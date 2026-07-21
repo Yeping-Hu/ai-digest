@@ -114,10 +114,31 @@
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13px;padding:10px 18px;border-radius:100px;opacity:0;transition:.25s;pointer-events:none;font-weight:500}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   @media (max-width:820px){
-    .app{grid-template-columns:1fr}.rail{display:none}
-    .item{grid-template-columns:24px 1fr;gap:12px}
-    .meta{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;margin-top:4px}
-    .card{grid-template-columns:24px 1fr}.thumb{width:100%;height:150px}
+    .app{grid-template-columns:1fr}
+    /* sidebar becomes a compact top bar (keeps filters + shortlist usable) */
+    .rail{position:static;height:auto;width:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 14px 10px;overflow:visible}
+    .rail h4{display:none}
+    #sources{display:none}
+    .filters{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin-top:10px;padding-bottom:4px}
+    .flt{white-space:nowrap;flex:none;border:1px solid var(--line);padding:7px 12px}
+    .flt.on{border-color:var(--pine)}
+    .basket{margin-top:10px;border:none;background:none;padding:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .basket .k,.basket .note{display:none}
+    .basket .v{font-size:15px;margin:0}
+    .basket .btn{width:auto;margin:0;padding:8px 13px;flex:none}
+    .owner{margin-top:10px;border-top:none;padding-top:0}
+    /* main */
+    .top{padding:16px 15px 8px}
+    .top h1{font-size:20px}
+    .stream{padding:2px 14px 48px}
+    /* X posts */
+    .item{grid-template-columns:22px 1fr;gap:11px;padding:14px 2px}
+    .meta{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;margin-top:6px}
+    /* video/blog cards: full-width thumbnail, content beneath, star in the corner */
+    .card{display:block;padding:14px;position:relative}
+    .card>.star{position:absolute;top:11px;right:11px;z-index:3;background:var(--surface);border-radius:6px}
+    .thumb{width:100%;height:auto;aspect-ratio:16/9;margin-bottom:12px}
+    .vtitle{font-size:16px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
   :focus-visible{outline:2px solid var(--pine);outline-offset:2px;border-radius:4px}
