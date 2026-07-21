@@ -11,6 +11,8 @@
 //   upgrade one archive item with a cached source text and a detailed summary.
 // Maintenance run with BACKFILL_FULL_SOURCES=1:
 //   cache the source text for previously generated full summaries.
+// Lightweight lifecycle run with REFRESH_YOUTUBE_STATUS=1:
+//   refresh scheduled/live/replay status without spending Gemini or transcript quota.
 
 import crypto from "node:crypto";
 import fs from "node:fs";
@@ -291,6 +293,111 @@ function fmtDuration(iso) {
   return `${hours ? `${hours}:${String(minutes).padStart(2, "0")}` : minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
+function validISO(value) {
+  const parsed = Date.parse(String(value || ""));
+  return Number.isFinite(parsed) ? new Date(parsed).toISOString() : "";
+}
+
+function durationSeconds(iso) {
+  const match = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(String(iso || ""));
+  if (!match) return 0;
+  return Number(match[1] || 0) * 3600 + Number(match[2] || 0) * 60 + Number(match[3] || 0);
+}
+
+function youtubeLifecycle(video = {}, playlistItem = {}, now = NOW) {
+  const snippet = video.snippet || playlistItem.snippet || {};
+  const playlistSnippet = playlistItem.snippet || {};
+  const details = video.liveStreamingDetails || {};
+  const content = video.contentDetails || {};
+  const status = video.status || {};
+  const liveBroadcastContent = String(snippet.liveBroadcastContent || "none").toLowerCase();
+  const scheduledStartTime = validISO(details.scheduledStartTime);
+  const actualStartTime = validISO(details.actualStartTime);
+  const actualEndTime = validISO(details.actualEndTime);
+  const playlistVideoPublishedAt = validISO(playlistItem.contentDetails?.videoPublishedAt);
+  const youtubePublishedAt = validISO(snippet.publishedAt || playlistVideoPublishedAt);
+  const playlistAddedAt = validISO(playlistSnippet.publishedAt);
+  const scheduledMs = Date.parse(scheduledStartTime);
+  const actualStartMs = Date.parse(actualStartTime);
+  const uploadStatus = String(status.uploadStatus || "").toLowerCase();
+  const seconds = durationSeconds(content.duration);
+
+  let state = "available";
+  if (liveBroadcastContent === "upcoming" || (Number.isFinite(scheduledMs) && scheduledMs > now && !actualStartTime)) {
+    state = "upcoming";
+  } else if (liveBroadcastContent === "live" || (actualStartTime && !actualEndTime)) {
+    state = "live";
+  } else if (actualEndTime && (uploadStatus && uploadStatus !== "processed" || seconds === 0)) {
+    state = "processing";
+  }
+
+  let effectivePublishedAt = "";
+  if (state !== "upcoming") {
+    effectivePublishedAt = actualStartTime || playlistVideoPublishedAt || youtubePublishedAt || playlistAddedAt;
+  }
+  const effectiveMs = Date.parse(effectivePublishedAt);
+
+  return {
+    state,
+    liveBroadcastContent,
+    scheduledStartTime,
+    actualStartTime,
+    actualEndTime,
+    youtubePublishedAt,
+    playlistVideoPublishedAt,
+    playlistAddedAt,
+    effectivePublishedAt,
+    ts: Number.isFinite(effectiveMs) ? effectiveMs : null,
+    uploadStatus,
+  };
+}
+
+class SourceNotReadyError extends Error {
+  constructor(code, message, retryAt = "") {
+    super(message);
+    this.name = "SourceNotReadyError";
+    this.code = code;
+    this.retryAt = retryAt;
+  }
+}
+
+function youtubeNotReady(item) {
+  const state = String(item?.youtubeState || "").toLowerCase();
+  const retryAt = item?.scheduledStartTime || "";
+  const retryMs = Date.parse(String(retryAt || ""));
+  if (state === "upcoming" && (!Number.isFinite(retryMs) || retryMs > NOW)) {
+    return new SourceNotReadyError(
+      "youtube_upcoming",
+      "This video is scheduled but has not started yet. A full summary will be available after the video is published and a transcript exists.",
+      retryAt,
+    );
+  }
+  if (state === "live") {
+    return new SourceNotReadyError(
+      "youtube_live",
+      "This video is live now. A full summary will be available after the stream ends and YouTube publishes a transcript.",
+      retryAt,
+    );
+  }
+  if (state === "processing") {
+    return new SourceNotReadyError(
+      "youtube_processing",
+      "The stream has ended, but the replay or transcript is still processing. Please try again later.",
+      retryAt,
+    );
+  }
+  return null;
+}
+
+function withinRetention(item) {
+  if (item?.kind === "youtube" && String(item.youtubeState || "") === "upcoming") {
+    const scheduled = Date.parse(String(item.scheduledStartTime || ""));
+    if (!Number.isFinite(scheduled) || scheduled >= NOW) return true;
+  }
+  const anchor = Number(item?.ts || item?.firstSeen || NOW);
+  return NOW - anchor < RETENTION_MS;
+}
+
 async function adaptXFeed(src) {
   const data = await getJSON(src.url);
   const out = [];
@@ -341,16 +448,16 @@ async function adaptYouTube(src) {
   const playlist = await youtubeUploadsPlaylist(src);
   const maxItems = clamp(Number(src.maxItems || 15), 1, 50);
   const data = await getJSON(
-    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxItems}&playlistId=${playlist}&key=${YOUTUBE_KEY}`,
+    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&maxResults=${maxItems}&playlistId=${playlist}&key=${YOUTUBE_KEY}`,
   );
-  const snippets = (data.items || []).map((item) => item.snippet).filter((snippet) => snippet?.resourceId?.videoId);
-  const ids = snippets.map((snippet) => snippet.resourceId.videoId);
+  const playlistItems = (data.items || []).filter((item) => item?.snippet?.resourceId?.videoId);
+  const ids = playlistItems.map((item) => item.snippet.resourceId.videoId);
   const details = new Map();
 
   if (ids.length) {
     try {
       const videoData = await getJSON(
-        `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${ids.join(",")}&key=${YOUTUBE_KEY}`,
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics,liveStreamingDetails,status&id=${ids.join(",")}&key=${YOUTUBE_KEY}`,
       );
       for (const video of videoData.items || []) details.set(video.id, video);
     } catch (error) {
@@ -358,11 +465,14 @@ async function adaptYouTube(src) {
     }
   }
 
-  return snippets.map((snippet) => {
-    const videoId = snippet.resourceId.videoId;
+  return playlistItems.map((playlistItem) => {
+    const playlistSnippet = playlistItem.snippet || {};
+    const videoId = playlistSnippet.resourceId.videoId;
     const detail = details.get(videoId) || {};
+    const videoSnippet = detail.snippet || playlistSnippet;
+    const lifecycle = youtubeLifecycle(detail, playlistItem);
     const url = canonicalizeURL(`https://www.youtube.com/watch?v=${videoId}`);
-    const description = stripHTML(snippet.description || "");
+    const description = stripHTML(videoSnippet.description || playlistSnippet.description || "");
     return {
       id: `yt:${videoId}`,
       source: src.name,
@@ -371,16 +481,26 @@ async function adaptYouTube(src) {
       sourcePriority: Number(src.priority || 0.75),
       sourceTags: [src.name],
       kind: "youtube",
-      author: src.name,
+      author: videoSnippet.channelTitle || src.name,
       subtitle: "YouTube",
-      title: snippet.title || "",
+      title: videoSnippet.title || playlistSnippet.title || "",
       text: "",
       excerpt: truncateChars(description, 1800),
       summary: truncateChars(description, 900),
       url,
       canonicalUrl: url,
       videoId,
-      ts: Date.parse(snippet.publishedAt) || NOW,
+      ts: lifecycle.ts,
+      publishedAt: lifecycle.effectivePublishedAt || "",
+      youtubePublishedAt: lifecycle.youtubePublishedAt,
+      playlistVideoPublishedAt: lifecycle.playlistVideoPublishedAt,
+      playlistAddedAt: lifecycle.playlistAddedAt,
+      youtubeState: lifecycle.state,
+      liveBroadcastContent: lifecycle.liveBroadcastContent,
+      scheduledStartTime: lifecycle.scheduledStartTime,
+      actualStartTime: lifecycle.actualStartTime,
+      actualEndTime: lifecycle.actualEndTime,
+      youtubeUploadStatus: lifecycle.uploadStatus,
       likes: Number(detail.statistics?.likeCount || 0),
       views: Number(detail.statistics?.viewCount || 0),
       duration: fmtDuration(detail.contentDetails?.duration),
@@ -735,25 +855,47 @@ async function transcript(videoId) {
     }
   } catch {}
 
-  if (!SUPADATA_KEY) return "";
-  try {
-    const data = await getJSON(`https://api.supadata.ai/v1/youtube/transcript?videoId=${encodeURIComponent(videoId)}`, {
-      "x-api-key": SUPADATA_KEY,
-    });
-    const text = Array.isArray(data?.content)
-      ? data.content.map((segment) => segment.text || "").join(" ")
-      : typeof data?.content === "string"
-        ? data.content
-        : "";
-    if (text.trim()) {
-      fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true });
-      fs.writeFileSync(cacheFile, text);
+  if (!SUPADATA_KEY) throw new Error("SUPADATA_API_KEY is missing.");
+  const url = `https://api.supadata.ai/v1/youtube/transcript?videoId=${encodeURIComponent(videoId)}`;
+  const response = await fetch(url, {
+    headers: { "User-Agent": USER_AGENT, Accept: "application/json", "x-api-key": SUPADATA_KEY },
+  });
+  const body = await response.text().catch(() => "");
+  if (!response.ok) {
+    const lower = body.toLowerCase();
+    if (/currently live streaming|currently live|live stream(?:ing)?/.test(lower)) {
+      throw new SourceNotReadyError(
+        "youtube_live",
+        "This video is live now. A full summary will be available after the stream ends and a transcript is published.",
+      );
     }
-    return text;
-  } catch (error) {
-    log("Transcript failed:", error.message);
-    return "";
+    if (/scheduled|upcoming|premiere|not yet published|has not (?:started|premiered)/.test(lower)) {
+      throw new SourceNotReadyError(
+        "youtube_upcoming",
+        "This video has not been published yet. A full summary will be available after it is released and a transcript exists.",
+      );
+    }
+    if (/transcript.*not available yet|replay.*processing|still processing|caption.*processing/.test(lower)) {
+      throw new SourceNotReadyError(
+        "youtube_processing",
+        "The video is available, but its replay or transcript is still processing. Please try again later.",
+      );
+    }
+    throw new Error(`Transcript service returned ${response.status}: ${body.slice(0, 240) || "unknown error"}`);
   }
+
+  let data = {};
+  try { data = body ? JSON.parse(body) : {}; } catch {}
+  const text = Array.isArray(data?.content)
+    ? data.content.map((segment) => segment.text || "").join(" ")
+    : typeof data?.content === "string"
+      ? data.content
+      : "";
+  if (text.trim()) {
+    fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true });
+    fs.writeFileSync(cacheFile, text);
+  }
+  return text;
 }
 
 function fullSummaryPrompt(item, text) {
@@ -863,9 +1005,11 @@ async function sourceTextForItem(item) {
   }
 
   if (item.kind === "youtube") {
+    const blocked = youtubeNotReady(item);
+    if (blocked) throw blocked;
     const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
     const text = await transcript(videoId);
-    if (!text) throw new Error("No transcript available. Check SUPADATA_API_KEY and its free credit balance.");
+    if (!text) throw new Error("No transcript was returned. The transcript may still be processing, or the Supadata key/quota may need attention.");
     return { text, source: "transcript", path: saveSourceCache(item, text) };
   }
   if (item.kind === "x") {
@@ -903,28 +1047,79 @@ function updateItemInTopHistory(item) {
   if (changed) writeJSONAtomic(TOP_HISTORY_PATH, history);
 }
 
+function writeFullSummaryStatus(archiveDoc, items, item, status, details = {}) {
+  const at = new Date().toISOString();
+  item.fullSummaryAttemptAt = at;
+  item.fullSummaryStatus = status;
+  item.fullSummaryMessage = details.message || "";
+  item.fullSummaryErrorCode = details.code || "";
+  item.fullSummaryRetryAt = details.retryAt || "";
+  if (status !== "ready") item.fullSummaryLastErrorAt = at;
+  writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: at, count: items.length, items });
+  updateItemInTopHistory(item);
+}
+
 async function summarizeOneItem(itemId) {
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
   const items = archiveDoc.items || [];
   const normalizedId = String(itemId || "").trim();
   const item = items.find((entry) => entry.id === normalizedId || entry.videoId === normalizedId || entry.id === `yt:${normalizedId}`);
   if (!item) throw new Error(`Item not found in archive: ${normalizedId}`);
-  if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY is required for a full summary.");
-  const source = await sourceTextForItem(item);
-  const summary = await geminiRequest(fullSummaryPrompt(item, source.text), false);
-  item.summary = summary || item.summary;
-  item.full = true;
-  item.fullSummaryAt = new Date().toISOString();
-  item.fullSummarySource = source.source;
-  item.fullSummaryChars = source.text.length;
-  item.fullSourcePath = source.path || relativeSourcePath(sourceCachePath(item));
-  item.sourceTextPath = item.fullSourcePath;
-  item.transcriptPath = item.fullSourcePath;
-  item.fullSourceChars = source.text.length;
-  item.fullSourceCachedAt = new Date().toISOString();
-  writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
-  updateItemInTopHistory(item);
-  log("Upgraded full summary:", item.id);
+
+  try {
+    const blocked = item.kind === "youtube" ? youtubeNotReady(item) : null;
+    if (blocked) throw blocked;
+    if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY is required for a full summary.");
+    const source = await sourceTextForItem(item);
+    if (item.kind === "youtube" && ["upcoming", "processing"].includes(String(item.youtubeState || ""))) {
+      const inferredPublishedAt = item.actualStartTime || item.scheduledStartTime || item.youtubePublishedAt || "";
+      const inferredPublishedMs = Date.parse(String(inferredPublishedAt || ""));
+      item.youtubeState = "available";
+      if (Number.isFinite(inferredPublishedMs)) {
+        item.publishedAt = new Date(inferredPublishedMs).toISOString();
+        item.ts = inferredPublishedMs;
+      }
+      item.availabilityUpdatedAt = new Date().toISOString();
+    }
+    const summary = await geminiRequest(fullSummaryPrompt(item, source.text), false);
+    item.summary = summary || item.summary;
+    item.full = true;
+    item.fullSummaryAt = new Date().toISOString();
+    item.fullSummarySource = source.source;
+    item.fullSummaryChars = source.text.length;
+    item.fullSourcePath = source.path || relativeSourcePath(sourceCachePath(item));
+    item.sourceTextPath = item.fullSourcePath;
+    item.transcriptPath = item.fullSourcePath;
+    item.fullSourceChars = source.text.length;
+    item.fullSourceCachedAt = new Date().toISOString();
+    item.fullSummaryAttemptAt = item.fullSummaryAt;
+    item.fullSummaryStatus = "ready";
+    item.fullSummaryMessage = "";
+    item.fullSummaryErrorCode = "";
+    item.fullSummaryRetryAt = "";
+    item.fullSummaryLastErrorAt = "";
+    writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
+    updateItemInTopHistory(item);
+    log("Upgraded full summary:", item.id);
+  } catch (error) {
+    const notReady = error instanceof SourceNotReadyError || error?.name === "SourceNotReadyError";
+    if (notReady && item.kind === "youtube") {
+      const inferredState = String(error.code || "").replace(/^youtube_/, "");
+      if (["upcoming", "live", "processing"].includes(inferredState)) item.youtubeState = inferredState;
+      item.availabilityUpdatedAt = new Date().toISOString();
+    }
+    const status = notReady ? "not_ready" : "error";
+    const message = notReady
+      ? error.message
+      : `Full summary could not be generated: ${error.message}`;
+    writeFullSummaryStatus(archiveDoc, items, item, status, {
+      message,
+      code: error.code || (notReady ? "source_not_ready" : "summary_failed"),
+      retryAt: error.retryAt || item.scheduledStartTime || "",
+    });
+    if (notReady) log("Full summary deferred:", item.id, "—", message);
+    else log("Full summary failed and was recorded:", item.id, "—", error.message);
+  }
 }
 
 async function backfillFullSourceCaches() {
@@ -999,11 +1194,20 @@ function migrateAndMerge(existingItems, collectedItems) {
   );
   const merged = new Map(existingById);
   const newIds = new Set();
+  const releasedIds = new Set();
 
   for (const incoming of collectedItems) {
     const canonical = canonicalizeURL(incoming.canonicalUrl || incoming.url);
     const previous = existingById.get(incoming.id) || (canonical ? existingByURL.get(canonical) : undefined);
     const id = previous?.id || incoming.id;
+    const lifecycleKeys = [
+      "youtubeState", "liveBroadcastContent", "scheduledStartTime", "actualStartTime",
+      "actualEndTime", "youtubePublishedAt", "playlistVideoPublishedAt", "publishedAt",
+      "youtubeUploadStatus", "ts",
+    ];
+    const lifecycleChanged = incoming.kind === "youtube" && (
+      !previous || lifecycleKeys.some((key) => String(previous?.[key] ?? "") !== String(incoming?.[key] ?? ""))
+    );
     const value = {
       ...(previous || {}),
       ...incoming,
@@ -1015,10 +1219,40 @@ function migrateAndMerge(existingItems, collectedItems) {
       firstSeen: previous?.firstSeen || incoming.firstSeen || previous?.ts || NOW,
       sourceTags: unique([...(previous?.sourceTags || []), ...(incoming.sourceTags || [incoming.source])]),
     };
+    if (value.kind === "youtube") {
+      value.availabilityUpdatedAt = lifecycleChanged
+        ? new Date().toISOString()
+        : previous?.availabilityUpdatedAt || incoming.availabilityUpdatedAt || "";
+      const state = String(value.youtubeState || "");
+      const availabilityBlock = youtubeNotReady(value);
+      if (value.full) {
+        value.fullSummaryStatus = "ready";
+      } else if (availabilityBlock) {
+        value.fullSummaryStatus = "not_ready";
+        value.fullSummaryErrorCode = availabilityBlock.code || `youtube_${state}`;
+        value.fullSummaryRetryAt = availabilityBlock.retryAt || value.scheduledStartTime || "";
+        value.fullSummaryMessage = availabilityBlock.message;
+      } else if (previous?.fullSummaryStatus === "not_ready" && String(previous?.fullSummaryErrorCode || "").startsWith("youtube_")) {
+        value.fullSummaryStatus = "";
+        value.fullSummaryErrorCode = "";
+        value.fullSummaryRetryAt = "";
+        value.fullSummaryMessage = "";
+      }
+    }
     merged.set(id, value);
-    if (!previous) newIds.add(id);
+    if (!previous) {
+      newIds.add(id);
+    } else if (
+      value.kind === "youtube" &&
+      String(previous.youtubeState || "") === "upcoming" &&
+      String(value.youtubeState || "") !== "upcoming" &&
+      Number.isFinite(Number(value.ts)) &&
+      Number(value.ts) > 0
+    ) {
+      releasedIds.add(id);
+    }
   }
-  return { merged, newIds };
+  return { merged, newIds, releasedIds };
 }
 
 function hasSourceHistory(existingItems, src) {
@@ -1051,8 +1285,21 @@ function historySnapshot(item) {
     views: item.views || 0,
     duration: item.duration || "",
     videoId: item.videoId || "",
+    youtubeState: item.youtubeState || "",
+    liveBroadcastContent: item.liveBroadcastContent || "",
+    scheduledStartTime: item.scheduledStartTime || "",
+    actualStartTime: item.actualStartTime || "",
+    actualEndTime: item.actualEndTime || "",
+    youtubePublishedAt: item.youtubePublishedAt || "",
+    playlistVideoPublishedAt: item.playlistVideoPublishedAt || "",
+    availabilityUpdatedAt: item.availabilityUpdatedAt || "",
     full: Boolean(item.full),
     fullSummaryAt: item.fullSummaryAt || "",
+    fullSummaryStatus: item.fullSummaryStatus || "",
+    fullSummaryAttemptAt: item.fullSummaryAttemptAt || "",
+    fullSummaryMessage: item.fullSummaryMessage || "",
+    fullSummaryErrorCode: item.fullSummaryErrorCode || "",
+    fullSummaryRetryAt: item.fullSummaryRetryAt || "",
     fullSummarySource: item.fullSummarySource || "",
     fullSourcePath: item.fullSourcePath || item.sourceTextPath || item.transcriptPath || "",
     sourceTextPath: item.sourceTextPath || item.fullSourcePath || item.transcriptPath || "",
@@ -1114,7 +1361,93 @@ function cleanDailySnapshots() {
   }
 }
 
+async function refreshYouTubeMetadata() {
+  if (!YOUTUBE_KEY) throw new Error("YOUTUBE_API_KEY is required to refresh YouTube availability.");
+  const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
+  const existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  let collected = [];
+  for (const src of CFG.sources || []) {
+    if (src.enabled === false || src.type !== "youtube") continue;
+    try {
+      collected.push(...await adaptYouTube(src));
+    } catch (error) {
+      log(`YouTube refresh skipped for ${src.name}:`, error.message);
+    }
+  }
+
+  const incomingItems = deduplicate(collected);
+  const incomingById = new Map(incomingItems.map((item) => [item.id, item]));
+  const changedItems = [];
+  const releaseIds = new Set();
+  const refreshKeys = [
+    "source", "sourceGroup", "sourceType", "sourcePriority", "sourceTags",
+    "author", "subtitle", "title", "excerpt", "url", "canonicalUrl", "videoId",
+    "duration", "ts", "publishedAt", "youtubePublishedAt", "playlistVideoPublishedAt",
+    "playlistAddedAt", "youtubeState", "liveBroadcastContent", "scheduledStartTime",
+    "actualStartTime", "actualEndTime", "youtubeUploadStatus", "availabilityUpdatedAt",
+    "fullSummaryStatus", "fullSummaryMessage", "fullSummaryErrorCode", "fullSummaryRetryAt",
+  ];
+
+  const nextItems = existingItems.map((previous) => {
+    if (previous.kind !== "youtube") return previous;
+    const incoming = incomingById.get(previous.id);
+    if (!incoming) return previous;
+    const { merged, releasedIds } = migrateAndMerge([previous], [incoming]);
+    const mergedItem = merged.get(previous.id);
+    const next = { ...previous };
+    for (const key of refreshKeys) {
+      if (Object.prototype.hasOwnProperty.call(mergedItem, key)) next[key] = mergedItem[key];
+    }
+    const before = JSON.stringify(refreshKeys.map((key) => previous[key] ?? null));
+    const after = JSON.stringify(refreshKeys.map((key) => next[key] ?? null));
+    if (before !== after) changedItems.push(next);
+    for (const id of releasedIds) releaseIds.add(id);
+    return next;
+  });
+
+  // This lightweight job deliberately updates existing archive entries only.
+  // New videos remain the responsibility of the full daily collector so they
+  // still receive editorial ranking and Chinese enrichment on first ingestion.
+  if (!changedItems.length) {
+    log(`YouTube availability is already current for ${incomingItems.length} item(s).`);
+    return;
+  }
+
+  const sortValue = (item) => {
+    const published = Number(item?.ts);
+    if (Number.isFinite(published) && published > 0) return published;
+    const scheduled = Date.parse(String(item?.scheduledStartTime || ""));
+    if (Number.isFinite(scheduled)) return scheduled;
+    const firstSeen = Number(item?.firstSeen);
+    return Number.isFinite(firstSeen) ? firstSeen : 0;
+  };
+  const kept = nextItems.filter(withinRetention).sort((a, b) => sortValue(b) - sortValue(a));
+  const generatedAt = new Date().toISOString();
+  writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt, count: kept.length, items: kept });
+  for (const item of changedItems) updateItemInTopHistory(item);
+
+  // Preserve the stable ID but let the current day's data remember that a
+  // previously scheduled video became a real release. The website's All New
+  // Today view still derives its count from the actual publication timestamp.
+  if (releaseIds.size) {
+    for (const file of [TODAY_PATH, path.join(DAILY_DIR, `${DATE_KEY}.json`)]) {
+      const doc = readJSON(file, null);
+      if (!doc || doc.date !== DATE_KEY) continue;
+      doc.newIds = unique([...(doc.newIds || []), ...releaseIds]);
+      doc.newCount = doc.newIds.length;
+      doc.generatedAt = generatedAt;
+      writeJSONAtomic(file, doc);
+    }
+  }
+
+  log(`Refreshed YouTube availability: ${changedItems.length} changed, ${releaseIds.size} newly released.`);
+}
+
 async function main() {
+  if (String(process.env.REFRESH_YOUTUBE_STATUS || "").trim() === "1") {
+    await refreshYouTubeMetadata();
+    return;
+  }
   if (String(process.env.BACKFILL_FULL_SOURCES || "").trim() === "1") {
     await backfillFullSourceCaches();
     return;
@@ -1176,10 +1509,10 @@ async function main() {
 
   const deduped = deduplicate(collected);
   run.itemsAfterDedup = deduped.length;
-  const { merged, newIds } = migrateAndMerge(existingItems, deduped);
+  const { merged, newIds, releasedIds } = migrateAndMerge(existingItems, deduped);
 
   let kept = [...merged.values()]
-    .filter((item) => NOW - Number(item.ts || item.firstSeen || NOW) < RETENTION_MS)
+    .filter(withinRetention)
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
   const previousDay = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), { newIds: [] });
@@ -1187,9 +1520,11 @@ async function main() {
     ...(previousDay.newIds || []),
     ...kept.filter((item) => item.firstSeen && utcDayKey(item.firstSeen) === DATE_KEY).map((item) => item.id),
     ...newIds,
+    ...releasedIds,
   ]).filter((id) => merged.has(id));
   const dailyNewSet = new Set(dailyNewIds);
   run.newItemsThisRun = newIds.size;
+  run.releasedItemsThisRun = releasedIds.size;
   run.newItems = dailyNewIds.length;
   const newItems = kept.filter((item) => dailyNewSet.has(item.id));
   const fallbackCutoff = NOW - Math.max(1, Number(EDIT.fallbackWindowHours || 48)) * 36e5;
@@ -1248,7 +1583,7 @@ async function main() {
   }
 
   kept = [...merged.values()]
-    .filter((item) => NOW - Number(item.ts || item.firstSeen || NOW) < RETENTION_MS)
+    .filter(withinRetention)
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
   run.finishedAt = new Date().toISOString();
@@ -1290,9 +1625,12 @@ export {
   utcDayKey,
   deduplicate,
   localScore,
+  migrateAndMerge,
   normalizeEditorial,
   parseFeed,
   readableArticleText,
   sourceCachePath,
   stripHTML,
+  youtubeLifecycle,
+  youtubeNotReady,
 };
