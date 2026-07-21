@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T21:13:50.472Z",
+  "generatedAt": "2026-07-21T21:17:55.228Z",
   "count": 145,
   "items": [
     {
@@ -43,7 +43,7 @@
       "title": "HTML Is All Agents Need — James Russo, HeyGen",
       "text": "",
       "excerpt": "LLMs are great at writing code. So the question we kept asking was: can they write code that produces a video? We thought it would be easy. The reality was a year of trying. We started with massive prompts to get very mediocre output. We made it more agentic to iterate and improve its output. This worked okay but wasn't production-ready. Eventually we tried Remotion. It got us deterministic video, but the React framework kept boxing the agent in. The more guardrails we added, the safer and more boring the outputs got. When we utilized plain HTML, CSS, and JavaScript, the creativity came back to the output. So we set out to build a video rendering framework on top of HTML. But it needed to work with Gemini Flash. Why? Because one tell that a framework is fighting an agent is needing the biggest model just to get usable output. So from there we shaped the framework around what small models could reliably author. That left one real engineering question: can we keep the freedom of HTML and still render a deterministic MP4? Browsers don't want to do that. Image decoders, font loaders, and animation clocks all run async on their own schedule. Great for performance. Terrible for \"render the same pixels every time.\" Throughout, we iterated constantly with agentic loops and self-improving evals to test out the framework, find issues in our renderer, and shape a set of skills that gave the agents Taste instead of guardrails. This talk is what it took to get there. Speaker: James Russo — Software Engineer, HeyGen Engineering lead for HyperFrames. Currently at HeyGen building the future of video storytelling, Previously at Brex X: https://x.com/Rames_Jusso LinkedIn: https://www.linkedin.com/in/james-russo-56026897/ Website: https://boredhacking.com/ Timeline: 0:00 Introduction and…",
-      "summary": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
+      "summary": "HeyGen 的技术负责人 James Russo 在演讲中提出，HTML、CSS 和 JavaScript 是大语言模型（LLM）的“母语”，因此它们是 AI 代理（Agents）生成高质量视频的最佳媒介。\n\n**核心论点：HTML 是视频生成的最佳语言**\nRusso 指出，虽然 AI 编码代理已极大降低了编程门槛，但产品发布视频的制作依然困难。HeyGen 认为，强迫模型学习自定义的 JSON 或 XML 格式（如 Lottie 或 Rive）如同让莎士比亚用外语写作，效果不佳。由于 LLM 的训练数据中包含了海量的网页代码，它们对 HTML 等语言有着天然的理解力。通过直接使用这些原生语言，开发者可以获得更具可控性和创造力的输出。\n\n**Hyperframes 框架的运作机制**\n为了将 HTML 转化为确定性的 MP4 视频，HeyGen 开发了开源框架 Hyperframes。其核心挑战在于解决浏览器渲染的异步性（如字体、图片加载延迟），这与视频制作所需的精确帧同步存在冲突。Hyperframes 的解决方案包括：\n• 冻结浏览器时钟：通过逐帧“寻址”的方式，确保每一帧在渲染前所有资源都已完全加载。\n• 确定性输出：确保浏览器预览的每一像素与最终生成的视频帧完全一致。\n• 广泛兼容性：由于基于 Web 标准，任何能在浏览器中渲染的内容（如 Three.js、SVG、WebGL、WebGPU 等）均可直接转化为视频。\n\n**从“单次生成”到“专业创作”**\nRusso 强调，虽然简单的提示词（Prompt）可以生成不错的视频，但要达到专业水准，仍需遵循软件工程的迭代逻辑：\n• 技能赋能：HeyGen 为模型提供了关于视频审美、排版和动效的“技能包”，而非仅仅教其写代码。\n• 人机协作：通过 Hyperframes Studio，用户可以像在专业剪辑软件（如 After Effects）中一样，进行逐帧调整、添加关键帧（Keyframes）和手动编辑。\n• 迭代流程：建议用户将视频拆解为独立片段，通过故事板（Storyboard）规划，再由 AI 逐步实现。\n\n**现状与局限性**\nHyperframes 目前已开源，并展现了强大的社区影响力：\n• 数据表现：在过去 90 天内，开源用户已渲染超过 130 万个视频，日均渲染量达 1.5 万个，GitHub 星标数达 3.2 万。\n• 局限性：Russo 坦诚，目前的模型在“创意工作”上仍有不足。为了提升整体水平，HeyGen 正在推动建立“代码转视频基准测试（Code-to-Video Benchmark）”，旨在与 LLM 实验室及开发者合作，共同提高 AI 生成视频的基准质量。\n\n总结而言，Hyperframes 的目标是让任何能编写 HTML 的 AI 代理都能成为视频创作者，从而填补产品开发与产品发布之间的鸿沟。",
       "url": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
       "canonicalUrl": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
       "videoId": "Cz4v1WHVyZc",
@@ -51,7 +51,7 @@
       "likes": 42,
       "views": 843,
       "duration": "15:13",
-      "full": false,
+      "full": true,
       "categories": [],
       "editorial": {
         "summaryZh": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
@@ -82,7 +82,15 @@
           "evaluation",
           "multimodal"
         ]
-      }
+      },
+      "fullSummaryAt": "2026-07-21T21:17:55.228Z",
+      "fullSummarySource": "transcript",
+      "fullSummaryChars": 13676,
+      "fullSourcePath": "data/transcripts/Cz4v1WHVyZc.txt",
+      "sourceTextPath": "data/transcripts/Cz4v1WHVyZc.txt",
+      "transcriptPath": "data/transcripts/Cz4v1WHVyZc.txt",
+      "fullSourceChars": 13676,
+      "fullSourceCachedAt": "2026-07-21T21:17:55.228Z"
     },
     {
       "id": "article:3064e426d18ccd85acab9b00",
