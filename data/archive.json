@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T18:44:54.898Z",
+  "generatedAt": "2026-07-21T20:05:39.292Z",
   "count": 141,
   "items": [
     {
@@ -224,12 +224,12 @@
       "title": "A Fireside Chat with Cat and Thariq from the Claude Code team",
       "text": "",
       "excerpt": "Earlier this month I hosted a fireside chat session at the AI Engineer World's Fair with Cat Wu and Thariq Shihipar from Anthropic's Claude Code team. We talked about Claude Code, Claude Tag, Fable, coding agent security, evals, tool design, and how Anthropic use these tools themselves. The full video of the session is now available on YouTube . Below is an edited copy of the transcript, with extra links and my own bolded highlights. A few top-level notes if you don't want to watch the video or wade through the whole transcript: Claude Tag (Claude's new collaborative Slack integration) now lands 65% of the product engineering PRs for the Claude Code team. Claude Code ships features to Anthropic employees first, and only ships the features that demonstrate user retention with that cohort Critical changes to Claude Code are still reviewed manually, but the team increasingly relies on automated code review for the \"outer layers\" of the product. Adding examples to a system prompt is no longer best practice for models like Fable 5 or even Opus 4.8. The Claude Code system prompt recently reduced in size by 80% . Likewise, lists of \" don't do X and don't do Y \" can reduce the quality of results from the latest models. Dogfooding inside Anthropic is called \" ant fooding \". Anthropic really believe in their auto mode , and see that as an enabling technology for Claude Tag. Thariq advises offsetting coding-agent-induced Deep Blue by \" being more ambitious \" with the work you take on. Fable is competent at editing video , and Thariq used it to edit its own launch video. Anthropic's c…",
-      "summary": "Anthropic Claude Code团队分享了其内部工程实践，Claude Tag在Slack中已承担65%的PR工作，并强调了自动化代码审查在产品外层的重要性。",
+      "summary": "Anthropic Claude Code 团队成员 Cat Wu 与 Thariq Shihipar 在 AI Engineer World’s Fair 上分享了关于 Claude Code、Claude Tag 及 Fable 等工具的开发经验与工程哲学。\n\n**核心工具与效能**\nClaude Code 已成为 Anthropic 内部开发的核心，Claude Tag（Slack 集成工具）目前承担了该团队 65% 的产品工程 Pull Request（PR）。Claude Code 遵循“内部先行”原则，仅发布经内部验证且具有高留存率的功能。团队强调“自动模式”（Auto Mode）是实现协作的关键，它能处理长周期任务并具备动态权限管理能力。\n\n**工程实践的范式转移**\n• 编码代理的普及改变了软件工程流程：从长达数月的需求规格说明书（PRD）转向快速迭代，工程师需提升产品品味与商业洞察力。\n• 团队不再视“重写代码”为禁忌，反而认为在拥有完善测试套件的前提下，重写是优化代码库的有效手段。\n• 内部文化强调“公开工作”，通过在 Slack 等协作工具中公开使用 Claude Tag，团队能共享使用经验并减少冗余。\n\n**提示词工程与模型评估**\n• 提示词最佳实践已发生变化：对于 Fable 或 Opus 4.8 等先进模型，不再建议堆砌示例或使用大量“禁止做某事”的负面约束。\n• Claude Code 的系统提示词近期缩减了 80%，通过提供更多上下文而非硬性约束，模型表现更佳。\n• 团队通过构建严谨的评估集（Evals）来确保新模型能作为旧模型的“直接替换”，并利用自动化代码审查覆盖产品外层逻辑，仅对核心代码保留人工审核。\n\n**安全与协作**\n• 自动模式是安全防线的核心，它通过分类器实时判断工具调用是否符合用户意图，并结合沙箱环境进行权限控制。\n• 团队支持“凭据注入”模式，即代理在执行任务时通过代理服务获取 API 密钥，而无需直接接触敏感凭据。\n• 协作层面，Claude Tag 允许团队成员在同一会话中共同引导 AI，这种“多人协作”模式被证明是提升团队整体 AI 使用水平的有效途径。\n\n**局限性与未来展望**\n尽管模型在代码生成和视频编辑（如 Fable 自动剪辑视频）方面表现惊人，但团队认为其在 UX 设计品味、复杂交互体验设计以及与物理世界交互方面仍有提升空间。Cat 和 Thariq 建议其他公司应采纳“不自我设限”的文化，通过不断尝试更具野心的项目来抵消因 AI 自动化带来的职业失落感。目前，Claude Tag 的记忆系统仍基于频道内的 Markdown 文件，团队正持续探索更优的记忆存储方案。",
       "url": "https://simonwillison.net/2026/Jul/21/cat-and-thariq",
       "canonicalUrl": "https://simonwillison.net/2026/Jul/21/cat-and-thariq",
       "ts": 1784638442000,
       "likes": 0,
-      "full": false,
+      "full": true,
       "categories": [
         "ai",
         "prompt-engineering",
@@ -278,7 +278,10 @@
           "model-release"
         ]
       },
-      "contentLength": 46396
+      "contentLength": 46396,
+      "fullSummaryAt": "2026-07-21T20:05:39.292Z",
+      "fullSummarySource": "article",
+      "fullSummaryChars": 47591
     },
     {
       "id": "x:2079438448956788964",
