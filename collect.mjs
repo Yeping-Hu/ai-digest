@@ -90,7 +90,7 @@ async function geminiCall(prompt) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
-    if (r.status === 429) { log("  gemini rate-limited; waiting…"); await sleep(8000); continue; }
+    if (r.status === 429 || r.status >= 500) { log(`  gemini busy (${r.status}); retrying…`); await sleep(8000); continue; }
     if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(`gemini ${r.status} ${t.slice(0, 100)}`); }
     const d = await r.json();
     return d?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
