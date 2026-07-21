@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Signal Desk — AI Builders Digest</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz@1,18..40&display=swap" rel="stylesheet">
@@ -26,7 +28,8 @@
   ::selection{background:#1d4a3820}
   .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
   .rail{border-right:1px solid var(--line);background:var(--surface);padding:22px 18px;position:sticky;top:0;height:100vh;overflow:auto}
-  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.14em;font-size:12px;color:var(--pine);text-transform:uppercase}
+  .brand{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;letter-spacing:.14em;font-size:12px;color:var(--pine);text-transform:uppercase}
+  .brandmark{flex:none}
   .brand b{color:var(--ink)}
   .status{margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:6px}
   .dot{width:6px;height:6px;border-radius:50%;background:#2F9E6A;box-shadow:0 0 0 3px rgba(47,158,106,.15)}
@@ -149,7 +152,7 @@
 <body>
 <div class="app">
   <aside class="rail">
-    <div class="brand"><b>SIGNAL</b> DESK</div>
+    <div class="brand"><svg class="brandmark" viewBox="10 14 44 42" width="24" height="23" aria-hidden="true"><rect x="15" y="19" width="27" height="8" rx="4" fill="#1D4A38"/><circle cx="49" cy="23" r="4.4" fill="#BD5A34"/><rect x="15" y="30.5" width="34" height="8" rx="4" fill="#1D4A38"/><rect x="15" y="42" width="22" height="8" rx="4" fill="#1D4A38" opacity="0.42"/></svg><span><b>SIGNAL</b> DESK</span></div>
     <div class="status"><span class="dot"></span><span id="synced">loading…</span></div>
     <h4>Sources</h4>
     <div id="sources"></div>
