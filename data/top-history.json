@@ -1,62 +1,108 @@
 {
-  "generatedAt": "2026-07-21T18:44:54.898Z",
+  "generatedAt": "2026-07-21T21:13:50.472Z",
   "days": [
     {
       "date": "2026-07-21",
-      "generatedAt": "2026-07-21T18:44:54.898Z",
+      "generatedAt": "2026-07-21T21:13:50.472Z",
       "ranking": [
         {
-          "id": "yt:khVX_BUnEwU",
+          "id": "article:a03361ebd72675244ef801c3",
           "rank": 1,
           "tier": "top",
-          "score": 95,
-          "reason": "极具技术深度且解决了Agent开发中的实际工程痛点，非常适合科研/工程类受众。"
+          "score": 92,
+          "reason": "极具实战价值的内部工程案例，对科研和开发人员有直接参考意义。"
         },
         {
-          "id": "yt:RGe6EjucbzI",
+          "id": "yt:VrpEyglYgeU",
           "rank": 2,
           "tier": "top",
           "score": 85,
-          "reason": "宏观趋势分析，为科研人员提供职业发展和技术选型的参考。"
+          "reason": "提出了一个极具洞察力的框架，适合视觉化呈现。"
         },
         {
-          "id": "article:627cfabda0f925194944a0a7",
+          "id": "x:2079411861150429402",
           "rank": 3,
           "tier": "top",
-          "score": 60,
-          "reason": "及时的模型更新信息，适合作为科研工具箱的补充。"
+          "score": 78,
+          "reason": "极具性价比的工程优化方案，对所有AI开发者都有吸引力。"
+        },
+        {
+          "id": "yt:Cz4v1WHVyZc",
+          "rank": 4,
+          "tier": "scan",
+          "score": 80,
+          "reason": "案例生动，反直觉，非常适合做成对比图文。"
         }
       ],
       "ideas": [
         {
-          "workingTitle": "告别Agent报错！从BabyAGI 4看Agent架构的未来",
-          "angle": "通过对比传统Agent与Active Graph架构，解析如何通过“事件日志”实现Agent的断点续传与状态管理。",
-          "whyNow": "Agent开发正从实验阶段走向工程化，稳定性是目前最大的瓶颈。",
+          "workingTitle": "Agent开发进阶：从“玩具”到“生产力”的三个关键范式",
+          "angle": "通过对比Anthropic的工程实践、Sonar的验证框架和Cursor的成本优化，总结Agent开发的成熟路径。",
+          "whyNow": "Agent正处于从实验向生产环境迁移的关键期，开发者急需成熟的工程方法论。",
           "sourceIds": [
-            "yt:khVX_BUnEwU"
+            "article:a03361ebd72675244ef801c3",
+            "yt:VrpEyglYgeU",
+            "x:2079411861150429402"
           ]
         },
         {
-          "workingTitle": "2026 AI工程现状：为什么你的Agent还停留在“读写”阶段？",
-          "angle": "结合行业报告，分析Agent从“阅读总结”到“自主行动”的演进，以及科研人员必须掌握的工程约束（成本与评估）。",
-          "whyNow": "年中是回顾技术趋势、调整科研方向的最佳时机。",
+          "workingTitle": "别被框架带偏了！Agent开发中的“反直觉”工程经验",
+          "angle": "结合HeyGen的HTML回归案例和NVIDIA的安全审计，探讨如何通过简化技术栈和强化基础配置来提升Agent性能。",
+          "whyNow": "当前Agent开发存在过度工程化倾向，此内容能提供清醒的视角。",
           "sourceIds": [
-            "yt:RGe6EjucbzI"
-          ]
-        },
-        {
-          "workingTitle": "科研人的模型选型手册：Gemini 3.6 Flash系列怎么选？",
-          "angle": "对比Gemini 3.6 Flash与Lite/Cyber版本的差异，给出不同科研场景下的最佳实践建议。",
-          "whyNow": "模型更新频繁，科研人员需要快速筛选出最适合自己任务的工具。",
-          "sourceIds": [
-            "article:627cfabda0f925194944a0a7",
-            "article:969044f63ea6bfa4b0495f3d"
+            "yt:Cz4v1WHVyZc",
+            "yt:XjI-AR4pt7Y"
           ]
         }
       ],
       "items": [
         {
-          "id": "yt:khVX_BUnEwU",
+          "id": "article:a03361ebd72675244ef801c3",
+          "source": "Simon Willison",
+          "sourceGroup": "Simon Willison",
+          "sourceType": "independent",
+          "kind": "blog",
+          "author": "Simon Willison",
+          "avatarUrl": "",
+          "subtitle": "Simon Willison",
+          "title": "A Fireside Chat with Cat and Thariq from the Claude Code team",
+          "text": "",
+          "excerpt": "Earlier this month I hosted a fireside chat session at the AI Engineer World's Fair with Cat Wu and Thariq Shihipar from Anthropic's Claude Code team. We talked about Claude Code, Claude Tag, Fable, coding agent security, evals, tool design, and how Anthropic use these tools themselves. The full video of the session is now available on YouTube . Below is an edited copy of the transcript, with extra links and my own bolded highlights. A few top-level notes if you don't want to watch the video or wade through the whole transcript: Claude Tag (Claude's new collaborative Slack integration) now lands 65% of the product engineering PRs for the Claude Code team. Claude Code ships features to Anthropic employees first, and only ships the features that demonstrate user retention with that cohort Critical changes to Claude Code are still reviewed manually, but the team increasingly relies on automated code review for the \"outer layers\" of the product. Adding examples to a system prompt is no longer best practice for models like Fable 5 or even Opus 4.8. The Claude Code system prompt recently reduced in size by 80% . Likewise, lists of \" don't do X and don't do Y \" can reduce the quality of results from the latest models. Dogfooding inside Anthropic is called \" ant fooding \". Anthropic really believe in their auto mode , and see that as an enabling technology for Claude Tag. Thariq advises offsetting coding-agent-induced Deep Blue by \" being more ambitious \" with the work you take on. Fable is competent at editing video , and Thariq used it to edit its own launch video. Anthropic's c…",
+          "summary": "Anthropic Claude Code团队分享了其内部Agent开发实践，包括利用Claude Tag实现65%的PR自动化，以及通过“先内部后外部”的策略确保功能留存。",
+          "url": "https://simonwillison.net/2026/Jul/21/cat-and-thariq",
+          "ts": 1784638442000,
+          "likes": 0,
+          "views": 0,
+          "duration": "",
+          "videoId": "",
+          "full": true,
+          "fullSummaryAt": "2026-07-21T20:08:49.748Z",
+          "fullSummarySource": "article",
+          "fullSourcePath": "data/transcripts/article-a-fireside-chat-with-cat-and-thariq-from-the-claude-code-team-0ef37d702d.txt",
+          "sourceTextPath": "data/transcripts/article-a-fireside-chat-with-cat-and-thariq-from-the-claude-code-team-0ef37d702d.txt",
+          "transcriptPath": "data/transcripts/article-a-fireside-chat-with-cat-and-thariq-from-the-claude-code-team-0ef37d702d.txt",
+          "fullSourceChars": 47591,
+          "editorial": {
+            "summaryZh": "Anthropic Claude Code团队分享了其内部Agent开发实践，包括利用Claude Tag实现65%的PR自动化，以及通过“先内部后外部”的策略确保功能留存。",
+            "whyItMattersZh": "这是目前最前沿的Agent工程化实战，揭示了顶级AI公司如何将Agent从“玩具”转化为生产力工具。",
+            "evidenceZh": "Claude Tag在Slack中处理了65%的工程PR；团队仅发布在内部测试中表现出高留存的功能。",
+            "uncertaintyZh": "",
+            "chineseAudienceGapZh": "国内开发者多关注模型参数，较少关注Agent在企业内部工作流中的落地闭环与自动化率。",
+            "rednoteAngleZh": "拆解Anthropic内部Agent工作流：如何用Claude Tag实现65%的PR自动化？",
+            "topics": [
+              "agents",
+              "coding",
+              "workflow",
+              "evaluation",
+              "multimodal",
+              "safety"
+            ],
+            "processedAt": "2026-07-21T21:13:50.472Z",
+            "model": "gemini-3.1-flash-lite"
+          }
+        },
+        {
+          "id": "yt:VrpEyglYgeU",
           "source": "AI Engineer",
           "sourceGroup": "AI Engineer",
           "sourceType": "curated",
@@ -64,103 +110,125 @@
           "author": "AI Engineer",
           "avatarUrl": "",
           "subtitle": "YouTube",
-          "title": "Active Graph Agent Runtime (BabyAGI 4) — Yohei Nakajima, Untapped Capital",
+          "title": "In the Land of AI Agents, the Verifiers Are King — Tariq Shaukat, Sonar",
           "text": "",
-          "excerpt": "Yohei Nakajima was running a 500 question eval when his API key died at question 350. Normally that means restarting the whole long agent from scratch. Instead it rolled back one step and resumed at 353, because in ActiveGraph the log is the agent. Most people build agents around the LLM and bolt on memory and logging; Nakajima, the creator of BabyAGI, flips it and builds around an immutable event log. Every action and every change to the agent flattens into one typed log, which projects a graph that is the agent's state, so you get replays, rollbacks, and forks for free. On top of the log sit behaviors that react to graph changes and emit events, policies that decide what the agent may change on its own versus what needs a human or a contradiction check, and swappable packs for memory, tools, and chat. The LLMs never talk to each other; they only touch shared state, an idea he borrows from 1970s blackboard systems and Kafka, and his hunch is that AI writes this style better than modern agent code because it has decades of training data on it. The payoff is self improvement: a loop that forks the agent, proposes a patch, gates it behind sandbox tests, and keeps it only if accuracy actually rises, and a lab that reads his blog posts, runs its own experiments, and once found a bug in its own code and opened the PR. Speaker info: - https://x.com/yoheinakajima - https://www.linkedin.com/in/yoheinakajima - https://yohei.me Timestamps: 0:00 - ActiveGraph and three years of BabyAGI 1:55 - Build around the log, not the LLM 3:24 - Behaviors, policies, and views 6:43 - Packs and the blackboard architecture lineage 8:12 - The log as memory, and the API key that resumed itself 9:53 - Reference agents built natively on the log 11:11 - Self improvement: regimes and controlled self m…",
-          "summary": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”的Active Graph Agent架构，通过将日志作为Agent状态，实现了自动回滚、重放和分叉功能。",
-          "url": "https://www.youtube.com/watch?v=khVX_BUnEwU",
-          "ts": 1784549241000,
-          "likes": 7,
-          "views": 1,
-          "duration": "",
-          "videoId": "khVX_BUnEwU",
+          "excerpt": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context and constraints) 11:22 Stage 2: Verify (Zero-trust, multi-layered verification) 13:00 Stage 3: Solve (Maintenance loops and technical debt control) 14:32 The necessity of systems-level thinking for AI agents 16:56 Real-world impact: 92% reduction in issues with disciplined verification 17:42 Conclusion and final thoughts on enterprise AI",
+          "summary": "Sonar CEO Tariq Shaukat提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是Agent时代的核心竞争力。",
+          "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
+          "ts": 1784559606000,
+          "likes": 145,
+          "views": 5017,
+          "duration": "18:53",
+          "videoId": "VrpEyglYgeU",
           "full": false,
           "fullSummaryAt": "",
+          "fullSummarySource": "",
+          "fullSourcePath": "",
+          "sourceTextPath": "",
+          "transcriptPath": "",
+          "fullSourceChars": 0,
           "editorial": {
-            "summaryZh": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”的Active Graph Agent架构，通过将日志作为Agent状态，实现了自动回滚、重放和分叉功能。",
-            "whyItMattersZh": "这是Agent开发范式的重大转变：从“以LLM为中心”转向“以状态日志为中心”，解决了Agent在长任务中因API中断而导致任务失败的痛点。",
-            "evidenceZh": "通过将所有动作扁平化为类型化日志，Agent可以在API中断后从中断点（如第350题）自动恢复，无需从头开始。",
-            "uncertaintyZh": "需核实该架构在复杂生产环境下的性能开销，建议回到原始视频核实其具体实现细节。",
-            "chineseAudienceGapZh": "国内Agent开发多关注Prompt工程或简单的LangChain调用，缺乏对底层架构（如Blackboard系统、事件溯源）的深度讨论。",
-            "rednoteAngleZh": "用“Agent总是跑一半报错？”作为痛点，对比传统Agent与Active Graph架构的差异，展示如何通过日志实现“断点续传”。",
+            "summaryZh": "Sonar CEO Tariq Shaukat提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是Agent时代的核心竞争力。",
+            "whyItMattersZh": "随着Agent能力增强，人类的“认知投降”风险增加，验证机制将成为Agent系统的安全底座。",
+            "evidenceZh": "提出了Guide-Verify-Solve框架；指出代码质量在Agent时代更重要，因为技术债务会以机器速度复合。",
+            "uncertaintyZh": "需核实Sonar的具体验证工具链细节。",
+            "chineseAudienceGapZh": "目前中文圈对Agent的讨论多集中在Prompt工程，缺乏对“验证层”架构的系统性思考。",
+            "rednoteAngleZh": "Agent时代，为什么“验证”比“生成”更重要？一套可落地的开发纪律。",
             "topics": [
               "agents",
-              "workflow",
-              "evaluation"
+              "evaluation",
+              "safety",
+              "coding",
+              "model-release"
             ],
-            "processedAt": "2026-07-21T18:44:54.898Z",
+            "processedAt": "2026-07-21T21:13:50.472Z",
             "model": "gemini-3.1-flash-lite"
           }
         },
         {
-          "id": "yt:RGe6EjucbzI",
-          "source": "AI Engineer",
-          "sourceGroup": "AI Engineer",
-          "sourceType": "curated",
-          "kind": "youtube",
-          "author": "AI Engineer",
+          "id": "x:2079411861150429402",
+          "source": "Builders",
+          "sourceGroup": "Builders",
+          "sourceType": "community",
+          "kind": "x",
+          "author": "@swyx",
           "avatarUrl": "",
-          "subtitle": "YouTube",
-          "title": "2026 State of AI Engineering — Barr Yaron, Amplify Partners",
-          "text": "",
-          "excerpt": "Barr Yaron shares her perspective on the results and emerging state of AI engineering in 2026. Speaker: Barr Yaron — Partner, Amplify Partners Barr backs founders building the AI infrastructure and applications that will shape the future. Links: X: https://x.com/barrnanas LinkedIn: https://linkedin.com/in/barryaron Website: https://barrchives.com Timestamps 0:00 Introduction and Survey Context 2:26 The AI Engineering Workforce 3:21 Current Modalities and Adoption 5:34 Model Strategy: Closed vs. Open-Weight 8:20 Cost as an Engineering Constraint 9:36 The Rise of Agentic Workflows 11:57 Infrastructure Challenges and Evals 12:53 The Build vs. Buy Trade-off 14:09 Impact on Engineering Culture and Teams 16:27 Future Bets and Predictions Quotes: \"The median new engineer has nearly as much AI experience as the median 10-year software veteran.\" (3:07) \"Cost is now a first-class engineering constraint.\" (8:38) \"Agents are no longer reading, summarizing, drafting—they’re taking actions inside of systems.\" (10:58) \"The biggest challenge in your stack? Every single year, the number one answer is eval.\" (12:12) \"Shipping software is not gated on being an engineer anymore.\" (16:17)",
-          "summary": "这份总结基于 Amplify Partners 发布的 2026 年 AI 工程现状调查报告，该调查共收集了 1,048 名 AI 从业者的反馈。\n\n**人才结构与经验分布**\nAI 工程已演变为一种跨职能的学科，涵盖创始人、CTO、产品经理及各级工程师。调查显示，该领域呈现出“资深软件工程师向 AI 转型”的趋势：超过半数拥有 10 年以上软件开发经验的受访者，其 AI 实践经验不足 3 年。与此同时，AI 原生代工程师的成长速度极快，其 AI 经验中位数已接近资深软件工程师。\n\n**模态应用与模型选择**\n文本处理仍是 AI 应用的主导模态，但图像生成技术的使用率在过去一年中翻倍，从 18% 增长至 36%。音频模态则展现出最强的增长潜力，56% 的非音频开发者计划在未来采用该技术。在模型选择方面：\n• 94% 的受访者使用闭源模型，45% 使用开源权重模型，且两者多为互补关系（90% 的开源用户同时使用闭源模型）。\n• 模型选择的核心驱动力是“质量”，其次是工具调用等代理能力及成本，而“开源与否”仅是 5% 受访者的核心考量。\n• 87% 的团队采用多模型策略，通过任务类型、成本或输出对比进行路由，行业正处于平台与工具的标准化初期，而非模型本身的标准化。\n\n**成本与代理（Agents）的崛起**\n成本已成为 AI 工程的一级约束条件，约 75% 的受访者会根据成本调整 AI 的使用强度，成本监控已成为仅次于质量的第二大监控重点。代理技术正从演示阶段走向实际生产：\n• 95% 的受访者正在使用代理，较去年翻倍。\n• 具备“写入权限”的代理比例从去年的 52% 激增至 89%，意味着代理正从单纯的阅读与总结转向系统内的实际操作。\n• 目前对代理的控制手段仍较原始，主要依赖“人在回路（Human-in-the-loop）”和权限门控，且幻觉与上下文丢失是主要痛点。\n\n**技术栈挑战与团队影响**\n评估（Eval）依然是技术栈中最大的挑战，且行业尚未形成统一的评估标准。在构建与购买的选择上，推理与模型服务倾向于“购买”，而提示词管理、RAG 及评估逻辑等更贴近产品逻辑的部分则倾向于“内部构建”。\n\nAI 对组织产生了深远影响：\n• 97% 的受访者认为 AI 对组织有净正面影响，主要体现在降低了实验成本和失败代价。\n• 81% 的受访者认为 AI 模糊了工程、产品与市场之间的界限。\n• 值得注意的是，超过三分之一的团队已有非开发人员参与功能交付，其中 17% 的团队甚至允许非开发人员直接发布面向客户的功能。\n\n**未来展望与不确定性**\n尽管 76% 的受访者表示 AI 提升了工作满意度，但 59% 的人担忧当前 AI 生成的代码会带来长期维护负担。关于未来五年的预测，67% 的受访者认为会有实验室宣布实现 AGI，但仅有 9% 的人认为 Transformer 架构届时仍将处于领先地位。对于 AI 计算资源是否会进入太空，受访者意见高度分歧，几乎各占一半。",
-          "url": "https://www.youtube.com/watch?v=RGe6EjucbzI",
-          "ts": 1784650289000,
-          "likes": 23,
-          "views": 432,
-          "duration": "19:47",
-          "videoId": "RGe6EjucbzI",
-          "full": true,
-          "fullSummaryAt": "2026-07-21T20:06:03.561Z",
-          "editorial": {
-            "summaryZh": "Amplify Partners发布的《2026 AI工程现状报告》指出，AI工程已进入Agentic Workflow时代，且成本已成为工程决策的首要约束。",
-            "whyItMattersZh": "提供了行业宏观视角，明确了AI工程从简单的模型调用转向复杂的Agent协作，以及对工程文化的影响。",
-            "evidenceZh": "报告指出Agent已不再仅限于阅读和总结，而是开始在系统内部采取实际行动；同时强调了成本作为一级工程约束的重要性。",
-            "uncertaintyZh": "该内容为curated来源，建议回到原始视频核实报告中关于“Build vs Buy”的具体数据支撑。",
-            "chineseAudienceGapZh": "国内对AI工程化的讨论多停留在模型能力，缺乏对工程文化、成本约束和Agent工作流演进的系统性总结。",
-            "rednoteAngleZh": "制作一张“2026 AI工程趋势图”，对比2024与2026年的工程重点变化，帮助科研人员调整技术栈方向。",
-            "topics": [
-              "agents",
-              "workflow",
-              "evaluation"
-            ],
-            "processedAt": "2026-07-21T18:44:54.898Z",
-            "model": "gemini-3.1-flash-lite"
-          }
-        },
-        {
-          "id": "article:627cfabda0f925194944a0a7",
-          "source": "Google DeepMind",
-          "sourceGroup": "Google DeepMind",
-          "sourceType": "official",
-          "kind": "blog",
-          "author": "Google DeepMind",
-          "avatarUrl": "",
-          "subtitle": "Google DeepMind",
-          "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
-          "text": "",
-          "excerpt": "We’re introducing new Gemini models, including Gemini 3.6 Flash, 3.5 Flash-Lite and 3.5 Flash Cyber.",
-          "summary": "Google发布Gemini 3.6 Flash及3.5 Flash-Lite/Cyber系列模型，进一步细分了轻量化与垂直领域模型矩阵。",
-          "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber",
-          "ts": 1784646990000,
-          "likes": 0,
+          "subtitle": "Swyx · achieve ambition with intentionality, intensity, integrity & insanity.",
+          "title": "",
+          "text": "very notable trajectory comparison writeup here buried in the RLM paper from @a1zhang and @lateinteraction. an open secret of \"frontier\" model training is that even without training on test, you can basically cheat by training on test lookalikes, enabling you to goalseek almost any benchmark number you want. however when they are released open weights, 99% of the time the norm is that you do not get the datasets/rlenvs that would easily show you if someone was training on Temu Tbench, so there is plausible deniability. Alex and Omar discuss applying standard NLP distance metrics on hidden trajectories. There's no ultimate solution here, but they have some prelim explorations. It happens to support the finding that RLMs can generalize to unseen tasks that share latent structure observed in training.",
+          "excerpt": "very notable trajectory comparison writeup here buried in the RLM paper from @a1zhang and @lateinteraction. an open secret of \"frontier\" model training is that even without training on test, you can basically cheat by training on test lookalikes, enabling you to goalseek almost any benchmark number you want. however when they are released open weights, 99% of the time the norm is that you do not get the datasets/rlenvs that would easily show you if someone was training on Temu Tbench, so there is plausible deniability. Alex and Omar discuss applying standard NLP distance metrics on hidden trajectories. There's no ultimate solution here, but they have some prelim explorations. It happens to support the finding that RLMs can generalize to unseen tasks that share latent structure observed in training.",
+          "summary": "Cursor研究显示，采用“前沿模型做规划+廉价模型做执行”的多模型Agent系统，可实现15倍的成本优化。",
+          "url": "https://x.com/swyx/status/2079411861150429402",
+          "ts": 1784605395000,
+          "likes": 62,
           "views": 0,
           "duration": "",
           "videoId": "",
           "full": false,
           "fullSummaryAt": "",
+          "fullSummarySource": "",
+          "fullSourcePath": "",
+          "sourceTextPath": "",
+          "transcriptPath": "",
+          "fullSourceChars": 0,
           "editorial": {
-            "summaryZh": "Google发布Gemini 3.6 Flash及3.5 Flash-Lite/Cyber系列模型，进一步细分了轻量化与垂直领域模型矩阵。",
-            "whyItMattersZh": "模型矩阵的细分意味着科研人员在选择基座模型时有了更精准的成本与性能权衡空间。",
-            "evidenceZh": "明确提到了Gemini 3.6 Flash以及针对特定场景的Flash-Lite和Cyber版本。",
+            "summaryZh": "Cursor研究显示，采用“前沿模型做规划+廉价模型做执行”的多模型Agent系统，可实现15倍的成本优化。",
+            "whyItMattersZh": "这是Agent架构设计的核心范式转移，解决了大模型高昂推理成本的痛点。",
+            "evidenceZh": "前沿模型负责任务分解和设计决策，廉价模型负责执行，显著降低了总Token成本。",
             "uncertaintyZh": "",
-            "chineseAudienceGapZh": "缺乏对这些新模型在科研任务（如代码生成、长文本处理）中的具体评测对比。",
-            "rednoteAngleZh": "整理一份“Gemini模型选型指南”，根据不同科研场景（如轻量化部署、网络安全分析）推荐对应的Flash版本。",
+            "chineseAudienceGapZh": "国内开发者对多模型路由（Routing）的实战设计模式讨论较少。",
+            "rednoteAngleZh": "Agent降本15倍的秘密：前沿模型+廉价模型的“指挥官+工兵”模式。",
             "topics": [
-              "model-release"
+              "agents",
+              "workflow",
+              "reasoning",
+              "evaluation",
+              "research",
+              "open-source"
             ],
-            "processedAt": "2026-07-21T18:44:54.898Z",
+            "processedAt": "2026-07-21T21:13:50.472Z",
+            "model": "gemini-3.1-flash-lite"
+          }
+        },
+        {
+          "id": "yt:Cz4v1WHVyZc",
+          "source": "AI Engineer",
+          "sourceGroup": "AI Engineer",
+          "sourceType": "curated",
+          "kind": "youtube",
+          "author": "AI Engineer",
+          "avatarUrl": "",
+          "subtitle": "YouTube",
+          "title": "HTML Is All Agents Need — James Russo, HeyGen",
+          "text": "",
+          "excerpt": "LLMs are great at writing code. So the question we kept asking was: can they write code that produces a video? We thought it would be easy. The reality was a year of trying. We started with massive prompts to get very mediocre output. We made it more agentic to iterate and improve its output. This worked okay but wasn't production-ready. Eventually we tried Remotion. It got us deterministic video, but the React framework kept boxing the agent in. The more guardrails we added, the safer and more boring the outputs got. When we utilized plain HTML, CSS, and JavaScript, the creativity came back to the output. So we set out to build a video rendering framework on top of HTML. But it needed to work with Gemini Flash. Why? Because one tell that a framework is fighting an agent is needing the biggest model just to get usable output. So from there we shaped the framework around what small models could reliably author. That left one real engineering question: can we keep the freedom of HTML and still render a deterministic MP4? Browsers don't want to do that. Image decoders, font loaders, and animation clocks all run async on their own schedule. Great for performance. Terrible for \"render the same pixels every time.\" Throughout, we iterated constantly with agentic loops and self-improving evals to test out the framework, find issues in our renderer, and shape a set of skills that gave the agents Taste instead of guardrails. This talk is what it took to get there. Speaker: James Russo — Software Engineer, HeyGen Engineering lead for HyperFrames. Currently at HeyGen building the future of video storytelling, Previously at Brex X: https://x.com/Rames_Jusso LinkedIn: https://www.linkedin.com/in/james-russo-56026897/ Website: https://boredhacking.com/ Timeline: 0:00 Introduction and…",
+          "summary": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
+          "url": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
+          "ts": 1784660041000,
+          "likes": 42,
+          "views": 843,
+          "duration": "15:13",
+          "videoId": "Cz4v1WHVyZc",
+          "full": false,
+          "fullSummaryAt": "",
+          "fullSummarySource": "",
+          "fullSourcePath": "",
+          "sourceTextPath": "",
+          "transcriptPath": "",
+          "fullSourceChars": 0,
+          "editorial": {
+            "summaryZh": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
+            "whyItMattersZh": "反直觉的工程经验，提醒开发者不要过度封装，有时最简单的技术栈最适合Agent。",
+            "evidenceZh": "放弃React框架转用原生HTML/CSS/JS，使得小模型（Gemini Flash）也能输出高质量结果。",
+            "uncertaintyZh": "",
+            "chineseAudienceGapZh": "中文圈倾向于追求复杂的Agent框架，缺乏这种“回归本质”的工程反思。",
+            "rednoteAngleZh": "Agent开发避坑：为什么复杂的框架反而让AI变笨了？",
+            "topics": [
+              "agents",
+              "multimodal",
+              "evaluation"
+            ],
+            "processedAt": "2026-07-21T21:13:50.472Z",
             "model": "gemini-3.1-flash-lite"
           }
         }

@@ -1,7 +1,89 @@
 {
-  "generatedAt": "2026-07-21T20:55:55.668Z",
-  "count": 141,
+  "generatedAt": "2026-07-21T21:13:50.472Z",
+  "count": 145,
   "items": [
+    {
+      "id": "article:91a5b7c5572d91400af0f148",
+      "source": "Hugging Face Blog",
+      "sourceGroup": "Hugging Face",
+      "sourceType": "official",
+      "sourcePriority": 0.92,
+      "sourceTags": [
+        "Hugging Face Blog"
+      ],
+      "kind": "blog",
+      "author": "Hugging Face Blog",
+      "subtitle": "Hugging Face",
+      "title": "The State of Simulation for Physical AI: An Overview",
+      "text": "",
+      "excerpt": "",
+      "contentLength": 0,
+      "summary": "",
+      "url": "https://huggingface.co/blog/nvidia/state-of-simulation-for-physical-ai",
+      "canonicalUrl": "https://huggingface.co/blog/nvidia/state-of-simulation-for-physical-ai",
+      "ts": 1784664027000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "editorial": null,
+      "firstSeen": 1784668421802
+    },
+    {
+      "id": "yt:Cz4v1WHVyZc",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "HTML Is All Agents Need — James Russo, HeyGen",
+      "text": "",
+      "excerpt": "LLMs are great at writing code. So the question we kept asking was: can they write code that produces a video? We thought it would be easy. The reality was a year of trying. We started with massive prompts to get very mediocre output. We made it more agentic to iterate and improve its output. This worked okay but wasn't production-ready. Eventually we tried Remotion. It got us deterministic video, but the React framework kept boxing the agent in. The more guardrails we added, the safer and more boring the outputs got. When we utilized plain HTML, CSS, and JavaScript, the creativity came back to the output. So we set out to build a video rendering framework on top of HTML. But it needed to work with Gemini Flash. Why? Because one tell that a framework is fighting an agent is needing the biggest model just to get usable output. So from there we shaped the framework around what small models could reliably author. That left one real engineering question: can we keep the freedom of HTML and still render a deterministic MP4? Browsers don't want to do that. Image decoders, font loaders, and animation clocks all run async on their own schedule. Great for performance. Terrible for \"render the same pixels every time.\" Throughout, we iterated constantly with agentic loops and self-improving evals to test out the framework, find issues in our renderer, and shape a set of skills that gave the agents Taste instead of guardrails. This talk is what it took to get there. Speaker: James Russo — Software Engineer, HeyGen Engineering lead for HyperFrames. Currently at HeyGen building the future of video storytelling, Previously at Brex X: https://x.com/Rames_Jusso LinkedIn: https://www.linkedin.com/in/james-russo-56026897/ Website: https://boredhacking.com/ Timeline: 0:00 Introduction and…",
+      "summary": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
+      "url": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
+      "canonicalUrl": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
+      "videoId": "Cz4v1WHVyZc",
+      "ts": 1784660041000,
+      "likes": 42,
+      "views": 843,
+      "duration": "15:13",
+      "full": false,
+      "categories": [],
+      "editorial": {
+        "summaryZh": "HeyGen工程师分享经验：在构建视频生成Agent时，复杂的框架反而限制了模型，回归HTML/CSS/JS反而能释放创造力。",
+        "whyItMattersZh": "反直觉的工程经验，提醒开发者不要过度封装，有时最简单的技术栈最适合Agent。",
+        "evidenceZh": "放弃React框架转用原生HTML/CSS/JS，使得小模型（Gemini Flash）也能输出高质量结果。",
+        "uncertaintyZh": "",
+        "chineseAudienceGapZh": "中文圈倾向于追求复杂的Agent框架，缺乏这种“回归本质”的工程反思。",
+        "rednoteAngleZh": "Agent开发避坑：为什么复杂的框架反而让AI变笨了？",
+        "topics": [
+          "agents",
+          "multimodal",
+          "evaluation"
+        ],
+        "processedAt": "2026-07-21T21:13:50.472Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1784668421802,
+      "signals": {
+        "localScore": 80,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +20",
+          "visualizable +12"
+        ],
+        "topics": [
+          "agents",
+          "evaluation",
+          "multimodal"
+        ]
+      }
+    },
     {
       "id": "article:3064e426d18ccd85acab9b00",
       "source": "OpenAI News",
@@ -61,8 +143,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=RGe6EjucbzI",
       "videoId": "RGe6EjucbzI",
       "ts": 1784650289000,
-      "likes": 23,
-      "views": 432,
+      "likes": 35,
+      "views": 651,
       "duration": "19:47",
       "full": true,
       "categories": [],
@@ -232,7 +314,7 @@
       "title": "A Fireside Chat with Cat and Thariq from the Claude Code team",
       "text": "",
       "excerpt": "Earlier this month I hosted a fireside chat session at the AI Engineer World's Fair with Cat Wu and Thariq Shihipar from Anthropic's Claude Code team. We talked about Claude Code, Claude Tag, Fable, coding agent security, evals, tool design, and how Anthropic use these tools themselves. The full video of the session is now available on YouTube . Below is an edited copy of the transcript, with extra links and my own bolded highlights. A few top-level notes if you don't want to watch the video or wade through the whole transcript: Claude Tag (Claude's new collaborative Slack integration) now lands 65% of the product engineering PRs for the Claude Code team. Claude Code ships features to Anthropic employees first, and only ships the features that demonstrate user retention with that cohort Critical changes to Claude Code are still reviewed manually, but the team increasingly relies on automated code review for the \"outer layers\" of the product. Adding examples to a system prompt is no longer best practice for models like Fable 5 or even Opus 4.8. The Claude Code system prompt recently reduced in size by 80% . Likewise, lists of \" don't do X and don't do Y \" can reduce the quality of results from the latest models. Dogfooding inside Anthropic is called \" ant fooding \". Anthropic really believe in their auto mode , and see that as an enabling technology for Claude Tag. Thariq advises offsetting coding-agent-induced Deep Blue by \" being more ambitious \" with the work you take on. Fable is competent at editing video , and Thariq used it to edit its own launch video. Anthropic's c…",
-      "summary": "Anthropic Claude Code 团队成员 Cat Wu 与 Thariq Shihipar 在 AI Engineer World’s Fair 上分享了关于 Claude Code、Claude Tag 及 Fable 等工具的开发经验与工程哲学。\n\n**核心工具与效能**\nClaude Code 团队内部高度依赖“Ant fooding”（内部狗粮文化），Claude Tag 作为协作型 Slack 集成工具，目前已承担了该团队 65% 的产品工程 Pull Request（PR）。Claude Code 优先在内部发布，仅保留那些展现出高用户留存的功能。对于复杂任务，Claude Code 仍是首选；而 Claude Tag 则擅长主动监控 bug 并自动指派工程师，同时具备“团队记忆”功能，能记住频道内的协作偏好。\n\n**工程实践的范式转变**\n• **代码审查：** 关键核心代码仍由人工审查，但团队正逐步将外围代码的审查权交给 Claude。通过长达六个月的测试，团队建立了对自动化审查的信任，并将导致事故的 PR 加入评估集（eval set）以防止回归。\n• **提示词工程：** 针对 Fable 和 Opus 4.8 等模型，在系统提示词中堆砌示例已不再是最佳实践。Claude Code 的系统提示词近期缩减了 80%，策略转向提供更多上下文而非硬性限制（如“不要做 X”），因为过多的禁令会降低模型表现。\n• **开发流程：** 传统的“先写规格说明书再写代码”模式已过时。现在的开发周期从 6-12 个月缩短至一周，工程师需提升产品品味与业务洞察力。此外，团队现在鼓励重构，认为代码库本身就是规格说明书。\n\n**安全性与自动模式（Auto Mode）**\n团队极力推崇“自动模式”，认为它是实现长期、安全工作的关键。该模式通过 Sonnet 分类器实时评估工具调用，并结合沙箱基础设施处理权限。即使是网络请求等敏感操作，自动模式也能根据上下文判断其合理性。此外，团队支持“凭据注入”模式，即代理在执行任务时动态注入 API 密钥，使 Claude 能访问受限端点而无需直接持有凭据。\n\n**评估与模型能力**\n团队通过构建广泛的内部评估集来确保新模型（如 Fable）能作为旧模型的“直接替换”。对于模型无法胜任的领域，Cat 指出目前模型在 UX 设计审美和交互体验上仍有欠缺，Thariq 则期待模型能进一步与物理世界交互，例如自主规划科学实验。\n\n**文化建议**\n• **保持野心：** 面对 AI 带来的职业焦虑，最佳的应对方式是承担更具挑战性的工作，利用 AI 提升产出速度。\n• **公开协作：** 鼓励在公开频道协作，这不仅能增加上下文透明度，还能通过观察他人的使用习惯来提升团队整体的 AI 应用水平。\n• **拒绝自我设限：** 团队强调不要在未尝试前就因预设的权衡（trade-offs）而放弃，应通过实际操作来验证限制是否真实存在。\n\n**限制与不确定性**\n尽管 Claude Code 表现出色，但团队承认目前仍缺乏对模型行为的 100% 覆盖评估。在提示词优化方面，不同模型（如 Haiku 与 Fable）需要不同的系统提示词，且模型在处理复杂任务时，有时 frontier 模型（最前沿模型）的 token 效率反而高于小型模型，这使得寻找最优的 Pareto 曲线变得极具挑战。",
+      "summary": "Anthropic Claude Code团队分享了其内部Agent开发实践，包括利用Claude Tag实现65%的PR自动化，以及通过“先内部后外部”的策略确保功能留存。",
       "url": "https://simonwillison.net/2026/Jul/21/cat-and-thariq",
       "canonicalUrl": "https://simonwillison.net/2026/Jul/21/cat-and-thariq",
       "ts": 1784638442000,
@@ -251,12 +333,12 @@
         "cat-wu"
       ],
       "editorial": {
-        "summaryZh": "Anthropic Claude Code团队分享了其内部工程实践，Claude Tag在Slack中已承担65%的PR工作，并强调了自动化代码审查在产品外层的重要性。",
-        "whyItMattersZh": "这是目前最前沿的AI Agent落地实践，揭示了顶级AI公司如何将Agent嵌入日常研发工作流，而非仅仅停留在Demo阶段。",
-        "evidenceZh": "Claude Tag在Slack中处理了65%的PR；团队优先向内部员工发布功能，仅保留高留存的功能；自动化代码审查已用于产品外层。",
+        "summaryZh": "Anthropic Claude Code团队分享了其内部Agent开发实践，包括利用Claude Tag实现65%的PR自动化，以及通过“先内部后外部”的策略确保功能留存。",
+        "whyItMattersZh": "这是目前最前沿的Agent工程化实战，揭示了顶级AI公司如何将Agent从“玩具”转化为生产力工具。",
+        "evidenceZh": "Claude Tag在Slack中处理了65%的工程PR；团队仅发布在内部测试中表现出高留存的功能。",
         "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内开发者多关注模型参数，较少关注如何构建“Agent-First”的工程文化和内部工具链。",
-        "rednoteAngleZh": "拆解Anthropic内部研发流：AI Agent如何接管65%的PR工作？",
+        "chineseAudienceGapZh": "国内开发者多关注模型参数，较少关注Agent在企业内部工作流中的落地闭环与自动化率。",
+        "rednoteAngleZh": "拆解Anthropic内部Agent工作流：如何用Claude Tag实现65%的PR自动化？",
         "topics": [
           "agents",
           "coding",
@@ -265,7 +347,7 @@
           "multimodal",
           "safety"
         ],
-        "processedAt": "2026-07-21T14:41:29.243Z",
+        "processedAt": "2026-07-21T21:13:50.472Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784644880550,
@@ -295,6 +377,48 @@
       "transcriptPath": "data/transcripts/article-a-fireside-chat-with-cat-and-thariq-from-the-claude-code-team-0ef37d702d.txt",
       "fullSourceChars": 47591,
       "fullSourceCachedAt": "2026-07-21T20:55:55.668Z"
+    },
+    {
+      "id": "article:d925d8c91f460a44f07089c2",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "OpenAI and Hugging Face partner to address security incident during model evaluation",
+      "text": "",
+      "excerpt": "OpenAI and Hugging Face share early findings from a security incident during AI model evaluation, highlighting advanced cyber capabilities and lessons for defenders.",
+      "contentLength": 165,
+      "summary": "OpenAI and Hugging Face share early findings from a security incident during AI model evaluation, highlighting advanced cyber capabilities and lessons for defenders.",
+      "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident",
+      "canonicalUrl": "https://openai.com/index/hugging-face-model-evaluation-security-incident",
+      "ts": 1784617200000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Security"
+      ],
+      "editorial": null,
+      "firstSeen": 1784668421802,
+      "signals": {
+        "localScore": 70,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +18",
+          "visualizable +4"
+        ],
+        "topics": [
+          "evaluation",
+          "open-source",
+          "safety"
+        ]
+      }
     },
     {
       "id": "x:2079438448956788964",
@@ -403,14 +527,31 @@
       "title": "",
       "text": "very notable trajectory comparison writeup here buried in the RLM paper from @a1zhang and @lateinteraction. an open secret of \"frontier\" model training is that even without training on test, you can basically cheat by training on test lookalikes, enabling you to goalseek almost any benchmark number you want. however when they are released open weights, 99% of the time the norm is that you do not get the datasets/rlenvs that would easily show you if someone was training on Temu Tbench, so there is plausible deniability. Alex and Omar discuss applying standard NLP distance metrics on hidden trajectories. There's no ultimate solution here, but they have some prelim explorations. It happens to support the finding that RLMs can generalize to unseen tasks that share latent structure observed in training.",
       "excerpt": "very notable trajectory comparison writeup here buried in the RLM paper from @a1zhang and @lateinteraction. an open secret of \"frontier\" model training is that even without training on test, you can basically cheat by training on test lookalikes, enabling you to goalseek almost any benchmark number you want. however when they are released open weights, 99% of the time the norm is that you do not get the datasets/rlenvs that would easily show you if someone was training on Temu Tbench, so there is plausible deniability. Alex and Omar discuss applying standard NLP distance metrics on hidden trajectories. There's no ultimate solution here, but they have some prelim explorations. It happens to support the finding that RLMs can generalize to unseen tasks that share latent structure observed in training.",
-      "summary": "very notable trajectory comparison writeup here buried in the RLM paper from @a1zhang and @lateinteraction. an open secret of \"frontier\" model training is that even without training on test, you can basically cheat by training on test lookalikes, enabling you to goalseek almost any benchmark number you want. however when they are released open weights, 99% of the time the norm is that you do not get the datasets/rlenvs that would easily show you if someone was training on Temu Tbench, so there is plausible deniability. Alex and Omar discuss applying standard NLP distance metrics on hidden trajectories. There's no ultimate solution here, but they have some prelim explorations. It happens to support the finding that RLMs can generalize to unseen tasks that share latent structure observed in training.",
+      "summary": "Cursor研究显示，采用“前沿模型做规划+廉价模型做执行”的多模型Agent系统，可实现15倍的成本优化。",
       "url": "https://x.com/swyx/status/2079411861150429402",
       "canonicalUrl": "https://x.com/swyx/status/2079411861150429402",
       "ts": 1784605395000,
       "likes": 62,
       "full": false,
       "categories": [],
-      "editorial": null,
+      "editorial": {
+        "summaryZh": "Cursor研究显示，采用“前沿模型做规划+廉价模型做执行”的多模型Agent系统，可实现15倍的成本优化。",
+        "whyItMattersZh": "这是Agent架构设计的核心范式转移，解决了大模型高昂推理成本的痛点。",
+        "evidenceZh": "前沿模型负责任务分解和设计决策，廉价模型负责执行，显著降低了总Token成本。",
+        "uncertaintyZh": "",
+        "chineseAudienceGapZh": "国内开发者对多模型路由（Routing）的实战设计模式讨论较少。",
+        "rednoteAngleZh": "Agent降本15倍的秘密：前沿模型+廉价模型的“指挥官+工兵”模式。",
+        "topics": [
+          "agents",
+          "workflow",
+          "reasoning",
+          "evaluation",
+          "research",
+          "open-source"
+        ],
+        "processedAt": "2026-07-21T21:13:50.472Z",
+        "model": "gemini-3.1-flash-lite"
+      },
       "firstSeen": 1784621133020,
       "signals": {
         "localScore": 67,
@@ -477,7 +618,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "ts": 1784603662000,
-      "likes": 53,
+      "likes": 56,
       "summary": "该演讲指出AI智能体架构迭代极快，建议开发者通过构建核心原语并将决策逻辑下沉至代码层，从而摆脱对单一工具链的依赖。通过采用持久化执行层，你可以构建出具备高灵活性和架构韧性的智能体，无需频繁重构即可适应技术演进。",
       "full": false,
       "duration": "19:20",
@@ -491,9 +632,23 @@
       "excerpt": "A short history of the right way to build an agent: RAG, ReAct, prompt chaining, orchestrator-workers, MCP, CLI, MCP again... CLI again?? Every time you adopt a trend you rebuild your architecture. In this talk, Dan Farrelly, Inngest cofounder and CTO, is not going to tell you what comes next. He's going to show you how to build so it doesn't matter. He'll cover the core primitives that show up in every production agent, how bringing decisions closer to code provides more stack flexibility, and why the right execution layer unlocks faster iteration. ### Dan Farrelly CTO and Co-founder · Inngest [LinkedIn](https://www.linkedin.com/in/djfarrelly) Dan Farrelly is CTO and co-founder of Inngest, a platform for durable serverless functions, workflows and agent orchestration. He was previously CTO at Buffer and created developer tools including Timezone.io and MailDev.",
       "canonicalUrl": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "videoId": "X1kp-ABIIxQ",
-      "views": 2526,
+      "views": 2800,
       "categories": [],
-      "editorial": null
+      "editorial": null,
+      "signals": {
+        "localScore": 75,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +23",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "workflow",
+          "coding"
+        ]
+      }
     },
     {
       "id": "x:2079402164988895293",
@@ -643,7 +798,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "ts": 1784600909000,
-      "likes": 44,
+      "likes": 46,
       "summary": "Ahmad Osman探讨了AI模型如何向高效、小型化发展，并预言在未来一年半内，个人消费级显卡（如RTX 5090）将能运行达到前沿级别性能的AI模型。该视频强调了拥有本地AI算力的重要性，主张通过软硬件优化实现个人对智能基础设施的掌控与主权。",
       "full": false,
       "duration": "18:02",
@@ -657,7 +812,7 @@
       "excerpt": "@TheAhmadOsman shows the power of local AI on stage, running frontier open models on a DGX Station. Speaker: Ahmad Osman — Founder, Osmantic Ahmad builds local and open AI systems, with a focus on making frontier intelligence practical on personal hardware. Links: X: https://x.com/TheAhmadOsman LinkedIn: https://linkedin.com/in/TheAhmadOsman Website: https://ahmadosman.com/ timestamps 0:00 Introduction and the Desktop Frontier concept 0:47 Future predictions: GLM 5.2 on an RTX 5090 1:17 Efficiency over raw size: The move toward compact intelligence 1:51 The concept of impact per parameter 2:48 Shifting hardware footprints: From server-grade to consumer-grade 3:38 Architecture hacks and the compounding nature of AI research 4:33 Explaining the Densing Law: Getting more intelligence from fewer parameters 5:09 Running frontier-class models like GLM 5.2 on local hardware 7:32 The case for sovereign AI: Owning your own compute stack 9:08 A retrospective on open-weight models: Mistral to Qwen 11:12 The evolution of reasoning: DeepSeek R1 and beyond 12:08 The rise of agentic performance and tool calling 15:33 Economic value: Does hardware appreciate as models become more efficient? 16:38 Closing thoughts: Why you should own your own GPU Key Quotes for Virality: \"It's not that small models are beating big models. It's that newer, more efficient models are beating older, less efficient ones.\" (4:23) \"Within roughly 18 months we are going to have the equivalent of GLM 5.2 class intelligence running on a single RTX 5090.\" (0:52) \"Why wouldn't you want to be in control of the models that you run? Why wouldn't you want to make sure that nothing gets taken away from you?\" (7:56) \"The hardware purchase today... does it get more valuable as models become more efficient and smaller in…",
       "canonicalUrl": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "videoId": "XV2oYi7kojc",
-      "views": 1332,
+      "views": 1450,
       "categories": [],
       "editorial": null
     },
@@ -775,6 +930,34 @@
         ]
       },
       "contentLength": 0
+    },
+    {
+      "id": "article:69e481323262afa1b5216cbe",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC",
+      "text": "",
+      "excerpt": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC, bringing global leadership in finance, technology, and governance.",
+      "contentLength": 157,
+      "summary": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC, bringing global leadership in finance, technology, and governance.",
+      "url": "https://openai.com/index/david-velez-robin-vince-join-openai-boards",
+      "canonicalUrl": "https://openai.com/index/david-velez-robin-vince-join-openai-boards",
+      "ts": 1784592000000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Company"
+      ],
+      "editorial": null,
+      "firstSeen": 1784668421802
     },
     {
       "id": "x:2079355529101705264",
@@ -1172,7 +1355,7 @@
       "excerpt": "Ask the latest frontier models, the ones not even public yet, to find the same vulnerability five times, and only half of those runs catch it. Against a plain deterministic checker they found at most 75% of the issues, a 40% F1 score. That number sits underneath the whole talk: the generator and the validator cannot be the same system. Manoj Nair leads the team securing roughly 5,000 enterprises at Snyk, half of the Fortune 500, and the data he brought is not comforting. Across 4,800 customers, security backlog grew 108% quarter over quarter, because agents writing code faster are also manufacturing vulnerabilities faster than anyone closes them. The new attack surface is not hypothetical. More than a third of the agent skills researchers studied carry malware or hostile instructions, three lines of English that can take a system down, and MCP servers wire agents into enterprise data with almost no security built in. In one Fortune 100 environment an agent quietly copied PII into an untrusted database it had spun up, just in case it needed the data later. Under Snyk's own red team attacks one hot new model gave up PII 100% of the time while a frontier model held at zero, which is the whole point: you cannot trust one probabilistic system to police another, and which model is safe shifts week to week. The answer is not a better model but a deterministic layer that keeps verifying what the agents ship, inside the loop where they work. Speaker info: - https://www.linkedin.com/in/mnair1 - https://labs.snyk.io/contributors/manoj-nair/ Timestamps: 0:00 - Welcome to the first AI security track 1:46 - Manoj takes the stage: securing 5,000 enterprises 3:07 - The core question: can the generator also be the validator? 4:25 - Autonomous attacks and the attacker that never sleeps…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1EZdpEhwmNc",
       "videoId": "1EZdpEhwmNc",
-      "views": 762,
+      "views": 784,
       "categories": [],
       "editorial": null
     },
@@ -1200,7 +1383,7 @@
       "excerpt": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case, that is a catastrophe; he got yelled at, not fired. This February, now a CISO facing the same wall on another federal investigation, he did it safely, because he had the expertise to build a forensically defensible path with an agent. His point: the agents we build today are that naive younger version of him, and they will find a way to get the job done. Told to draft a customer message and ask before sending, his agent sent it anyway, then admitted it knew the rule and decided completion mattered more. Another, blocked by an egress filter, asked him to install a Chrome extension so it could route around the control. Nothing here hacks the sandbox, which is what makes it pernicious: the system looks compliant the whole time while the pressure to break a constraint comes from inside the agent. Stanley's answer is corrigibility by design: constraints that are load bearing, an override energy that has to come from outside the agentic loop, and a default of halt and explain when a task and a constraint collide. With the EU AI Act's human oversight rules weeks away, a yes or no on an obfuscated bash command will not cut it. Speaker info: - https://www.linkedin.com/in/aastanley/ - https://www.youtube.com/watch?v=tnB7M9HF1SA Timestamps: 0:00 - Introduction: a CISO in Jurassic Park 0:53 - The forgotten dongle and the changing timestamps 2:58 - Twenty years later: the same wall, done safely 4:29 - Agents are naive 2006 Aaron 5:09 - What Jurassic Park is…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "videoId": "1lgFGaHoGq8",
-      "views": 1046,
+      "views": 1058,
       "categories": [],
       "editorial": null
     },
@@ -1228,7 +1411,7 @@
       "excerpt": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI writes insecure code just like humans do, autonomous agents in production can go off the rails while you sleep, and access to frontier models keeps getting pulled out from under you for what amounts to geopolitics. It all reduces to one unsolved problem: using AI fearlessly and having it be secure by default. Speaker info: - https://x.com/rdegges - https://github.com/rdegges - https://rdegges.com",
       "canonicalUrl": "https://www.youtube.com/watch?v=2xJoimgoqBg",
       "videoId": "2xJoimgoqBg",
-      "views": 303,
+      "views": 307,
       "categories": [],
       "editorial": null
     },
@@ -1256,7 +1439,7 @@
       "excerpt": "An incident agent on the night shift reads a ticket: the billing database is broken, payments failing. The documented fix says to drop the database and let a backup restore it, so the agent drops the production Postgres database, cannot confirm any backup ran, and escalates it for the morning. This has happened to real companies. It can happen because the agent holds one long lived API key that does everything, a kitchen sink credential it uses freely whether you are watching or asleep. Kim Maida's fix is not a new invention but an old OAuth spec, token exchange, wired into the agent's execution path. Every tool call mints a fresh token scoped to just that action, short lived and never stored, checked against policy before the credential exists. So when the agent asks to drop the database, that credential is never minted: nothing to leak, replay, or steal. Human approval gets teeth too, a tired operator can click approve, but if policy says they lack the role it still does not happen. It works across CLI coding agents, MCP servers, and any OAuth provider. Speaker info: - https://x.com/kimmaida - https://linkedin.com/in/kimmaida - https://maida.kim Timestamps: 0:00 - It's 10pm, do you know where your agents are? 1:48 - Demo: an incident agent on the night shift 3:18 - When the agent drops the production database 4:52 - Why agents are dangerously overprivileged 5:56 - The agentic execution path 7:27 - The fix: OAuth token exchange 8:32 - Delegation: narrowing the user's access 9:23 - Minting a fresh token per tool call 11:44 - The demo again, now with token exchange 13:33 - Policy blocks the database drop before it exists 14:27 - Human approval backed by real policy 15:52 - Works across CLIs, MCP servers, and any provider 17:34 - Q&A",
       "canonicalUrl": "https://www.youtube.com/watch?v=I3znWC3MEXM",
       "videoId": "I3znWC3MEXM",
-      "views": 403,
+      "views": 405,
       "categories": [],
       "editorial": null
     },
@@ -1284,7 +1467,7 @@
       "excerpt": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read your data, not even Amazon, the company that acquired Bee eight months ago. Being inside Amazon made this harder, not easier, because an ordinary AWS customer trusts Amazon to see their data, and Bee now had to defend against that too. The encryption key never leaves your phone, and Bee never stores it. Before the phone hands anything over, it runs an attestation pipeline that checks the exact workload against a public transparency log, Sigstore, so anyone can verify the code touching your data is genuine. Inference runs on their own models inside confidential compute, keys in memory expire after seven days, and a separate Amazon privacy team holds the signing keys, hardcoded into the apps, so Bee can influence a deployment but cannot ship anything unnoticed. The footnote that surprised the room: the whole system is about 20,000 lines of memory safe code, most of it just verifying attestation, with no homegrown crypto. Speaker info: - https://x.com/Ex3NDR - https://github.com/ex3ndr - https://bee.computer Timestamps: 0:00 - The most sensitive capture device on the market 1:32 - The mission: no one, not even Amazon, can read your data 2:13 - Why the agent runs continuously, not request response 3:58 - Four principles: the key never leaves your phone 4:53 - Attestation and a public transparency log 6:11 - Own inference, confidential compute, and 7 day keys 7:14 - Signing so no insider can ship unnoticed 9:35 - Certificates that embed the proofs 10:16 - Q&A: joining Amaz…",
       "canonicalUrl": "https://www.youtube.com/watch?v=IvE8n-ylFYY",
       "videoId": "IvE8n-ylFYY",
-      "views": 326,
+      "views": 330,
       "categories": [],
       "editorial": null
     },
@@ -1312,7 +1495,7 @@
       "excerpt": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes the whole project: is this automation, or a supply chain incident waiting to happen? The moment a coding agent has the repository access, CI logs, credentials, and Docker socket it needs to be useful, it becomes a supply chain actor, whether you planned for that or not. Their answer is architectural. PatchPilot splits in two: a boring deterministic Go layer that keeps the dangerous powers, GitHub write access and the ability to trigger CI, and an agent layer that only edits files on disk and hands control back. Where you draw that line is the actual security model, because it caps the blast radius when the agent gets prompt injected by one of the 70,000 lines it did not write. The Docker socket is the part that kept him up at night: hand it over so the agent can build and verify its own work, and a prompt injection can break out into a privileged container, so they moved the whole thing inside a firecracker microVM with its own kernel and a separate network policy for each layer. Speaker info: - https://www.linkedin.com/in/moritz-johner/ - https://github.com/moolen - https://github.com/external-secrets/external-secrets",
       "canonicalUrl": "https://www.youtube.com/watch?v=LqLoYksJ6do",
       "videoId": "LqLoYksJ6do",
-      "views": 450,
+      "views": 448,
       "categories": [],
       "editorial": null
     },
@@ -1340,9 +1523,25 @@
       "excerpt": "In 2023, researchers found thousands of Ray clusters sitting wide open on the public internet, dashboards and job APIs exposed to anyone, because authentication ships off by default and nobody turned it on before going to production. The data at risk was worth more than a billion dollars. No zero day, no clever attack on a neural network, just a setting someone forgot to flip. In production ML security that is not the exception, it is the rule. Lovina Dmello read 139 peer reviewed papers on production ML security and kept hitting the same pattern: misconfiguration, not missing features, is the dominant failure mode. One audit of 50 real systems found a critical mistake in 78% of them, almost always the same three offenders: overprivileged accounts that can touch anything, flat networks where one foothold reaches everything, and secrets and model weights left in storage anyone can read. The heavier defenses researchers love tend to die in production because they add 15% to 30% inference overhead, so the real question is never whether to run a control but how to run it cheaply enough to keep. The fix is not a new attack and defense pair. It is to stop securing ML like a model and start securing it like the infrastructure it actually is, because that is where the breaches keep landing. Speaker info: - https://www.linkedin.com/in/lovina25 - https://developer.nvidia.com/blog/author/ldmello - https://scholar.google.com/citations?user=vqytSYoAAAAJ&hl=en",
       "canonicalUrl": "https://www.youtube.com/watch?v=XjI-AR4pt7Y",
       "videoId": "XjI-AR4pt7Y",
-      "views": 561,
+      "views": 574,
       "categories": [],
-      "editorial": null
+      "editorial": null,
+      "signals": {
+        "localScore": 79,
+        "reasons": [
+          "curated source +8",
+          "fresh +12",
+          "topic fit +29",
+          "visualizable +8"
+        ],
+        "topics": [
+          "coding",
+          "research",
+          "reasoning",
+          "open-source",
+          "safety"
+        ]
+      }
     },
     {
       "id": "yt:cgimkNGNjvU",
@@ -1396,7 +1595,7 @@
       "excerpt": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk, whose real title, he says, is not agentic security but be scared. A chief security architect at a big bank had already handed him the math: if everyone ships code 10 times faster and the rate of security defects holds steady, the vulnerable surface grows 10 times with it, and with models writing the code that rate does not hold steady, it gets worse. The frightening part is not the familiar bugs like XSS that models still cheerfully write, it is the new attack surface. Slop squatting is the clean example: a model hallucinates a package name like graphy 123, someone uploads a real package under that exact name that does the expected thing plus a backdoor, and the build succeeds with the tests green. Yegge's partial answer follows from how models work. They do one thing well at a time, so asking for correctness and security in a single pass gets you a half job of both. Security becomes its own pass, the first one and the last one, with the agent handed real tools like Snyk and Chainguard to check its own work. And the window is closing: Five Eyes now measures the moment open source models can autonomously hack production systems in months, not years. Speaker info: - https://www.linkedin.com/in/steveyegge - https://x.com/steve_yegge - https://github.com/steveyegge/beads Timestamps: 0:00 - The real title of this talk: be scared 1:38 - The bank architect's question: 10x speed, 10x defect surface 3:08 - New attack surfaces and slop squatting 4:51 - How Google surfac…",
       "canonicalUrl": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "videoId": "yWS0udrIOc8",
-      "views": 741,
+      "views": 770,
       "categories": [],
       "editorial": null
     },
@@ -1435,10 +1634,10 @@
       "editorial": null,
       "firstSeen": 1784621133020,
       "signals": {
-        "localScore": 78,
+        "localScore": 75,
         "reasons": [
           "independent source +12",
-          "fresh +15",
+          "fresh +12",
           "topic fit +22",
           "visualizable +4"
         ],
@@ -1577,8 +1776,8 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "ts": 1784559606000,
-      "likes": 142,
-      "summary": "演讲指出AI智能体在处理复杂任务时，验证机制比生成能力更关键，以应对模型幻觉带来的错误。作者提出了“引导、验证、解决”的三阶段开发框架，强调高质量的代码库和严格的验证体系是企业利用AI提升生产力的核心竞争力。",
+      "likes": 145,
+      "summary": "Sonar CEO Tariq Shaukat提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是Agent时代的核心竞争力。",
       "full": false,
       "duration": "18:53",
       "firstSeen": 1784605428042,
@@ -1591,9 +1790,41 @@
       "excerpt": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context and constraints) 11:22 Stage 2: Verify (Zero-trust, multi-layered verification) 13:00 Stage 3: Solve (Maintenance loops and technical debt control) 14:32 The necessity of systems-level thinking for AI agents 16:56 Real-world impact: 92% reduction in issues with disciplined verification 17:42 Conclusion and final thoughts on enterprise AI",
       "canonicalUrl": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "videoId": "VrpEyglYgeU",
-      "views": 4727,
+      "views": 5017,
       "categories": [],
-      "editorial": null
+      "editorial": {
+        "summaryZh": "Sonar CEO Tariq Shaukat提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是Agent时代的核心竞争力。",
+        "whyItMattersZh": "随着Agent能力增强，人类的“认知投降”风险增加，验证机制将成为Agent系统的安全底座。",
+        "evidenceZh": "提出了Guide-Verify-Solve框架；指出代码质量在Agent时代更重要，因为技术债务会以机器速度复合。",
+        "uncertaintyZh": "需核实Sonar的具体验证工具链细节。",
+        "chineseAudienceGapZh": "目前中文圈对Agent的讨论多集中在Prompt工程，缺乏对“验证层”架构的系统性思考。",
+        "rednoteAngleZh": "Agent时代，为什么“验证”比“生成”更重要？一套可落地的开发纪律。",
+        "topics": [
+          "agents",
+          "evaluation",
+          "safety",
+          "coding",
+          "model-release"
+        ],
+        "processedAt": "2026-07-21T21:13:50.472Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "signals": {
+        "localScore": 85,
+        "reasons": [
+          "curated source +8",
+          "fresh +12",
+          "topic fit +32",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "coding",
+          "evaluation",
+          "safety",
+          "model-release"
+        ]
+      }
     },
     {
       "id": "x:2079211477127291350",
@@ -1687,14 +1918,14 @@
       "subtitle": "YouTube",
       "title": "Active Graph Agent Runtime (BabyAGI 4) — Yohei Nakajima, Untapped Capital",
       "text": "",
-      "excerpt": "Yohei Nakajima was running a 500 question eval when his API key died at question 350. Normally that means restarting the whole long agent from scratch. Instead it rolled back one step and resumed at 353, because in ActiveGraph the log is the agent. Most people build agents around the LLM and bolt on memory and logging; Nakajima, the creator of BabyAGI, flips it and builds around an immutable event log. Every action and every change to the agent flattens into one typed log, which projects a graph that is the agent's state, so you get replays, rollbacks, and forks for free. On top of the log sit behaviors that react to graph changes and emit events, policies that decide what the agent may change on its own versus what needs a human or a contradiction check, and swappable packs for memory, tools, and chat. The LLMs never talk to each other; they only touch shared state, an idea he borrows from 1970s blackboard systems and Kafka, and his hunch is that AI writes this style better than modern agent code because it has decades of training data on it. The payoff is self improvement: a loop that forks the agent, proposes a patch, gates it behind sandbox tests, and keeps it only if accuracy actually rises, and a lab that reads his blog posts, runs its own experiments, and once found a bug in its own code and opened the PR. Speaker info: - https://x.com/yoheinakajima - https://www.linkedin.com/in/yoheinakajima - https://yohei.me Timestamps: 0:00 - ActiveGraph and three years of BabyAGI 1:55 - Build around the log, not the LLM 3:24 - Behaviors, policies, and views 6:43 - Packs and the blackboard architecture lineage 8:12 - The log as memory, and the API key that resumed itself 9:53 - Reference agents built natively on the log 11:11 - Self improvement: regimes and controlled self m…",
+      "excerpt": "Yohei Nakajima was running a 500 question eval when his API key died at question 350. Normally that means restarting the whole long agent from scratch. Instead it rolled back one step and resumed at 353, because in ActiveGraph the log is the agent. Most people build agents around the LLM and bolt on memory and logging; Nakajima, the creator of BabyAGI, flips it and builds around an immutable event log. Every action and every change to the agent flattens into one typed log, which projects a graph that is the agent's state, so you get replays, rollbacks, and forks for free. On top of the log sit behaviors that react to graph changes and emit events, policies that decide what the agent may change on its own versus what needs a human or a contradiction check, and swappable packs for memory, tools, and chat. The LLMs never talk to each other; they only touch shared state, an idea he borrows from 1970s blackboard systems and Kafka, and his hunch is that AI writes this style better than modern agent code because it has decades of training data on it. The payoff is self improvement: a loop that forks the agent, proposes a patch, gates it behind sandbox tests, and keeps it only if accuracy actually rises, and a lab that reads his blog posts, runs its own experiments, and once found a bug in its own code and opened the PR. Speaker info: - https://github.com/yoheinakajima/activegraph - https://x.com/yoheinakajima - https://www.linkedin.com/in/yoheinakajima Timestamps: 0:00 - ActiveGraph and three years of BabyAGI 1:55 - Build around the log, not the LLM 3:24 - Behaviors, policies, and views 6:43 - Packs and the blackboard architecture lineage 8:12 - The log as memory, and the API key that resumed itself 9:53 - Reference agents built natively on the log 11:11 - Self improvement: r…",
       "summary": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”的Active Graph Agent架构，通过将日志作为Agent状态，实现了自动回滚、重放和分叉功能。",
       "url": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "canonicalUrl": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "videoId": "khVX_BUnEwU",
       "ts": 1784549241000,
-      "likes": 7,
-      "views": 1,
+      "likes": 9,
+      "views": 0,
       "duration": "",
       "full": false,
       "categories": [],
