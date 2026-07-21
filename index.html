@@ -87,6 +87,7 @@
   .thumb::before{content:"";position:absolute;inset:0;border-radius:9px;background:rgba(10,20,15,.14)}
   .thumb .play{width:38px;height:38px;border-radius:50%;background:#ffffffee;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,.25)}
   .thumb .play::after{content:"";border-left:11px solid var(--pine);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+  .thumb .dur{position:absolute;right:6px;bottom:6px;background:#0d1f16d9;color:#eef2ee;font-family:var(--mono);font-size:10.5px;padding:1px 6px;border-radius:5px;z-index:1}
   .vtag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);display:flex;align-items:center;gap:7px}
   .vtitle{font-family:var(--disp);font-weight:600;font-size:16.5px;margin:7px 0 4px;line-height:1.3;display:block}
   a.vtitle:hover{color:var(--pine)}
@@ -161,7 +162,7 @@
 const SEED={items:[
   {id:"x:1",kind:"x",source:"Builders",author:"@trq212",subtitle:"Thariq · Claude Code at Anthropic",text:"HTML is the new markdown. I’ve stopped writing markdown files for almost everything and switched to having Claude Code generate HTML for me — here’s why.",url:"#",ts:Date.now()-2*3600e3,likes:8721},
   {id:"x:2",kind:"x",source:"Builders",author:"@alexalbert__",subtitle:"Alex Albert · Research at Anthropic",text:"An early Claude Mythos Preview snapshot we gave METR has a time horizon more than 2× the next best model on their 80% success-rate benchmark.",url:"#",ts:Date.now()-5*3600e3,likes:880},
-  {id:"yt:1EZdpEhwmNc",kind:"youtube",source:"AI Engineer",author:"AI Engineer",full:false,title:"Through the AI Fog: The Architectural Decision Agentic Security Depends On — Manoj Nair, Snyk",url:"https://www.youtube.com/watch?v=1EZdpEhwmNc",ts:Date.now()-3*3600e3,likes:0,summary:"这场演讲指出，即使是尚未公开的前沿模型，在重复检测同一个安全漏洞时也很不稳定，多次运行往往只有一半能发现问题；而仅靠确定性的检查器，最多也只能覆盖约四分之三的漏洞。讲者认为，面向智能体系统的安全必须作为一项架构决策来设计，而不是事后附加，并说明了验证环节应该放在技术栈中的哪个位置。"},
+  {id:"yt:1EZdpEhwmNc",kind:"youtube",source:"AI Engineer",author:"AI Engineer",full:false,duration:"18:42",title:"Through the AI Fog: The Architectural Decision Agentic Security Depends On — Manoj Nair, Snyk",url:"https://www.youtube.com/watch?v=1EZdpEhwmNc",ts:Date.now()-3*3600e3,likes:0,summary:"这场演讲指出，即使是尚未公开的前沿模型，在重复检测同一个安全漏洞时也很不稳定，多次运行往往只有一半能发现问题；而仅靠确定性的检查器，最多也只能覆盖约四分之三的漏洞。讲者认为，面向智能体系统的安全必须作为一项架构决策来设计，而不是事后附加，并说明了验证环节应该放在技术栈中的哪个位置。"},
   {id:"x:3",kind:"x",source:"Builders",author:"@AmandaAskell",subtitle:"Amanda Askell · Ethics at Anthropic",text:"Alignment research often focuses on averting concerning behaviors, but the positive vision is training that gives models an honest, positive sense of what AI can be.",url:"#",ts:Date.now()-6*3600e3,likes:394},
   {id:"x:4",kind:"x",source:"Builders",author:"@levie",subtitle:"Aaron Levie · CEO of Box",text:"Token budgeting is becoming a real enterprise topic. As agents run longer tasks and use more compute, allocating tokens across teams becomes genuine resource planning.",url:"#",ts:Date.now()-7*3600e3,likes:328},
   {id:"x:5",kind:"x",source:"Builders",author:"@garrytan",subtitle:"Garry Tan · CEO of Y Combinator",text:"1M-token context with a usable coding agent, all on a 128GB MacBook Pro. Downloading now 🤯",url:"#",ts:Date.now()-27*3600e3,likes:301},
@@ -192,7 +193,7 @@ function itemHTML(it){
   if(it.kind==="x"){
     const h=heat(it.likes), hb=h?`<div class="heat"><i style="width:${h[0]};background:${h[1]}"></i></div>`:"";
     const role=it.subtitle?`<span class="role">${esc(it.subtitle)}</span>`:"";
-    return `<div class="item${sel}" data-id="${esc(it.id)}"${match(it)?"":' style="display:none"'}>
+    return `<div class="item${sel}" data-id="${esc(it.id)}">
       <button class="star" aria-label="Add to shortlist">${STAR}</button>
       <div><div class="who"><span class="handle">${esc(it.author)}</span>${role}${nb}<span class="time">${ago(it.ts)}</span></div>
       <div class="body">${esc(it.text)}</div></div>
@@ -200,12 +201,12 @@ function itemHTML(it){
   }
   const yt=it.kind==="youtube";
   const vid=yt?it.id.replace(/^yt:/,""):"";
-  const thumb=yt?`<a class="thumb" href="${esc(it.url)}" target="_blank" rel="noopener" style="background-image:url('https://img.youtube.com/vi/${esc(vid)}/hqdefault.jpg')"><span class="play"></span></a>`:"";
+  const thumb=yt?`<a class="thumb" href="${esc(it.url)}" target="_blank" rel="noopener" style="background-image:url('https://img.youtube.com/vi/${esc(vid)}/hqdefault.jpg')"><span class="play"></span>${it.duration?`<span class="dur">${esc(it.duration)}</span>`:""}</a>`:"";
   const titleTag=yt?`<a class="vtitle" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>`:`<div class="vtitle">${esc(it.title)}</div>`;
   const watch=yt?` · <a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">watch ↗</a>`:"";
   const badge=yt&&it.full?`<span class="fullbadge">✓ full summary</span>`:"";
   const getbtn=yt&&OWNER&&!it.full?`<button class="getfull" data-vid="${esc(vid)}">Get full summary</button>`:"";
-  return `<div class="card${yt?"":" noimg"}${sel}" data-id="${esc(it.id)}"${match(it)?"":' style="display:none"'}>
+  return `<div class="card${yt?"":" noimg"}${sel}" data-id="${esc(it.id)}">
     <button class="star" aria-label="Add to shortlist">${STAR}</button>${thumb}
     <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}${badge}</div>
     ${titleTag}<div class="vchan">${esc(it.author)} · ${ago(it.ts)} ago${watch}</div>
@@ -213,11 +214,17 @@ function itemHTML(it){
 }
 
 function render(){
-  const vis=items.filter(match);
   const stream=$("stream");
-  if(!items.length){stream.innerHTML='<div class="loading">No items yet — the bot will fill this on its next run.</div>';return;}
+  let list;
+  if(filter==="shortlist"){
+    list=Object.keys(saved).map(id=>items.find(i=>i.id===id)||saved[id]).filter(x=>x&&x.id).sort((a,b)=>(b.ts||0)-(a.ts||0));
+    if(!list.length){stream.innerHTML='<div class="loading">Nothing shortlisted yet — tap the ☆ on any post or video to save it here.</div>';return;}
+  }else{
+    if(!items.length){stream.innerHTML='<div class="loading">No items yet — the bot will fill this on its next run.</div>';return;}
+    list=items.filter(match);
+  }
   let html="", curDay=null;
-  for(const it of items){
+  for(const it of list){
     const dk=dayKey(it.ts);
     if(dk!==curDay){curDay=dk;const[l,s]=dayLabel(it.ts);
       html+=`<div class="day"><span class="lbl">${l}</span><span class="cnt">${s}</span></div>`;}
@@ -230,6 +237,7 @@ function render(){
       el.classList.toggle("sel");
       if(el.classList.contains("sel"))saved[id]=snapshot(id);else delete saved[id];
       store.set("shortlist",saved);updateBasket();
+      if(filter==="shortlist")render();
     });
   });
   stream.querySelectorAll(".stext").forEach(txt=>{
@@ -240,14 +248,14 @@ function render(){
   });
   stream.querySelectorAll(".getfull").forEach(b=>b.addEventListener("click",()=>getFull(b.dataset.vid,b)));
 }
-function snapshot(id){const it=items.find(i=>i.id===id)||{};return{author:it.author,text:it.text||it.title,url:it.url};}
+function snapshot(id){return {...(items.find(i=>i.id===id)||{}),id};}
 function updateBasket(){const n=Object.keys(saved).length;$("count").innerHTML=n+' <span>picked</span>';
   const c=$("compose");c.disabled=!n;c.textContent=n?`Compose post (${n})`:"Compose post";}
 
 function buildRail(){
   const bySource={};items.forEach(i=>bySource[i.source]=(bySource[i.source]||0)+1);
   $("sources").innerHTML=Object.entries(bySource).map(([s,n])=>`<div class="src"><span>${esc(s)}</span><span class="n">${n}</span></div>`).join("");
-  const filters=[["all","All signals"],["new","New since last visit"],["hi","Blowing up"]].concat(Object.keys(bySource).map(s=>[s,s]));
+  const filters=[["all","All signals"],["shortlist","★ Shortlist"],["new","New since last visit"],["hi","Blowing up"]].concat(Object.keys(bySource).map(s=>[s,s]));
   $("filters").innerHTML=filters.map(([f,l])=>`<button class="flt${f==="all"?" on":""}" data-f="${esc(f)}">${esc(l)}</button>`).join("");
   $("filters").querySelectorAll(".flt").forEach(b=>b.addEventListener("click",()=>{
     $("filters").querySelectorAll(".flt").forEach(x=>x.classList.remove("on"));b.classList.add("on");
@@ -272,7 +280,7 @@ async function load(){
   store.set("lastVisit",Date.now());
 }
 $("export").addEventListener("click",()=>{
-  const lines=Object.values(saved).map(s=>`• ${s.author}: ${s.text}${s.url&&s.url!=="#"?"  "+s.url:""}`);
+  const lines=Object.values(saved).map(s=>`• ${s.author}: ${s.text||s.title||""}${s.url&&s.url!=="#"?"  "+s.url:""}`);
   const txt=lines.length?`My RedNote shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
   (navigator.clipboard?.writeText(txt)||Promise.reject()).then(()=>{const t=$("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}).catch(()=>{});
 });

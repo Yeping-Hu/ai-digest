@@ -42,6 +42,13 @@ const decode = (s) => (s || "")
   .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"')
   .replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, "&")
   .replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+// ISO 8601 duration (PT#H#M#S) -> "H:MM:SS" or "M:SS"
+function fmtDuration(iso) {
+  const m = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/.exec(iso || "");
+  if (!m) return "";
+  const h = +(m[1] || 0), min = +(m[2] || 0), s = +(m[3] || 0);
+  return (h ? h + ":" + String(min).padStart(2, "0") : String(min)) + ":" + String(s).padStart(2, "0");
+}
 
 // ---- summarization + translation (Gemini) ----
 function buildPrompt(kind, title, body) {
@@ -52,39 +59,41 @@ function buildPrompt(kind, title, body) {
     return `Summarize this ${kind} in 2-3 sentences to help someone decide whether it is worth their time. Then, on a new line, give a Simplified Chinese translation of that summary. No preamble, no markdown.\n\nTitle: ${title}\n\n${b}`;
   return `Summarize this ${kind} in 2-3 plain sentences to help someone decide whether it is worth their time. No preamble, no markdown.\n\nTitle: ${title}\n\n${b}`;
 }
-// Pick a valid Gemini model at runtime — model names change, so a hardcoded one can 404.
-let RESOLVED_MODEL = "";
-async function pickModel() {
-  if (GEMINI_MODEL_OVERRIDE) return GEMINI_MODEL_OVERRIDE;
-  if (RESOLVED_MODEL) return RESOLVED_MODEL;
+// Prefer a fuller flash model for quality, with flash-lite as a fallback for when the
+// primary model's (smaller) daily quota runs out mid-run. Model names change, so these
+// are detected at runtime rather than hardcoded.
+let PRIMARY_MODEL = "", FALLBACK_MODEL = "", CURRENT_MODEL = "";
+async function ensureModels() {
+  if (CURRENT_MODEL) return;
+  if (GEMINI_MODEL_OVERRIDE) { CURRENT_MODEL = PRIMARY_MODEL = GEMINI_MODEL_OVERRIDE; return; }
   try {
     const d = await getJSONSafe(`https://generativelanguage.googleapis.com/v1beta/models?key=${GEMINI_KEY}`);
     const gen = (d.models || [])
       .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
       .map((m) => m.name.replace(/^models\//, ""));
     const ok = (m) => !/(preview|exp|thinking|vision|image|audio|tts|8b|embedding)/i.test(m);
-    RESOLVED_MODEL =
-      gen.filter((m) => /flash/i.test(m) && /lite/i.test(m) && ok(m)).sort().reverse()[0]   // flash-lite: highest free-tier RPM + daily limit
-      || gen.filter((m) => /flash/i.test(m) && ok(m)).sort().reverse()[0]
-      || gen.find((m) => /gemini/i.test(m) && ok(m))
-      || gen[0]
-      || "gemini-2.0-flash-lite";
-    log("  using Gemini model:", RESOLVED_MODEL);
+    const fullFlash = gen.filter((m) => /flash/i.test(m) && !/lite/i.test(m) && ok(m)).sort().reverse();
+    const liteFlash = gen.filter((m) => /flash/i.test(m) && /lite/i.test(m) && ok(m)).sort().reverse();
+    PRIMARY_MODEL = fullFlash[0] || liteFlash[0] || gen.find((m) => /gemini/i.test(m) && ok(m)) || gen[0] || "gemini-flash-latest";
+    FALLBACK_MODEL = (liteFlash[0] && liteFlash[0] !== PRIMARY_MODEL) ? liteFlash[0] : (fullFlash[1] || "");
+    CURRENT_MODEL = PRIMARY_MODEL;
+    log("  Gemini model:", CURRENT_MODEL + (FALLBACK_MODEL ? "  (fallback on quota: " + FALLBACK_MODEL + ")" : ""));
   } catch (e) {
-    RESOLVED_MODEL = "gemini-2.0-flash";
-    log("  model auto-detect failed, using default:", e.message);
+    CURRENT_MODEL = PRIMARY_MODEL = "gemini-flash-latest";
+    FALLBACK_MODEL = "gemini-2.5-flash-lite";
+    log("  model auto-detect failed, using defaults:", e.message);
   }
-  return RESOLVED_MODEL;
 }
 
 // Throttle calls to stay under the free-tier per-minute limit.
 let lastGemini = 0;
-let geminiExhausted = false;  // set once the daily quota is gone — stop trying for the rest of the run
+let geminiExhausted = false;  // set once every model's daily quota is gone — stop trying for the rest of the run
 async function geminiCall(prompt) {
-  const model = await pickModel();
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`;
-  for (let i = 0; i < 4; i++) {
-    const gap = 4000 - (Date.now() - lastGemini);
+  await ensureModels();
+  for (let i = 0; i < 6; i++) {
+    const model = CURRENT_MODEL;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`;
+    const gap = 6000 - (Date.now() - lastGemini);
     if (gap > 0) await sleep(gap);
     lastGemini = Date.now();
     const r = await fetch(url, {
@@ -94,7 +103,16 @@ async function geminiCall(prompt) {
     });
     if (r.status === 429) {
       const t = await r.text().catch(() => "");
-      if (/per\s*day|perday|daily|requests per day/i.test(t)) { geminiExhausted = true; throw new Error("gemini daily quota reached (resets midnight Pacific)"); }
+      const perDay = /per\s*day|perday|daily|requests per day/i.test(t);
+      if (perDay) {
+        if (model === PRIMARY_MODEL && FALLBACK_MODEL) {
+          log("  " + model + " hit its daily quota — switching to " + FALLBACK_MODEL);
+          CURRENT_MODEL = FALLBACK_MODEL;
+          continue;
+        }
+        geminiExhausted = true;
+        throw new Error("gemini daily quota reached on all models (resets midnight Pacific)");
+      }
       log("  gemini busy (429/min); retrying…"); await sleep(8000); continue;
     }
     if (r.status >= 500) { log(`  gemini busy (${r.status}); retrying…`); await sleep(8000); continue; }
@@ -154,17 +172,24 @@ async function adapt_youtube(src, existingIds) {
   if (!YT_KEY) throw new Error("no YouTube API key — add a YOUTUBE_API_KEY secret (a YouTube Data API v3 key from Google Cloud)");
   const playlist = await ytUploadsPlaylist(src);
   const d = await getJSONSafe(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=${playlist}&key=${YT_KEY}`);
+  const snips = (d.items || []).map((it) => it.snippet).filter((sn) => sn?.resourceId?.videoId);
+  const ids = snips.map((sn) => sn.resourceId.videoId);
+  const durMap = {};
+  if (ids.length) {
+    try {
+      const vd = await getJSONSafe(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${ids.join(",")}&key=${YT_KEY}`);
+      for (const v of vd.items || []) durMap[v.id] = fmtDuration(v.contentDetails?.duration);
+    } catch (e) { log("  duration fetch failed:", e.message); }
+  }
   const out = [];
-  for (const it of d.items || []) {
-    const sn = it.snippet || {};
-    const vid = sn.resourceId?.videoId;
-    if (!vid) continue;
+  for (const sn of snips) {
+    const vid = sn.resourceId.videoId;
     const id = "yt:" + vid;
     const title = sn.title || "";
     const desc = sn.description || "";
     const url = "https://www.youtube.com/watch?v=" + vid;
     const ts = Date.parse(sn.publishedAt) || now;
-    const item = { id, source: src.name, kind: "youtube", author: src.name, subtitle: "YouTube", title, text: "", url, ts, likes: 0, summary: "", full: false };
+    const item = { id, source: src.name, kind: "youtube", author: src.name, subtitle: "YouTube", title, text: "", url, ts, likes: 0, summary: "", full: false, duration: durMap[vid] || "" };
     if (!existingIds.has(id)) {
       const tx = src.transcript === true ? await transcript(vid) : "";
       item.full = !!tx;
