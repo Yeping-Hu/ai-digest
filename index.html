@@ -59,7 +59,7 @@
     .item{position:relative;padding:15px 3px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:13px}.kind-icon{width:27px;height:27px;border-radius:8px;background:var(--pine2);display:grid;place-items:center;color:var(--pine);font:600 10px var(--mono)}.item-body h3{margin:3px 0 7px;font:600 17px/1.27 var(--disp)}.item-body .text{color:var(--ink2);font-size:14px;white-space:pre-wrap}.content-label{display:block;margin-bottom:5px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.item-body .item-summary{margin-top:9px;color:var(--ink2);font-size:13px}.item-meta{margin-top:9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono)}.item-side{display:flex;gap:7px;align-items:start}.rank-mini{padding:4px 7px;border-radius:999px;background:var(--orange2);color:#9E4928;font:600 10px var(--mono)}
     .x-item{grid-template-columns:32px minmax(0,1fr) auto}.x-item .kind-icon{padding:0;background:transparent}.x-item .x-avatar{width:29px;height:29px}.x-who{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.x-handle{font:600 12px var(--mono);color:var(--ink)}.x-role{font:10px var(--mono);color:var(--pine);background:var(--pine2);padding:2px 6px;border-radius:5px;text-transform:none;letter-spacing:0}
     .video-card{position:relative;margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:16px}.thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line2)}.thumb img{width:100%;height:100%;object-fit:cover}.video-card h3{margin:4px 0 8px;font:600 18px/1.25 var(--disp)}
-    .clamp-text{white-space:pre-wrap;overflow-wrap:anywhere}.clamp-text.is-clamped{display:-webkit-box;-webkit-line-clamp:var(--clamp-lines,4);-webkit-box-orient:vertical;overflow:hidden}.more-toggle{border:0;background:transparent;color:var(--pine);cursor:pointer;padding:6px 0 0;font:600 11px var(--mono)}.more-toggle:hover{text-decoration:underline}.more-toggle[hidden]{display:none}
+    .clamp-text{white-space:normal;overflow-wrap:anywhere;line-height:1.62}.clamp-text strong{font-weight:750;color:var(--ink)}.clamp-text .md-heading{display:inline-block;margin:.55em 0 .12em;font-weight:750}.clamp-text code{padding:1px 4px;border-radius:4px;background:var(--line2);font:11px var(--mono)}.clamp-text.is-clamped{display:-webkit-box;-webkit-line-clamp:var(--clamp-lines,4);-webkit-box-orient:vertical;overflow:hidden}.more-toggle{border:0;background:transparent;color:var(--pine);cursor:pointer;padding:6px 0 0;font:600 11px var(--mono)}.more-toggle:hover{text-decoration:underline}.more-toggle[hidden]{display:none}
     .full-state{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--pine2);color:var(--pine);font:600 10px var(--mono)}.full-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}.full-btn:hover{border-color:var(--pine)}.full-btn:disabled{opacity:.62;cursor:default}
     .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
     .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
@@ -162,6 +162,16 @@
   function itemById(id){return state.items.find(x=>x.id===id)||state.saved[id]}
   function isSaved(id){return Boolean(state.saved[id])}
   function snapshot(item){return JSON.parse(JSON.stringify(item))}
+  function syncSavedWithLive(){
+    let changed=false;
+    for(const id of Object.keys(state.saved)){
+      const live=state.items.find(item=>item.id===id);
+      if(!live)continue;
+      state.saved[id]=snapshot(live);
+      changed=true;
+    }
+    if(changed)localStorage.setItem("ai-signal-shortlist",JSON.stringify(state.saved));
+  }
   function normalizeCompare(s){return String(s||"").toLowerCase().replace(/https?:\/\/\S+/g,"").replace(/[\s\p{P}\p{S}]+/gu,"")}
   function distinctText(candidate,original){const a=normalizeCompare(candidate),b=normalizeCompare(original);if(!a||!b)return Boolean(a);return a!==b&&!a.includes(b)&&!b.includes(a)}
   function displayTitle(item){
@@ -172,7 +182,21 @@
   }
   function avatarUrl(item){const handle=String(item.author||"").replace(/^@/,"");return item.avatarUrl||item.profileImageUrl||(handle?`https://unavatar.io/x/${encodeURIComponent(handle)}`:"")}
   function avatarMarkup(item){const handle=String(item.author||"").replace(/^@/,"");const url=avatarUrl(item);return `<span class="x-avatar">${esc((handle[0]||"?").toUpperCase())}${url?`<img src="${esc(url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`}
-  function collapsible(text,lines=4,extra=""){if(!text)return"";return `<div class="clamp-wrap ${extra}"><div class="clamp-text is-clamped" style="--clamp-lines:${lines}">${esc(text)}</div><button class="more-toggle" hidden>Show more</button></div>`}
+  function richText(text){
+    let safe=esc(String(text??"").replace(/\r\n?/g,"\n"));
+    safe=safe.replace(/^#{1,6}\s+(.+)$/gm,'<strong class="md-heading">$1</strong>');
+    safe=safe.replace(/^\*\*([^*\n]+)\*\*$/gm,'<strong class="md-heading">$1</strong>');
+    safe=safe.replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>");
+    safe=safe.replace(/__([^_\n]+)__/g,"<strong>$1</strong>");
+    safe=safe.replace(/`([^`\n]+)`/g,"<code>$1</code>");
+    return safe.replace(/\n/g,"<br>");
+  }
+  function collapsible(text,lines=4,extra="",forceToggle=false){
+    if(!text)return"";
+    const raw=String(text);
+    const likelyLong=forceToggle||raw.length>Math.max(260,lines*90)||(raw.match(/\n/g)||[]).length>lines;
+    return `<div class="clamp-wrap ${extra}" data-likely-long="${likelyLong?"1":"0"}"><div class="clamp-text is-clamped" style="--clamp-lines:${lines}">${richText(raw)}</div><button class="more-toggle" ${likelyLong?"":"hidden"}>Show more</button></div>`;
+  }
   function eligibleForFull(item){const body=String(item.excerpt||item.text||item.summary||"");if(item.kind==="youtube")return Boolean(item.videoId||String(item.id||"").startsWith("yt:"));if(item.kind==="blog")return body.length>=550||Number(item.contentLength||0)>=900||/(fireside|interview|conversation|podcast|transcript|field guide|report|essay|deep dive)/i.test(`${item.title||""} ${body}`);if(item.kind==="x")return body.length>=600;return false}
   function fullControls(item){const eligible=eligibleForFull(item);const stateBadge=item.full?`<span class="full-state">✓ Full summary generated</span>`:"";const button=OWNER&&eligible?`<button class="full-btn" data-summary-item="${esc(item.id)}">${item.full?"Regenerate":"Generate full summary"}</button>`:"";return `${stateBadge}${button}`}
 
@@ -188,6 +212,7 @@
       const today=todayRes.ok?await todayRes.json():{};
       const history=historyRes.ok?await historyRes.json():{days:[]};
       state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));
+      syncSavedWithLive();
       state.today={topIds:[],scanIds:[],ranking:[],ideas:[],run:{},...today};
       state.history={days:[],...history};
       setupOwner();buildRail();updateHeader();render();
@@ -199,6 +224,7 @@
       ["top","Today's Top",rankingEntries().length],
       ["today","All New Today",dailyNewItems().length],
       ["shortlist","My Shortlist",Object.keys(state.saved).length],
+      ["full","Full Summaries",state.items.filter(item=>item.full).length],
       ["all","All 30 Days",state.items.length],
     ];
   }
@@ -215,7 +241,7 @@
   function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
-    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
+    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, always synced with the latest archive copy."],full:["Full Summaries","Every item for which you generated a detailed summary."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
     const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"Browse one source."]:(labels[state.filter]||labels.top);
     $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
     const showTopTabs=state.filter==="top";
@@ -242,8 +268,8 @@
     return `<article class="top-card rank-${index+1}" data-id="${esc(item.id)}">
       <div class="top-head"><div class="rank-badge">${String(index+1).padStart(2,"0")}</div><div class="meta">${topMeta(item,rank)}</div></div>
       <h2 class="top-title"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h2>
-      <div class="summary">${item.kind==="x"?`<span class="content-label">Original post</span>`:""}${collapsible(summary,5)}</div>
-      ${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4)}</div>`:""}
+      <div class="summary">${item.kind==="x"?`<span class="content-label">Original post</span>`:item.full?`<span class="content-label">Full summary</span>`:""}${collapsible(summary,item.full?7:5,"",item.full)}</div>
+      ${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4,"",item.full)}</div>`:""}
       <div class="insight"><b>Why it matters</b>${esc(ed.whyItMattersZh||rank.reason||"Open the original source to judge the full context.")}</div>
       <div class="insight angle"><b>RedNote angle</b>${esc(ed.rednoteAngleZh||"Extract one counter-intuitive point and explain it through a single concrete example.")}</div>
       ${(ed.evidenceZh||ed.uncertaintyZh)?`<details class="evidence"><summary>Evidence & uncertainty</summary>${ed.evidenceZh?`<p><b>Evidence:</b> ${esc(ed.evidenceZh)}</p>`:""}${ed.uncertaintyZh?`<p><b>Watch:</b> ${esc(ed.uncertaintyZh)}</p>`:""}</details>`:""}
@@ -251,7 +277,7 @@
     </article>`;
   }
 
-  function rankCard(item,rank){const ed=item.editorial||{};const summary=ed.summaryZh||item.summary||item.excerpt||item.text;return `<article class="rank-card" data-id="${esc(item.id)}"><div class="rank-small">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,3)}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
+  function rankCard(item,rank){const ed=item.editorial||{};const summary=item.full?item.summary:(ed.summaryZh||item.summary||item.excerpt||item.text);return `<article class="rank-card" data-id="${esc(item.id)}"><div class="rank-small">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,item.full?6:3,"",item.full)}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
 
   function renderTodayTop(){
     const entries=rankingEntries();const ranked=entries.map(entry=>({entry,item:itemById(entry.id)})).filter(x=>x.item);const ideas=state.today.ideas||[];
@@ -267,14 +293,15 @@
   function renderTopArchive(){
     const days=(state.history.days||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
     if(!days.length)return `<div class="empty">Top Archive will fill automatically after the next daily run.</div>`;
-    return days.map(day=>{const rankings=(day.ranking||[]).slice().sort((a,b)=>(a.rank||999)-(b.rank||999));const snapshots=new Map((day.items||[]).map(item=>[item.id,item]));const cards=rankings.map(rank=>{const item=itemById(rank.id)||snapshots.get(rank.id);if(!item)return"";const ed=item.editorial||{};const summary=ed.summaryZh||item.summary||item.excerpt||item.text;return `<article class="history-card" data-id="${esc(item.id)}"><div class="history-rank">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span class="score">${Math.round(rank.score||0)}/100</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,3)}<div class="history-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open ↗</a>${fullControls(item)}</div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></div></div></article>`}).join("");return cards?`<section class="history-day"><div class="history-day-head"><h2>${esc(formatHistoryDate(day.date))}</h2><span>${rankings.length} ranked</span></div><div class="history-grid">${cards}</div></section>`:""}).join("")||`<div class="empty">No archived rankings yet.</div>`;
+    return days.map(day=>{const rankings=(day.ranking||[]).slice().sort((a,b)=>(a.rank||999)-(b.rank||999));const snapshots=new Map((day.items||[]).map(item=>[item.id,item]));const cards=rankings.map(rank=>{const item=itemById(rank.id)||snapshots.get(rank.id);if(!item)return"";const ed=item.editorial||{};const summary=item.full?item.summary:(ed.summaryZh||item.summary||item.excerpt||item.text);return `<article class="history-card" data-id="${esc(item.id)}"><div class="history-rank">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span class="score">${Math.round(rank.score||0)}/100</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,item.full?6:3,"",item.full)}<div class="history-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open ↗</a>${fullControls(item)}</div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></div></div></article>`}).join("");return cards?`<section class="history-day"><div class="history-day-head"><h2>${esc(formatHistoryDate(day.date))}</h2><span>${rankings.length} ranked</span></div><div class="history-grid">${cards}</div></section>`:""}).join("")||`<div class="empty">No archived rankings yet.</div>`;
   }
 
   function renderTop(){return state.topView==="archive"?renderTopArchive():renderTodayTop()}
 
   function filteredItems(){
-    if(state.filter==="shortlist")return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0));
+    if(state.filter==="shortlist")return Object.keys(state.saved).map(itemById).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0));
     if(state.filter==="today")return dailyNewItems();
+    if(state.filter==="full")return state.items.filter(item=>item.full).sort((a,b)=>timeValue(b.fullSummaryAt||b.ts)-timeValue(a.fullSummaryAt||a.ts));
     if(state.filter.startsWith("source:"))return state.items.filter(x=>(x.sourceGroup||x.source)===state.filter.slice(7));
     return state.items;
   }
@@ -285,14 +312,14 @@
     const rank=rankFor(item.id),saved=isSaved(item.id);
     if(item.kind==="youtube"){
       const summary=item.summary||item.editorial?.summaryZh||item.excerpt||"";
-      return `<article class="video-card" data-id="${esc(item.id)}"><a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(youtubeThumb(item))}" alt=""></a><div><div class="meta">${itemMeta(item)}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta">${item.duration?`<span>${esc(item.duration)}</span>`:""}<a href="${esc(item.url)}" target="_blank" rel="noopener">Watch ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+      return `<article class="video-card" data-id="${esc(item.id)}"><a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(youtubeThumb(item))}" alt=""></a><div><div class="meta">${itemMeta(item)}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(summary,item.full?7:4,"",item.full)}</div><div class="item-meta">${item.duration?`<span>${esc(item.duration)}</span>`:""}<a href="${esc(item.url)}" target="_blank" rel="noopener">Watch ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
     }
     if(item.kind==="x"){
       const original=item.text||item.excerpt||"";const candidate=item.full?item.summary:(item.editorial?.summaryZh||item.summary||"");const translated=distinctText(candidate,original)?candidate:"";
-      return `<article class="item x-item" data-id="${esc(item.id)}"><div class="kind-icon">${avatarMarkup(item)}</div><div class="item-body"><div class="x-who"><span class="x-handle">${esc(item.author)}</span>${item.subtitle?`<span class="x-role">${esc(item.subtitle)}</span>`:""}<span class="meta">${ago(item.ts)}${item.likes?` · ♥ ${Number(item.likes).toLocaleString()}`:""}</span></div><div class="text"><span class="content-label">Original post</span>${collapsible(original,5)}</div>${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4)}</div>`:""}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open on X ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+      return `<article class="item x-item" data-id="${esc(item.id)}"><div class="kind-icon">${avatarMarkup(item)}</div><div class="item-body"><div class="x-who"><span class="x-handle">${esc(item.author)}</span>${item.subtitle?`<span class="x-role">${esc(item.subtitle)}</span>`:""}<span class="meta">${ago(item.ts)}${item.likes?` · ♥ ${Number(item.likes).toLocaleString()}`:""}</span></div><div class="text"><span class="content-label">Original post</span>${collapsible(original,5)}</div>${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4,"",item.full)}</div>`:""}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open on X ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
     }
     const summary=item.full?item.summary:(item.editorial?.summaryZh||item.summary||item.excerpt||item.text||"");
-    return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">↗</div><div class="item-body"><div class="meta">${itemMeta(item)}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}<div class="item-summary"><span class="content-label">${item.full?"Full summary":item.editorial?"Chinese summary":"Excerpt"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+    return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">↗</div><div class="item-body"><div class="meta">${itemMeta(item)}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}<div class="item-summary"><span class="content-label">${item.full?"Full summary":item.editorial?"Chinese summary":"Excerpt"}</span>${collapsible(summary,item.full?7:4,"",item.full)}</div><div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
   }
 
   function renderArchiveOutline(list){
@@ -315,8 +342,9 @@
 
   function renderList(){
     const list=filteredItems();
-    if(!list.length){const message=state.filter==="today"?"No items were originally published today.":"Nothing here yet.";return `<div class="empty">${message}</div>`}
+    if(!list.length){const message=state.filter==="today"?"No items were originally published today.":state.filter==="full"?"No full summaries have been generated yet.":"Nothing here yet.";return `<div class="empty">${message}</div>`}
     if(state.filter==="today")return `<div class="day"><span>Published Today</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`;
+    if(state.filter==="full")return `<div class="day"><span>Newest summaries first</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`;
     if(state.filter==="all")return renderArchiveOutline(list);
     return renderGroupedList(list);
   }
@@ -329,10 +357,30 @@
     bindClamps();
   }
 
-  function bindClamps(){requestAnimationFrame(()=>{document.querySelectorAll(".clamp-wrap").forEach(wrap=>{const text=wrap.querySelector(".clamp-text"),btn=wrap.querySelector(".more-toggle");if(!text||!btn)return;text.classList.add("is-clamped");btn.textContent="Show more";btn.hidden=!(text.scrollHeight>text.clientHeight+2);btn.onclick=()=>{const clamped=text.classList.toggle("is-clamped");btn.textContent=clamped?"Show more":"Show less"}})})}
+  function refreshClamp(wrap){
+    const text=wrap.querySelector(".clamp-text"),btn=wrap.querySelector(".more-toggle");
+    if(!text||!btn)return;
+    const expanded=!text.classList.contains("is-clamped");
+    const shouldShow=wrap.dataset.likelyLong==="1"||text.scrollHeight>text.clientHeight+2;
+    btn.hidden=!shouldShow;
+    btn.textContent=expanded?"Show less":"Show more";
+  }
+  function bindClamps(){
+    const refreshAll=()=>document.querySelectorAll(".clamp-wrap").forEach(refreshClamp);
+    document.querySelectorAll(".clamp-wrap").forEach(wrap=>{
+      const text=wrap.querySelector(".clamp-text"),btn=wrap.querySelector(".more-toggle");
+      if(!text||!btn)return;
+      text.classList.add("is-clamped");
+      btn.onclick=()=>{text.classList.toggle("is-clamped");refreshClamp(wrap)};
+    });
+    document.querySelectorAll("details").forEach(details=>details.addEventListener("toggle",()=>{if(details.open)requestAnimationFrame(refreshAll)}));
+    requestAnimationFrame(refreshAll);
+    setTimeout(refreshAll,180);
+    if(document.fonts?.ready)document.fonts.ready.then(refreshAll).catch(()=>{});
+  }
 
   function updateShortlist(){const n=Object.keys(state.saved).length;$("shortlistCount").innerHTML=`${n} <span>picked</span>`;$("compose").disabled=!n;$("compose").textContent=n?`Compose post (${n})`:"Compose post"}
-  function shortlistArray(){return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0))}
+  function shortlistArray(){return Object.keys(state.saved).map(itemById).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0))}
 
   $("compose").onclick=async()=>{const list=shortlistArray();if(!list.length)return;const text=`请基于以下英文 AI 信号，先做一次 blindspot pass，再给出 3 个适合 @Kelly的科研日常 的小红书选题。不要简单翻译新闻；每个选题说明目标读者、核心收获、主线案例、需要核实的事实和推荐视觉结构。\n\n${list.map((x,i)=>`${i+1}. ${x.title||x.text}\n来源：${x.source}\n链接：${x.url}\n摘要：${x.editorial?.summaryZh||x.summary||x.excerpt||x.text}\n推荐角度：${x.editorial?.rednoteAngleZh||""}`).join("\n\n")}`;await navigator.clipboard.writeText(text);toast("Post brief copied")};
   $("export").onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),items:shortlistArray()},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ai-shortlist-${dayKey(Date.now())}.json`;a.click();URL.revokeObjectURL(a.href)};
@@ -376,7 +424,7 @@
   async function pollSummary(itemId,baseline,btn){
     for(let attempt=0;attempt<30;attempt++){
       await new Promise(resolve=>setTimeout(resolve,10000));
-      try{const res=await fetch(`data/archive.json?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)continue;const archive=await res.json();const updated=(archive.items||[]).find(x=>x.id===itemId);if(!updated)continue;const changed=updated.full&&(!baseline||updated.fullSummaryAt!==baseline);if(changed){state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));if(state.saved[itemId])state.saved[itemId]=snapshot(updated),storeSaved();render();toast("Full summary is ready");return}}
+      try{const res=await fetch(`data/archive.json?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)continue;const archive=await res.json();const updated=(archive.items||[]).find(x=>x.id===itemId);if(!updated)continue;const changed=updated.full&&(!baseline||updated.fullSummaryAt!==baseline);if(changed){state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));syncSavedWithLive();storeSaved();buildRail();updateHeader();render();toast("Full summary is ready");return}}
       catch{}
       if(btn&&btn.isConnected)btn.textContent=`Generating… ${Math.min(99,(attempt+1)*3)}%`;
     }

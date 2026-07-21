@@ -7,8 +7,10 @@
 //   4. send only the best candidates to Gemini in one editorial batch
 //   5. write the rolling archive, today's ranking, and a dated snapshot
 //
-// Manual run with SUMMARIZE_VIDEO_ID:
-//   upgrade one YouTube item with a cached Supadata transcript and a detailed summary.
+// Manual run with SUMMARIZE_ITEM_ID or SUMMARIZE_VIDEO_ID:
+//   upgrade one archive item with a cached source text and a detailed summary.
+// Maintenance run with BACKFILL_FULL_SOURCES=1:
+//   cache the source text for previously generated full summaries.
 
 import crypto from "node:crypto";
 import fs from "node:fs";
@@ -758,12 +760,12 @@ function fullSummaryPrompt(item, text) {
   const body = truncateWords(text, 18000);
   const kind = item.kind === "youtube" ? "YouTube talk" : item.kind === "x" ? "long X post" : "article or blog post";
   if (LANG === "en") {
-    return `Write a detailed, faithful summary of this ${kind}. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. No preamble or markdown headings.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
+    return `Write a detailed, faithful summary of this ${kind}. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. Use short section labels in **bold** when helpful. Do not use # headings or code blocks. No preamble.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
   }
   if (LANG === "bilingual") {
-    return `Write a detailed, faithful summary of this ${kind} in English, followed by the same summary in Simplified Chinese. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. No preamble or markdown headings.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
+    return `Write a detailed, faithful summary of this ${kind} in English, followed by the same summary in Simplified Chinese. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. Use short section labels in **bold** when helpful. Do not use # headings or code blocks. No preamble.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
   }
-  return `请阅读下面${kind === "YouTube talk" ? "视频" : kind === "long X post" ? "长帖" : "文章"}的完整内容，写一份详细、忠于原文的简体中文总结，让读者不用打开原文也能掌握主要内容。以连贯段落为主，只有并列步骤或清单才使用「• 」列表。请保留关键论点、数字、例子、限制与不确定性。直接输出正文，不要开场白或 markdown 标题。\n\n标题：${item.title || item.text || item.url}\n\n原始内容：${body}`;
+  return `请阅读下面${kind === "YouTube talk" ? "视频" : kind === "long X post" ? "长帖" : "文章"}的完整内容，写一份详细、忠于原文的简体中文总结，让读者不用打开原文也能掌握主要内容。以连贯段落为主，只有并列步骤或清单才使用「• 」列表。请保留关键论点、数字、例子、限制与不确定性。可以用 **加粗小标题** 标出主要分段；不要使用 # 标题或代码块。直接输出正文，不要开场白。\n\n标题：${item.title || item.text || item.url}\n\n原始内容：${body}`;
 }
 
 function findArticleBodyInJSON(value) {
@@ -807,17 +809,69 @@ function readableArticleText(html) {
   return candidates.map(compactText).filter((text) => text.length >= 300).sort((a, b) => b.length - a.length)[0] || "";
 }
 
+function safeSourceSlug(value, fallback = "item") {
+  const slug = String(value || "")
+    .normalize("NFKD")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .toLowerCase()
+    .slice(0, 64);
+  return slug || fallback;
+}
+
+function sourceCachePath(item) {
+  if (item.kind === "youtube") {
+    const rawVideoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
+    const videoId = String(rawVideoId || "").replace(/[^A-Za-z0-9_-]/g, "") || "video";
+    return path.join(TRANSCRIPT_DIR, `${videoId}.txt`);
+  }
+  const digest = crypto.createHash("sha256").update(String(item.id || item.url || item.title || "item")).digest("hex").slice(0, 10);
+  const prefix = item.kind === "x" ? "x" : "article";
+  const human = item.kind === "x"
+    ? safeSourceSlug(String(item.id || "").replace(/^x:/, ""), "post")
+    : safeSourceSlug(item.title || item.author || "article", "article");
+  return path.join(TRANSCRIPT_DIR, `${prefix}-${human}-${digest}.txt`);
+}
+
+function relativeSourcePath(file) {
+  return path.relative(ROOT, file).split(path.sep).join("/");
+}
+
+function readSourceCache(item) {
+  const file = sourceCachePath(item);
+  try {
+    const text = fs.readFileSync(file, "utf8");
+    if (text.trim()) return { text, file };
+  } catch {}
+  return null;
+}
+
+function saveSourceCache(item, text) {
+  const clean = String(text || "").trim();
+  if (!clean) return "";
+  const file = sourceCachePath(item);
+  fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true });
+  fs.writeFileSync(file, `${clean}\n`);
+  return relativeSourcePath(file);
+}
+
 async function sourceTextForItem(item) {
+  const cached = readSourceCache(item);
+  if (cached) {
+    const inferredSource = item.fullSummarySource || (item.kind === "youtube" ? "transcript" : item.kind === "x" ? "post" : "article");
+    return { text: cached.text.trim(), source: inferredSource, path: relativeSourcePath(cached.file) };
+  }
+
   if (item.kind === "youtube") {
     const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
     const text = await transcript(videoId);
     if (!text) throw new Error("No transcript available. Check SUPADATA_API_KEY and its free credit balance.");
-    return { text, source: "transcript" };
+    return { text, source: "transcript", path: saveSourceCache(item, text) };
   }
   if (item.kind === "x") {
-    const text = compactText(item.text || item.excerpt || item.summary);
+    const text = String(item.text || item.excerpt || "").trim();
     if (!text) throw new Error("The X post has no text in the archive.");
-    return { text, source: "post" };
+    return { text, source: "post", path: saveSourceCache(item, text) };
   }
 
   let article = "";
@@ -829,10 +883,10 @@ async function sourceTextForItem(item) {
       log("Article fetch fallback:", error.message);
     }
   }
-  const fallback = compactText(item.excerpt || item.summary || item.text || item.title);
+  const fallback = compactText(item.excerpt || item.text || (!item.full ? item.summary : "") || item.title);
   const text = article.length >= Math.max(700, fallback.length) ? article : fallback;
   if (!text) throw new Error("No readable article text was available.");
-  return { text, source: article === text ? "article" : "feed" };
+  return { text, source: article === text ? "article" : "feed", path: saveSourceCache(item, text) };
 }
 
 function updateItemInTopHistory(item) {
@@ -863,9 +917,77 @@ async function summarizeOneItem(itemId) {
   item.fullSummaryAt = new Date().toISOString();
   item.fullSummarySource = source.source;
   item.fullSummaryChars = source.text.length;
+  item.fullSourcePath = source.path || relativeSourcePath(sourceCachePath(item));
+  item.sourceTextPath = item.fullSourcePath;
+  item.transcriptPath = item.fullSourcePath;
+  item.fullSourceChars = source.text.length;
+  item.fullSourceCachedAt = new Date().toISOString();
   writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
   updateItemInTopHistory(item);
   log("Upgraded full summary:", item.id);
+}
+
+async function backfillFullSourceCaches() {
+  const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
+  const items = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  let changed = false;
+  let cachedCount = 0;
+  let skippedCount = 0;
+
+  for (const item of items) {
+    if (!item?.full) continue;
+    const cached = readSourceCache(item);
+    if (cached) {
+      const relative = relativeSourcePath(cached.file);
+      const cachedLength = cached.text.trim().length;
+      if (
+        item.fullSourcePath !== relative ||
+        item.sourceTextPath !== relative ||
+        item.transcriptPath !== relative ||
+        item.fullSourceChars !== cachedLength
+      ) {
+        item.fullSourcePath = relative;
+        item.sourceTextPath = relative;
+        item.transcriptPath = relative;
+        item.fullSourceChars = cachedLength;
+        item.fullSourceCachedAt = item.fullSourceCachedAt || new Date().toISOString();
+        changed = true;
+      }
+      cachedCount += 1;
+      continue;
+    }
+
+    // Fetch missing YouTube transcripts only when the maintenance workflow explicitly opts in.
+    // This keeps normal backfills free, while allowing a one-time repair to preserve the
+    // original script for summaries that were generated by an older collector version.
+    if (item.kind === "youtube" && String(process.env.BACKFILL_YOUTUBE_SOURCES || "").trim() !== "1") {
+      skippedCount += 1;
+      log(`Backfill skipped uncached YouTube transcript: ${item.id}`);
+      continue;
+    }
+
+    try {
+      const source = await sourceTextForItem(item);
+      item.fullSourcePath = source.path || relativeSourcePath(sourceCachePath(item));
+      item.sourceTextPath = item.fullSourcePath;
+      item.transcriptPath = item.fullSourcePath;
+      item.fullSourceChars = source.text.length;
+      item.fullSourceCachedAt = new Date().toISOString();
+      item.fullSummarySource = item.fullSummarySource || source.source;
+      updateItemInTopHistory(item);
+      changed = true;
+      cachedCount += 1;
+      log(`Backfilled source text: ${item.id} -> ${item.fullSourcePath}`);
+    } catch (error) {
+      skippedCount += 1;
+      log(`Backfill failed for ${item.id}: ${error.message}`);
+    }
+  }
+
+  if (changed) {
+    writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
+  }
+  log(`Source cache backfill complete: ${cachedCount} cached, ${skippedCount} skipped.`);
 }
 
 function migrateAndMerge(existingItems, collectedItems) {
@@ -931,6 +1053,11 @@ function historySnapshot(item) {
     videoId: item.videoId || "",
     full: Boolean(item.full),
     fullSummaryAt: item.fullSummaryAt || "",
+    fullSummarySource: item.fullSummarySource || "",
+    fullSourcePath: item.fullSourcePath || item.sourceTextPath || item.transcriptPath || "",
+    sourceTextPath: item.sourceTextPath || item.fullSourcePath || item.transcriptPath || "",
+    transcriptPath: item.transcriptPath || item.fullSourcePath || item.sourceTextPath || "",
+    fullSourceChars: item.fullSourceChars || 0,
     editorial: item.editorial || null,
   };
 }
@@ -988,6 +1115,11 @@ function cleanDailySnapshots() {
 }
 
 async function main() {
+  if (String(process.env.BACKFILL_FULL_SOURCES || "").trim() === "1") {
+    await backfillFullSourceCaches();
+    return;
+  }
+
   const requestedItem = String(process.env.SUMMARIZE_ITEM_ID || process.env.SUMMARIZE_VIDEO_ID || "").trim();
   if (requestedItem) {
     await summarizeOneItem(requestedItem);
@@ -1161,5 +1293,6 @@ export {
   normalizeEditorial,
   parseFeed,
   readableArticleText,
+  sourceCachePath,
   stripHTML,
 };
