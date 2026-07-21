@@ -8,7 +8,7 @@ const CFG = JSON.parse(fs.readFileSync("sources.json", "utf8"));
 const ARCHIVE_PATH = "data/archive.json";
 const GEMINI_KEY = process.env.GEMINI_API_KEY || "";
 const SUPADATA_KEY = process.env.SUPADATA_API_KEY || "";
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const GEMINI_MODEL_OVERRIDE = process.env.GEMINI_MODEL || "";  // optional pin; otherwise auto-detected
 const YT_KEY = process.env.YOUTUBE_API_KEY || "";  // must be a YouTube Data API v3 key (a Gemini/AI Studio key does NOT work here)
 const LANG = (CFG.summaryLang || "en").toLowerCase();  // "en" | "zh" | "bilingual"
 const RETENTION = (CFG.retentionDays || 30) * 864e5;
@@ -52,16 +52,46 @@ function buildPrompt(kind, title, body) {
     return `Summarize this ${kind} in 2-3 sentences to help someone decide whether it is worth their time. Then, on a new line, give a Simplified Chinese translation of that summary. No preamble, no markdown.\n\nTitle: ${title}\n\n${b}`;
   return `Summarize this ${kind} in 2-3 plain sentences to help someone decide whether it is worth their time. No preamble, no markdown.\n\nTitle: ${title}\n\n${b}`;
 }
+// Pick a valid Gemini model at runtime — model names change, so a hardcoded one can 404.
+let RESOLVED_MODEL = "";
+async function pickModel() {
+  if (GEMINI_MODEL_OVERRIDE) return GEMINI_MODEL_OVERRIDE;
+  if (RESOLVED_MODEL) return RESOLVED_MODEL;
+  try {
+    const d = await getJSONSafe(`https://generativelanguage.googleapis.com/v1beta/models?key=${GEMINI_KEY}`);
+    const gen = (d.models || [])
+      .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
+      .map((m) => m.name.replace(/^models\//, ""));
+    RESOLVED_MODEL =
+      gen.filter((m) => /flash/i.test(m) && !/(preview|exp|thinking|vision|lite|image|audio|tts|8b)/i.test(m)).sort().reverse()[0]
+      || gen.filter((m) => /flash/i.test(m)).sort().reverse()[0]
+      || gen.find((m) => /gemini/i.test(m))
+      || gen[0]
+      || "gemini-2.0-flash";
+    log("  using Gemini model:", RESOLVED_MODEL);
+  } catch (e) {
+    RESOLVED_MODEL = "gemini-2.0-flash";
+    log("  model auto-detect failed, using default:", e.message);
+  }
+  return RESOLVED_MODEL;
+}
+
+// Throttle calls to stay under the free-tier per-minute limit.
+let lastGemini = 0;
 async function geminiCall(prompt) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_KEY}`;
-  for (let i = 0; i < 3; i++) {
+  const model = await pickModel();
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`;
+  for (let i = 0; i < 4; i++) {
+    const gap = 5000 - (Date.now() - lastGemini);
+    if (gap > 0) await sleep(gap);
+    lastGemini = Date.now();
     const r = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
-    if (r.status === 429) { log("  gemini rate-limited; waiting 6s…"); await sleep(6000); continue; }
-    if (!r.ok) throw new Error(`gemini ${r.status}`);
+    if (r.status === 429) { log("  gemini rate-limited; waiting…"); await sleep(8000); continue; }
+    if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(`gemini ${r.status} ${t.slice(0, 100)}`); }
     const d = await r.json();
     return d?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
   }
