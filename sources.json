@@ -1,26 +1,105 @@
 {
   "retentionDays": 30,
   "summaryLang": "zh",
+  "editorial": {
+    "geminiModel": "gemini-3.1-flash-lite",
+    "maxGeminiCalls": 2,
+    "candidateLimit": 18,
+    "topPrimary": 3,
+    "topLimit": 8,
+    "ideaLimit": 3,
+    "maxCandidatesPerSource": 5,
+    "maxTopPerSource": 2,
+    "initialBackfillDays": 7,
+    "fallbackWindowHours": 48
+  },
   "sources": [
     {
       "type": "x-feed",
       "name": "Builders",
+      "group": "Builders",
+      "sourceType": "community",
+      "priority": 0.55,
       "url": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
       "enabled": true
     },
     {
       "type": "youtube",
       "name": "AI Engineer",
+      "group": "AI Engineer",
+      "sourceType": "curated",
+      "priority": 0.75,
       "handle": "@aiDotEngineer",
       "channelId": "UCLKPca3kwwd-B59HNr-_lvA",
       "transcript": false,
+      "maxItems": 15,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "OpenAI News",
+      "group": "OpenAI",
+      "sourceType": "official",
+      "priority": 0.88,
+      "url": "https://openai.com/news/rss.xml",
+      "maxItems": 12,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "OpenAI Engineering",
+      "group": "OpenAI",
+      "sourceType": "official",
+      "priority": 1.0,
+      "url": "https://openai.com/news/engineering/rss.xml",
+      "maxItems": 12,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "Google DeepMind",
+      "group": "Google DeepMind",
+      "sourceType": "official",
+      "priority": 1.0,
+      "url": "https://deepmind.google/blog/rss.xml",
+      "maxItems": 12,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "Hugging Face Blog",
+      "group": "Hugging Face",
+      "sourceType": "official",
+      "priority": 0.92,
+      "url": "https://huggingface.co/blog/feed.xml",
+      "maxItems": 12,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "Latent Space AINews",
+      "group": "Latent Space",
+      "sourceType": "curated",
+      "priority": 0.86,
+      "url": "https://www.latent.space/feed?sectionId=327741",
+      "maxItems": 12,
+      "enabled": true
+    },
+    {
+      "type": "blog",
+      "name": "Simon Willison",
+      "group": "Simon Willison",
+      "sourceType": "independent",
+      "priority": 0.94,
+      "url": "https://feeds.simonwillison.net/atom/everything/",
+      "maxItems": 20,
       "enabled": true
     }
   ],
   "_howToAdd": {
-    "summaryLang": "Set to 'zh' for Chinese, 'en' for English, or 'bilingual' for both. Applies to video and blog summaries (tweets are shown as-is).",
-    "youtube": "Add { \"type\": \"youtube\", \"name\": \"Channel\", \"channelId\": \"UCxxxx\", \"transcript\": false }. transcript:false = free description summary by default; use the 'Get full summary' button in owner mode to spend a Supadata credit on the ones you pick.",
-    "blog": "Add { \"type\": \"blog\", \"name\": \"Blog\", \"url\": \"https://site.com/feed\" }.",
-    "x": "Zara's feed is a fixed list of 26 builders. A new X handle needs a paid X API + a new adapter — ask Claude."
+    "summaryLang": "Set to 'zh', 'en', or 'bilingual'. The daily editorial pass is optimized for Chinese when set to zh.",
+    "blog": "Add a public RSS or Atom feed with type=blog. sourceType should be official, independent, curated, or community.",
+    "youtube": "Use a channelId when possible. transcript=false keeps daily collection free; request full transcripts manually only for selected videos.",
+    "priority": "A 0-1 relevance weight for your own editorial goals, not a universal credibility score."
   }
 }

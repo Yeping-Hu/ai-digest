@@ -1,349 +1,249 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Signal Desk — AI Builders Digest</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz@1,18..40&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F4F5F0; --surface:#FCFCFA; --card:#FFFFFF;
-    --ink:#181E1A; --ink2:#4E574F; --ink3:#8C948B;
-    --line:#E3E5DD; --line2:#EAEBE4;
-    --pine:#1D4A38; --pine-s:#E7EEEA; --ochre:#96712A;
-    --heat-lo:#8A9790; --heat-mid:#C0912F; --heat-hi:#BD5A34; --track:#ECEEE7;
-    --disp:"Bricolage Grotesque",system-ui,sans-serif;
-    --mono:"IBM Plex Mono",ui-monospace,monospace;
-    --serif:"Newsreader",Georgia,serif;
-    --body:system-ui,-apple-system,"Segoe UI",sans-serif;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  ::selection{background:#1d4a3820}
-  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
-  .rail{border-right:1px solid var(--line);background:var(--surface);padding:22px 18px;position:sticky;top:0;height:100vh;overflow:auto}
-  .brand{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;letter-spacing:.14em;font-size:12px;color:var(--pine);text-transform:uppercase}
-  .brandmark{flex:none}
-  .brand b{color:var(--ink)}
-  .status{margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:6px}
-  .dot{width:6px;height:6px;border-radius:50%;background:#2F9E6A;box-shadow:0 0 0 3px rgba(47,158,106,.15)}
-  .rail h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:28px 0 10px}
-  .src{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border-radius:8px;font-size:13.5px;color:var(--ink2)}
-  .src .n{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-  .filters{display:flex;flex-direction:column;gap:2px}
-  .flt{text-align:left;background:none;border:0;color:var(--ink2);font-family:var(--body);font-size:13.5px;padding:8px 11px;border-radius:8px;cursor:pointer}
-  .flt:hover{background:var(--paper);color:var(--ink)}
-  .flt.on{color:var(--pine);background:var(--pine-s);font-weight:500}
-  .basket{margin-top:26px;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--card)}
-  .basket .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
-  .basket .v{font-family:var(--disp);font-weight:600;font-size:30px;line-height:1.1;margin-top:4px}
-  .basket .v span{font-size:14px;color:var(--ink3);font-weight:400}
-  .basket .btn{margin-top:10px;width:100%;border-radius:8px;padding:9px;font-family:var(--disp);font-weight:600;font-size:13px;cursor:pointer;border:0}
-  .basket .compose{background:var(--pine);color:#fff}
-  .basket .compose:disabled{background:#EDEEE8;color:var(--ink3);cursor:default}
-  .basket .export{background:none;border:1px solid var(--line);color:var(--ink2);margin-top:7px}
-  .basket .export:hover{border-color:var(--pine);color:var(--pine)}
-  .note{margin-top:14px;font-size:11px;color:var(--ink3);line-height:1.5}
-  .note b{color:var(--ink2);font-weight:600}
-  .main{min-width:0}
-  .top{position:sticky;top:0;background:linear-gradient(180deg,var(--paper) 72%,transparent);padding:24px 30px 12px;z-index:5}
-  .top h1{font-family:var(--disp);font-weight:600;font-size:23px;margin:0;letter-spacing:-.015em}
-  .top .sub{color:var(--ink3);font-family:var(--mono);font-size:12px;margin-top:3px}
-  .stats{display:flex;gap:22px;margin-top:14px}
-  .stat b{font-family:var(--disp);font-weight:600;font-size:19px}
-  .stat span{color:var(--ink3);font-size:12px;font-family:var(--mono);margin-left:6px}
-  .stream{padding:4px 30px 60px}
-  .day{display:flex;align-items:center;gap:12px;margin:24px 0 6px}
-  .day .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
-  .day .cnt{font-family:var(--mono);font-size:10.5px;color:var(--ink3);background:var(--line2);padding:2px 8px;border-radius:100px}
-  .day::after{content:"";flex:1;height:1px;background:var(--line2)}
-  .item{display:grid;grid-template-columns:26px 1fr 128px;gap:15px;padding:16px 6px;border-bottom:1px solid var(--line2)}
-  .item.hide{display:none}
-  .star{width:24px;height:24px;border:0;background:none;cursor:pointer;padding:0;color:var(--ink3);transition:color .15s;flex:none}
-  .star:hover{color:var(--pine)}
-  .sel .star{color:var(--pine)}
-  .star svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6}
-  .sel .star svg{fill:var(--pine);stroke:var(--pine)}
-  .who{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:5px}
-  .avatar{width:22px;height:22px;border-radius:50%;position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;background:var(--pine-s);color:var(--pine);font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase}
-  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .handle{font-family:var(--mono);font-size:13px;color:var(--ink)}
-  .name{color:var(--ink2);font-size:12.5px}
-  .role{font-family:var(--mono);font-size:10.5px;color:var(--pine);background:var(--pine-s);padding:2px 7px;border-radius:5px}
-  .new{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--ochre);padding:2px 6px;border-radius:5px}
-  .time{color:var(--ink3);font-family:var(--mono);font-size:11px}
-  .body{font-size:14.5px;color:#2B322D;line-height:1.55;overflow-wrap:anywhere}
-  .meta{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px}
-  .heat{width:96px;height:5px;border-radius:3px;background:var(--track);overflow:hidden}
-  .heat i{display:block;height:100%;border-radius:3px}
-  .likes{font-family:var(--mono);font-size:12px;color:var(--ink2)}
-  .open{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-  .open:hover{color:var(--pine)}
-  .card{margin:16px 0;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:16px;display:grid;grid-template-columns:26px 172px 1fr;gap:16px;align-items:start}
-  .card.noimg{grid-template-columns:26px 1fr}
-  .card.hide{display:none}
-  .thumb{width:172px;height:97px;border-radius:9px;background:#17251d;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative;text-decoration:none;flex:none}
-  .thumb::before{content:"";position:absolute;inset:0;border-radius:9px;background:rgba(10,20,15,.14)}
-  .thumb .play{width:38px;height:38px;border-radius:50%;background:#ffffffee;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-  .thumb .play::after{content:"";border-left:11px solid var(--pine);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
-  .thumb .dur{position:absolute;right:6px;bottom:6px;background:#0d1f16d9;color:#eef2ee;font-family:var(--mono);font-size:10.5px;padding:1px 6px;border-radius:5px;z-index:1}
-  .vtag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);display:flex;align-items:center;gap:7px}
-  .vtitle{font-family:var(--disp);font-weight:600;font-size:16.5px;margin:7px 0 4px;line-height:1.3;display:block}
-  a.vtitle:hover{color:var(--pine)}
-  .vchan{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-bottom:9px}
-  .summary{font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.55;border-left:2px solid var(--line);padding-left:12px}
-  .summary b{color:var(--ochre);font-weight:500;font-family:var(--body);font-size:10px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:5px}
-  .stext{display:block;white-space:pre-wrap}
-  .stext.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .more{background:none;border:0;color:var(--pine);font-family:var(--mono);font-size:11px;cursor:pointer;padding:7px 0 0;font-weight:500}
-  .more:hover{text-decoration:underline}
-  .owner{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
-  .ownerToggle{background:none;border:0;color:var(--ink3);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:2px 0}
-  .ownerToggle:hover{color:var(--pine)}
-  .ownerPanel{margin-top:10px;display:flex;flex-direction:column;gap:7px}
-  .ownerPanel input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-family:var(--mono);font-size:11px;background:var(--card);color:var(--ink)}
-  .ownerPanel button{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:7px 10px;font-size:12px;cursor:pointer;font-family:var(--body);color:var(--ink2);flex:1}
-  .ownerPanel button:hover{border-color:var(--pine);color:var(--pine)}
-  .ownerHint{font-size:10.5px;color:var(--ink3);line-height:1.5}
-  .getfull{margin-top:10px;background:var(--pine-s);color:var(--pine);border:0;border-radius:8px;padding:8px 13px;font-family:var(--body);font-weight:600;font-size:12.5px;cursor:pointer}
-  .getfull:hover{background:#DCE7E1}
-  .getfull:disabled{opacity:.65;cursor:default}
-  .fullbadge{color:var(--pine);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--pine-s);padding:2px 6px;border-radius:5px;margin-left:2px}
-  .loading{padding:60px 30px;color:var(--ink3);font-family:var(--mono);font-size:13px}
-  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13px;padding:10px 18px;border-radius:100px;opacity:0;transition:.25s;pointer-events:none;font-weight:500}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  @media (max-width:820px){
-    .app{grid-template-columns:1fr}
-    /* sidebar becomes a compact top bar (keeps filters + shortlist usable) */
-    .rail{position:static;height:auto;width:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 14px 10px;overflow:visible}
-    .rail h4{display:none}
-    #sources{display:none}
-    .filters{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin-top:10px;padding-bottom:4px}
-    .flt{white-space:nowrap;flex:none;border:1px solid var(--line);padding:7px 12px}
-    .flt.on{border-color:var(--pine)}
-    .basket{margin-top:10px;border:none;background:none;padding:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-    .basket .k,.basket .note{display:none}
-    .basket .v{font-size:15px;margin:0}
-    .basket .btn{width:auto;margin:0;padding:8px 13px;flex:none}
-    .owner{margin-top:10px;border-top:none;padding-top:0}
-    /* main */
-    .top{padding:16px 15px 8px}
-    .top h1{font-size:20px}
-    .stream{padding:2px 14px 48px}
-    /* X posts */
-    .item{grid-template-columns:22px 1fr;gap:11px;padding:14px 2px}
-    .meta{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;margin-top:6px}
-    /* video/blog cards: full-width thumbnail, content beneath, star in the corner */
-    .card{display:block;padding:14px;position:relative}
-    .card>.star{position:absolute;top:11px;right:11px;z-index:3;background:var(--surface);border-radius:6px}
-    .thumb{width:100%;height:auto;aspect-ratio:16/9;margin-bottom:12px}
-    .vtitle{font-size:16px}
-  }
-  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-  :focus-visible{outline:2px solid var(--pine);outline-offset:2px;border-radius:4px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Signal Desk</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz@1,18..40&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#F3F4EF;--surface:#FAFAF7;--card:#FFF;--ink:#182019;--ink2:#4E584F;--ink3:#899189;
+      --line:#DFE3DA;--line2:#EBEDE7;--pine:#174E39;--pine2:#E4EFE9;--lime:#CDEB8A;--amber:#E9B754;
+      --orange:#D9693C;--orange2:#F7E0D5;--blue:#4C66D7;--blue2:#E4E9FF;--shadow:0 16px 45px rgba(24,32,25,.08);
+      --disp:"Bricolage Grotesque",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+      --serif:"Newsreader",Georgia,serif;--body:system-ui,-apple-system,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box}html,body{margin:0}body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+    button,input{font:inherit}a{color:inherit;text-decoration:none}::selection{background:#174e3920}
+    .app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+    .rail{position:sticky;top:0;height:100vh;overflow:auto;padding:24px 18px 28px;background:var(--surface);border-right:1px solid var(--line)}
+    .brand{display:flex;gap:9px;align-items:center;font:600 12px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--pine)}
+    .brand b{color:var(--ink)}.status{display:flex;align-items:center;gap:7px;margin-top:8px;color:var(--ink3);font:11px var(--mono)}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:#2D9F68;box-shadow:0 0 0 4px rgba(45,159,104,.13)}
+    .rail h3{margin:29px 10px 9px;color:var(--ink3);font:600 10px var(--mono);letter-spacing:.15em;text-transform:uppercase}
+    .nav,.source-list{display:grid;gap:3px}.nav button,.source-btn{width:100%;border:0;background:transparent;text-align:left;padding:9px 11px;border-radius:9px;color:var(--ink2);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .nav button:hover,.source-btn:hover{background:var(--paper);color:var(--ink)}.nav button.on,.source-btn.on{background:var(--pine2);color:var(--pine);font-weight:700}
+    .count-badge{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px;white-space:nowrap}
+    .shortlist-box{margin-top:25px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+    .shortlist-box .label{font:600 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+    .shortlist-box .number{margin-top:4px;font:600 31px/1 var(--disp)}.shortlist-box .number span{font:12px var(--mono);color:var(--ink3)}
+    .btn{border:0;border-radius:9px;padding:9px 11px;cursor:pointer;font:600 13px var(--disp)}.btn.primary{width:100%;margin-top:12px;background:var(--pine);color:#fff}.btn.primary:disabled{background:#E5E7E1;color:var(--ink3);cursor:default}
+    .btn.secondary{width:100%;margin-top:7px;background:transparent;border:1px solid var(--line);color:var(--ink2)}
+    .small-note{margin-top:10px;color:var(--ink3);font-size:11px;line-height:1.45}
+    .owner{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.owner summary{cursor:pointer;color:var(--ink3);font:500 11px var(--mono)}
+    .owner-panel{display:grid;gap:8px;margin-top:10px}.owner-panel input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:12px var(--mono)}
+    .owner-row{display:flex;gap:7px}.owner-row button{flex:1;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:12px}.owner-msg{min-height:18px;color:var(--ink3);font-size:10px}
+    .main{min-width:0}.topbar{position:sticky;top:0;z-index:10;padding:24px 34px 15px;background:linear-gradient(180deg,var(--paper) 78%,transparent)}
+    .topbar-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.topbar h1{margin:0;font:600 25px/1.1 var(--disp);letter-spacing:-.02em}.sub{margin-top:5px;color:var(--ink3);font:12px var(--mono)}
+    .run-chip{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.65);color:var(--ink2);font:11px var(--mono);white-space:nowrap}
+    .stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:15px}.stat b{font:600 20px var(--disp)}.stat span{margin-left:5px;color:var(--ink3);font:11px var(--mono)}
+    .content{padding:4px 34px 70px;max-width:1500px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:26px 0 12px}.section-head h2{margin:0;font:600 18px var(--disp)}.section-head p{margin:0;color:var(--ink3);font:11px var(--mono)}
+    .top-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.top-card{position:relative;min-height:430px;padding:19px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .top-card.rank-1{border-color:#AFCDAE;background:linear-gradient(155deg,#fff 55%,#EDF5E9)}.rank{position:absolute;right:15px;top:13px;font:600 44px/1 var(--disp);color:#DDE3DA}.rank-1 .rank{color:#B7D5B3}
+    .meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em}.chip{padding:4px 7px;border-radius:999px;background:var(--line2);color:var(--ink2)}.chip.official{background:var(--pine2);color:var(--pine)}.chip.independent{background:var(--blue2);color:#394CA3}.chip.curated{background:#F8EACB;color:#76561D}.score{font-weight:600;color:var(--orange)}
+    .top-title{margin:15px 45px 0 0;font:600 23px/1.2 var(--disp);letter-spacing:-.02em}.top-title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+    .summary{margin-top:13px;color:var(--ink2);font-size:14px}.insight{margin-top:14px;padding:12px 13px;border-radius:12px;background:var(--paper)}.insight b{display:block;margin-bottom:4px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase}.insight.angle{background:var(--orange2)}.insight.angle b{color:#9E4928}
+    details.evidence{margin-top:12px;color:var(--ink3);font-size:12px}details.evidence summary{cursor:pointer;font:11px var(--mono)}details.evidence p{margin:7px 0 0}.top-actions{margin-top:auto;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .open-link{color:var(--pine);font:600 12px var(--mono)}.star{border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px 9px;cursor:pointer;color:var(--ink3)}.star.on{background:var(--pine);border-color:var(--pine);color:#fff}
+    .scan-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.scan-card{padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:start}.scan-rank{font:600 28px var(--disp);color:#C4CBC2}.scan-card h3{margin:3px 0 7px;font:600 16px/1.25 var(--disp)}.scan-card p{margin:0;color:var(--ink2);font-size:13px}.scan-card .star{align-self:start}
+    .idea-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.idea{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.idea .eyebrow{color:var(--orange);font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.idea h3{margin:9px 0 8px;font:600 18px/1.2 var(--disp)}.idea p{margin:0;color:var(--ink2);font-size:13px}.idea .why{margin-top:10px;color:var(--ink3);font-size:12px}
+    .day{display:flex;align-items:center;gap:10px;margin:26px 0 7px}.day span:first-child{font:600 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}.day span:last-child{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px}
+    .item{position:relative;padding:15px 3px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:13px}.kind-icon{width:24px;height:24px;border-radius:7px;background:var(--pine2);display:grid;place-items:center;color:var(--pine);font:600 10px var(--mono)}.item-body h3{margin:3px 0 7px;font:600 17px/1.27 var(--disp)}.item-body .text{color:var(--ink2);font-size:14px;white-space:pre-wrap}.item-body .item-summary{margin-top:8px;color:var(--ink2);font-size:13px}.item-body .item-summary b{color:var(--pine);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:6px}.item-meta{margin-top:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono)}.item-side{display:flex;gap:7px;align-items:start}.rank-mini{padding:4px 7px;border-radius:999px;background:var(--orange2);color:#9E4928;font:600 10px var(--mono)}
+    .video-card{margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:16px}.thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line2)}.thumb img{width:100%;height:100%;object-fit:cover}.video-card h3{margin:4px 0 8px;font:600 18px/1.25 var(--disp)}.full-btn{margin-top:9px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}
+    .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.top-card:last-child,.idea:last-child{grid-column:1/-1}.video-card{grid-template-columns:160px minmax(0,1fr) auto}}
+    @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(3,1fr)}.nav button{justify-content:center;font-size:12px}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:16px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.scan-list,.idea-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.star{position:absolute;right:18px}.item{grid-template-columns:24px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
 </head>
 <body>
 <div class="app">
   <aside class="rail">
-    <div class="brand"><svg class="brandmark" viewBox="10 14 44 42" width="24" height="23" aria-hidden="true"><rect x="15" y="19" width="27" height="8" rx="4" fill="#1D4A38"/><circle cx="49" cy="23" r="4.4" fill="#BD5A34"/><rect x="15" y="30.5" width="34" height="8" rx="4" fill="#1D4A38"/><rect x="15" y="42" width="22" height="8" rx="4" fill="#1D4A38" opacity="0.42"/></svg><span><b>AI SIGNAL</b> DESK</span></div>
-    <div class="status"><span class="dot"></span><span id="synced">loading…</span></div>
-    <h4>Sources</h4>
-    <div id="sources"></div>
-    <h4>Filter</h4>
-    <div class="filters" id="filters"></div>
-    <div class="basket">
-      <div class="k">Shortlist</div>
-      <div class="v" id="count">0 <span>picked</span></div>
-      <button class="btn compose" id="compose" disabled>Compose post</button>
-      <button class="btn export" id="export">Export shortlist</button>
-      <div class="note"><b>Picks saved in this browser</b> — they stay after refresh, and after items leave the feed. Export any time for a permanent copy.</div>
+    <div class="brand">
+      <svg viewBox="0 0 34 30" width="25" height="23" aria-hidden="true"><rect x="1" y="3" width="22" height="6" rx="3" fill="#174E39"/><circle cx="29" cy="6" r="4" fill="#D9693C"/><rect x="1" y="12" width="28" height="6" rx="3" fill="#174E39"/><rect x="1" y="21" width="18" height="6" rx="3" fill="#174E39" opacity=".38"/></svg>
+      <span><b>AI SIGNAL</b> DESK</span>
     </div>
-    <div class="owner">
-      <button class="ownerToggle" id="ownerToggle">⚙ Owner mode</button>
-      <div class="ownerPanel" id="ownerPanel" hidden>
-        <input id="ghToken" type="password" placeholder="repo-scoped GitHub token">
-        <div style="display:flex;gap:6px"><button id="ghSave">Save</button><button id="ghClear" hidden>Turn off</button></div>
-        <div class="ownerHint" id="ownerHint"></div>
+    <div class="status"><span class="status-dot"></span><span id="synced">加载中…</span></div>
+
+    <h3>Today</h3>
+    <div class="nav" id="nav"></div>
+
+    <h3>Sources</h3>
+    <div class="source-list" id="sources"></div>
+
+    <div class="shortlist-box">
+      <div class="label">My shortlist</div>
+      <div class="number" id="shortlistCount">0 <span>picked</span></div>
+      <button class="btn primary" id="compose" disabled>生成创作素材</button>
+      <button class="btn secondary" id="export">导出收藏</button>
+      <div class="small-note">收藏仅保存在当前浏览器；导出后可永久保存。</div>
+    </div>
+
+    <details class="owner">
+      <summary>Owner tools</summary>
+      <div class="owner-panel">
+        <input id="githubToken" type="password" autocomplete="off" placeholder="fine-grained GitHub token">
+        <div class="owner-row"><button id="saveToken">本次会话保存</button><button id="runNow">立即刷新</button></div>
+        <div class="owner-msg" id="ownerMsg">Token 只存 sessionStorage，关闭标签页后清除。</div>
       </div>
-    </div>
+    </details>
   </aside>
+
   <main class="main">
-    <div class="top">
-      <h1>Today’s AI signal</h1>
-      <div class="sub" id="sub">feed keeps the last 30 days</div>
+    <header class="topbar">
+      <div class="topbar-row">
+        <div><h1 id="pageTitle">今日最值得看</h1><div class="sub" id="pageSub">自动筛选，不删除任何原始内容</div></div>
+        <div class="run-chip" id="runChip">等待数据</div>
+      </div>
       <div class="stats" id="stats"></div>
-    </div>
-    <div class="stream" id="stream"><div class="loading">Fetching the latest signal…</div></div>
+    </header>
+    <div class="content" id="content"><div class="empty">正在读取今日信号…</div></div>
   </main>
 </div>
-<div class="toast" id="toast">Shortlist copied to clipboard</div>
+<div class="toast" id="toast"></div>
 <script>
-const SEED={items:[
-  {id:"x:1",kind:"x",source:"Builders",author:"@trq212",subtitle:"Thariq · Claude Code at Anthropic",text:"HTML is the new markdown. I’ve stopped writing markdown files for almost everything and switched to having Claude Code generate HTML for me — here’s why.",url:"#",ts:Date.now()-2*3600e3,likes:8721},
-  {id:"x:2",kind:"x",source:"Builders",author:"@alexalbert__",subtitle:"Alex Albert · Research at Anthropic",text:"An early Claude Mythos Preview snapshot we gave METR has a time horizon more than 2× the next best model on their 80% success-rate benchmark.",url:"#",ts:Date.now()-5*3600e3,likes:880},
-  {id:"yt:1EZdpEhwmNc",kind:"youtube",source:"AI Engineer",author:"AI Engineer",full:false,duration:"18:42",title:"Through the AI Fog: The Architectural Decision Agentic Security Depends On — Manoj Nair, Snyk",url:"https://www.youtube.com/watch?v=1EZdpEhwmNc",ts:Date.now()-3*3600e3,likes:0,summary:"这场演讲指出，即使是尚未公开的前沿模型，在重复检测同一个安全漏洞时也很不稳定，多次运行往往只有一半能发现问题；而仅靠确定性的检查器，最多也只能覆盖约四分之三的漏洞。讲者认为，面向智能体系统的安全必须作为一项架构决策来设计，而不是事后附加，并说明了验证环节应该放在技术栈中的哪个位置。"},
-  {id:"x:3",kind:"x",source:"Builders",author:"@AmandaAskell",subtitle:"Amanda Askell · Ethics at Anthropic",text:"Alignment research often focuses on averting concerning behaviors, but the positive vision is training that gives models an honest, positive sense of what AI can be.",url:"#",ts:Date.now()-6*3600e3,likes:394},
-  {id:"x:4",kind:"x",source:"Builders",author:"@levie",subtitle:"Aaron Levie · CEO of Box",text:"Token budgeting is becoming a real enterprise topic. As agents run longer tasks and use more compute, allocating tokens across teams becomes genuine resource planning.",url:"#",ts:Date.now()-7*3600e3,likes:328},
-  {id:"x:5",kind:"x",source:"Builders",author:"@garrytan",subtitle:"Garry Tan · CEO of Y Combinator",text:"1M-token context with a usable coding agent, all on a 128GB MacBook Pro. Downloading now 🤯",url:"#",ts:Date.now()-27*3600e3,likes:301},
-  {id:"x:6",kind:"x",source:"Builders",author:"@mattturck",subtitle:"Matt Turck · VC at FirstMark",text:"The less obvious it is that agent pricing stays purely consumption-based — enterprise agents may need identities, roles, budgets, audit logs. Oddly seat-like.",url:"#",ts:Date.now()-29*3600e3,likes:72}
-]};
+  const REPO={owner:"Yeping-Hu",repo:"ai-digest",branch:"main"};
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},filter:"top",saved:loadSaved(),lastVisit:Number(localStorage.getItem("ai-signal-last-visit")||0)};
+  const rankingMap=()=>new Map((state.today.ranking||[]).map(x=>[x.id,x]));
+  const typeLabel={official:"官方",independent:"独立分析",curated:"聚合精选",community:"社区"};
 
-const store={mem:{},get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return this.mem[k]??d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){this.mem[k]=v}}};
-const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-const $=id=>document.getElementById(id);
-const OWNER_REPO="Yeping-Hu/ai-digest";
-let saved=store.get("shortlist",{}), lastVisit=store.get("lastVisit",0), items=[], filter="all", OWNER=!!store.get("gh_token","");
+  function loadSaved(){try{return JSON.parse(localStorage.getItem("ai-signal-shortlist")||"{}")}catch{return {}}}
+  function storeSaved(){localStorage.setItem("ai-signal-shortlist",JSON.stringify(state.saved));updateShortlist()}
+  function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
+  function dateTime(ts){return new Intl.DateTimeFormat("zh-CN",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(ts))}
+  function ago(ts){const parsed=typeof ts==="number"?ts:Date.parse(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} 分钟前`;if(h<24)return `${Math.round(h)} 小时前`;return `${Math.round(h/24)} 天前`}
+  function dayKey(ts){return new Date(ts).toISOString().slice(0,10)}
+  function dayLabel(ts){const today=dayKey(Date.now()),yesterday=dayKey(Date.now()-864e5),key=dayKey(ts);return key===today?"今天":key===yesterday?"昨天":new Intl.DateTimeFormat("zh-CN",{month:"long",day:"numeric"}).format(new Date(ts))}
+  function youtubeThumb(item){const id=item.videoId||new URL(item.url).searchParams.get("v");return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:""}
+  function sourceTypeChip(item){const t=item.sourceType||"community";return `<span class="chip ${esc(t)}">${esc(typeLabel[t]||t)}</span>`}
+  function rankFor(id){return rankingMap().get(id)}
+  function itemById(id){return state.items.find(x=>x.id===id)||state.saved[id]}
+  function isSaved(id){return Boolean(state.saved[id])}
+  function snapshot(item){return JSON.parse(JSON.stringify(item))}
 
-function heat(l){if(l>1000)return["100%","var(--heat-hi)"];if(l>100)return["55%","var(--heat-mid)"];if(l>0)return["28%","var(--heat-lo)"];return null;}
-function ago(ts){const m=(Date.now()-ts)/60000;if(m<60)return Math.max(1,Math.round(m))+"m";if(m<1440)return Math.round(m/60)+"h";return Math.round(m/1440)+"d";}
-function dayKey(ts){const d=new Date(ts);return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();}
-function dayLabel(ts){const d=new Date(ts),t=new Date(),y=new Date(Date.now()-864e5);
-  const s=d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
-  if(dayKey(ts)===dayKey(t.getTime()))return["Today",s];
-  if(dayKey(ts)===dayKey(y.getTime()))return["Yesterday",s];
-  return[d.toLocaleDateString(undefined,{weekday:"long"}),s];}
-const isNew=it=>it.ts>lastVisit||Date.now()-it.ts<864e5;
-const STAR='<svg viewBox="0 0 24 24"><path d="M12 3l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.8 6 21.5l1.2-6.5L2.4 9.9 9 9z"/></svg>';
-
-function match(it){return filter==="all"||(filter==="new"&&isNew(it))||(filter==="hi"&&it.likes>1000)||it.source===filter;}
-
-function itemHTML(it){
-  const sel=saved[it.id]?" sel":"", nb=isNew(it)?`<span class="new">new</span>`:"";
-  if(it.kind==="x"){
-    const h=heat(it.likes), hb=h?`<div class="heat"><i style="width:${h[0]};background:${h[1]}"></i></div>`:"";
-    const role=it.subtitle?`<span class="role">${esc(it.subtitle)}</span>`:"";
-    const handle=it.author.replace(/^@/,"");
-    const avatar=`<span class="avatar">${esc(handle[0]||"?")}<img src="https://unavatar.io/x/${esc(handle)}" alt="" loading="lazy" onerror="this.remove()"></span>`;
-    return `<div class="item${sel}" data-id="${esc(it.id)}">
-      <button class="star" aria-label="Add to shortlist">${STAR}</button>
-      <div><div class="who">${avatar}<span class="handle">${esc(it.author)}</span>${role}${nb}<span class="time">${ago(it.ts)}</span></div>
-      <div class="body">${esc(it.text)}</div></div>
-      <div class="meta">${hb}<span class="likes">${it.likes?it.likes.toLocaleString():""}</span><a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">open ↗</a></div></div>`;
+  async function load(){
+    try{
+      const stamp=Date.now();
+      const [archiveRes,todayRes]=await Promise.all([fetch(`data/archive.json?v=${stamp}`),fetch(`data/today.json?v=${stamp}`)]);
+      const archive=archiveRes.ok?await archiveRes.json():{items:[]};
+      const today=todayRes.ok?await todayRes.json():{};
+      state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));
+      state.today={topIds:[],scanIds:[],ranking:[],ideas:[],run:{},...today};
+      buildRail();updateHeader();render();
+      localStorage.setItem("ai-signal-last-visit",String(Date.now()));
+    }catch(err){$("content").innerHTML=`<div class="empty">读取数据失败：${esc(err.message)}</div>`}
   }
-  const yt=it.kind==="youtube";
-  const vid=yt?it.id.replace(/^yt:/,""):"";
-  const thumb=yt?`<a class="thumb" href="${esc(it.url)}" target="_blank" rel="noopener" style="background-image:url('https://img.youtube.com/vi/${esc(vid)}/hqdefault.jpg')"><span class="play"></span>${it.duration?`<span class="dur">${esc(it.duration)}</span>`:""}</a>`:"";
-  const titleTag=yt?`<a class="vtitle" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>`:`<div class="vtitle">${esc(it.title)}</div>`;
-  const watch=yt?` · <a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">watch ↗</a>`:"";
-  const badge=yt&&it.full?`<span class="fullbadge">✓ full summary</span>`:"";
-  const getbtn=yt&&OWNER?`<button class="getfull" data-vid="${esc(vid)}">${it.full?"Refresh summary":"Get full summary"}</button>`:"";
-  return `<div class="card${yt?"":" noimg"}${sel}" data-id="${esc(it.id)}">
-    <button class="star" aria-label="Add to shortlist">${STAR}</button>${thumb}
-    <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}${badge}</div>
-    ${titleTag}<div class="vchan">${esc(it.author)} · ${ago(it.ts)} ago${watch}</div>
-    <div class="summary"><b>AI summary</b><span class="stext clamp">${esc(it.summary||"")}</span></div><button class="more" hidden>Show more</button>${getbtn}</div></div>`;
-}
 
-function render(){
-  const stream=$("stream");
-  let list;
-  if(filter==="shortlist"){
-    list=Object.keys(saved).map(id=>items.find(i=>i.id===id)||saved[id]).filter(x=>x&&x.id).sort((a,b)=>(b.ts||0)-(a.ts||0));
-    if(!list.length){stream.innerHTML='<div class="loading">Nothing shortlisted yet — tap the ☆ on any post or video to save it here.</div>';return;}
-  }else{
-    if(!items.length){stream.innerHTML='<div class="loading">No items yet — the bot will fill this on its next run.</div>';return;}
-    list=items.filter(match);
+  function navDefinitions(){
+    const todayIds=new Set(state.today.newIds||[]);
+    return [
+      ["top","★ 今日 Top",(state.today.topIds||[]).length],
+      ["scan","值得扫一眼",(state.today.scanIds||[]).length],
+      ["today","今天全部新内容",todayIds.size],
+      ["official","官方来源",state.items.filter(x=>x.sourceType==="official").length],
+      ["independent","独立分析",state.items.filter(x=>x.sourceType==="independent").length],
+      ["curated","聚合精选",state.items.filter(x=>x.sourceType==="curated").length],
+      ["youtube","YouTube",state.items.filter(x=>x.kind==="youtube").length],
+      ["hot-x","Hot on X",state.items.filter(x=>x.kind==="x"&&Number(x.likes||0)>=500).length],
+      ["shortlist","我的 Shortlist",Object.keys(state.saved).length],
+      ["all","全部 30 天",state.items.length],
+    ];
   }
-  let html="", curDay=null;
-  for(const it of list){
-    const dk=dayKey(it.ts);
-    if(dk!==curDay){curDay=dk;const[l,s]=dayLabel(it.ts);
-      html+=`<div class="day"><span class="lbl">${l}</span><span class="cnt">${s}</span></div>`;}
-    html+=itemHTML(it);
-  }
-  stream.innerHTML=html;
-  stream.querySelectorAll(".star").forEach(btn=>{
-    const el=btn.closest("[data-id]"), id=el.dataset.id;
-    btn.addEventListener("click",()=>{
-      el.classList.toggle("sel");
-      if(el.classList.contains("sel"))saved[id]=snapshot(id);else delete saved[id];
-      store.set("shortlist",saved);updateBasket();
-      if(filter==="shortlist")render();
-    });
-  });
-  stream.querySelectorAll(".stext").forEach(txt=>{
-    const btn=txt.closest(".summary")?.nextElementSibling;
-    if(!btn||!btn.classList.contains("more"))return;
-    if(txt.scrollHeight>txt.clientHeight+2)btn.hidden=false;
-    btn.addEventListener("click",()=>{txt.classList.toggle("clamp");btn.textContent=txt.classList.contains("clamp")?"Show more":"Show less";});
-  });
-  stream.querySelectorAll(".getfull").forEach(b=>b.addEventListener("click",()=>getFull(b.dataset.vid,b)));
-}
-function snapshot(id){return {...(items.find(i=>i.id===id)||{}),id};}
-function updateBasket(){const n=Object.keys(saved).length;$("count").innerHTML=n+' <span>picked</span>';
-  const c=$("compose");c.disabled=!n;c.textContent=n?`Compose post (${n})`:"Compose post";}
 
-function buildRail(){
-  const bySource={};items.forEach(i=>bySource[i.source]=(bySource[i.source]||0)+1);
-  $("sources").innerHTML=Object.entries(bySource).map(([s,n])=>`<div class="src"><span>${esc(s)}</span><span class="n">${n}</span></div>`).join("");
-  const filters=[["all","All signals"],["shortlist","★ Shortlist"],["new","New since last visit"],["hi","Blowing up"]].concat(Object.keys(bySource).map(s=>[s,s]));
-  $("filters").innerHTML=filters.map(([f,l])=>`<button class="flt${f==="all"?" on":""}" data-f="${esc(f)}">${esc(l)}</button>`).join("");
-  $("filters").querySelectorAll(".flt").forEach(b=>b.addEventListener("click",()=>{
-    $("filters").querySelectorAll(".flt").forEach(x=>x.classList.remove("on"));b.classList.add("on");
-    filter=b.dataset.f;render();}));
-}
-function buildStats(){
-  const posts=items.filter(i=>i.kind==="x").length;
-  const authors=new Set(items.filter(i=>i.kind==="x").map(i=>i.author)).size;
-  const vids=items.filter(i=>i.kind==="youtube"&&isNew(i)).length;
-  $("stats").innerHTML=`<div class="stat"><b>${posts}</b><span>posts</span></div><div class="stat"><b>${authors}</b><span>builders active</span></div><div class="stat"><b>${vids}</b><span>new videos</span></div>`;
-}
-
-async function load(){
-  let data;
-  try{const r=await fetch("data/archive.json",{cache:"no-store"});if(!r.ok)throw 0;data=await r.json();}
-  catch(e){data=SEED;}
-  items=(data.items||[]).sort((a,b)=>b.ts-a.ts);
-  const gen=data.generatedAt?new Date(data.generatedAt):new Date();
-  $("synced").textContent="synced "+gen.toLocaleDateString(undefined,{month:"short",day:"numeric"})+" · "+gen.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
-  $("sub").textContent=gen.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})+" · feed keeps the last 30 days";
-  buildRail();buildStats();render();updateBasket();
-  store.set("lastVisit",Date.now());
-}
-$("export").addEventListener("click",()=>{
-  const lines=Object.values(saved).map(s=>`• ${s.author}: ${s.text||s.title||""}${s.url&&s.url!=="#"?"  "+s.url:""}`);
-  const txt=lines.length?`My shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
-  (navigator.clipboard?.writeText(txt)||Promise.reject()).then(()=>{const t=$("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}).catch(()=>{});
-});
-function setupOwner(){
-  const toggle=$("ownerToggle"),panel=$("ownerPanel"),input=$("ghToken"),save=$("ghSave"),clr=$("ghClear"),hint=$("ownerHint");
-  function reflect(){
-    const t=store.get("gh_token","");OWNER=!!t;clr.hidden=!t;input.value="";
-    input.placeholder=t?"token saved ✓ (paste again to replace)":"repo-scoped GitHub token";
-    hint.textContent=t
-      ?"Owner mode on. 'Get full summary' buttons are visible and work only in this browser."
-      :"Paste a fine-grained token scoped to this repo (Actions: read & write). Stored only in this browser, never on the page.";
+  function buildRail(){
+    $("nav").innerHTML=navDefinitions().map(([id,label,n])=>`<button data-filter="${id}" class="${state.filter===id?"on":""}"><span>${label}</span><span class="count-badge">${n}</span></button>`).join("");
+    $("nav").querySelectorAll("button").forEach(btn=>btn.onclick=()=>setFilter(btn.dataset.filter));
+    const counts={};state.items.forEach(x=>{const group=x.sourceGroup||x.source;counts[group]=(counts[group]||0)+1});
+    $("sources").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([name,n])=>`<button class="source-btn ${state.filter===`source:${name}`?"on":""}" data-source="${esc(name)}"><span>${esc(name)}</span><span class="count-badge">${n}</span></button>`).join("");
+    $("sources").querySelectorAll("button").forEach(btn=>btn.onclick=()=>setFilter(`source:${btn.dataset.source}`));
+    updateShortlist();
   }
-  toggle.addEventListener("click",()=>{panel.hidden=!panel.hidden;});
-  save.addEventListener("click",()=>{const v=input.value.trim();if(v)store.set("gh_token",v);reflect();render();});
-  clr.addEventListener("click",()=>{try{localStorage.removeItem("gh_token")}catch(e){store.mem["gh_token"]="";}reflect();render();});
-  reflect();
-}
-async function getFull(vid,btn){
-  const token=store.get("gh_token","");
-  if(!token){btn.textContent="Set owner token first";return;}
-  btn.disabled=true;btn.textContent="Summarizing…";
-  try{
-    const r=await fetch(`https://api.github.com/repos/${OWNER_REPO}/actions/workflows/summarize-one.yml/dispatches`,{
-      method:"POST",
-      headers:{"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
-      body:JSON.stringify({ref:"main",inputs:{videoId:vid}})
-    });
-    if(r.status===204)btn.textContent="Working… refresh in ~2 min";
-    else if(r.status===401||r.status===403){btn.textContent="Token rejected";btn.disabled=false;}
-    else if(r.status===404){btn.textContent="Workflow not found";btn.disabled=false;}
-    else{btn.textContent="Error "+r.status;btn.disabled=false;}
-  }catch(e){btn.textContent="Network error";btn.disabled=false;}
-}
-setupOwner();
-load();
+
+  function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
+
+  function updateHeader(){
+    const labels={top:["今日最值得看","机器先筛选，你保留最终判断"],scan:["值得扫一眼","第 4–8 名，适合快速浏览"],today:["今天全部新内容","没有被 Top 选中，也不会被删除"],official:["官方来源","模型实验室与工程团队的一手发布"],independent:["独立分析","高质量个人实验与深度判断"],curated:["聚合精选","用来发现线索，创作前回到原始来源"],youtube:["YouTube","视频描述免费抓取；完整转录按需升级"],"hot-x":["Hot on X","仅作为早期线索，不替代原始来源"],shortlist:["我的 Shortlist","你的人工编辑判断"],all:["全部信号","最近 30 天完整归档"]};
+    const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"按来源查看"]:(labels[state.filter]||labels.top);
+    $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
+    const run=state.today.run||{};
+    $("runChip").textContent=state.today.generatedAt?`更新 ${dateTime(state.today.generatedAt)} · ${run.usedGemini?"Gemini 精排":"本地排序"}`:"等待首次运行";
+    $("synced").textContent=state.today.generatedAt?`synced ${ago(state.today.generatedAt)}`:"waiting for first run";
+    $("stats").innerHTML=[
+      [state.today.newCount||0,"今日新增"],[(state.today.topIds||[]).length,"Top"],[(state.today.ideas||[]).length,"创作候选"],[state.items.length,"30天归档"]
+    ].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
+  }
+
+  function topCard(item,index){
+    if(!item)return "";const ed=item.editorial||{};const rank=rankFor(item.id)||{};
+    return `<article class="top-card rank-${index+1}" data-id="${esc(item.id)}">
+      <div class="rank">0${index+1}</div>
+      <div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span><span class="score">${Math.round(rank.score||item.signals?.localScore||0)}/100</span></div>
+      <h2 class="top-title"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title||item.text)}</a></h2>
+      <div class="summary">${esc(ed.summaryZh||item.summary||item.excerpt||item.text)}</div>
+      <div class="insight"><b>为什么值得看</b>${esc(ed.whyItMattersZh||rank.reason||"值得进一步打开原文判断。")}</div>
+      <div class="insight angle"><b>小红书切入点</b>${esc(ed.rednoteAngleZh||"先提炼一个反常识观点，再用同一个案例讲清楚。")}</div>
+      ${(ed.evidenceZh||ed.uncertaintyZh)?`<details class="evidence"><summary>证据与不确定性</summary>${ed.evidenceZh?`<p><b>证据：</b>${esc(ed.evidenceZh)}</p>`:""}${ed.uncertaintyZh?`<p><b>注意：</b>${esc(ed.uncertaintyZh)}</p>`:""}</details>`:""}
+      <div class="top-actions"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">打开原文 ↗</a><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★ 已收藏":"☆ 收藏"}</button></div>
+    </article>`;
+  }
+
+  function renderTop(){
+    const top=(state.today.topIds||[]).map(itemById).filter(Boolean);const scan=(state.today.scanIds||[]).map(itemById).filter(Boolean);const ideas=state.today.ideas||[];
+    if(!top.length&&!scan.length)return `<div class="empty">还没有今日排名。运行一次 Daily digest 后，这里会显示 Top 内容。</div>`;
+    return `${top.length?`<div class="section-head"><div><h2>今日 Top ${top.length}</h2><p>优先认真阅读</p></div></div><div class="top-grid">${top.map(topCard).join("")}</div>`:""}
+      ${scan.length?`<div class="section-head"><div><h2>Worth scanning</h2><p>快速扫一眼，再决定是否收藏</p></div></div><div class="scan-list">${scan.map((item,i)=>scanCard(item,i+top.length+1)).join("")}</div>`:""}
+      ${ideas.length?`<div class="section-head"><div><h2>今日创作候选</h2><p>模型提出，最终由你选择</p></div></div><div class="idea-grid">${ideas.map((idea,i)=>`<article class="idea"><div class="eyebrow">Idea 0${i+1}</div><h3>${esc(idea.workingTitle)}</h3><p>${esc(idea.angle)}</p><div class="why">${esc(idea.whyNow||"")}</div></article>`).join("")}</div>`:""}`;
+  }
+
+  function scanCard(item,rank){const ed=item.editorial||{};return `<article class="scan-card" data-id="${esc(item.id)}"><div class="scan-rank">${String(rank).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title||item.text)}</a></h3><p>${esc(ed.summaryZh||item.summary||item.excerpt||item.text)}</p></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
+
+  function filteredItems(){
+    if(state.filter==="shortlist")return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0));
+    if(state.filter==="scan")return (state.today.scanIds||[]).map(itemById).filter(Boolean);
+    if(state.filter==="today"){const ids=new Set(state.today.newIds||[]);return state.items.filter(x=>ids.has(x.id))}
+    if(state.filter==="official"||state.filter==="independent"||state.filter==="curated")return state.items.filter(x=>x.sourceType===state.filter);
+    if(state.filter==="youtube")return state.items.filter(x=>x.kind==="youtube");
+    if(state.filter==="hot-x")return state.items.filter(x=>x.kind==="x"&&Number(x.likes||0)>=500).sort((a,b)=>(b.likes||0)-(a.likes||0));
+    if(state.filter.startsWith("source:"))return state.items.filter(x=>(x.sourceGroup||x.source)===state.filter.slice(7));
+    return state.items;
+  }
+
+  function genericItem(item){
+    const rank=rankFor(item.id);const saved=isSaved(item.id);const meta=`${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span>${item.likes?`<span>♥ ${Number(item.likes).toLocaleString()}</span>`:""}${item.views?`<span>▶ ${Number(item.views).toLocaleString()}</span>`:""}`;
+    if(item.kind==="youtube")return `<article class="video-card" data-id="${esc(item.id)}"><a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(youtubeThumb(item))}" alt=""></a><div><div class="meta">${meta}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="item-summary">${esc(item.summary||item.excerpt||"")}</div><div class="item-meta">${item.duration?`<span>${esc(item.duration)}</span>`:""}${item.full?`<span>完整转录摘要</span>`:`<button class="full-btn" data-video="${esc(item.videoId||"")}">按需生成完整摘要</button>`}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+    return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">${item.kind==="x"?"X":"↗"}</div><div class="item-body"><div class="meta">${meta}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}${item.text?`<div class="text">${esc(item.text)}</div>`:""}${item.summary?`<div class="item-summary"><b>${item.editorial?"AI digest":"Excerpt"}</b>${esc(item.summary)}</div>`:""}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">打开原文 ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+  }
+
+  function renderList(){const list=filteredItems();if(!list.length)return `<div class="empty">这个筛选下暂时没有内容。</div>`;let html="",day="";for(const item of list){const key=dayKey(item.ts||Date.now());if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(item.ts)}</span><span>${list.filter(x=>dayKey(x.ts||0)===key).length}</span></div>`}html+=genericItem(item)}return html}
+
+  function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
+
+  function bindActions(){
+    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render();});
+    document.querySelectorAll("[data-video]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.video));
+  }
+
+  function updateShortlist(){const n=Object.keys(state.saved).length;$("shortlistCount").innerHTML=`${n} <span>picked</span>`;$("compose").disabled=!n;$("compose").textContent=n?`生成创作素材 (${n})`:"生成创作素材"}
+  function shortlistArray(){return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0))}
+
+  $("compose").onclick=async()=>{const list=shortlistArray();if(!list.length)return;const text=`请基于以下英文 AI 信号，先做一次 blindspot pass，再给出 3 个适合 @Kelly的科研日常 的小红书选题。不要简单翻译新闻；每个选题说明目标读者、核心收获、主线案例、需要核实的事实和推荐视觉结构。\n\n${list.map((x,i)=>`${i+1}. ${x.title||x.text}\n来源：${x.source}\n链接：${x.url}\n摘要：${x.editorial?.summaryZh||x.summary||x.excerpt||x.text}\n推荐角度：${x.editorial?.rednoteAngleZh||""}`).join("\n\n")}`;await navigator.clipboard.writeText(text);toast("创作素材已复制")};
+  $("export").onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),items:shortlistArray()},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ai-shortlist-${dayKey(Date.now())}.json`;a.click();URL.revokeObjectURL(a.href)};
+
+  function token(){return sessionStorage.getItem("ai-signal-gh-token")||""}
+  $("githubToken").value=token();
+  $("saveToken").onclick=()=>{const value=$("githubToken").value.trim();if(value)sessionStorage.setItem("ai-signal-gh-token",value);else sessionStorage.removeItem("ai-signal-gh-token");$("ownerMsg").textContent=value?"已保存到本次浏览器会话。":"已清除。"};
+  async function dispatch(workflow,inputs={}){const t=token()||$("githubToken").value.trim();if(!t){$("ownerMsg").textContent="请先输入 fine-grained token。";return false}const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/${workflow}/dispatches`,{method:"POST",headers:{Authorization:`Bearer ${t}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:JSON.stringify({ref:REPO.branch,inputs})});if(!res.ok)throw new Error(`${res.status} ${await res.text()}`);return true}
+  $("runNow").onclick=async()=>{try{$("ownerMsg").textContent="正在触发…";await dispatch("daily.yml");$("ownerMsg").textContent="已触发 Daily digest，稍后刷新页面。"}catch(e){$("ownerMsg").textContent=`触发失败：${e.message}`}}
+  async function requestFullSummary(videoId){if(!videoId){toast("找不到视频 ID");return}try{await dispatch("summarize-one.yml",{videoId});toast("已提交完整摘要任务")}catch(e){toast(`提交失败：${e.message}`)}}
+
+  load();
 </script>
 </body>
 </html>

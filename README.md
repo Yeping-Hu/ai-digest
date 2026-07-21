@@ -1,87 +1,189 @@
-# AI Builders Digest
+# AI Signal Desk
 
-A daily, self-updating dashboard of what AI builders are posting on X (via Zara's
-public feed) and YouTube (new videos + AI summaries). Runs entirely on GitHub —
-a scheduled bot fetches everything, summarizes it, and publishes the page. No
-server, no local machine, no personal token.
+A daily, self-updating dashboard that collects AI signals, keeps a complete 30-day archive, and highlights the few items most worth reading or turning into a Chinese RedNote post.
 
----
+It runs entirely on GitHub Actions + GitHub Pages. There is no server and no database.
 
-## What's here
+## What changed in this version
 
-| File | What it does |
+The old flow summarized every unseen blog/video item separately. The new flow is deliberately cheaper and more editorial:
+
+```text
+collect every source for free
+        ↓
+canonicalize + deduplicate
+        ↓
+local rule-based pre-score
+        ↓
+only the best 18 candidates go to Gemini
+        ↓
+one editorial batch returns Top items + RedNote ideas
+        ↓
+archive everything, feature only the best
+```
+
+The daily job makes at most **2 Gemini requests**: one normal structured-output request and, only when needed, one JSON-repair request. If Gemini is unavailable or the free quota is exhausted, the site still updates using local ranking.
+
+## Sources included
+
+The existing X builders feed and AI Engineer YouTube channel remain. The following English sources are added:
+
+- OpenAI News
+- OpenAI Engineering
+- Google DeepMind Blog
+- Hugging Face Blog
+- Latent Space AINews
+- Simon Willison's Weblog
+
+Hugging Face Daily Papers is intentionally not included yet.
+
+All six new feeds are public RSS/Atom feeds and require no API key.
+
+## Files
+
+| File | Purpose |
 |---|---|
-| `index.html` | The dashboard you open (reads `data/archive.json`) |
-| `collect.mjs` | The collector — fetches sources, summarizes, updates the archive |
-| `sources.json` | **The one file you edit to add/remove sources** |
-| `data/archive.json` | The rolling 30-day archive (the bot maintains this) |
-| `.github/workflows/daily.yml` | The daily bot |
+| `index.html` | Static dashboard for GitHub Pages |
+| `collect.mjs` | Collection, deduplication, local scoring, one-batch Gemini editorial pass |
+| `sources.json` | Sources and editorial limits |
+| `data/archive.json` | Complete rolling 30-day archive |
+| `data/today.json` | Current Top ranking, scan list, ideas, and run statistics |
+| `data/daily/YYYY-MM-DD.json` | Daily ranking snapshots, retained for 30 days |
+| `.github/workflows/daily.yml` | Daily collector job |
+| `.github/workflows/summarize-one.yml` | Existing manual full-transcript workflow |
+| `tests/collector.test.mjs` | Offline parser and ranking smoke tests |
 
----
+## Homepage views
 
-## Deploy it (about 10 minutes, all in the browser)
+- **今日 Top** — the strongest 1-3 items
+- **值得扫一眼** — ranks 4-8
+- **今天全部新内容** — every newly collected item, including those not selected
+- **官方来源 / 独立分析 / 聚合精选**
+- **YouTube**
+- **Hot on X**
+- **我的 Shortlist** — manual picks saved in the browser
+- **全部 30 天**
 
-**1. Create the repo.** On GitHub: **New repository** → name it e.g. `ai-digest` →
-**Public** → Create.
+The Top list is not deletion. Every collected item remains in `archive.json` until it leaves the retention window.
 
-**2. Upload these files.** On the new repo page: **Add file → Upload files** →
-drag in everything here (keep the folders `data/` and `.github/`) → **Commit**.
+## Free-tier plan
 
-**3. Get your free API keys.**
-- **Gemini** (summaries + Chinese translation): https://aistudio.google.com/apikey → Create API key. Free.
-- **YouTube Data API v3** (required — to list videos reliably from the cloud): in Google Cloud Console, create/select a project, enable "YouTube Data API v3", then create an API key. Free (10,000 requests/day). This must be its own key — a Gemini/AI Studio key does **not** work for the YouTube API.
-- **Supadata** (optional — full transcripts for the "Get full summary" button): https://supadata.ai → sign up → copy your key. Free tier is 100 transcripts/month, no card.
+### RSS / Atom
 
-**4. Add the keys as secrets.** Repo **Settings → Secrets and variables → Actions
-→ New repository secret**. Add:
-- `GEMINI_API_KEY` = your Gemini key
-- `YOUTUBE_API_KEY` = your YouTube Data API key (required for videos)
-- `SUPADATA_API_KEY` = your Supadata key (skip if you're not using transcripts)
+Free. No keys.
 
-**5. Let the bot write.** **Settings → Actions → General → Workflow permissions →
-Read and write permissions → Save.**
+### GitHub Actions and Pages
 
-**6. Turn on the website.** **Settings → Pages → Source: Deploy from a branch →
-Branch: `main` / `/ (root)` → Save.** Your dashboard will be at
-`https://<your-username>.github.io/ai-digest/`
+The repository is public, so the scheduled standard runner and Pages hosting can be used without a separate server bill.
 
-**7. Run it once now.** **Actions tab → Daily digest → Run workflow.** It'll fetch
-fresh content and refresh the page. After this it runs automatically every day.
+### YouTube Data API
 
-That's it. Bookmark your Pages URL.
+The current setup uses approximately two low-cost quota operations per daily run for the configured channel:
 
----
+1. read the uploads playlist
+2. fetch duration + public statistics for the returned videos
 
-## Adding a source later
+### Gemini
 
-Open `sources.json` on GitHub (click the file → pencil icon), add a line, commit.
-The next run picks it up.
+The default is:
 
-**Another YouTube channel** (free):
-```json
-{ "type": "youtube", "name": "Channel Name", "channelId": "UCxxxxxxxx", "transcript": true }
+```text
+gemini-3.1-flash-lite
 ```
-Find `channelId`: open the channel page → View Source → search for `channelId`.
-Set `"transcript": false` to use the description instead and save Supadata credits.
 
-**A blog** (free):
-```json
-{ "type": "blog", "name": "Blog Name", "url": "https://site.com/feed" }
+It is chosen because it is designed for lightweight processing and currently has free-tier input/output access. You can override it with a repository secret named `GEMINI_MODEL`.
+
+The collector enforces:
+
+```text
+GEMINI_MAX_CALLS=2
 ```
-Most blogs have a feed at `/feed`, `/rss`, or `/atom.xml`.
 
-**Someone new on X:** not free — Zara's feed is a fixed list of 26 builders, so a
-new handle needs a paid X API plus a small new adapter. Ask Claude for that one.
+If you want an even stricter limit, change it to `1` in `.github/workflows/daily.yml`.
 
----
+### Supadata
 
-## Notes
+Optional. Daily collection does **not** request transcripts. A transcript is used only when you manually choose “按需生成完整摘要” for one YouTube video.
 
-- **Your saved picks** live in your browser (local storage), as full snapshots —
-  they survive refreshes and outlive the 30-day feed window. Use **Export** for a
-  permanent copy.
-- **Change the schedule:** edit the `cron` line in `.github/workflows/daily.yml`
-  (it's in UTC).
-- **Change the model:** add a `GEMINI_MODEL` secret to override the default.
-- **Security:** revoke any personal access token you may have shared — this setup
-  never needs one. The bot uses GitHub's own built-in token.
+## Required repository secrets
+
+Go to:
+
+```text
+Settings → Secrets and variables → Actions
+```
+
+Add:
+
+- `GEMINI_API_KEY`
+- `YOUTUBE_API_KEY`
+- `SUPADATA_API_KEY` — optional
+- `GEMINI_MODEL` — optional override; leave unset to use the value in `sources.json`
+
+No personal GitHub token is required for the scheduled bot. GitHub Actions uses the built-in `GITHUB_TOKEN` and the workflow requests `contents: write`.
+
+## First run
+
+1. Make sure Actions workflow permissions allow read/write.
+2. Open **Actions → Daily digest → Run workflow**.
+3. The job will create/update:
+   - `data/archive.json`
+   - `data/today.json`
+   - `data/daily/<date>.json`
+4. GitHub Pages will show the new views after the commit is published.
+
+When a source is seen for the first time, only items from its most recent 7 days are admitted. This also applies when adding new feeds to an existing archive, preventing a large historical backlog.
+
+## Editorial scoring
+
+The free local pre-score uses:
+
+- relevance to agents, workflows, context, AI for Science, evaluation, research, and open source
+- source type and your configured source priority
+- freshness
+- visual/story potential
+- basic engagement signals where available
+- negative filters for hiring posts, webinars, and overt marketing
+
+The Gemini batch then evaluates:
+
+- why the item matters
+- evidence present in the supplied excerpt
+- uncertainty and verification needs
+- likely Chinese-audience information gap
+- a RedNote content angle
+- up to three cross-source post ideas
+
+Curated sources are treated as discovery tools. The output explicitly reminds you to return to the primary source before publishing.
+
+## Adjusting the system
+
+The main controls live in `sources.json`:
+
+```json
+{
+  "editorial": {
+    "candidateLimit": 18,
+    "topPrimary": 3,
+    "topLimit": 8,
+    "ideaLimit": 3,
+    "maxCandidatesPerSource": 5,
+    "maxTopPerSource": 2,
+    "initialBackfillDays": 7,
+    "fallbackWindowHours": 48
+  }
+}
+```
+
+- `candidateLimit`: maximum items passed to the one Gemini editorial batch
+- `topPrimary`: number shown as large Top cards
+- `topLimit`: maximum total ranked items
+- `maxCandidatesPerSource`: prevents one feed dominating the input
+- `maxTopPerSource`: prevents one source group dominating the output
+- `priority`: per-source relevance weight for your own account, not a universal credibility rating
+
+## Security
+
+The dashboard's optional Owner Tools stores a fine-grained GitHub token in **sessionStorage only**. It is cleared when the tab/session closes. Use the narrowest repository permission possible.
+
+The normal daily pipeline does not need a personal token at all.
