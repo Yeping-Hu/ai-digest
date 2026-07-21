@@ -41,7 +41,7 @@ const decode = (s) =>
 
 // ---------- summarization (Gemini, with graceful fallback) ----------
 async function summarize(kind, title, body) {
-  const fallback = truncateWords(body || title, 55);
+  const fallback = truncateWords(body || title, 180);
   if (!GEMINI_KEY || !body) return fallback;
   try {
     const prompt =

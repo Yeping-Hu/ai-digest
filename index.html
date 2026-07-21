@@ -93,6 +93,10 @@
   .vchan{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-bottom:9px}
   .summary{font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.55;border-left:2px solid var(--line);padding-left:12px}
   .summary b{color:var(--ochre);font-weight:500;font-family:var(--body);font-size:10px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .stext{display:block}
+  .stext.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .more{background:none;border:0;color:var(--pine);font-family:var(--mono);font-size:11px;cursor:pointer;padding:7px 0 0;font-weight:500}
+  .more:hover{text-decoration:underline}
   .loading{padding:60px 30px;color:var(--ink3);font-family:var(--mono);font-size:13px}
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13px;padding:10px 18px;border-radius:100px;opacity:0;transition:.25s;pointer-events:none;font-weight:500}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -182,7 +186,7 @@ function itemHTML(it){
     <button class="star" aria-label="Add to shortlist">${STAR}</button>${thumb}
     <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}</div>
     ${titleTag}<div class="vchan">${esc(it.author)} · ${ago(it.ts)} ago${watch}</div>
-    <div class="summary"><b>AI summary</b>${esc(it.summary||"")}</div></div></div>`;
+    <div class="summary"><b>AI summary</b><span class="stext clamp">${esc(it.summary||"")}</span></div><button class="more" hidden>Show more</button></div></div>`;
 }
 
 function render(){
@@ -204,6 +208,12 @@ function render(){
       if(el.classList.contains("sel"))saved[id]=snapshot(id);else delete saved[id];
       store.set("shortlist",saved);updateBasket();
     });
+  });
+  stream.querySelectorAll(".stext").forEach(txt=>{
+    const btn=txt.closest(".summary")?.nextElementSibling;
+    if(!btn||!btn.classList.contains("more"))return;
+    if(txt.scrollHeight>txt.clientHeight+2)btn.hidden=false;
+    btn.addEventListener("click",()=>{txt.classList.toggle("clamp");btn.textContent=txt.classList.contains("clamp")?"Show more":"Show less";});
   });
 }
 function snapshot(id){const it=items.find(i=>i.id===id)||{};return{author:it.author,text:it.text||it.title,url:it.url};}

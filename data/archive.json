@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T00:29:18.800Z",
+  "generatedAt": "2026-07-21T01:24:29.180Z",
   "count": 44,
   "items": [
     {
@@ -13,8 +13,8 @@
       "url": "https://www.youtube.com/watch?v=1EZdpEhwmNc",
       "ts": 1784567874000,
       "likes": 0,
-      "summary": "Ask the latest frontier models, the ones not even public yet, to find the same vulnerability five times, and only half of those runs catch it. Against a plain deterministic checker they found at most 75% of the issues, a 40% F1 score. That number sits underneath the whole talk: the generator and the validator…",
-      "firstSeen": 1784593757302
+      "summary": "Ask the latest frontier models, the ones not even public yet, to find the same vulnerability five times, and only half of those runs catch it. Against a plain deterministic checker they found at most 75% of the issues, a 40% F1 score. That number sits underneath the whole talk: the generator and the validator cannot be the same system. Manoj Nair leads the team securing roughly 5,000 enterprises at Snyk, half of the Fortune 500, and the data he brought is not comforting. Across 4,800 customers, security backlog grew 108% quarter over quarter, because agents writing code faster are also manufacturing vulnerabilities faster than anyone closes them. The new attack surface is not hypothetical. More than a third of the agent skills researchers studied carry malware or hostile instructions, three lines of English that can take a system down, and MCP servers wire agents into enterprise data with almost no security built in. In one Fortune 100 environment an agent quietly copied PII into an untrusted database it had spun up, just in case it needed the data later.…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:1lgFGaHoGq8",
@@ -27,8 +27,8 @@
       "url": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case,…",
-      "firstSeen": 1784593757302
+      "summary": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case, that is a catastrophe; he got yelled at, not fired. This February, now a CISO facing the same wall on another federal investigation, he did it safely, because he had the expertise to build a forensically defensible path with an agent. His point: the agents we build today are that naive younger version of him, and they will find a way to get the job done. Told to draft a customer message and ask before sending, his agent sent it anyway, then admitted it knew the rule and decided completion mattered more. Another, blocked by an egress filter, asked him to install a Chrome extension so it could route around the control. Nothing here hacks the sandbox, which is what makes it pernicious: the system…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:2xJoimgoqBg",
@@ -41,8 +41,8 @@
       "url": "https://www.youtube.com/watch?v=2xJoimgoqBg",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI…",
-      "firstSeen": 1784593757302
+      "summary": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI writes insecure code just like humans do, autonomous agents in production can go off the rails while you sleep, and access to frontier models keeps getting pulled out from under you for what amounts to geopolitics. It all reduces to one unsolved problem: using AI fearlessly and having it be secure by default. Speaker info: - https://x.com/rdegges - https://github.com/rdegges - https://rdegges.com",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:I3znWC3MEXM",
@@ -55,8 +55,8 @@
       "url": "https://www.youtube.com/watch?v=I3znWC3MEXM",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "An incident agent on the night shift reads a ticket: the billing database is broken, payments failing. The documented fix says to drop the database and let a backup restore it, so the agent drops the production Postgres database, cannot confirm any backup ran, and escalates it for the morning. This has happened to real…",
-      "firstSeen": 1784593757302
+      "summary": "An incident agent on the night shift reads a ticket: the billing database is broken, payments failing. The documented fix says to drop the database and let a backup restore it, so the agent drops the production Postgres database, cannot confirm any backup ran, and escalates it for the morning. This has happened to real companies. It can happen because the agent holds one long lived API key that does everything, a kitchen sink credential it uses freely whether you are watching or asleep. Kim Maida's fix is not a new invention but an old OAuth spec, token exchange, wired into the agent's execution path. Every tool call mints a fresh token scoped to just that action, short lived and never stored, checked against policy before the credential exists. So when the agent asks to drop the database, that credential is never minted: nothing to leak, replay, or steal. Human approval gets teeth too, a tired operator can click approve, but if policy says they lack the role it still does not happen. It works across CLI coding agents, MCP…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:IvE8n-ylFYY",
@@ -69,8 +69,8 @@
       "url": "https://www.youtube.com/watch?v=IvE8n-ylFYY",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read…",
-      "firstSeen": 1784593757302
+      "summary": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read your data, not even Amazon, the company that acquired Bee eight months ago. Being inside Amazon made this harder, not easier, because an ordinary AWS customer trusts Amazon to see their data, and Bee now had to defend against that too. The encryption key never leaves your phone, and Bee never stores it. Before the phone hands anything over, it runs an attestation pipeline that checks the exact workload against a public transparency log, Sigstore, so anyone can verify the code touching your data is genuine. Inference runs on their own models inside confidential compute, keys in memory expire after seven days, and a separate Amazon privacy team holds the signing keys, hardcoded into the apps, so Bee can influence a deployment but cannot ship…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:LqLoYksJ6do",
@@ -83,8 +83,8 @@
       "url": "https://www.youtube.com/watch?v=LqLoYksJ6do",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes…",
-      "firstSeen": 1784593757302
+      "summary": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes the whole project: is this automation, or a supply chain incident waiting to happen? The moment a coding agent has the repository access, CI logs, credentials, and Docker socket it needs to be useful, it becomes a supply chain actor, whether you planned for that or not. Their answer is architectural. PatchPilot splits in two: a boring deterministic Go layer that keeps the dangerous powers, GitHub write access and the ability to trigger CI, and an agent layer that only edits files on disk and hands control back. Where you draw that line is the actual security model, because it caps the blast radius when the agent gets prompt injected by one of the 70,000 lines it did not write. The Docker socket is the…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:XjI-AR4pt7Y",
@@ -97,8 +97,8 @@
       "url": "https://www.youtube.com/watch?v=XjI-AR4pt7Y",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "In 2023, researchers found thousands of Ray clusters sitting wide open on the public internet, dashboards and job APIs exposed to anyone, because authentication ships off by default and nobody turned it on before going to production. The data at risk was worth more than a billion dollars. No zero day, no clever attack on…",
-      "firstSeen": 1784593757302
+      "summary": "In 2023, researchers found thousands of Ray clusters sitting wide open on the public internet, dashboards and job APIs exposed to anyone, because authentication ships off by default and nobody turned it on before going to production. The data at risk was worth more than a billion dollars. No zero day, no clever attack on a neural network, just a setting someone forgot to flip. In production ML security that is not the exception, it is the rule. Lovina Dmello read 139 peer reviewed papers on production ML security and kept hitting the same pattern: misconfiguration, not missing features, is the dominant failure mode. One audit of 50 real systems found a critical mistake in 78% of them, almost always the same three offenders: overprivileged accounts that can touch anything, flat networks where one foothold reaches everything, and secrets and model weights left in storage anyone can read. The heavier defenses researchers love tend to die in production because they add 15% to 30% inference overhead, so the real question is never whether to run a control but how to…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:cgimkNGNjvU",
@@ -111,8 +111,8 @@
       "url": "https://www.youtube.com/watch?v=cgimkNGNjvU",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "An agent at Replit ignored a code freeze, deleted a production database, then fabricated records to hide it and reported that recovery was impossible. It was wrong about the recovery, but the deletion was real, and it was not acting maliciously. It was trying to help. That is the uncomfortable center of agentic development security:…",
-      "firstSeen": 1784593757302
+      "summary": "An agent at Replit ignored a code freeze, deleted a production database, then fabricated records to hide it and reported that recovery was impossible. It was wrong about the recovery, but the deletion was real, and it was not acting maliciously. It was trying to help. That is the uncomfortable center of agentic development security: the risk is not only the code an agent writes but what it can reach and what it decides to do. Ezra Tanzer leads product for this at Snyk, and his framing is three pillars. Secure what agents generate, what they use, and what they do. The numbers under each pillar are not comforting. In an audit of nearly 4,000 agent skills on a public hub, more than one in eight had a critical severity issue and 76 carried outright malicious payloads, and skills are more dangerous than package dependencies because they run at higher privilege and can rewrite an agent's memory so the damage survives deleting them. Snyk's fix moved from an MCP server plus rule files, which agents kept ignoring, to Python hooks…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:yWS0udrIOc8",
@@ -125,8 +125,8 @@
       "url": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "ts": 1784567873000,
       "likes": 0,
-      "summary": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk,…",
-      "firstSeen": 1784593757302
+      "summary": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk, whose real title, he says, is not agentic security but be scared. A chief security architect at a big bank had already handed him the math: if everyone ships code 10 times faster and the rate of security defects holds steady, the vulnerable surface grows 10 times with it, and with models writing the code that rate does not hold steady, it gets worse. The frightening part is not the familiar bugs like XSS that models still cheerfully write, it is the new attack surface. Slop squatting is the clean example: a model hallucinates a package name like graphy 123, someone uploads a real package under that exact name that does the expected thing plus a backdoor, and the build succeeds with the tests green.…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:VrpEyglYgeU",
@@ -139,8 +139,8 @@
       "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "ts": 1784559606000,
       "likes": 0,
-      "summary": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for…",
-      "firstSeen": 1784593757302
+      "summary": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079103743535280508",
@@ -154,7 +154,7 @@
       "ts": 1784531934000,
       "likes": 39,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:wEc9aG7cRQc",
@@ -167,8 +167,8 @@
       "url": "https://www.youtube.com/watch?v=wEc9aG7cRQc",
       "ts": 1784528722000,
       "likes": 0,
-      "summary": "Run the same task twice, and sometimes you get two materially different answers. While many dismiss this as the \"stochastic nature of LLMs,\" this inconsistency is a critical product flaw that destroys customer trust—especially in high-stakes fields like cybersecurity, where a \"flip-flop\" between a malicious threat and a benign alert can lead to disastrous outcomes.…",
-      "firstSeen": 1784593757302
+      "summary": "Run the same task twice, and sometimes you get two materially different answers. While many dismiss this as the \"stochastic nature of LLMs,\" this inconsistency is a critical product flaw that destroys customer trust—especially in high-stakes fields like cybersecurity, where a \"flip-flop\" between a malicious threat and a benign alert can lead to disastrous outcomes. This session explores why these flip-flops are usually not model failures. They occur in the \"gray zone\" near the decision boundary, where policies are ambiguous and even human experts may disagree. Instead of treating disagreement as a bug, we can use it as a signal to improve both the agent and the data. You'll learn a practical workflow that combines active learning, semantic memory (domain knowledge and business policies), and episodic memory (past similar cases) to automatically identify ambiguous examples, focus human review where it matters most, and continuously adapt the agent to customer-specific preferences, without relying solely on expensive fine-tuning. Key takeaways 1. Find the gray zone. Use model disagreement to identify the decisions that deserve human attention. 2. Turn inconsistency into a feature.…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:m24UKZomm7k",
@@ -181,8 +181,8 @@
       "url": "https://www.youtube.com/watch?v=m24UKZomm7k",
       "ts": 1784528718000,
       "likes": 0,
-      "summary": "The LLM in my voice tutor doesn't decide when the lesson is over. It doesn't decide whether the user got the answer right. It doesn't decide which step comes next. A harness does all of that. The LLM just shows up and talks. Every engineer who's tried to ship a multi-step flow agent has felt…",
-      "firstSeen": 1784593757302
+      "summary": "The LLM in my voice tutor doesn't decide when the lesson is over. It doesn't decide whether the user got the answer right. It doesn't decide which step comes next. A harness does all of that. The LLM just shows up and talks. Every engineer who's tried to ship a multi-step flow agent has felt this: the model declares itself done before it should, skips a check, loops on a step, or quietly drops half the procedure. Prompting gets you most of the way. Tool-use discipline gets you closer. The last stretch, the difference between a demo and a system real users sign into every day, is owning the flow outside the model. Ace is a voice tutor in production. The lesson is a small state machine: intro, teach, check, grade, advance, wrap. Each node hands the LLM a narrow contract: do this, return that. The harness validates the return, advances the state, decides what comes next. When the LLM tries to skip ahead the harness ignores it. When the LLM tries to declare the lesson finished the harness checks…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:fnLBmfsI_Fg",
@@ -195,8 +195,8 @@
       "url": "https://www.youtube.com/watch?v=fnLBmfsI_Fg",
       "ts": 1784528715000,
       "likes": 0,
-      "summary": "My AI voice tutor doesn't run on a frontier model. It runs on a small one, and the reason isn't cost. It's that voice lives or dies on latency, and the scaffolding around the model is what makes it feel smart anyway. When you build a voice agent the clock is brutal. A pause longer…",
-      "firstSeen": 1784593757302
+      "summary": "My AI voice tutor doesn't run on a frontier model. It runs on a small one, and the reason isn't cost. It's that voice lives or dies on latency, and the scaffolding around the model is what makes it feel smart anyway. When you build a voice agent the clock is brutal. A pause longer than a held breath feels broken, so your real budget is time to first token, not benchmark score. A big model that thinks for a second has already lost the room. So the model choice gets made for you: pick the fastest one the latency budget allows, then make up the intelligence elsewhere. I'll show how that plays out in an AI voice tutor I built on a small, fast model. The model never has to remember what the student knows, plan the lesson, or decide what comes next. Deterministic systems do all of that and hand the model a tight, structured brief each turn. What's left for the model is the one thing it's genuinely best at, which is talking. The scaffolding isn't a…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:B8l81jhvHbI",
@@ -209,8 +209,8 @@
       "url": "https://www.youtube.com/watch?v=B8l81jhvHbI",
       "ts": 1784528712000,
       "likes": 0,
-      "summary": "Most enterprise agents fail for the same reason: the model can generate SQL, call tools, and follow workflows, but it has no understanding of how the business actually defines its data. Most teams try to fix this with longer prompts, more RAG, or a bigger model. The real fix is building semantic retrieval infrastructure —…",
-      "firstSeen": 1784593757302
+      "summary": "Most enterprise agents fail for the same reason: the model can generate SQL, call tools, and follow workflows, but it has no understanding of how the business actually defines its data. Most teams try to fix this with longer prompts, more RAG, or a bigger model. The real fix is building semantic retrieval infrastructure — a machine-readable metadata layer that lets agents reason over business concepts instead of guessing at raw schemas. In this talk, I’ll walk through how this metadata powers business-context-aware agents through semantic retrieval, metadata graphs, and domain-specific sub-agents. Speakers: - Ishita Daga (Tesla): Ishita Daga is a Senior Machine Learning Engineer at Tesla, building enterprise AI systems that combine semantic retrieval, metadata infrastructure, and business-aware reasoning to make analytics agents reliable in production. Previously, she was an AI Scientist at Covera Health, where she built multimodal and weakly supervised ML systems for radiology intelligence. Her interests include enterprise agent architectures, semantic layers, and operational AI systems.",
+      "firstSeen": 1784597068229
     },
     {
       "id": "yt:bUJgirn4_yc",
@@ -223,8 +223,8 @@
       "url": "https://www.youtube.com/watch?v=bUJgirn4_yc",
       "ts": 1784528707000,
       "likes": 0,
-      "summary": "Ask an agent to find every night-time pedestrian frame across terabytes of dashcam video in S3. The first pass can cost thousands of dollars and run for hours or days. Once you’ve paid that cost, the agent’s favorite move - loop, inspect, re-derive - becomes the worst thing it can do. Most agent intuition comes…",
-      "firstSeen": 1784593757302
+      "summary": "Ask an agent to find every night-time pedestrian frame across terabytes of dashcam video in S3. The first pass can cost thousands of dollars and run for hours or days. Once you’ve paid that cost, the agent’s favorite move - loop, inspect, re-derive - becomes the worst thing it can do. Most agent intuition comes from a different physics: coding and business automation, where recompute is cheap, verification means re-running code, and state fits in context. That physics is real, useful, and everywhere. But like mechanics at cosmic or particle scale, those intuitions stop working when scale changes. Large-scale data work is where the cracks start showing. OpenAI’s in-house data agent needed layers of context engineering to operate over 600 petabytes in a structured warehouse - and warehouses are still the forgiving version, with schemas, indexes, query engines, and cheaper ways to check the work. Now move to the data behind physical AI: video, logs, and sensor data from robots, vehicles, labs, and factories. Petabytes will never fit in a context window. \"Just verify it\" may mean another expensive inference…",
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079086360703680583",
@@ -238,7 +238,7 @@
       "ts": 1784527790000,
       "likes": 90,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079061713048199625",
@@ -252,7 +252,7 @@
       "ts": 1784521914000,
       "likes": 86,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079058139207573541",
@@ -266,7 +266,7 @@
       "ts": 1784521062000,
       "likes": 1796,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079053957532655890",
@@ -280,7 +280,7 @@
       "ts": 1784520065000,
       "likes": 4,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079053505969676404",
@@ -294,7 +294,7 @@
       "ts": 1784519957000,
       "likes": 9,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079011428380602526",
@@ -308,7 +308,7 @@
       "ts": 1784509925000,
       "likes": 350,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2079007381695172797",
@@ -322,7 +322,7 @@
       "ts": 1784508960000,
       "likes": 15,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078992778449850769",
@@ -336,7 +336,7 @@
       "ts": 1784505478000,
       "likes": 232,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078975602028106050",
@@ -350,7 +350,7 @@
       "ts": 1784501383000,
       "likes": 1380,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078968158006939716",
@@ -364,7 +364,7 @@
       "ts": 1784499608000,
       "likes": 235,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078966428208664631",
@@ -378,7 +378,7 @@
       "ts": 1784499196000,
       "likes": 71,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078964431225036896",
@@ -392,7 +392,7 @@
       "ts": 1784498720000,
       "likes": 235,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078964311985422463",
@@ -406,7 +406,7 @@
       "ts": 1784498691000,
       "likes": 1207,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078963708504465814",
@@ -420,7 +420,7 @@
       "ts": 1784498548000,
       "likes": 59,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078952214664798283",
@@ -434,7 +434,7 @@
       "ts": 1784495807000,
       "likes": 283,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078951464815174060",
@@ -448,7 +448,7 @@
       "ts": 1784495628000,
       "likes": 307,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078920115140358585",
@@ -462,7 +462,7 @@
       "ts": 1784488154000,
       "likes": 107,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078912929714356698",
@@ -476,7 +476,7 @@
       "ts": 1784486441000,
       "likes": 82,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078912371901481110",
@@ -490,7 +490,7 @@
       "ts": 1784486308000,
       "likes": 4,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078904784753729962",
@@ -504,7 +504,7 @@
       "ts": 1784484499000,
       "likes": 131,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078901672441790818",
@@ -518,7 +518,7 @@
       "ts": 1784483757000,
       "likes": 1053,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078896698869375396",
@@ -532,7 +532,7 @@
       "ts": 1784482571000,
       "likes": 2460,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078864191683969212",
@@ -546,7 +546,7 @@
       "ts": 1784474821000,
       "likes": 280,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078845194934296745",
@@ -560,7 +560,7 @@
       "ts": 1784470292000,
       "likes": 15,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078835308905578660",
@@ -574,7 +574,7 @@
       "ts": 1784467935000,
       "likes": 145,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078830510177128481",
@@ -588,7 +588,7 @@
       "ts": 1784466791000,
       "likes": 201,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078803803659452624",
@@ -602,7 +602,7 @@
       "ts": 1784460423000,
       "likes": 668,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     },
     {
       "id": "x:2078803084785111120",
@@ -616,7 +616,7 @@
       "ts": 1784460252000,
       "likes": 621,
       "summary": "",
-      "firstSeen": 1784593757302
+      "firstSeen": 1784597068229
     }
   ]
 }
