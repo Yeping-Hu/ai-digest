@@ -62,12 +62,13 @@ async function pickModel() {
     const gen = (d.models || [])
       .filter((m) => (m.supportedGenerationMethods || []).includes("generateContent"))
       .map((m) => m.name.replace(/^models\//, ""));
+    const ok = (m) => !/(preview|exp|thinking|vision|image|audio|tts|8b|embedding)/i.test(m);
     RESOLVED_MODEL =
-      gen.filter((m) => /flash/i.test(m) && !/(preview|exp|thinking|vision|lite|image|audio|tts|8b)/i.test(m)).sort().reverse()[0]
-      || gen.filter((m) => /flash/i.test(m)).sort().reverse()[0]
-      || gen.find((m) => /gemini/i.test(m))
+      gen.filter((m) => /flash/i.test(m) && /lite/i.test(m) && ok(m)).sort().reverse()[0]   // flash-lite: highest free-tier RPM + daily limit
+      || gen.filter((m) => /flash/i.test(m) && ok(m)).sort().reverse()[0]
+      || gen.find((m) => /gemini/i.test(m) && ok(m))
       || gen[0]
-      || "gemini-2.0-flash";
+      || "gemini-2.0-flash-lite";
     log("  using Gemini model:", RESOLVED_MODEL);
   } catch (e) {
     RESOLVED_MODEL = "gemini-2.0-flash";
@@ -78,11 +79,12 @@ async function pickModel() {
 
 // Throttle calls to stay under the free-tier per-minute limit.
 let lastGemini = 0;
+let geminiExhausted = false;  // set once the daily quota is gone — stop trying for the rest of the run
 async function geminiCall(prompt) {
   const model = await pickModel();
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_KEY}`;
   for (let i = 0; i < 4; i++) {
-    const gap = 5000 - (Date.now() - lastGemini);
+    const gap = 4000 - (Date.now() - lastGemini);
     if (gap > 0) await sleep(gap);
     lastGemini = Date.now();
     const r = await fetch(url, {
@@ -90,8 +92,13 @@ async function geminiCall(prompt) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
     });
-    if (r.status === 429 || r.status >= 500) { log(`  gemini busy (${r.status}); retrying…`); await sleep(8000); continue; }
-    if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(`gemini ${r.status} ${t.slice(0, 100)}`); }
+    if (r.status === 429) {
+      const t = await r.text().catch(() => "");
+      if (/per\s*day|perday|daily|requests per day/i.test(t)) { geminiExhausted = true; throw new Error("gemini daily quota reached (resets midnight Pacific)"); }
+      log("  gemini busy (429/min); retrying…"); await sleep(8000); continue;
+    }
+    if (r.status >= 500) { log(`  gemini busy (${r.status}); retrying…`); await sleep(8000); continue; }
+    if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(`gemini ${r.status} ${t.slice(0, 120)}`); }
     const d = await r.json();
     return d?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
   }
@@ -102,7 +109,7 @@ async function geminiCall(prompt) {
 // can only be English).
 async function summarize(kind, title, body, fallbackEn) {
   const fallback = truncateWords(fallbackEn || body || title, 180);
-  if (!GEMINI_KEY || !body) return fallback;
+  if (!GEMINI_KEY || !body || geminiExhausted) return fallback;
   try { return (await geminiCall(buildPrompt(kind, title, body))) || fallback; }
   catch (e) { log("  summarize fallback (English):", e.message); return fallback; }
 }
