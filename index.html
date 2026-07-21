@@ -63,7 +63,11 @@
     .full-state{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--pine2);color:var(--pine);font:600 10px var(--mono)}.full-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}.full-btn:hover{border-color:var(--pine)}.full-btn:disabled{opacity:.62;cursor:default}.full-btn.blocked{border-color:#E3C17B;background:#FFF7E4;color:#815C17}.full-btn.blocked:hover{border-color:#D6A94F}.availability-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;font:600 10px var(--mono);letter-spacing:0;text-transform:none}.availability-chip.upcoming{background:#FFF0CA;color:#79550D}.availability-chip.live{background:#F8D9D2;color:#A33D28}.availability-chip.processing{background:var(--blue2);color:#394CA3}.availability-chip.summary-error{background:#F5E1DE;color:#963B2D}.availability-chip:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.summary-note{display:inline-flex;align-items:center;padding:4px 7px;border-radius:999px;background:#FFF7E4;color:#815C17;font:600 10px var(--mono)}
     .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
     .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
-    @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.top-card:last-child,.idea:last-child{grid-column:1/-1}.video-card{grid-template-columns:160px minmax(0,1fr) auto}}
+    /* v8: cumulative top cards + in-page reader */
+    .top-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.top-card{min-height:390px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}.top-card:hover{transform:translateY(-2px);box-shadow:0 19px 50px rgba(24,32,25,.12);border-color:#C6CDC2}.top-card:focus-visible{outline:3px solid #174e3940;outline-offset:3px}.top-card .summary{min-height:72px}.preview-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;white-space:normal;overflow-wrap:anywhere;line-height:1.6}.insight-copy{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;line-height:1.5}.reader-hint{margin-top:11px;color:var(--pine);font:600 11px var(--mono)}.rank-list{display:none!important}.history-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.history-day .top-card{min-height:365px}
+    .reader-overlay[hidden]{display:none}.reader-overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px}.reader-backdrop{position:absolute;inset:0;border:0;background:rgba(17,24,19,.58);backdrop-filter:blur(5px);cursor:pointer}.reader-panel{position:relative;width:min(980px,calc(100vw - 40px));max-height:min(900px,92vh);overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 28px 90px rgba(12,18,14,.3);padding:30px 34px 34px}.reader-close{position:sticky;float:right;top:0;z-index:3;width:38px;height:38px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);cursor:pointer;font:600 23px/1 var(--disp);box-shadow:0 6px 18px rgba(24,32,25,.08)}.reader-head{padding-right:55px}.reader-kicker{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.reader-rank{font:600 36px/1 var(--disp);color:#AEB7AC}.reader-context{color:var(--ink3);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.reader-title{margin:16px 0 0;font:600 36px/1.12 var(--disp);letter-spacing:-.025em}.reader-title a:hover{text-decoration:underline;text-underline-offset:4px}.reader-meta{margin-top:13px}.reader-thumb{margin-top:22px;width:min(620px,100%);aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--line2)}.reader-thumb img{width:100%;height:100%;object-fit:cover}.reader-section{margin-top:25px;padding-top:22px;border-top:1px solid var(--line)}.reader-section h3{margin:0 0 10px;color:var(--pine);font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}.reader-copy{font-size:16px;line-height:1.75;color:var(--ink2);white-space:normal;overflow-wrap:anywhere}.reader-copy strong{color:var(--ink);font-weight:750}.reader-copy .md-heading{display:block;margin:1.1em 0 .25em;font:600 20px/1.25 var(--disp);color:var(--ink)}.reader-copy code{padding:2px 5px;border-radius:5px;background:var(--line2);font:12px var(--mono)}.reader-insights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}.reader-insight{padding:17px 18px;border-radius:15px;background:var(--paper);font-size:14px;line-height:1.65;color:var(--ink2)}.reader-insight.angle{background:var(--orange2)}.reader-insight b{display:block;margin-bottom:6px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.11em;text-transform:uppercase}.reader-insight.angle b{color:#9E4928}.reader-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}body.reader-open{overflow:hidden}
+    @media(max-width:760px){.reader-overlay{padding:0;place-items:end center}.reader-panel{width:100%;max-height:94vh;border-radius:22px 22px 0 0;padding:23px 18px 28px}.reader-title{font-size:29px}.reader-insights{grid-template-columns:1fr}.reader-copy{font-size:15px}.top-grid,.history-grid{grid-template-columns:1fr}.top-card{min-height:0}}
+    @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.idea:last-child{grid-column:1/-1}.video-card{grid-template-columns:160px minmax(0,1fr) auto}}
     @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.nav button{justify-content:center;font-size:12px;border:1px solid var(--line)}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:15px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.rank-list,.idea-grid,.history-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.item-side{position:absolute;right:18px;top:14px}.item{grid-template-columns:28px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}.top-tabs{width:100%}.top-tabs button{flex:1}.history-card{grid-template-columns:40px 1fr}.archive-day summary{padding:13px 14px}.archive-items{padding:0 12px 8px}.archive-date{font-size:14px}}
     @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   </style>
@@ -116,12 +120,19 @@
     <div class="content" id="content"><div class="empty">Loading today's signal…</div></div>
   </main>
 </div>
+<div class="reader-overlay" id="readerOverlay" hidden>
+  <button class="reader-backdrop" data-reader-close aria-label="Close reader"></button>
+  <section class="reader-panel" role="dialog" aria-modal="true" aria-labelledby="readerTitle">
+    <button class="reader-close" data-reader-close aria-label="Close reader">×</button>
+    <div id="readerContent"></div>
+  </section>
+</div>
 <div class="toast" id="toast"></div>
 <script>
   const REPO={owner:"Yeping-Hu",repo:"ai-digest",branch:"main"};
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},history:{days:[]},filter:"top",topView:"today",saved:loadSaved()};
+  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},history:{days:[]},filter:"top",topView:"today",saved:loadSaved(),reader:null};
   const typeLabel={official:"Official",independent:"Independent",curated:"Curated",community:"Community"};
   let OWNER=false;
 
@@ -188,7 +199,8 @@
     return"";
   }
   function itemTimeLabel(item){const stateName=youtubeState(item);if(stateName==="upcoming"){const when=scheduleLabel(item.scheduledStartTime);return when?`Scheduled ${when}`:"Upcoming"}if(stateName==="live")return"Live now";if(stateName==="processing")return"Replay processing";return ago(item.ts)}
-  function rankingEntries(){const rank=[...(state.today.ranking||[])].sort((a,b)=>(a.rank||999)-(b.rank||999));if(rank.length)return rank;const ids=[...(state.today.topIds||[]),...(state.today.scanIds||[])];return ids.map((id,index)=>({id,rank:index+1,score:0,reason:""}))}
+  function rankScore(entry){return Number(entry?.peakScore??entry?.score??entry?.lastScore??0)||0}
+  function rankingEntries(){const rank=[...(state.today.ranking||[])].sort((a,b)=>rankScore(b)-rankScore(a)||Number(b.selectionCount||0)-Number(a.selectionCount||0)||(a.rank||999)-(b.rank||999));if(rank.length)return rank.map((entry,index)=>({...entry,rank:index+1,score:rankScore(entry),tier:"top"}));const ids=[...(state.today.topIds||[]),...(state.today.scanIds||[])];return ids.map((id,index)=>({id,rank:index+1,score:0,peakScore:0,reason:"",tier:"top"}))}
   function rankingMap(){return new Map(rankingEntries().map(x=>[x.id,x]))}
   function rankFor(id){return rankingMap().get(id)}
   function itemById(id){return state.items.find(x=>x.id===id)||state.saved[id]}
@@ -229,7 +241,7 @@
     const likelyLong=forceToggle||raw.length>Math.max(260,lines*90)||(raw.match(/\n/g)||[]).length>lines;
     return `<div class="clamp-wrap ${extra}" data-likely-long="${likelyLong?"1":"0"}"><div class="clamp-text is-clamped" style="--clamp-lines:${lines}">${richText(raw)}</div><button class="more-toggle" ${likelyLong?"":"hidden"}>Show more</button></div>`;
   }
-  function eligibleForFull(item){const body=String(item.excerpt||item.text||item.summary||"");if(item.kind==="youtube")return Boolean(item.videoId||String(item.id||"").startsWith("yt:"));if(item.kind==="blog")return body.length>=550||Number(item.contentLength||0)>=900||/(fireside|interview|conversation|podcast|transcript|field guide|report|essay|deep dive)/i.test(`${item.title||""} ${body}`);if(item.kind==="x")return body.length>=600;return false}
+  function eligibleForFull(item){const body=String(item.excerpt||item.text||item.summary||"");if(item.kind==="youtube")return Boolean(item.videoId||String(item.id||"").startsWith("yt:"));if(item.kind==="blog")return Boolean(item.url);if(item.kind==="x")return body.length>=600;return false}
   function fullControls(item){const eligible=eligibleForFull(item);const stateBadge=item.full?`<span class="full-state">✓ Full summary generated</span>`:"";const block=summaryBlock(item);const due=item.kind==="youtube"&&youtubeState(item)==="upcoming"&&scheduleReached(item);let note="",button="";if(!item.full&&item.fullSummaryStatus==="error")note=`<span class="summary-note" title="${esc(item.fullSummaryMessage||"")}">Summary failed</span>`;if(OWNER&&eligible){button=block?`<button class="full-btn blocked" data-summary-block="${esc(block.message)}">${esc(block.label)}</button>`:`<button class="full-btn" data-summary-item="${esc(item.id)}">${item.full?"Regenerate":due?"Check availability & summarize":"Generate full summary"}</button>`}return `${stateBadge}${note}${button}`}
 
   async function load(){
@@ -270,7 +282,7 @@
     updateShortlist();
   }
 
-  function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
+  function setFilter(filter){closeReader(false);state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
     const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, always synced with the latest archive copy."],full:["Full Summaries","Every item for which you generated a detailed summary."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
@@ -288,44 +300,43 @@
     ].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   }
 
-  function topMeta(item,rank){const author=item.kind==="x"?`<span class="author-inline">${avatarMarkup(item)}<span>${esc(item.author)}</span></span>`:`<span>${esc(item.source)}</span>`;return `${sourceTypeChip(item)}${author}<span>${esc(itemTimeLabel(item))}</span>${availabilityChip(item)}<span class="score">${Math.round(rank.score||item.signals?.localScore||0)}/100</span>`}
+  function topMeta(item,rank){const author=item.kind==="x"?`<span class="author-inline">${avatarMarkup(item)}<span>${esc(item.author)}</span></span>`:`<span>${esc(item.source)}</span>`;return `${sourceTypeChip(item)}${author}<span>${esc(itemTimeLabel(item))}</span>${availabilityChip(item)}<span class="score">${Math.round(rankScore(rank)||item.signals?.localScore||0)}/100</span>`}
 
-  function topCard(item,rank,index){
+  function topPreview(item){const ed=item.editorial||{};if(ed.summaryZh)return ed.summaryZh;if(!item.full&&item.summary)return item.summary;return item.excerpt||item.text||item.summary||item.title||""}
+
+  function topCard(item,rank,index,contextDate=""){
     if(!item)return"";
-    const ed=item.editorial||{};
-    const original=String(item.text||item.excerpt||"");
-    const candidate=item.full?item.summary:(ed.summaryZh||item.summary||"");
-    const translated=item.kind==="x"&&distinctText(candidate,original)?candidate:"";
-    const summary=item.kind==="x"?original:(candidate||item.excerpt||item.text||"");
-    return `<article class="top-card rank-${index+1}" data-id="${esc(item.id)}">
-      <div class="top-head"><div class="rank-badge">${String(index+1).padStart(2,"0")}</div><div class="meta">${topMeta(item,rank)}</div></div>
+    const ed=item.editorial||{},rankNumber=Number(rank?.rank||index+1),score=Math.round(rankScore(rank)||item.signals?.localScore||0);
+    const summary=topPreview(item);
+    return `<article class="top-card rank-${rankNumber}" data-id="${esc(item.id)}" data-reader="${esc(item.id)}" data-reader-rank="${rankNumber}" data-reader-score="${score}" data-reader-date="${esc(contextDate)}" role="button" tabindex="0" aria-label="Open reader for ${esc(displayTitle(item))}">
+      <div class="top-head"><div class="rank-badge">${String(rankNumber).padStart(2,"0")}</div><div class="meta">${topMeta(item,{...rank,rank:rankNumber,score})}</div></div>
       <h2 class="top-title"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h2>
-      <div class="summary">${item.kind==="x"?`<span class="content-label">Original post</span>`:item.full?`<span class="content-label">Full summary</span>`:""}${collapsible(summary,item.full?7:5,"",item.full)}</div>
-      ${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4,"",item.full)}</div>`:""}
-      <div class="insight"><b>Why it matters</b>${esc(ed.whyItMattersZh||rank.reason||"Open the original source to judge the full context.")}</div>
-      <div class="insight angle"><b>RedNote angle</b>${esc(ed.rednoteAngleZh||"Extract one counter-intuitive point and explain it through a single concrete example.")}</div>
-      ${(ed.evidenceZh||ed.uncertaintyZh)?`<details class="evidence"><summary>Evidence & uncertainty</summary>${ed.evidenceZh?`<p><b>Evidence:</b> ${esc(ed.evidenceZh)}</p>`:""}${ed.uncertaintyZh?`<p><b>Watch:</b> ${esc(ed.uncertaintyZh)}</p>`:""}</details>`:""}
+      <div class="summary"><div class="preview-text">${richText(summary)}</div></div>
+      <div class="insight"><b>Why it matters</b><div class="insight-copy">${esc(ed.whyItMattersZh||rank?.reason||"Open the original source to judge the full context.")}</div></div>
+      <div class="insight angle"><b>RedNote angle</b><div class="insight-copy">${esc(ed.rednoteAngleZh||"Extract one counter-intuitive point and explain it through a single concrete example.")}</div></div>
+      <div class="reader-hint">Open reader for the full summary, evidence and notes →</div>
       <div class="top-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div><div class="action-right"><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★ Saved":"☆ Save"}</button></div></div>
     </article>`;
   }
 
-  function rankCard(item,rank){const ed=item.editorial||{};const summary=item.full?item.summary:(ed.summaryZh||item.summary||item.excerpt||item.text);return `<article class="rank-card" data-id="${esc(item.id)}"><div class="rank-small">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${esc(itemTimeLabel(item))}</span>${availabilityChip(item)}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,item.full?6:3,"",item.full)}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
-
   function renderTodayTop(){
     const entries=rankingEntries();const ranked=entries.map(entry=>({entry,item:itemById(entry.id)})).filter(x=>x.item);const ideas=state.today.ideas||[];
     if(!ranked.length)return `<div class="empty">No ranking yet. Run Daily digest once and today's editorial list will appear here.</div>`;
-    const primary=ranked.slice(0,3),rest=ranked.slice(3);
-    return `<div class="section-head"><div><h2>Today's Top ${ranked.length}</h2><p>Ranked from the strongest signal down; every selected item stays in one list.</p></div></div>
-      ${primary.length?`<div class="top-grid">${primary.map((x,i)=>topCard(x.item,x.entry,i)).join("")}</div>`:""}
-      ${rest.length?`<div class="rank-list">${rest.map(x=>rankCard(x.item,x.entry)).join("")}</div>`:""}
-      ${ideas.length?`<div class="section-head"><div><h2>Content ideas</h2><p>Model-proposed; your judgment stays final.</p></div></div><div class="idea-grid">${ideas.map((idea,i)=>`<article class="idea"><div class="eyebrow">Idea 0${i+1}</div><h3>${esc(idea.workingTitle)}</h3><p>${esc(idea.angle)}</p><div class="why">${esc(idea.whyNow||"")}</div></article>`).join("")}</div>`:""}`;
+    return `<div class="section-head"><div><h2>Today's Top ${ranked.length}</h2><p>Cumulative across today's runs, sorted by the highest score each item earned.</p></div></div>
+      <div class="top-grid">${ranked.map((x,i)=>topCard(x.item,x.entry,i,state.today.date||"")).join("")}</div>
+      ${ideas.length?`<div class="section-head"><div><h2>Content ideas</h2><p>Model-proposed; your judgment stays final.</p></div></div><div class="idea-grid">${ideas.map((idea,i)=>`<article class="idea"><div class="eyebrow">Idea ${String(i+1).padStart(2,"0")}</div><h3>${esc(idea.workingTitle)}</h3><p>${esc(idea.angle)}</p><div class="why">${esc(idea.whyNow||"")}</div></article>`).join("")}</div>`:""}`;
   }
 
   function historyItem(entryItem,ranking){const live=itemById(entryItem.id);return live||entryItem.snapshot||entryItem.item||entryItem}
   function renderTopArchive(){
     const days=(state.history.days||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
     if(!days.length)return `<div class="empty">Top Archive will fill automatically after the next daily run.</div>`;
-    return days.map(day=>{const rankings=(day.ranking||[]).slice().sort((a,b)=>(a.rank||999)-(b.rank||999));const snapshots=new Map((day.items||[]).map(item=>[item.id,item]));const cards=rankings.map(rank=>{const item=itemById(rank.id)||snapshots.get(rank.id);if(!item)return"";const ed=item.editorial||{};const summary=item.full?item.summary:(ed.summaryZh||item.summary||item.excerpt||item.text);return `<article class="history-card" data-id="${esc(item.id)}"><div class="history-rank">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span class="score">${Math.round(rank.score||0)}/100</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,item.full?6:3,"",item.full)}<div class="history-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open ↗</a>${fullControls(item)}</div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></div></div></article>`}).join("");return cards?`<section class="history-day"><div class="history-day-head"><h2>${esc(formatHistoryDate(day.date))}</h2><span>${rankings.length} ranked</span></div><div class="history-grid">${cards}</div></section>`:""}).join("")||`<div class="empty">No archived rankings yet.</div>`;
+    return days.map(day=>{
+      const snapshots=new Map((day.items||[]).map(item=>[item.id,item]));
+      const rankings=(day.ranking||[]).slice().sort((a,b)=>rankScore(b)-rankScore(a)||Number(b.selectionCount||0)-Number(a.selectionCount||0)||(a.rank||999)-(b.rank||999)).map((rank,index)=>({...rank,rank:index+1,score:rankScore(rank),tier:"top"}));
+      const cards=rankings.map((rank,index)=>{const item=itemById(rank.id)||snapshots.get(rank.id);return item?topCard(item,rank,index,day.date):""}).join("");
+      return cards?`<section class="history-day"><div class="history-day-head"><h2>${esc(formatHistoryDate(day.date))}</h2><span>${rankings.length} selected</span></div><div class="history-grid">${cards}</div></section>`:"";
+    }).join("")||`<div class="empty">No archived rankings yet.</div>`;
   }
 
   function renderTop(){return state.topView==="archive"?renderTopArchive():renderTodayTop()}
@@ -381,12 +392,40 @@
     return renderGroupedList(list);
   }
 
-  function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
+  function openReader(itemId,rank={},contextDate=""){
+    state.reader={itemId,rank:{...rank},contextDate};
+    renderReader();
+    bindActions();
+  }
+  function closeReader(renderAgain=false){state.reader=null;$("readerOverlay").hidden=true;document.body.classList.remove("reader-open");if(renderAgain)render()}
+  function renderReader(){
+    const overlay=$("readerOverlay"),host=$("readerContent"),context=state.reader;
+    if(!context){overlay.hidden=true;document.body.classList.remove("reader-open");return}
+    const item=itemById(context.itemId);if(!item){closeReader(false);return}
+    const ed=item.editorial||{},rank=context.rank||rankFor(item.id)||{},rankNumber=Number(rank.rank||0),score=Math.round(rankScore(rank)||item.signals?.localScore||0);
+    const original=String(item.text||item.excerpt||"").trim();
+    const shortSummary=ed.summaryZh||(!item.full?item.summary:"")||item.excerpt||item.text||"";
+    const fullSummary=item.full?String(item.summary||"").trim():"";
+    const thumb=item.kind==="youtube"?youtubeThumb(item):"";
+    host.innerHTML=`<div class="reader-head"><div class="reader-kicker">${rankNumber?`<span class="reader-rank">${String(rankNumber).padStart(2,"0")}</span>`:""}<span class="reader-context">${esc(context.contextDate?`Top · ${formatDateKey(context.contextDate)}`:"Today's Top")}</span><span class="score">${score}/100</span></div><h2 class="reader-title" id="readerTitle"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h2><div class="meta reader-meta">${sourceTypeChip(item)}${item.kind==="x"?`<span class="author-inline">${avatarMarkup(item)}<span>${esc(item.author)}</span></span>`:`<span>${esc(item.source)}</span>`}<span>${esc(itemTimeLabel(item))}</span>${availabilityChip(item)}</div></div>
+      ${thumb?`<div class="reader-thumb"><img src="${esc(thumb)}" alt="" loading="lazy"></div>`:""}
+      ${item.kind==="x"&&original?`<section class="reader-section"><h3>Original post</h3><div class="reader-copy">${richText(original)}</div></section>`:""}
+      ${shortSummary&&(!fullSummary||distinctText(shortSummary,fullSummary))?`<section class="reader-section"><h3>Chinese summary</h3><div class="reader-copy">${richText(shortSummary)}</div></section>`:""}
+      ${fullSummary?`<section class="reader-section"><h3>Full summary</h3><div class="reader-copy">${richText(fullSummary)}</div></section>`:""}
+      <div class="reader-insights"><div class="reader-insight"><b>Why it matters</b>${esc(ed.whyItMattersZh||rank.reason||"Open the original source to judge the full context.")}</div><div class="reader-insight angle"><b>RedNote angle</b>${esc(ed.rednoteAngleZh||"Extract one counter-intuitive point and explain it through a single concrete example.")}</div>${ed.evidenceZh?`<div class="reader-insight"><b>Evidence</b>${esc(ed.evidenceZh)}</div>`:""}${ed.uncertaintyZh?`<div class="reader-insight"><b>Uncertainty</b>${esc(ed.uncertaintyZh)}</div>`:""}${ed.chineseAudienceGapZh?`<div class="reader-insight"><b>Chinese audience gap</b>${esc(ed.chineseAudienceGapZh)}</div>`:""}</div>
+      <div class="reader-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★ Saved":"☆ Save"}</button></div>`;
+    overlay.hidden=false;document.body.classList.add("reader-open");
+  }
+
+  function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();renderReader();bindActions()}
 
   function bindActions(){
-    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render()});
-    document.querySelectorAll("[data-summary-item]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.summaryItem,btn));
-    document.querySelectorAll("[data-summary-block]").forEach(btn=>btn.onclick=()=>toast(btn.dataset.summaryBlock||"This item is not available for a full summary yet."));
+    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=(event)=>{event.stopPropagation();const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render()});
+    document.querySelectorAll("[data-summary-item]").forEach(btn=>btn.onclick=(event)=>{event.stopPropagation();requestFullSummary(btn.dataset.summaryItem,btn)});
+    document.querySelectorAll("[data-summary-block]").forEach(btn=>btn.onclick=(event)=>{event.stopPropagation();toast(btn.dataset.summaryBlock||"This item is not available for a full summary yet.")});
+    document.querySelectorAll("[data-reader]").forEach(card=>{card.onclick=(event)=>{if(event.target.closest("a,button,input,summary"))return;openReader(card.dataset.reader,{rank:Number(card.dataset.readerRank||0),score:Number(card.dataset.readerScore||0)},card.dataset.readerDate||"")};card.onkeydown=(event)=>{if((event.key==="Enter"||event.key===" ")&&!event.target.closest("a,button,input")){event.preventDefault();openReader(card.dataset.reader,{rank:Number(card.dataset.readerRank||0),score:Number(card.dataset.readerScore||0)},card.dataset.readerDate||"")}}});
+    document.querySelectorAll("[data-reader-close]").forEach(btn=>btn.onclick=()=>closeReader(false));
+    document.querySelectorAll("a,button").forEach(el=>{if(el.closest("[data-reader]"))el.addEventListener("click",event=>event.stopPropagation())});
     bindClamps();
   }
 
@@ -467,7 +506,8 @@
     if(btn&&btn.isConnected){btn.disabled=false;btn.textContent="Still running — check Actions"}toast("The workflow is still running. No manual page refresh is required; reopen later if needed.")
   }
 
-  $("topTabs").querySelectorAll("button").forEach(btn=>btn.onclick=()=>{state.topView=btn.dataset.topView;updateHeader();render()});
+  $("topTabs").querySelectorAll("button").forEach(btn=>btn.onclick=()=>{closeReader(false);state.topView=btn.dataset.topView;updateHeader();render()});
+  document.addEventListener("keydown",event=>{if(event.key==="Escape"&&state.reader)closeReader(false)});
   load();
 </script>
 </body>

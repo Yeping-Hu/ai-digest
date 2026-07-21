@@ -30,7 +30,8 @@ const TRANSCRIPT_DIR = path.join(ROOT, "data", "transcripts");
 const CFG = readJSON(CONFIG_PATH, {});
 const EDIT = CFG.editorial || {};
 const NOW = Date.now();
-const DATE_KEY = new Date(NOW).toISOString().slice(0, 10);
+const EDIT_TIME_ZONE = String(EDIT.timeZone || "America/Los_Angeles");
+const DATE_KEY = dayKeyInTimeZone(NOW, EDIT_TIME_ZONE);
 const RETENTION_MS = Math.max(1, Number(CFG.retentionDays || 30)) * 864e5;
 const LANG = String(CFG.summaryLang || "zh").toLowerCase();
 const USER_AGENT = "Mozilla/5.0 (compatible; ai-signal-desk/2.0; +https://github.com/Yeping-Hu/ai-digest)";
@@ -71,6 +72,23 @@ function unique(values) {
 function utcDayKey(value) {
   const date = new Date(value);
   return Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 10) : "";
+}
+
+function dayKeyInTimeZone(value, timeZone = EDIT_TIME_ZONE) {
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return "";
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(date);
+    const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+    return `${values.year}-${values.month}-${values.day}`;
+  } catch {
+    return date.toISOString().slice(0, 10);
+  }
 }
 
 function compactText(value) {
@@ -761,6 +779,100 @@ function buildFallbackIdeas(selected, candidates) {
   return ideas;
 }
 
+
+function rankingScore(entry) {
+  return clamp(Number(entry?.peakScore ?? entry?.score ?? entry?.lastScore ?? 0), 0, 100);
+}
+
+function mergeDailyRanking(previousRanking = [], currentRanking = [], itemMap = new Map(), selectedAt = new Date().toISOString()) {
+  const byId = new Map();
+
+  for (const value of previousRanking || []) {
+    if (!value?.id) continue;
+    const peakScore = rankingScore(value);
+    byId.set(value.id, {
+      ...value,
+      tier: "top",
+      score: peakScore,
+      peakScore,
+      lastScore: clamp(Number(value.lastScore ?? value.score ?? peakScore), 0, 100),
+      selectionCount: Math.max(1, Number(value.selectionCount || 1)),
+      firstSelectedAt: value.firstSelectedAt || value.selectedAt || selectedAt,
+      lastSelectedAt: value.lastSelectedAt || value.selectedAt || selectedAt,
+    });
+  }
+
+  for (const value of currentRanking || []) {
+    if (!value?.id) continue;
+    const previous = byId.get(value.id);
+    const currentScore = clamp(Number(value.score || 0), 0, 100);
+    const peakScore = Math.max(rankingScore(previous), currentScore);
+    byId.set(value.id, {
+      ...(previous || {}),
+      ...value,
+      tier: "top",
+      score: peakScore,
+      peakScore,
+      lastScore: currentScore,
+      selectionCount: Number(previous?.selectionCount || 0) + 1,
+      firstSelectedAt: previous?.firstSelectedAt || selectedAt,
+      lastSelectedAt: selectedAt,
+      reason: value.reason || previous?.reason || "",
+    });
+  }
+
+  const publicationValue = (entry) => {
+    const item = itemMap.get(entry.id);
+    const published = Number(item?.ts);
+    if (Number.isFinite(published) && published > 0) return published;
+    return Number(item?.firstSeen || 0);
+  };
+
+  return [...byId.values()]
+    .sort((a, b) =>
+      rankingScore(b) - rankingScore(a)
+      || Number(b.selectionCount || 0) - Number(a.selectionCount || 0)
+      || publicationValue(b) - publicationValue(a)
+      || String(a.firstSelectedAt || "").localeCompare(String(b.firstSelectedAt || ""))
+      || String(a.id).localeCompare(String(b.id)))
+    .map((entry, index) => ({ ...entry, rank: index + 1, tier: "top", score: rankingScore(entry) }));
+}
+
+function mergeDailyIdeas(previousIdeas = [], currentIdeas = [], selectedAt = new Date().toISOString()) {
+  const byKey = new Map();
+  const keyFor = (idea) => {
+    const title = compactText(idea?.workingTitle).toLowerCase();
+    const sources = unique(idea?.sourceIds || []).sort().join("|");
+    return `${title}::${sources}`;
+  };
+  for (const idea of previousIdeas || []) {
+    const key = keyFor(idea);
+    if (!key || key === "::") continue;
+    byKey.set(key, {
+      ...idea,
+      firstSuggestedAt: idea.firstSuggestedAt || selectedAt,
+      lastSuggestedAt: idea.lastSuggestedAt || selectedAt,
+      suggestionCount: Math.max(1, Number(idea.suggestionCount || 1)),
+    });
+  }
+  for (const idea of currentIdeas || []) {
+    const key = keyFor(idea);
+    if (!key || key === "::") continue;
+    const previous = byKey.get(key);
+    byKey.set(key, {
+      ...(previous || {}),
+      ...idea,
+      firstSuggestedAt: previous?.firstSuggestedAt || selectedAt,
+      lastSuggestedAt: selectedAt,
+      suggestionCount: Number(previous?.suggestionCount || 0) + 1,
+    });
+  }
+  return [...byKey.values()]
+    .sort((a, b) => Number(b.suggestionCount || 0) - Number(a.suggestionCount || 0)
+      || String(b.lastSuggestedAt || "").localeCompare(String(a.lastSuggestedAt || "")))
+    .slice(0, Math.max(9, Number(EDIT.ideaLimit || 3)));
+}
+
 function normalizeEditorial(raw, candidates) {
   const candidateMap = new Map(candidates.map((entry) => [entry.item.id, entry]));
   const requested = Array.isArray(raw?.items) ? raw.items : [];
@@ -769,7 +881,7 @@ function normalizeEditorial(raw, candidates) {
   const sourceCounts = new Map();
   const items = [];
 
-  const sorted = [...requested].sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999));
+  const sorted = [...requested].sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Number(a.rank || 999) - Number(b.rank || 999));
   for (const value of sorted) {
     const candidate = candidateMap.get(value?.id);
     if (!candidate || items.some((item) => item.id === value.id)) continue;
@@ -808,6 +920,12 @@ function normalizeEditorial(raw, candidates) {
       if (items.length >= Number(EDIT.topPrimary || 3)) break;
     }
   }
+
+  items.sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Number(a.rank || 999) - Number(b.rank || 999));
+  items.forEach((item, index) => {
+    item.rank = index + 1;
+    item.tier = "top";
+  });
 
   const validIds = new Set(candidateMap.keys());
   const ideas = (Array.isArray(raw?.ideas) ? raw.ideas : [])
@@ -1459,6 +1577,17 @@ async function main() {
     return;
   }
 
+  // The former youtube-availability workflow is now part of every full digest
+  // run. It refreshes stable archive IDs before ranking, so scheduled videos can
+  // move through upcoming → live → processing → available without a separate job.
+  if (YOUTUBE_KEY && (CFG.sources || []).some((source) => source.enabled !== false && source.type === "youtube")) {
+    try {
+      await refreshYouTubeMetadata();
+    } catch (error) {
+      log("YouTube lifecycle refresh skipped:", error.message);
+    }
+  }
+
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
   const existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
   const run = {
@@ -1515,10 +1644,15 @@ async function main() {
     .filter(withinRetention)
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
-  const previousDay = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), { newIds: [] });
+  const dailySnapshot = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), null);
+  const todaySnapshot = readJSON(TODAY_PATH, null);
+  const sameDaySnapshots = [dailySnapshot, todaySnapshot]
+    .filter((doc) => doc && doc.date === DATE_KEY)
+    .sort((a, b) => Date.parse(String(b.generatedAt || "")) - Date.parse(String(a.generatedAt || "")));
+  const previousDay = sameDaySnapshots[0] || { newIds: [], ranking: [], ideas: [] };
   const dailyNewIds = unique([
     ...(previousDay.newIds || []),
-    ...kept.filter((item) => item.firstSeen && utcDayKey(item.firstSeen) === DATE_KEY).map((item) => item.id),
+    ...kept.filter((item) => item.firstSeen && dayKeyInTimeZone(item.firstSeen, EDIT_TIME_ZONE) === DATE_KEY).map((item) => item.id),
     ...newIds,
     ...releasedIds,
   ]).filter((id) => merged.has(id));
@@ -1557,12 +1691,14 @@ async function main() {
   run.usedGemini = editorial.usedGemini;
   if (editorial.error) run.errors.push(`Gemini: ${editorial.error}`);
 
-  const ranking = editorial.result.items.map((entry, index) => ({
+  const selectedAt = new Date().toISOString();
+  const currentRanking = editorial.result.items.map((entry, index) => ({
     id: entry.id,
     rank: index + 1,
-    tier: index < Number(EDIT.topPrimary || 3) ? "top" : "scan",
-    score: entry.score,
+    tier: "top",
+    score: clamp(Number(entry.score || 0), 0, 100),
     reason: entry.reason,
+    selectedAt,
   }));
 
   for (const entry of editorial.result.items) {
@@ -1587,15 +1723,21 @@ async function main() {
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
   run.finishedAt = new Date().toISOString();
+  const ranking = mergeDailyRanking(previousDay.ranking || [], currentRanking, merged, run.finishedAt);
+  const ideas = mergeDailyIdeas(previousDay.ideas || [], editorial.result.ideas || [], run.finishedAt);
+  run.rankedThisRun = currentRanking.length;
+  run.rankedToday = ranking.length;
+  run.timeZone = EDIT_TIME_ZONE;
   const today = {
     generatedAt: run.finishedAt,
     date: DATE_KEY,
+    timeZone: EDIT_TIME_ZONE,
     newCount: dailyNewIds.length,
     newIds: dailyNewIds,
-    topIds: ranking.filter((entry) => entry.tier === "top").map((entry) => entry.id),
-    scanIds: ranking.filter((entry) => entry.tier === "scan").map((entry) => entry.id),
+    topIds: ranking.map((entry) => entry.id),
+    scanIds: [],
     ranking,
-    ideas: editorial.result.ideas,
+    ideas,
     run,
   };
 
@@ -1623,8 +1765,10 @@ if (isDirectRun) {
 export {
   canonicalizeURL,
   utcDayKey,
+  dayKeyInTimeZone,
   deduplicate,
   localScore,
+  mergeDailyRanking,
   migrateAndMerge,
   normalizeEditorial,
   parseFeed,

@@ -46,8 +46,11 @@ assert.match(context.result, /<strong class="md-heading">Heading<\/strong>/);
 assert.match(context.result, /data-likely-long="1"/);
 assert.doesNotMatch(context.result, /more-toggle" hidden/);
 
-// Full summaries must win over the shorter editorial snippet in compact cards.
-assert.match(html, /const summary=item\.full\?item\.summary:\(ed\.summaryZh/);
+// Compact Top cards intentionally keep a short preview, while the in-page
+// reader must expose the complete generated summary.
+assert.match(html, /function topPreview\(item\)/);
+assert.match(html, /const fullSummary=item\.full\?String\(item\.summary\|\|""\)\.trim\(\):""/);
+assert.match(html, /<h3>Full summary<\/h3>/);
 
 // Maintenance backfill must cache a non-video original source and record the
 // same path in the archive and historical snapshots without any API key.
