@@ -1,32 +1,30 @@
 # AI Signal Desk
 
-A daily, self-updating dashboard that collects AI signals, keeps a complete 30-day archive, and highlights the few items most worth reading or turning into a Chinese RedNote post.
+A daily, self-updating dashboard that collects English-language AI signals, keeps a rolling 30-day archive, and highlights the items most useful for deeper reading or future Chinese RedNote posts.
 
-It runs entirely on GitHub Actions + GitHub Pages. There is no server and no database.
+It runs entirely on GitHub Actions and GitHub Pages. There is no server and no database.
 
-## What changed in this version
-
-The old flow summarized every unseen blog/video item separately. The new flow is deliberately cheaper and more editorial:
+## Daily pipeline
 
 ```text
-collect every source for free
+collect every source
         ↓
-canonicalize + deduplicate
+canonicalize URLs + deduplicate
         ↓
-local rule-based pre-score
+local rule-based pre-score (free)
         ↓
-only the best 18 candidates go to Gemini
+up to 18 candidates enter one Gemini editorial batch
         ↓
-one editorial batch returns Top items + RedNote ideas
+one ranked Today's Top list + content ideas
         ↓
-archive everything, feature only the best
+archive every item and save a dated Top snapshot
 ```
 
-The daily job makes at most **2 Gemini requests**: one normal structured-output request and, only when needed, one JSON-repair request. If Gemini is unavailable or the free quota is exhausted, the site still updates using local ranking.
+The daily job makes at most **2 Gemini requests**: one structured editorial request and, only if necessary, one JSON-repair request. If Gemini is unavailable or its free quota is exhausted, local ranking still updates the site.
 
-## Sources included
+## Sources
 
-The existing X builders feed and AI Engineer YouTube channel remain. The following English sources are added:
+The existing Builders X feed and AI Engineer YouTube channel remain. These public RSS/Atom sources are also included:
 
 - OpenAI News
 - OpenAI Engineering
@@ -37,128 +35,81 @@ The existing X builders feed and AI Engineer YouTube channel remain. The followi
 
 Hugging Face Daily Papers is intentionally not included yet.
 
-All six new feeds are public RSS/Atom feeds and require no API key.
+## Main views
+
+The left sidebar contains only four primary views:
+
+- **Today's Top** — one ranked list for all selected items
+- **All New Today** — every item found in the latest run
+- **My Shortlist** — manual picks saved in this browser
+- **All 30 Days** — the complete rolling archive
+
+Within **Today's Top**, the secondary tabs are:
+
+- **Today** — the current ranking
+- **Top Archive** — all saved daily rankings, including yesterday and earlier days
+
+Source-specific filters remain below the primary navigation.
+
+## Restored reader features
+
+- X author profile pictures
+- **Show more / Show less** for long text
+- duplicate suppression when an X post and its generated description are materially the same
+- large rank numbers placed in normal card flow so they do not cover content
+- English interface labels; generated summaries and editorial analysis can remain in Chinese
+
+## Full summaries
+
+Owner mode restores the earlier manual workflow and expands it beyond YouTube:
+
+- YouTube videos use a transcript when `SUPADATA_API_KEY` is available
+- long blog posts and articles are fetched from the original page and summarized
+- unusually long X posts can also be summarized
+- completed items display **✓ Full summary generated**
+- owner mode shows **Generate full summary** or **Regenerate**
+- after a workflow is dispatched, the page polls the archive and updates automatically
+
+The browser token is saved under `gh_token` in local storage, matching the earlier owner-tool behavior. Use a fine-grained token restricted to this repository, and remove it when it is no longer needed.
 
 ## Files
 
 | File | Purpose |
 |---|---|
-| `index.html` | Static dashboard for GitHub Pages |
-| `collect.mjs` | Collection, deduplication, local scoring, one-batch Gemini editorial pass |
-| `sources.json` | Sources and editorial limits |
+| `index.html` | Static GitHub Pages dashboard |
+| `collect.mjs` | Collection, deduplication, scoring, editorial ranking, and on-demand summaries |
+| `sources.json` | Source and editorial configuration |
 | `data/archive.json` | Complete rolling 30-day archive |
-| `data/today.json` | Current Top ranking, scan list, ideas, and run statistics |
-| `data/daily/YYYY-MM-DD.json` | Daily ranking snapshots, retained for 30 days |
-| `.github/workflows/daily.yml` | Daily collector job |
-| `.github/workflows/summarize-one.yml` | Existing manual full-transcript workflow |
-| `tests/collector.test.mjs` | Offline parser and ranking smoke tests |
+| `data/today.json` | Current ranking, content ideas, and run statistics |
+| `data/top-history.json` | Rolling archive of all daily ranked lists |
+| `data/daily/YYYY-MM-DD.json` | Raw daily editorial snapshots |
+| `.github/workflows/daily.yml` | Scheduled collector |
+| `.github/workflows/summarize-one.yml` | On-demand full summary for one item |
+| `tests/collector.test.mjs` | Offline parser, extraction, and ranking tests |
 
-## Homepage views
+## Repository secrets
 
-- **今日 Top** — the strongest 1-3 items
-- **值得扫一眼** — ranks 4-8
-- **今天全部新内容** — every newly collected item, including those not selected
-- **官方来源 / 独立分析 / 聚合精选**
-- **YouTube**
-- **Hot on X**
-- **我的 Shortlist** — manual picks saved in the browser
-- **全部 30 天**
-
-The Top list is not deletion. Every collected item remains in `archive.json` until it leaves the retention window.
-
-## Free-tier plan
-
-### RSS / Atom
-
-Free. No keys.
-
-### GitHub Actions and Pages
-
-The repository is public, so the scheduled standard runner and Pages hosting can be used without a separate server bill.
-
-### YouTube Data API
-
-The current setup uses approximately two low-cost quota operations per daily run for the configured channel:
-
-1. read the uploads playlist
-2. fetch duration + public statistics for the returned videos
-
-### Gemini
-
-The default is:
-
-```text
-gemini-3.1-flash-lite
-```
-
-It is chosen because it is designed for lightweight processing and currently has free-tier input/output access. You can override it with a repository secret named `GEMINI_MODEL`.
-
-The collector enforces:
-
-```text
-GEMINI_MAX_CALLS=2
-```
-
-If you want an even stricter limit, change it to `1` in `.github/workflows/daily.yml`.
-
-### Supadata
-
-Optional. Daily collection does **not** request transcripts. A transcript is used only when you manually choose “按需生成完整摘要” for one YouTube video.
-
-## Required repository secrets
-
-Go to:
-
-```text
-Settings → Secrets and variables → Actions
-```
-
-Add:
+Under **Settings → Secrets and variables → Actions**, configure:
 
 - `GEMINI_API_KEY`
 - `YOUTUBE_API_KEY`
-- `SUPADATA_API_KEY` — optional
-- `GEMINI_MODEL` — optional override; leave unset to use the value in `sources.json`
+- `SUPADATA_API_KEY` — optional; needed for video transcripts
+- `GEMINI_MODEL` — optional override
 
-No personal GitHub token is required for the scheduled bot. GitHub Actions uses the built-in `GITHUB_TOKEN` and the workflow requests `contents: write`.
+The scheduled collector uses GitHub's built-in `GITHUB_TOKEN`; no personal token is required for daily updates.
 
 ## First run
 
-1. Make sure Actions workflow permissions allow read/write.
+1. Ensure Actions workflow permissions allow read/write access.
 2. Open **Actions → Daily digest → Run workflow**.
-3. The job will create/update:
-   - `data/archive.json`
-   - `data/today.json`
-   - `data/daily/<date>.json`
-4. GitHub Pages will show the new views after the commit is published.
+3. The job updates `data/archive.json`, `data/today.json`, `data/top-history.json`, and `data/daily/<date>.json`.
+4. GitHub Pages publishes the resulting dashboard.
 
-When a source is seen for the first time, only items from its most recent 7 days are admitted. This also applies when adding new feeds to an existing archive, preventing a large historical backlog.
+When a source is first added, only its most recent 7 days are admitted, preventing a large historical backlog. On the first run of this version, compatible snapshots already in `data/daily/` are imported into Top Archive when their items are still present in the 30-day archive.
 
-## Editorial scoring
+## Editorial controls
 
-The free local pre-score uses:
-
-- relevance to agents, workflows, context, AI for Science, evaluation, research, and open source
-- source type and your configured source priority
-- freshness
-- visual/story potential
-- basic engagement signals where available
-- negative filters for hiring posts, webinars, and overt marketing
-
-The Gemini batch then evaluates:
-
-- why the item matters
-- evidence present in the supplied excerpt
-- uncertainty and verification needs
-- likely Chinese-audience information gap
-- a RedNote content angle
-- up to three cross-source post ideas
-
-Curated sources are treated as discovery tools. The output explicitly reminds you to return to the primary source before publishing.
-
-## Adjusting the system
-
-The main controls live in `sources.json`:
+The main settings live in `sources.json`:
 
 ```json
 {
@@ -175,15 +126,14 @@ The main controls live in `sources.json`:
 }
 ```
 
-- `candidateLimit`: maximum items passed to the one Gemini editorial batch
-- `topPrimary`: number shown as large Top cards
-- `topLimit`: maximum total ranked items
-- `maxCandidatesPerSource`: prevents one feed dominating the input
-- `maxTopPerSource`: prevents one source group dominating the output
-- `priority`: per-source relevance weight for your own account, not a universal credibility rating
+`topPrimary` controls how many items use the large-card layout. `topLimit` controls the total number in the single Today's Top ranking. The old `topIds` and `scanIds` fields are still written for backward compatibility, but the interface combines them into one list.
 
-## Security
+## Cost controls
 
-The dashboard's optional Owner Tools stores a fine-grained GitHub token in **sessionStorage only**. It is cleared when the tab/session closes. Use the narrowest repository permission possible.
-
-The normal daily pipeline does not need a personal token at all.
+- RSS/Atom collection is free.
+- Daily YouTube collection does not request transcripts.
+- Local rules pre-filter candidates before Gemini is called.
+- The daily workflow is capped at two Gemini calls.
+- An on-demand full summary is capped at one Gemini call.
+- Article text is fetched directly from the public source page; no paid extraction API is required.
+- If Gemini fails, collection and local ranking still complete.

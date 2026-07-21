@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -34,30 +34,36 @@
     .btn{border:0;border-radius:9px;padding:9px 11px;cursor:pointer;font:600 13px var(--disp)}.btn.primary{width:100%;margin-top:12px;background:var(--pine);color:#fff}.btn.primary:disabled{background:#E5E7E1;color:var(--ink3);cursor:default}
     .btn.secondary{width:100%;margin-top:7px;background:transparent;border:1px solid var(--line);color:var(--ink2)}
     .small-note{margin-top:10px;color:var(--ink3);font-size:11px;line-height:1.45}
-    .owner{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.owner summary{cursor:pointer;color:var(--ink3);font:500 11px var(--mono)}
-    .owner-panel{display:grid;gap:8px;margin-top:10px}.owner-panel input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:12px var(--mono)}
-    .owner-row{display:flex;gap:7px}.owner-row button{flex:1;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:12px}.owner-msg{min-height:18px;color:var(--ink3);font-size:10px}
+    .owner{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.owner-toggle{border:0;background:transparent;padding:2px 0;color:var(--ink3);cursor:pointer;font:500 11px var(--mono)}.owner-toggle:hover{color:var(--pine)}
+    .owner-panel{display:grid;gap:8px;margin-top:10px}.owner-panel[hidden]{display:none}.owner-panel input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font:12px var(--mono)}
+    .owner-row{display:flex;gap:7px}.owner-row button{flex:1;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-size:12px}.owner-msg{min-height:18px;color:var(--ink3);font-size:10px;line-height:1.45}
     .main{min-width:0}.topbar{position:sticky;top:0;z-index:10;padding:24px 34px 15px;background:linear-gradient(180deg,var(--paper) 78%,transparent)}
     .topbar-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.topbar h1{margin:0;font:600 25px/1.1 var(--disp);letter-spacing:-.02em}.sub{margin-top:5px;color:var(--ink3);font:12px var(--mono)}
     .run-chip{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.65);color:var(--ink2);font:11px var(--mono);white-space:nowrap}
     .stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:15px}.stat b{font:600 20px var(--disp)}.stat span{margin-left:5px;color:var(--ink3);font:11px var(--mono)}
     .content{padding:4px 34px 70px;max-width:1500px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:26px 0 12px}.section-head h2{margin:0;font:600 18px var(--disp)}.section-head p{margin:0;color:var(--ink3);font:11px var(--mono)}
-    .top-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.top-card{position:relative;min-height:430px;padding:19px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
-    .top-card.rank-1{border-color:#AFCDAE;background:linear-gradient(155deg,#fff 55%,#EDF5E9)}.rank{position:absolute;right:15px;top:13px;font:600 44px/1 var(--disp);color:#DDE3DA}.rank-1 .rank{color:#B7D5B3}
-    .meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em}.chip{padding:4px 7px;border-radius:999px;background:var(--line2);color:var(--ink2)}.chip.official{background:var(--pine2);color:var(--pine)}.chip.independent{background:var(--blue2);color:#394CA3}.chip.curated{background:#F8EACB;color:#76561D}.score{font-weight:600;color:var(--orange)}
-    .top-title{margin:15px 45px 0 0;font:600 23px/1.2 var(--disp);letter-spacing:-.02em}.top-title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+    .top-tabs{display:inline-flex;gap:4px;margin-top:17px;padding:4px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.58)}.top-tabs button{border:0;background:transparent;padding:7px 12px;border-radius:8px;color:var(--ink3);cursor:pointer;font:600 11px var(--mono)}.top-tabs button.on{background:#fff;color:var(--pine);box-shadow:0 3px 10px rgba(24,32,25,.07)}
+    .top-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.top-card{min-height:430px;padding:19px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .top-card.rank-1{border-color:#AFCDAE;background:linear-gradient(155deg,#fff 55%,#EDF5E9)}.top-head{display:flex;align-items:flex-start;gap:12px}.rank-badge{flex:0 0 51px;color:#C9D0C6;font:600 35px/1 var(--disp);letter-spacing:-.05em}.rank-1 .rank-badge{color:#93B990}.top-head .meta{padding-top:4px}
+    .meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em}.chip{padding:4px 7px;border-radius:999px;background:var(--line2);color:var(--ink2)}.chip.official{background:var(--pine2);color:var(--pine)}.chip.independent{background:var(--blue2);color:#394CA3}.chip.curated{background:#F8EACB;color:#76561D}.chip.community{background:var(--line2);color:var(--ink2)}.score{font-weight:600;color:var(--orange)}
+    .top-title{margin:15px 0 0;font:600 23px/1.2 var(--disp);letter-spacing:-.02em}.top-title a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+    .author-inline{display:inline-flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0}.x-avatar{width:24px;height:24px;border-radius:50%;position:relative;display:inline-grid;place-items:center;overflow:hidden;background:var(--pine2);color:var(--pine);font:600 10px var(--mono);text-transform:uppercase;flex:0 0 auto}.x-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     .summary{margin-top:13px;color:var(--ink2);font-size:14px}.insight{margin-top:14px;padding:12px 13px;border-radius:12px;background:var(--paper)}.insight b{display:block;margin-bottom:4px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase}.insight.angle{background:var(--orange2)}.insight.angle b{color:#9E4928}
-    details.evidence{margin-top:12px;color:var(--ink3);font-size:12px}details.evidence summary{cursor:pointer;font:11px var(--mono)}details.evidence p{margin:7px 0 0}.top-actions{margin-top:auto;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    details.evidence{margin-top:12px;color:var(--ink3);font-size:12px}details.evidence summary{cursor:pointer;font:11px var(--mono)}details.evidence p{margin:7px 0 0}.top-actions{margin-top:auto;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.action-left,.action-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
     .open-link{color:var(--pine);font:600 12px var(--mono)}.star{border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px 9px;cursor:pointer;color:var(--ink3)}.star.on{background:var(--pine);border-color:var(--pine);color:#fff}
-    .scan-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.scan-card{padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:start}.scan-rank{font:600 28px var(--disp);color:#C4CBC2}.scan-card h3{margin:3px 0 7px;font:600 16px/1.25 var(--disp)}.scan-card p{margin:0;color:var(--ink2);font-size:13px}.scan-card .star{align-self:start}
+    .rank-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px}.rank-card{padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--card);display:grid;grid-template-columns:45px minmax(0,1fr) auto;gap:12px;align-items:start}.rank-card .rank-small{font:600 28px var(--disp);color:#C4CBC2}.rank-card h3{margin:3px 0 7px;font:600 16px/1.25 var(--disp)}.rank-card p{margin:0;color:var(--ink2);font-size:13px}.rank-card .star{align-self:start}
     .idea-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.idea{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.idea .eyebrow{color:var(--orange);font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.idea h3{margin:9px 0 8px;font:600 18px/1.2 var(--disp)}.idea p{margin:0;color:var(--ink2);font-size:13px}.idea .why{margin-top:10px;color:var(--ink3);font-size:12px}
+    .history-day{margin-top:27px}.history-day-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}.history-day-head h2{margin:0;font:600 17px var(--disp)}.history-day-head span{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px}.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.history-card{padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px}.history-card .history-rank{font:600 27px var(--disp);color:#C4CBC2}.history-card h3{margin:4px 0 7px;font:600 16px/1.25 var(--disp)}.history-card .history-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
     .day{display:flex;align-items:center;gap:10px;margin:26px 0 7px}.day span:first-child{font:600 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}.day span:last-child{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px}
-    .item{position:relative;padding:15px 3px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:13px}.kind-icon{width:24px;height:24px;border-radius:7px;background:var(--pine2);display:grid;place-items:center;color:var(--pine);font:600 10px var(--mono)}.item-body h3{margin:3px 0 7px;font:600 17px/1.27 var(--disp)}.item-body .text{color:var(--ink2);font-size:14px;white-space:pre-wrap}.item-body .item-summary{margin-top:8px;color:var(--ink2);font-size:13px}.item-body .item-summary b{color:var(--pine);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:6px}.item-meta{margin-top:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono)}.item-side{display:flex;gap:7px;align-items:start}.rank-mini{padding:4px 7px;border-radius:999px;background:var(--orange2);color:#9E4928;font:600 10px var(--mono)}
-    .video-card{margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:16px}.thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line2)}.thumb img{width:100%;height:100%;object-fit:cover}.video-card h3{margin:4px 0 8px;font:600 18px/1.25 var(--disp)}.full-btn{margin-top:9px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}
+    .item{position:relative;padding:15px 3px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:13px}.kind-icon{width:27px;height:27px;border-radius:8px;background:var(--pine2);display:grid;place-items:center;color:var(--pine);font:600 10px var(--mono)}.item-body h3{margin:3px 0 7px;font:600 17px/1.27 var(--disp)}.item-body .text{color:var(--ink2);font-size:14px;white-space:pre-wrap}.content-label{display:block;margin-bottom:5px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.item-body .item-summary{margin-top:9px;color:var(--ink2);font-size:13px}.item-meta{margin-top:9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono)}.item-side{display:flex;gap:7px;align-items:start}.rank-mini{padding:4px 7px;border-radius:999px;background:var(--orange2);color:#9E4928;font:600 10px var(--mono)}
+    .x-item{grid-template-columns:32px minmax(0,1fr) auto}.x-item .kind-icon{padding:0;background:transparent}.x-item .x-avatar{width:29px;height:29px}.x-who{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.x-handle{font:600 12px var(--mono);color:var(--ink)}.x-role{font:10px var(--mono);color:var(--pine);background:var(--pine2);padding:2px 6px;border-radius:5px;text-transform:none;letter-spacing:0}
+    .video-card{position:relative;margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:16px}.thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line2)}.thumb img{width:100%;height:100%;object-fit:cover}.video-card h3{margin:4px 0 8px;font:600 18px/1.25 var(--disp)}
+    .clamp-text{white-space:pre-wrap;overflow-wrap:anywhere}.clamp-text.is-clamped{display:-webkit-box;-webkit-line-clamp:var(--clamp-lines,4);-webkit-box-orient:vertical;overflow:hidden}.more-toggle{border:0;background:transparent;color:var(--pine);cursor:pointer;padding:6px 0 0;font:600 11px var(--mono)}.more-toggle:hover{text-decoration:underline}.more-toggle[hidden]{display:none}
+    .full-state{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--pine2);color:var(--pine);font:600 10px var(--mono)}.full-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}.full-btn:hover{border-color:var(--pine)}.full-btn:disabled{opacity:.62;cursor:default}
     .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
-    .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
     @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.top-card:last-child,.idea:last-child{grid-column:1/-1}.video-card{grid-template-columns:160px minmax(0,1fr) auto}}
-    @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(3,1fr)}.nav button{justify-content:center;font-size:12px}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:16px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.scan-list,.idea-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.star{position:absolute;right:18px}.item{grid-template-columns:24px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}}
+    @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.nav button{justify-content:center;font-size:12px;border:1px solid var(--line)}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:15px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.rank-list,.idea-grid,.history-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.item-side{position:absolute;right:18px;top:14px}.item{grid-template-columns:28px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}.top-tabs{width:100%}.top-tabs button{flex:1}.history-card{grid-template-columns:40px 1fr}}
     @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   </style>
 </head>
@@ -68,7 +74,7 @@
       <svg viewBox="0 0 34 30" width="25" height="23" aria-hidden="true"><rect x="1" y="3" width="22" height="6" rx="3" fill="#174E39"/><circle cx="29" cy="6" r="4" fill="#D9693C"/><rect x="1" y="12" width="28" height="6" rx="3" fill="#174E39"/><rect x="1" y="21" width="18" height="6" rx="3" fill="#174E39" opacity=".38"/></svg>
       <span><b>AI SIGNAL</b> DESK</span>
     </div>
-    <div class="status"><span class="status-dot"></span><span id="synced">加载中…</span></div>
+    <div class="status"><span class="status-dot"></span><span id="synced">loading…</span></div>
 
     <h3>Today</h3>
     <div class="nav" id="nav"></div>
@@ -79,30 +85,34 @@
     <div class="shortlist-box">
       <div class="label">My shortlist</div>
       <div class="number" id="shortlistCount">0 <span>picked</span></div>
-      <button class="btn primary" id="compose" disabled>生成创作素材</button>
-      <button class="btn secondary" id="export">导出收藏</button>
-      <div class="small-note">收藏仅保存在当前浏览器；导出后可永久保存。</div>
+      <button class="btn primary" id="compose" disabled>Compose post</button>
+      <button class="btn secondary" id="export">Export shortlist</button>
+      <div class="small-note">Saved only in this browser. Export any time for a permanent copy.</div>
     </div>
 
-    <details class="owner">
-      <summary>Owner tools</summary>
-      <div class="owner-panel">
-        <input id="githubToken" type="password" autocomplete="off" placeholder="fine-grained GitHub token">
-        <div class="owner-row"><button id="saveToken">本次会话保存</button><button id="runNow">立即刷新</button></div>
-        <div class="owner-msg" id="ownerMsg">Token 只存 sessionStorage，关闭标签页后清除。</div>
+    <div class="owner">
+      <button class="owner-toggle" id="ownerToggle">⚙ Owner mode</button>
+      <div class="owner-panel" id="ownerPanel" hidden>
+        <input id="githubToken" type="password" autocomplete="off" placeholder="repo-scoped GitHub token">
+        <div class="owner-row"><button id="saveToken">Save</button><button id="clearToken" hidden>Turn off</button></div>
+        <div class="owner-msg" id="ownerMsg"></div>
       </div>
-    </details>
+    </div>
   </aside>
 
   <main class="main">
     <header class="topbar">
       <div class="topbar-row">
-        <div><h1 id="pageTitle">今日最值得看</h1><div class="sub" id="pageSub">自动筛选，不删除任何原始内容</div></div>
-        <div class="run-chip" id="runChip">等待数据</div>
+        <div>
+          <h1 id="pageTitle">Today's Top</h1>
+          <div class="sub" id="pageSub">Daily editorial ranking; you keep the final judgment.</div>
+          <div class="top-tabs" id="topTabs" hidden><button data-top-view="today" class="on">Today</button><button data-top-view="archive">Top Archive</button></div>
+        </div>
+        <div class="run-chip" id="runChip">waiting for data</div>
       </div>
       <div class="stats" id="stats"></div>
     </header>
-    <div class="content" id="content"><div class="empty">正在读取今日信号…</div></div>
+    <div class="content" id="content"><div class="empty">Loading today's signal…</div></div>
   </main>
 </div>
 <div class="toast" id="toast"></div>
@@ -110,50 +120,67 @@
   const REPO={owner:"Yeping-Hu",repo:"ai-digest",branch:"main"};
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},filter:"top",saved:loadSaved(),lastVisit:Number(localStorage.getItem("ai-signal-last-visit")||0)};
-  const rankingMap=()=>new Map((state.today.ranking||[]).map(x=>[x.id,x]));
-  const typeLabel={official:"官方",independent:"独立分析",curated:"聚合精选",community:"社区"};
+  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},history:{days:[]},filter:"top",topView:"today",saved:loadSaved()};
+  const typeLabel={official:"Official",independent:"Independent",curated:"Curated",community:"Community"};
+  let OWNER=false;
 
   function loadSaved(){try{return JSON.parse(localStorage.getItem("ai-signal-shortlist")||"{}")}catch{return {}}}
   function storeSaved(){localStorage.setItem("ai-signal-shortlist",JSON.stringify(state.saved));updateShortlist()}
-  function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),1800)}
-  function dateTime(ts){return new Intl.DateTimeFormat("zh-CN",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(ts))}
-  function ago(ts){const parsed=typeof ts==="number"?ts:Date.parse(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} 分钟前`;if(h<24)return `${Math.round(h)} 小时前`;return `${Math.round(h/24)} 天前`}
+  function getToken(){return localStorage.getItem("gh_token")||localStorage.getItem("ai-signal-gh-token")||""}
+  function setToken(value){if(value){localStorage.setItem("gh_token",value);localStorage.removeItem("ai-signal-gh-token")}else{localStorage.removeItem("gh_token");localStorage.removeItem("ai-signal-gh-token")}OWNER=Boolean(value)}
+  function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
+  function dateTime(ts){return new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(ts))}
+  function ago(ts){const parsed=typeof ts==="number"?ts:Date.parse(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} min ago`;if(h<24)return `${Math.round(h)}h ago`;return `${Math.round(h/24)}d ago`}
   function dayKey(ts){return new Date(ts).toISOString().slice(0,10)}
-  function dayLabel(ts){const today=dayKey(Date.now()),yesterday=dayKey(Date.now()-864e5),key=dayKey(ts);return key===today?"今天":key===yesterday?"昨天":new Intl.DateTimeFormat("zh-CN",{month:"long",day:"numeric"}).format(new Date(ts))}
-  function youtubeThumb(item){const id=item.videoId||new URL(item.url).searchParams.get("v");return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:""}
+  function dayLabel(ts){const today=dayKey(Date.now()),yesterday=dayKey(Date.now()-864e5),key=dayKey(ts);if(key===today)return"Today";if(key===yesterday)return"Yesterday";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric"}).format(new Date(ts))}
+  function formatHistoryDate(key){const d=new Date(`${key}T12:00:00Z`);return Number.isFinite(d.getTime())?new Intl.DateTimeFormat("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}).format(d):key}
+  function youtubeThumb(item){try{const id=item.videoId||new URL(item.url).searchParams.get("v");return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:""}catch{return""}}
   function sourceTypeChip(item){const t=item.sourceType||"community";return `<span class="chip ${esc(t)}">${esc(typeLabel[t]||t)}</span>`}
+  function rankingEntries(){const rank=[...(state.today.ranking||[])].sort((a,b)=>(a.rank||999)-(b.rank||999));if(rank.length)return rank;const ids=[...(state.today.topIds||[]),...(state.today.scanIds||[])];return ids.map((id,index)=>({id,rank:index+1,score:0,reason:""}))}
+  function rankingMap(){return new Map(rankingEntries().map(x=>[x.id,x]))}
   function rankFor(id){return rankingMap().get(id)}
   function itemById(id){return state.items.find(x=>x.id===id)||state.saved[id]}
   function isSaved(id){return Boolean(state.saved[id])}
   function snapshot(item){return JSON.parse(JSON.stringify(item))}
+  function normalizeCompare(s){return String(s||"").toLowerCase().replace(/https?:\/\/\S+/g,"").replace(/[\s\p{P}\p{S}]+/gu,"")}
+  function distinctText(candidate,original){const a=normalizeCompare(candidate),b=normalizeCompare(original);if(!a||!b)return Boolean(a);return a!==b&&!a.includes(b)&&!b.includes(a)}
+  function displayTitle(item){
+    if(item.kind!=="x")return item.title||item.text||"Untitled item";
+    const title=String(item.title||"").trim(),original=String(item.text||item.excerpt||"").trim();
+    if(title&&distinctText(title,original)&&title.length<=180)return title;
+    return `Post by ${item.author||"an X user"}`;
+  }
+  function avatarUrl(item){const handle=String(item.author||"").replace(/^@/,"");return item.avatarUrl||item.profileImageUrl||(handle?`https://unavatar.io/x/${encodeURIComponent(handle)}`:"")}
+  function avatarMarkup(item){const handle=String(item.author||"").replace(/^@/,"");const url=avatarUrl(item);return `<span class="x-avatar">${esc((handle[0]||"?").toUpperCase())}${url?`<img src="${esc(url)}" alt="" loading="lazy" onerror="this.remove()">`:""}</span>`}
+  function collapsible(text,lines=4,extra=""){if(!text)return"";return `<div class="clamp-wrap ${extra}"><div class="clamp-text is-clamped" style="--clamp-lines:${lines}">${esc(text)}</div><button class="more-toggle" hidden>Show more</button></div>`}
+  function eligibleForFull(item){const body=String(item.excerpt||item.text||item.summary||"");if(item.kind==="youtube")return Boolean(item.videoId||String(item.id||"").startsWith("yt:"));if(item.kind==="blog")return body.length>=550||Number(item.contentLength||0)>=900||/(fireside|interview|conversation|podcast|transcript|field guide|report|essay|deep dive)/i.test(`${item.title||""} ${body}`);if(item.kind==="x")return body.length>=600;return false}
+  function fullControls(item){const eligible=eligibleForFull(item);const stateBadge=item.full?`<span class="full-state">✓ Full summary generated</span>`:"";const button=OWNER&&eligible?`<button class="full-btn" data-summary-item="${esc(item.id)}">${item.full?"Regenerate":"Generate full summary"}</button>`:"";return `${stateBadge}${button}`}
 
   async function load(){
     try{
       const stamp=Date.now();
-      const [archiveRes,todayRes]=await Promise.all([fetch(`data/archive.json?v=${stamp}`),fetch(`data/today.json?v=${stamp}`)]);
+      const [archiveRes,todayRes,historyRes]=await Promise.all([
+        fetch(`data/archive.json?v=${stamp}`,{cache:"no-store"}),
+        fetch(`data/today.json?v=${stamp}`,{cache:"no-store"}),
+        fetch(`data/top-history.json?v=${stamp}`,{cache:"no-store"}),
+      ]);
       const archive=archiveRes.ok?await archiveRes.json():{items:[]};
       const today=todayRes.ok?await todayRes.json():{};
+      const history=historyRes.ok?await historyRes.json():{days:[]};
       state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));
       state.today={topIds:[],scanIds:[],ranking:[],ideas:[],run:{},...today};
-      buildRail();updateHeader();render();
-      localStorage.setItem("ai-signal-last-visit",String(Date.now()));
-    }catch(err){$("content").innerHTML=`<div class="empty">读取数据失败：${esc(err.message)}</div>`}
+      state.history={days:[],...history};
+      setupOwner();buildRail();updateHeader();render();
+    }catch(err){$("content").innerHTML=`<div class="empty">Could not load data: ${esc(err.message)}</div>`}
   }
 
   function navDefinitions(){
     const todayIds=new Set(state.today.newIds||[]);
     return [
-      ["top","★ 今日 Top",(state.today.topIds||[]).length],
-      ["scan","值得扫一眼",(state.today.scanIds||[]).length],
-      ["today","今天全部新内容",todayIds.size],
-      ["official","官方来源",state.items.filter(x=>x.sourceType==="official").length],
-      ["independent","独立分析",state.items.filter(x=>x.sourceType==="independent").length],
-      ["curated","聚合精选",state.items.filter(x=>x.sourceType==="curated").length],
-      ["youtube","YouTube",state.items.filter(x=>x.kind==="youtube").length],
-      ["hot-x","Hot on X",state.items.filter(x=>x.kind==="x"&&Number(x.likes||0)>=500).length],
-      ["shortlist","我的 Shortlist",Object.keys(state.saved).length],
-      ["all","全部 30 天",state.items.length],
+      ["top","Today's Top",rankingEntries().length],
+      ["today","All New Today",todayIds.size],
+      ["shortlist","My Shortlist",Object.keys(state.saved).length],
+      ["all","All 30 Days",state.items.length],
     ];
   }
 
@@ -169,80 +196,129 @@
   function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
-    const labels={top:["今日最值得看","机器先筛选，你保留最终判断"],scan:["值得扫一眼","第 4–8 名，适合快速浏览"],today:["今天全部新内容","没有被 Top 选中，也不会被删除"],official:["官方来源","模型实验室与工程团队的一手发布"],independent:["独立分析","高质量个人实验与深度判断"],curated:["聚合精选","用来发现线索，创作前回到原始来源"],youtube:["YouTube","视频描述免费抓取；完整转录按需升级"],"hot-x":["Hot on X","仅作为早期线索，不替代原始来源"],shortlist:["我的 Shortlist","你的人工编辑判断"],all:["全部信号","最近 30 天完整归档"]};
-    const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"按来源查看"]:(labels[state.filter]||labels.top);
+    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Every item found in the latest run, including those outside the ranking."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The complete rolling 30-day archive."]};
+    const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"Browse one source."]:(labels[state.filter]||labels.top);
     $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
+    $("topTabs").hidden=state.filter!=="top";
+    $("topTabs").querySelectorAll("button").forEach(btn=>btn.classList.toggle("on",btn.dataset.topView===state.topView));
     const run=state.today.run||{};
-    $("runChip").textContent=state.today.generatedAt?`更新 ${dateTime(state.today.generatedAt)} · ${run.usedGemini?"Gemini 精排":"本地排序"}`:"等待首次运行";
+    $("runChip").textContent=state.today.generatedAt?`Updated ${dateTime(state.today.generatedAt)} · ${run.usedGemini?"Gemini ranked":"Local ranking"}`:"Waiting for first run";
     $("synced").textContent=state.today.generatedAt?`synced ${ago(state.today.generatedAt)}`:"waiting for first run";
     $("stats").innerHTML=[
-      [state.today.newCount||0,"今日新增"],[(state.today.topIds||[]).length,"Top"],[(state.today.ideas||[]).length,"创作候选"],[state.items.length,"30天归档"]
+      [state.today.newCount||0,"new today"],[rankingEntries().length,"ranked today"],[(state.today.ideas||[]).length,"content ideas"],[state.items.length,"30-day archive"]
     ].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   }
 
-  function topCard(item,index){
-    if(!item)return "";const ed=item.editorial||{};const rank=rankFor(item.id)||{};
+  function topMeta(item,rank){const author=item.kind==="x"?`<span class="author-inline">${avatarMarkup(item)}<span>${esc(item.author)}</span></span>`:`<span>${esc(item.source)}</span>`;return `${sourceTypeChip(item)}${author}<span>${ago(item.ts)}</span><span class="score">${Math.round(rank.score||item.signals?.localScore||0)}/100</span>`}
+
+  function topCard(item,rank,index){
+    if(!item)return"";
+    const ed=item.editorial||{};
+    const original=String(item.text||item.excerpt||"");
+    const candidate=item.full?item.summary:(ed.summaryZh||item.summary||"");
+    const translated=item.kind==="x"&&distinctText(candidate,original)?candidate:"";
+    const summary=item.kind==="x"?original:(candidate||item.excerpt||item.text||"");
     return `<article class="top-card rank-${index+1}" data-id="${esc(item.id)}">
-      <div class="rank">0${index+1}</div>
-      <div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span><span class="score">${Math.round(rank.score||item.signals?.localScore||0)}/100</span></div>
-      <h2 class="top-title"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title||item.text)}</a></h2>
-      <div class="summary">${esc(ed.summaryZh||item.summary||item.excerpt||item.text)}</div>
-      <div class="insight"><b>为什么值得看</b>${esc(ed.whyItMattersZh||rank.reason||"值得进一步打开原文判断。")}</div>
-      <div class="insight angle"><b>小红书切入点</b>${esc(ed.rednoteAngleZh||"先提炼一个反常识观点，再用同一个案例讲清楚。")}</div>
-      ${(ed.evidenceZh||ed.uncertaintyZh)?`<details class="evidence"><summary>证据与不确定性</summary>${ed.evidenceZh?`<p><b>证据：</b>${esc(ed.evidenceZh)}</p>`:""}${ed.uncertaintyZh?`<p><b>注意：</b>${esc(ed.uncertaintyZh)}</p>`:""}</details>`:""}
-      <div class="top-actions"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">打开原文 ↗</a><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★ 已收藏":"☆ 收藏"}</button></div>
+      <div class="top-head"><div class="rank-badge">${String(index+1).padStart(2,"0")}</div><div class="meta">${topMeta(item,rank)}</div></div>
+      <h2 class="top-title"><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h2>
+      <div class="summary">${item.kind==="x"?`<span class="content-label">Original post</span>`:""}${collapsible(summary,5)}</div>
+      ${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4)}</div>`:""}
+      <div class="insight"><b>Why it matters</b>${esc(ed.whyItMattersZh||rank.reason||"Open the original source to judge the full context.")}</div>
+      <div class="insight angle"><b>RedNote angle</b>${esc(ed.rednoteAngleZh||"Extract one counter-intuitive point and explain it through a single concrete example.")}</div>
+      ${(ed.evidenceZh||ed.uncertaintyZh)?`<details class="evidence"><summary>Evidence & uncertainty</summary>${ed.evidenceZh?`<p><b>Evidence:</b> ${esc(ed.evidenceZh)}</p>`:""}${ed.uncertaintyZh?`<p><b>Watch:</b> ${esc(ed.uncertaintyZh)}</p>`:""}</details>`:""}
+      <div class="top-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div><div class="action-right"><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★ Saved":"☆ Save"}</button></div></div>
     </article>`;
   }
 
-  function renderTop(){
-    const top=(state.today.topIds||[]).map(itemById).filter(Boolean);const scan=(state.today.scanIds||[]).map(itemById).filter(Boolean);const ideas=state.today.ideas||[];
-    if(!top.length&&!scan.length)return `<div class="empty">还没有今日排名。运行一次 Daily digest 后，这里会显示 Top 内容。</div>`;
-    return `${top.length?`<div class="section-head"><div><h2>今日 Top ${top.length}</h2><p>优先认真阅读</p></div></div><div class="top-grid">${top.map(topCard).join("")}</div>`:""}
-      ${scan.length?`<div class="section-head"><div><h2>Worth scanning</h2><p>快速扫一眼，再决定是否收藏</p></div></div><div class="scan-list">${scan.map((item,i)=>scanCard(item,i+top.length+1)).join("")}</div>`:""}
-      ${ideas.length?`<div class="section-head"><div><h2>今日创作候选</h2><p>模型提出，最终由你选择</p></div></div><div class="idea-grid">${ideas.map((idea,i)=>`<article class="idea"><div class="eyebrow">Idea 0${i+1}</div><h3>${esc(idea.workingTitle)}</h3><p>${esc(idea.angle)}</p><div class="why">${esc(idea.whyNow||"")}</div></article>`).join("")}</div>`:""}`;
+  function rankCard(item,rank){const ed=item.editorial||{};const summary=ed.summaryZh||item.summary||item.excerpt||item.text;return `<article class="rank-card" data-id="${esc(item.id)}"><div class="rank-small">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,3)}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${fullControls(item)}</div></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
+
+  function renderTodayTop(){
+    const entries=rankingEntries();const ranked=entries.map(entry=>({entry,item:itemById(entry.id)})).filter(x=>x.item);const ideas=state.today.ideas||[];
+    if(!ranked.length)return `<div class="empty">No ranking yet. Run Daily digest once and today's editorial list will appear here.</div>`;
+    const primary=ranked.slice(0,3),rest=ranked.slice(3);
+    return `<div class="section-head"><div><h2>Today's Top ${ranked.length}</h2><p>Ranked from the strongest signal down; every selected item stays in one list.</p></div></div>
+      ${primary.length?`<div class="top-grid">${primary.map((x,i)=>topCard(x.item,x.entry,i)).join("")}</div>`:""}
+      ${rest.length?`<div class="rank-list">${rest.map(x=>rankCard(x.item,x.entry)).join("")}</div>`:""}
+      ${ideas.length?`<div class="section-head"><div><h2>Content ideas</h2><p>Model-proposed; your judgment stays final.</p></div></div><div class="idea-grid">${ideas.map((idea,i)=>`<article class="idea"><div class="eyebrow">Idea 0${i+1}</div><h3>${esc(idea.workingTitle)}</h3><p>${esc(idea.angle)}</p><div class="why">${esc(idea.whyNow||"")}</div></article>`).join("")}</div>`:""}`;
   }
 
-  function scanCard(item,rank){const ed=item.editorial||{};return `<article class="scan-card" data-id="${esc(item.id)}"><div class="scan-rank">${String(rank).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title||item.text)}</a></h3><p>${esc(ed.summaryZh||item.summary||item.excerpt||item.text)}</p></div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></article>`}
+  function historyItem(entryItem,ranking){const live=itemById(entryItem.id);return live||entryItem.snapshot||entryItem.item||entryItem}
+  function renderTopArchive(){
+    const days=(state.history.days||[]).slice().sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    if(!days.length)return `<div class="empty">Top Archive will fill automatically after the next daily run.</div>`;
+    return days.map(day=>{const rankings=(day.ranking||[]).slice().sort((a,b)=>(a.rank||999)-(b.rank||999));const snapshots=new Map((day.items||[]).map(item=>[item.id,item]));const cards=rankings.map(rank=>{const item=itemById(rank.id)||snapshots.get(rank.id);if(!item)return"";const ed=item.editorial||{};const summary=ed.summaryZh||item.summary||item.excerpt||item.text;return `<article class="history-card" data-id="${esc(item.id)}"><div class="history-rank">${String(rank.rank||0).padStart(2,"0")}</div><div><div class="meta">${sourceTypeChip(item)}<span>${esc(item.source)}</span><span class="score">${Math.round(rank.score||0)}/100</span></div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(displayTitle(item))}</a></h3>${collapsible(summary,3)}<div class="history-actions"><div class="action-left"><a class="open-link" href="${esc(item.url)}" target="_blank" rel="noopener">Open ↗</a>${fullControls(item)}</div><button class="star ${isSaved(item.id)?"on":""}" data-star="${esc(item.id)}">${isSaved(item.id)?"★":"☆"}</button></div></div></article>`}).join("");return cards?`<section class="history-day"><div class="history-day-head"><h2>${esc(formatHistoryDate(day.date))}</h2><span>${rankings.length} ranked</span></div><div class="history-grid">${cards}</div></section>`:""}).join("")||`<div class="empty">No archived rankings yet.</div>`;
+  }
+
+  function renderTop(){return state.topView==="archive"?renderTopArchive():renderTodayTop()}
 
   function filteredItems(){
     if(state.filter==="shortlist")return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0));
-    if(state.filter==="scan")return (state.today.scanIds||[]).map(itemById).filter(Boolean);
     if(state.filter==="today"){const ids=new Set(state.today.newIds||[]);return state.items.filter(x=>ids.has(x.id))}
-    if(state.filter==="official"||state.filter==="independent"||state.filter==="curated")return state.items.filter(x=>x.sourceType===state.filter);
-    if(state.filter==="youtube")return state.items.filter(x=>x.kind==="youtube");
-    if(state.filter==="hot-x")return state.items.filter(x=>x.kind==="x"&&Number(x.likes||0)>=500).sort((a,b)=>(b.likes||0)-(a.likes||0));
     if(state.filter.startsWith("source:"))return state.items.filter(x=>(x.sourceGroup||x.source)===state.filter.slice(7));
     return state.items;
   }
 
+  function itemMeta(item){return `${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span>${item.likes?`<span>♥ ${Number(item.likes).toLocaleString()}</span>`:""}${item.views?`<span>▶ ${Number(item.views).toLocaleString()}</span>`:""}`}
+
   function genericItem(item){
-    const rank=rankFor(item.id);const saved=isSaved(item.id);const meta=`${sourceTypeChip(item)}<span>${esc(item.source)}</span><span>${ago(item.ts)}</span>${item.likes?`<span>♥ ${Number(item.likes).toLocaleString()}</span>`:""}${item.views?`<span>▶ ${Number(item.views).toLocaleString()}</span>`:""}`;
-    if(item.kind==="youtube")return `<article class="video-card" data-id="${esc(item.id)}"><a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(youtubeThumb(item))}" alt=""></a><div><div class="meta">${meta}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="item-summary">${esc(item.summary||item.excerpt||"")}</div><div class="item-meta">${item.duration?`<span>${esc(item.duration)}</span>`:""}${item.full?`<span>完整转录摘要</span>`:`<button class="full-btn" data-video="${esc(item.videoId||"")}">按需生成完整摘要</button>`}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
-    return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">${item.kind==="x"?"X":"↗"}</div><div class="item-body"><div class="meta">${meta}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}${item.text?`<div class="text">${esc(item.text)}</div>`:""}${item.summary?`<div class="item-summary"><b>${item.editorial?"AI digest":"Excerpt"}</b>${esc(item.summary)}</div>`:""}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">打开原文 ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+    const rank=rankFor(item.id),saved=isSaved(item.id);
+    if(item.kind==="youtube"){
+      const summary=item.summary||item.editorial?.summaryZh||item.excerpt||"";
+      return `<article class="video-card" data-id="${esc(item.id)}"><a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener"><img loading="lazy" src="${esc(youtubeThumb(item))}" alt=""></a><div><div class="meta">${itemMeta(item)}</div><h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3><div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta">${item.duration?`<span>${esc(item.duration)}</span>`:""}<a href="${esc(item.url)}" target="_blank" rel="noopener">Watch ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+    }
+    if(item.kind==="x"){
+      const original=item.text||item.excerpt||"";const candidate=item.full?item.summary:(item.editorial?.summaryZh||item.summary||"");const translated=distinctText(candidate,original)?candidate:"";
+      return `<article class="item x-item" data-id="${esc(item.id)}"><div class="kind-icon">${avatarMarkup(item)}</div><div class="item-body"><div class="x-who"><span class="x-handle">${esc(item.author)}</span>${item.subtitle?`<span class="x-role">${esc(item.subtitle)}</span>`:""}<span class="meta">${ago(item.ts)}${item.likes?` · ♥ ${Number(item.likes).toLocaleString()}`:""}</span></div><div class="text"><span class="content-label">Original post</span>${collapsible(original,5)}</div>${translated?`<div class="item-summary"><span class="content-label">${item.full?"Full summary":"Chinese summary"}</span>${collapsible(translated,item.full?7:4)}</div>`:""}<div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open on X ↗</a>${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
+    }
+    const summary=item.full?item.summary:(item.editorial?.summaryZh||item.summary||item.excerpt||item.text||"");
+    return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">↗</div><div class="item-body"><div class="meta">${itemMeta(item)}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}<div class="item-summary"><span class="content-label">${item.full?"Full summary":item.editorial?"Chinese summary":"Excerpt"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
   }
 
-  function renderList(){const list=filteredItems();if(!list.length)return `<div class="empty">这个筛选下暂时没有内容。</div>`;let html="",day="";for(const item of list){const key=dayKey(item.ts||Date.now());if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(item.ts)}</span><span>${list.filter(x=>dayKey(x.ts||0)===key).length}</span></div>`}html+=genericItem(item)}return html}
+  function renderList(){const list=filteredItems();if(!list.length)return `<div class="empty">Nothing here yet.</div>`;let html="",day="";const counts=new Map();for(const item of list){const key=dayKey(item.ts||Date.now());counts.set(key,(counts.get(key)||0)+1)}for(const item of list){const key=dayKey(item.ts||Date.now());if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(item.ts)}</span><span>${counts.get(key)}</span></div>`}html+=genericItem(item)}return html}
 
   function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
 
   function bindActions(){
-    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render();});
-    document.querySelectorAll("[data-video]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.video));
+    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render()});
+    document.querySelectorAll("[data-summary-item]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.summaryItem,btn));
+    bindClamps();
   }
 
-  function updateShortlist(){const n=Object.keys(state.saved).length;$("shortlistCount").innerHTML=`${n} <span>picked</span>`;$("compose").disabled=!n;$("compose").textContent=n?`生成创作素材 (${n})`:"生成创作素材"}
+  function bindClamps(){requestAnimationFrame(()=>{document.querySelectorAll(".clamp-wrap").forEach(wrap=>{const text=wrap.querySelector(".clamp-text"),btn=wrap.querySelector(".more-toggle");if(!text||!btn)return;text.classList.add("is-clamped");btn.textContent="Show more";btn.hidden=!(text.scrollHeight>text.clientHeight+2);btn.onclick=()=>{const clamped=text.classList.toggle("is-clamped");btn.textContent=clamped?"Show more":"Show less"}})})}
+
+  function updateShortlist(){const n=Object.keys(state.saved).length;$("shortlistCount").innerHTML=`${n} <span>picked</span>`;$("compose").disabled=!n;$("compose").textContent=n?`Compose post (${n})`:"Compose post"}
   function shortlistArray(){return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0))}
 
-  $("compose").onclick=async()=>{const list=shortlistArray();if(!list.length)return;const text=`请基于以下英文 AI 信号，先做一次 blindspot pass，再给出 3 个适合 @Kelly的科研日常 的小红书选题。不要简单翻译新闻；每个选题说明目标读者、核心收获、主线案例、需要核实的事实和推荐视觉结构。\n\n${list.map((x,i)=>`${i+1}. ${x.title||x.text}\n来源：${x.source}\n链接：${x.url}\n摘要：${x.editorial?.summaryZh||x.summary||x.excerpt||x.text}\n推荐角度：${x.editorial?.rednoteAngleZh||""}`).join("\n\n")}`;await navigator.clipboard.writeText(text);toast("创作素材已复制")};
+  $("compose").onclick=async()=>{const list=shortlistArray();if(!list.length)return;const text=`请基于以下英文 AI 信号，先做一次 blindspot pass，再给出 3 个适合 @Kelly的科研日常 的小红书选题。不要简单翻译新闻；每个选题说明目标读者、核心收获、主线案例、需要核实的事实和推荐视觉结构。\n\n${list.map((x,i)=>`${i+1}. ${x.title||x.text}\n来源：${x.source}\n链接：${x.url}\n摘要：${x.editorial?.summaryZh||x.summary||x.excerpt||x.text}\n推荐角度：${x.editorial?.rednoteAngleZh||""}`).join("\n\n")}`;await navigator.clipboard.writeText(text);toast("Post brief copied")};
   $("export").onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),items:shortlistArray()},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ai-shortlist-${dayKey(Date.now())}.json`;a.click();URL.revokeObjectURL(a.href)};
 
-  function token(){return sessionStorage.getItem("ai-signal-gh-token")||""}
-  $("githubToken").value=token();
-  $("saveToken").onclick=()=>{const value=$("githubToken").value.trim();if(value)sessionStorage.setItem("ai-signal-gh-token",value);else sessionStorage.removeItem("ai-signal-gh-token");$("ownerMsg").textContent=value?"已保存到本次浏览器会话。":"已清除。"};
-  async function dispatch(workflow,inputs={}){const t=token()||$("githubToken").value.trim();if(!t){$("ownerMsg").textContent="请先输入 fine-grained token。";return false}const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/${workflow}/dispatches`,{method:"POST",headers:{Authorization:`Bearer ${t}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:JSON.stringify({ref:REPO.branch,inputs})});if(!res.ok)throw new Error(`${res.status} ${await res.text()}`);return true}
-  $("runNow").onclick=async()=>{try{$("ownerMsg").textContent="正在触发…";await dispatch("daily.yml");$("ownerMsg").textContent="已触发 Daily digest，稍后刷新页面。"}catch(e){$("ownerMsg").textContent=`触发失败：${e.message}`}}
-  async function requestFullSummary(videoId){if(!videoId){toast("找不到视频 ID");return}try{await dispatch("summarize-one.yml",{videoId});toast("已提交完整摘要任务")}catch(e){toast(`提交失败：${e.message}`)}}
+  function setupOwner(){
+    const toggle=$("ownerToggle"),panel=$("ownerPanel"),input=$("githubToken"),save=$("saveToken"),clear=$("clearToken"),msg=$("ownerMsg");
+    function reflect(){const t=getToken();OWNER=Boolean(t);clear.hidden=!t;input.value="";input.placeholder=t?"token saved ✓ (paste again to replace)":"repo-scoped GitHub token";msg.textContent=t?"Owner mode is on. Full-summary buttons work in this browser and update automatically when the workflow finishes.":"Paste a fine-grained token for this repo (Actions: read & write). Stored only in this browser."}
+    toggle.onclick=()=>{panel.hidden=!panel.hidden};
+    save.onclick=()=>{const value=input.value.trim();if(value)setToken(value);reflect();render()};
+    clear.onclick=()=>{setToken("");reflect();render()};
+    reflect();
+  }
 
+  async function dispatch(workflow,inputs={}){const token=getToken();if(!token)throw new Error("Set the owner token first");const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/${workflow}/dispatches`,{method:"POST",headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:JSON.stringify({ref:REPO.branch,inputs})});if(!res.ok)throw new Error(`${res.status} ${await res.text()}`)}
+
+  async function requestFullSummary(itemId,btn){
+    const current=itemById(itemId);if(!current)return;const baseline=current.fullSummaryAt||"";btn.disabled=true;btn.textContent="Queuing…";
+    try{await dispatch("summarize-one.yml",{videoId:itemId});btn.textContent="Generating…";toast("Full summary queued — this page will update automatically");await pollSummary(itemId,baseline,btn)}catch(err){btn.disabled=false;btn.textContent=current.full?"Regenerate":"Generate full summary";toast(`Could not start summary: ${err.message}`)}
+  }
+
+  async function pollSummary(itemId,baseline,btn){
+    for(let attempt=0;attempt<30;attempt++){
+      await new Promise(resolve=>setTimeout(resolve,10000));
+      try{const res=await fetch(`data/archive.json?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)continue;const archive=await res.json();const updated=(archive.items||[]).find(x=>x.id===itemId);if(!updated)continue;const changed=updated.full&&(!baseline||updated.fullSummaryAt!==baseline);if(changed){state.items=(archive.items||[]).sort((a,b)=>(b.ts||0)-(a.ts||0));if(state.saved[itemId])state.saved[itemId]=snapshot(updated),storeSaved();render();toast("Full summary is ready");return}}
+      catch{}
+      if(btn&&btn.isConnected)btn.textContent=`Generating… ${Math.min(99,(attempt+1)*3)}%`;
+    }
+    if(btn&&btn.isConnected){btn.disabled=false;btn.textContent="Still running — check Actions"}toast("The workflow is still running. No manual page refresh is required; reopen later if needed.")
+  }
+
+  $("topTabs").querySelectorAll("button").forEach(btn=>btn.onclick=()=>{state.topView=btn.dataset.topView;updateHeader();render()});
   load();
 </script>
 </body>

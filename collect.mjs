@@ -19,6 +19,7 @@ const ROOT = process.cwd();
 const CONFIG_PATH = path.join(ROOT, "sources.json");
 const ARCHIVE_PATH = path.join(ROOT, "data", "archive.json");
 const TODAY_PATH = path.join(ROOT, "data", "today.json");
+const TOP_HISTORY_PATH = path.join(ROOT, "data", "top-history.json");
 const DAILY_DIR = path.join(ROOT, "data", "daily");
 const TRANSCRIPT_DIR = path.join(ROOT, "data", "transcripts");
 
@@ -241,7 +242,8 @@ function parseFeed(xml, src) {
     const parsedDate = Date.parse(rawDate);
     const ts = Number.isFinite(parsedDate) ? parsedDate : NOW;
     const rawContent = tagValue(block, ["encoded", "content", "description", "summary"]);
-    const excerpt = truncateChars(stripHTML(rawContent), Number(src.excerptChars || 1600));
+    const fullFeedText = stripHTML(rawContent);
+    const excerpt = truncateChars(fullFeedText, Number(src.excerptChars || 1600));
     const author = stripHTML(tagValue(block, ["creator", "author", "name"])) || src.name;
     const categories = unique([...tagTerms(block, "category"), ...tagTerms(block, "subject")]);
 
@@ -258,6 +260,7 @@ function parseFeed(xml, src) {
       title,
       text: "",
       excerpt,
+      contentLength: fullFeedText.length,
       summary: excerpt,
       url: link,
       canonicalUrl: link,
@@ -295,6 +298,7 @@ async function adaptXFeed(src) {
         sourceTags: [src.name],
         kind: "x",
         author: builder.handle ? `@${builder.handle}` : builder.name || src.name,
+        avatarUrl: builder.profileImageUrl || builder.profile_image_url || builder.avatarUrl || builder.avatar || builder.image || "",
         subtitle: [builder.name, truncateWords(String(builder.bio || "").split("\n")[0], 8)].filter(Boolean).join(" · "),
         title: "",
         text,
@@ -740,30 +744,117 @@ async function transcript(videoId) {
 }
 
 function fullSummaryPrompt(item, text) {
-  const body = truncateWords(text, 16000);
+  const body = truncateWords(text, 18000);
+  const kind = item.kind === "youtube" ? "YouTube talk" : item.kind === "x" ? "long X post" : "article or blog post";
   if (LANG === "en") {
-    return `Write a detailed, faithful summary of this YouTube talk. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, and limitations. No preamble or markdown headings.\n\nTitle: ${item.title}\n\nTranscript: ${body}`;
+    return `Write a detailed, faithful summary of this ${kind}. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. No preamble or markdown headings.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
   }
   if (LANG === "bilingual") {
-    return `Write a detailed, faithful summary in English, followed by the same summary in Simplified Chinese. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, and limitations. No preamble or markdown headings.\n\nTitle: ${item.title}\n\nTranscript: ${body}`;
+    return `Write a detailed, faithful summary of this ${kind} in English, followed by the same summary in Simplified Chinese. Use flowing paragraphs and bullets only for genuine parallel lists. Include key arguments, examples, numbers, limitations, and uncertainties. No preamble or markdown headings.\n\nTitle: ${item.title || item.text || item.url}\n\nSource text: ${body}`;
   }
-  return `请阅读下面视频的完整文字记录，写一份详细、忠于原文的简体中文总结，让读者不用观看也能掌握主要内容。以连贯段落为主，只有并列步骤或清单才使用「• 」列表。请保留关键论点、数字、例子、限制与不确定性。直接输出正文，不要开场白或 markdown 标题。\n\n标题：${item.title}\n\n文字记录：${body}`;
+  return `请阅读下面${kind === "YouTube talk" ? "视频" : kind === "long X post" ? "长帖" : "文章"}的完整内容，写一份详细、忠于原文的简体中文总结，让读者不用打开原文也能掌握主要内容。以连贯段落为主，只有并列步骤或清单才使用「• 」列表。请保留关键论点、数字、例子、限制与不确定性。直接输出正文，不要开场白或 markdown 标题。\n\n标题：${item.title || item.text || item.url}\n\n原始内容：${body}`;
 }
 
-async function summarizeOneVideo(videoId) {
+function findArticleBodyInJSON(value) {
+  if (!value) return "";
+  if (Array.isArray(value)) {
+    for (const child of value) {
+      const found = findArticleBodyInJSON(child);
+      if (found) return found;
+    }
+    return "";
+  }
+  if (typeof value !== "object") return "";
+  if (typeof value.articleBody === "string" && value.articleBody.trim()) return value.articleBody;
+  for (const child of Object.values(value)) {
+    const found = findArticleBodyInJSON(child);
+    if (found) return found;
+  }
+  return "";
+}
+
+function readableArticleText(html) {
+  const source = String(html || "");
+  const jsonScripts = [...source.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)];
+  for (const match of jsonScripts) {
+    try {
+      const body = findArticleBodyInJSON(JSON.parse(decodeEntities(match[1])));
+      if (compactText(body).length > 500) return compactText(body);
+    } catch {}
+  }
+
+  const cleaned = source
+    .replace(/<!--[\s\S]*?-->/g, " ")
+    .replace(/<(script|style|noscript|svg|canvas|form|nav|footer|aside|header)\b[^>]*>[\s\S]*?<\/\1>/gi, " ");
+  const candidates = [];
+  for (const tag of ["article", "main"]) {
+    for (const block of extractBlocks(cleaned, tag)) candidates.push(stripHTML(block));
+  }
+  const classPattern = /<(?:div|section)\b[^>]*(?:id|class)=["'][^"']*(?:article|post|entry|content|story|prose|body)[^"']*["'][^>]*>([\s\S]*?)<\/(?:div|section)>/gi;
+  for (const match of cleaned.matchAll(classPattern)) candidates.push(stripHTML(match[1]));
+  candidates.push(stripHTML(cleaned));
+  return candidates.map(compactText).filter((text) => text.length >= 300).sort((a, b) => b.length - a.length)[0] || "";
+}
+
+async function sourceTextForItem(item) {
+  if (item.kind === "youtube") {
+    const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
+    const text = await transcript(videoId);
+    if (!text) throw new Error("No transcript available. Check SUPADATA_API_KEY and its free credit balance.");
+    return { text, source: "transcript" };
+  }
+  if (item.kind === "x") {
+    const text = compactText(item.text || item.excerpt || item.summary);
+    if (!text) throw new Error("The X post has no text in the archive.");
+    return { text, source: "post" };
+  }
+
+  let article = "";
+  if (item.url) {
+    try {
+      const html = await getText(item.url, { Accept: "text/html,application/xhtml+xml,*/*" });
+      article = readableArticleText(html);
+    } catch (error) {
+      log("Article fetch fallback:", error.message);
+    }
+  }
+  const fallback = compactText(item.excerpt || item.summary || item.text || item.title);
+  const text = article.length >= Math.max(700, fallback.length) ? article : fallback;
+  if (!text) throw new Error("No readable article text was available.");
+  return { text, source: article === text ? "article" : "feed" };
+}
+
+function updateItemInTopHistory(item) {
+  const history = readJSON(TOP_HISTORY_PATH, { days: [] });
+  let changed = false;
+  for (const day of history.days || []) {
+    if (!Array.isArray(day.items)) continue;
+    const index = day.items.findIndex((entry) => entry.id === item.id);
+    if (index >= 0) {
+      day.items[index] = historySnapshot(item);
+      changed = true;
+    }
+  }
+  if (changed) writeJSONAtomic(TOP_HISTORY_PATH, history);
+}
+
+async function summarizeOneItem(itemId) {
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
   const items = archiveDoc.items || [];
-  const item = items.find((entry) => entry.id === `yt:${videoId}` || entry.videoId === videoId);
-  if (!item) throw new Error(`Video not found in archive: ${videoId}`);
-  const text = await transcript(videoId);
-  if (!text) throw new Error("No transcript available. Check SUPADATA_API_KEY and its free credit balance.");
-  if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY is required for a full transcript summary.");
-  const summary = await geminiRequest(fullSummaryPrompt(item, text), false);
+  const normalizedId = String(itemId || "").trim();
+  const item = items.find((entry) => entry.id === normalizedId || entry.videoId === normalizedId || entry.id === `yt:${normalizedId}`);
+  if (!item) throw new Error(`Item not found in archive: ${normalizedId}`);
+  if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY is required for a full summary.");
+  const source = await sourceTextForItem(item);
+  const summary = await geminiRequest(fullSummaryPrompt(item, source.text), false);
   item.summary = summary || item.summary;
   item.full = true;
   item.fullSummaryAt = new Date().toISOString();
+  item.fullSummarySource = source.source;
+  item.fullSummaryChars = source.text.length;
   writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
-  log("Upgraded video summary:", videoId);
+  updateItemInTopHistory(item);
+  log("Upgraded full summary:", item.id);
 }
 
 function migrateAndMerge(existingItems, collectedItems) {
@@ -806,6 +897,75 @@ function hasSourceHistory(existingItems, src) {
   );
 }
 
+function historySnapshot(item) {
+  if (!item) return null;
+  return {
+    id: item.id,
+    source: item.source,
+    sourceGroup: item.sourceGroup,
+    sourceType: item.sourceType,
+    kind: item.kind,
+    author: item.author,
+    avatarUrl: item.avatarUrl || "",
+    subtitle: item.subtitle || "",
+    title: item.title || "",
+    text: item.text || "",
+    excerpt: item.excerpt || "",
+    summary: item.summary || "",
+    url: item.url,
+    ts: item.ts,
+    likes: item.likes || 0,
+    views: item.views || 0,
+    duration: item.duration || "",
+    videoId: item.videoId || "",
+    full: Boolean(item.full),
+    fullSummaryAt: item.fullSummaryAt || "",
+    editorial: item.editorial || null,
+  };
+}
+
+function dailySnapshotHistory(itemMap) {
+  if (!fs.existsSync(DAILY_DIR)) return [];
+  const entries = [];
+  for (const file of fs.readdirSync(DAILY_DIR)) {
+    if (!/^\d{4}-\d{2}-\d{2}\.json$/.test(file)) continue;
+    const doc = readJSON(path.join(DAILY_DIR, file), null);
+    if (!doc || !Array.isArray(doc.ranking)) continue;
+    const date = doc.date || file.slice(0, 10);
+    entries.push({
+      date,
+      generatedAt: doc.generatedAt || `${date}T12:00:00Z`,
+      ranking: doc.ranking,
+      ideas: doc.ideas || [],
+      items: doc.ranking.map((rank) => historySnapshot(itemMap.get(rank.id))).filter(Boolean),
+    });
+  }
+  return entries;
+}
+
+function updateTopHistory(today, itemMap) {
+  const existing = readJSON(TOP_HISTORY_PATH, { days: [] });
+  const entry = {
+    date: today.date,
+    generatedAt: today.generatedAt,
+    ranking: today.ranking || [],
+    ideas: today.ideas || [],
+    items: (today.ranking || []).map((rank) => historySnapshot(itemMap.get(rank.id))).filter(Boolean),
+  };
+  const cutoff = NOW - RETENTION_MS;
+  const byDate = new Map();
+  for (const day of [entry, ...dailySnapshotHistory(itemMap), ...(existing.days || [])]) {
+    if (!day?.date || byDate.has(day.date)) continue;
+    const ts = Date.parse(`${day.date}T12:00:00Z`);
+    if (Number.isFinite(ts) && ts < cutoff) continue;
+    byDate.set(day.date, day);
+  }
+  const days = [...byDate.values()]
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)))
+    .slice(0, Math.max(30, Number(CFG.retentionDays || 30)));
+  writeJSONAtomic(TOP_HISTORY_PATH, { generatedAt: today.generatedAt, days });
+}
+
 function cleanDailySnapshots() {
   fs.mkdirSync(DAILY_DIR, { recursive: true });
   const cutoff = NOW - RETENTION_MS;
@@ -817,9 +977,9 @@ function cleanDailySnapshots() {
 }
 
 async function main() {
-  const requestedVideo = String(process.env.SUMMARIZE_VIDEO_ID || "").trim();
-  if (requestedVideo) {
-    await summarizeOneVideo(requestedVideo);
+  const requestedItem = String(process.env.SUMMARIZE_ITEM_ID || process.env.SUMMARIZE_VIDEO_ID || "").trim();
+  if (requestedItem) {
+    await summarizeOneItem(requestedItem);
     return;
   }
 
@@ -960,6 +1120,7 @@ async function main() {
   });
   writeJSONAtomic(TODAY_PATH, today);
   writeJSONAtomic(path.join(DAILY_DIR, `${DATE_KEY}.json`), today);
+  updateTopHistory(today, merged);
   cleanDailySnapshots();
 
   log(`\nDone. ${kept.length} archived · ${newIds.size} new · ${ranking.length} ranked · ${geminiCalls} Gemini call(s).`);
@@ -979,5 +1140,6 @@ export {
   localScore,
   normalizeEditorial,
   parseFeed,
+  readableArticleText,
   stripHTML,
 };
