@@ -100,9 +100,11 @@ async function adapt_x_feed(src) {
 async function resolveChannelId(src) {
   if (src.channelId) return src.channelId;
   const handle = (src.handle || "").replace(/^@/, "");
-  const html = await getText("https://www.youtube.com/@" + handle);
-  const m = html.match(/"channelId":"(UC[\w-]+)"/) || html.match(/"externalId":"(UC[\w-]+)"/);
-  if (!m) throw new Error("could not resolve channelId for @" + handle);
+  const html = await getText("https://www.youtube.com/@" + handle + "?hl=en&gl=US", { Cookie: "CONSENT=YES+1" });
+  const m = html.match(/youtube\.com\/channel\/(UC[\w-]{22})/)
+    || html.match(/"channelId":"(UC[\w-]{22})"/)
+    || html.match(/"externalId":"(UC[\w-]{22})"/);
+  if (!m) throw new Error("could not resolve @" + handle + " — set channelId manually in sources.json");
   return m[1];
 }
 async function adapt_youtube(src, existingIds) {
