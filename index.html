@@ -67,7 +67,9 @@
   .sel .star{color:var(--pine)}
   .star svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6}
   .sel .star svg{fill:var(--pine);stroke:var(--pine)}
-  .who{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:5px}
+  .who{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:5px}
+  .avatar{width:22px;height:22px;border-radius:50%;position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;background:var(--pine-s);color:var(--pine);font-family:var(--mono);font-size:10px;font-weight:600;text-transform:uppercase}
+  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .handle{font-family:var(--mono);font-size:13px;color:var(--ink)}
   .name{color:var(--ink2);font-size:12.5px}
   .role{font-family:var(--mono);font-size:10.5px;color:var(--pine);background:var(--pine-s);padding:2px 7px;border-radius:5px}
@@ -214,9 +216,11 @@ function itemHTML(it){
   if(it.kind==="x"){
     const h=heat(it.likes), hb=h?`<div class="heat"><i style="width:${h[0]};background:${h[1]}"></i></div>`:"";
     const role=it.subtitle?`<span class="role">${esc(it.subtitle)}</span>`:"";
+    const handle=it.author.replace(/^@/,"");
+    const avatar=`<span class="avatar">${esc(handle[0]||"?")}<img src="https://unavatar.io/x/${esc(handle)}" alt="" loading="lazy" onerror="this.remove()"></span>`;
     return `<div class="item${sel}" data-id="${esc(it.id)}">
       <button class="star" aria-label="Add to shortlist">${STAR}</button>
-      <div><div class="who"><span class="handle">${esc(it.author)}</span>${role}${nb}<span class="time">${ago(it.ts)}</span></div>
+      <div><div class="who">${avatar}<span class="handle">${esc(it.author)}</span>${role}${nb}<span class="time">${ago(it.ts)}</span></div>
       <div class="body">${esc(it.text)}</div></div>
       <div class="meta">${hb}<span class="likes">${it.likes?it.likes.toLocaleString():""}</span><a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">open ↗</a></div></div>`;
   }
