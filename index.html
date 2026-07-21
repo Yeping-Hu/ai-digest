@@ -42,7 +42,7 @@
     .run-chip{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.65);color:var(--ink2);font:11px var(--mono);white-space:nowrap}
     .stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:15px}.stat b{font:600 20px var(--disp)}.stat span{margin-left:5px;color:var(--ink3);font:11px var(--mono)}
     .content{padding:4px 34px 70px;max-width:1500px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:26px 0 12px}.section-head h2{margin:0;font:600 18px var(--disp)}.section-head p{margin:0;color:var(--ink3);font:11px var(--mono)}
-    .top-tabs{display:inline-flex;gap:4px;margin-top:17px;padding:4px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.58)}.top-tabs button{border:0;background:transparent;padding:7px 12px;border-radius:8px;color:var(--ink3);cursor:pointer;font:600 11px var(--mono)}.top-tabs button.on{background:#fff;color:var(--pine);box-shadow:0 3px 10px rgba(24,32,25,.07)}
+    .top-tabs{display:inline-flex;gap:4px;margin-top:17px;padding:4px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.58)}.top-tabs[hidden]{display:none!important}.top-tabs button{border:0;background:transparent;padding:7px 12px;border-radius:8px;color:var(--ink3);cursor:pointer;font:600 11px var(--mono)}.top-tabs button.on{background:#fff;color:var(--pine);box-shadow:0 3px 10px rgba(24,32,25,.07)}
     .top-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.top-card{min-height:430px;padding:19px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);display:flex;flex-direction:column}
     .top-card.rank-1{border-color:#AFCDAE;background:linear-gradient(155deg,#fff 55%,#EDF5E9)}.top-head{display:flex;align-items:flex-start;gap:12px}.rank-badge{flex:0 0 51px;color:#C9D0C6;font:600 35px/1 var(--disp);letter-spacing:-.05em}.rank-1 .rank-badge{color:#93B990}.top-head .meta{padding-top:4px}
     .meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em}.chip{padding:4px 7px;border-radius:999px;background:var(--line2);color:var(--ink2)}.chip.official{background:var(--pine2);color:var(--pine)}.chip.independent{background:var(--blue2);color:#394CA3}.chip.curated{background:#F8EACB;color:#76561D}.chip.community{background:var(--line2);color:var(--ink2)}.score{font-weight:600;color:var(--orange)}
@@ -131,8 +131,17 @@
   function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
   function dateTime(ts){return new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(ts))}
   function ago(ts){const parsed=typeof ts==="number"?ts:Date.parse(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} min ago`;if(h<24)return `${Math.round(h)}h ago`;return `${Math.round(h/24)}d ago`}
-  function dayKey(ts){return new Date(ts).toISOString().slice(0,10)}
+  function timeValue(value){const parsed=typeof value==="number"?value:Date.parse(value);return Number.isFinite(parsed)?parsed:Date.now()}
+  function dayKey(ts){const d=new Date(timeValue(ts));return d.toISOString().slice(0,10)}
   function dayLabel(ts){const today=dayKey(Date.now()),yesterday=dayKey(Date.now()-864e5),key=dayKey(ts);if(key===today)return"Today";if(key===yesterday)return"Yesterday";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric"}).format(new Date(ts))}
+  function digestDate(){return state.today.date||dayKey(state.today.generatedAt||Date.now())}
+  function dailyNewIdSet(){
+    const date=digestDate(),ids=new Set(state.today.newIds||[]);
+    for(const item of state.items){if(item.firstSeen&&dayKey(item.firstSeen)===date)ids.add(item.id)}
+    return ids;
+  }
+  function dailyNewItems(){const ids=dailyNewIdSet();return state.items.filter(item=>ids.has(item.id))}
+  function archiveGroupTime(item,ids=dailyNewIdSet()){if(ids.has(item.id)){const parsed=Date.parse(`${digestDate()}T12:00:00Z`);if(Number.isFinite(parsed))return parsed}return timeValue(item.firstSeen||item.ts)}
   function formatHistoryDate(key){const d=new Date(`${key}T12:00:00Z`);return Number.isFinite(d.getTime())?new Intl.DateTimeFormat("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}).format(d):key}
   function youtubeThumb(item){try{const id=item.videoId||new URL(item.url).searchParams.get("v");return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:""}catch{return""}}
   function sourceTypeChip(item){const t=item.sourceType||"community";return `<span class="chip ${esc(t)}">${esc(typeLabel[t]||t)}</span>`}
@@ -175,10 +184,9 @@
   }
 
   function navDefinitions(){
-    const todayIds=new Set(state.today.newIds||[]);
     return [
       ["top","Today's Top",rankingEntries().length],
-      ["today","All New Today",todayIds.size],
+      ["today","All New Today",dailyNewItems().length],
       ["shortlist","My Shortlist",Object.keys(state.saved).length],
       ["all","All 30 Days",state.items.length],
     ];
@@ -196,16 +204,18 @@
   function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
-    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Every item found in the latest run, including those outside the ranking."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The complete rolling 30-day archive."]};
+    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Everything first added to the digest today, even when the original source was published earlier."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The rolling archive, grouped by the day each item entered this digest."]};
     const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"Browse one source."]:(labels[state.filter]||labels.top);
     $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
-    $("topTabs").hidden=state.filter!=="top";
+    const showTopTabs=state.filter==="top";
+    $("topTabs").hidden=!showTopTabs;
+    $("topTabs").style.display=showTopTabs?"":"none";
     $("topTabs").querySelectorAll("button").forEach(btn=>btn.classList.toggle("on",btn.dataset.topView===state.topView));
     const run=state.today.run||{};
     $("runChip").textContent=state.today.generatedAt?`Updated ${dateTime(state.today.generatedAt)} · ${run.usedGemini?"Gemini ranked":"Local ranking"}`:"Waiting for first run";
     $("synced").textContent=state.today.generatedAt?`synced ${ago(state.today.generatedAt)}`:"waiting for first run";
     $("stats").innerHTML=[
-      [state.today.newCount||0,"new today"],[rankingEntries().length,"ranked today"],[(state.today.ideas||[]).length,"content ideas"],[state.items.length,"30-day archive"]
+      [dailyNewItems().length,"new today"],[rankingEntries().length,"ranked today"],[(state.today.ideas||[]).length,"content ideas"],[state.items.length,"30-day archive"]
     ].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   }
 
@@ -253,7 +263,7 @@
 
   function filteredItems(){
     if(state.filter==="shortlist")return Object.values(state.saved).sort((a,b)=>(b.ts||0)-(a.ts||0));
-    if(state.filter==="today"){const ids=new Set(state.today.newIds||[]);return state.items.filter(x=>ids.has(x.id))}
+    if(state.filter==="today")return dailyNewItems();
     if(state.filter.startsWith("source:"))return state.items.filter(x=>(x.sourceGroup||x.source)===state.filter.slice(7));
     return state.items;
   }
@@ -274,7 +284,17 @@
     return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">↗</div><div class="item-body"><div class="meta">${itemMeta(item)}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}<div class="item-summary"><span class="content-label">${item.full?"Full summary":item.editorial?"Chinese summary":"Excerpt"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
   }
 
-  function renderList(){const list=filteredItems();if(!list.length)return `<div class="empty">Nothing here yet.</div>`;let html="",day="";const counts=new Map();for(const item of list){const key=dayKey(item.ts||Date.now());counts.set(key,(counts.get(key)||0)+1)}for(const item of list){const key=dayKey(item.ts||Date.now());if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(item.ts)}</span><span>${counts.get(key)}</span></div>`}html+=genericItem(item)}return html}
+  function renderList(){
+    const list=filteredItems();if(!list.length)return `<div class="empty">Nothing here yet.</div>`;
+    if(state.filter==="today")return `<div class="day"><span>Added Today</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`;
+    const todayIds=dailyNewIdSet();
+    const groupTime=item=>state.filter==="all"?archiveGroupTime(item,todayIds):timeValue(item.firstSeen||item.ts);
+    const ordered=[...list].sort((a,b)=>groupTime(b)-groupTime(a)||Number(b.ts||0)-Number(a.ts||0));
+    let html="",day="";const counts=new Map();
+    for(const item of ordered){const key=dayKey(groupTime(item));counts.set(key,(counts.get(key)||0)+1)}
+    for(const item of ordered){const time=groupTime(item),key=dayKey(time);if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(time)}</span><span>${counts.get(key)}</span></div>`}html+=genericItem(item)}
+    return html;
+  }
 
   function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
 
@@ -292,16 +312,36 @@
   $("compose").onclick=async()=>{const list=shortlistArray();if(!list.length)return;const text=`请基于以下英文 AI 信号，先做一次 blindspot pass，再给出 3 个适合 @Kelly的科研日常 的小红书选题。不要简单翻译新闻；每个选题说明目标读者、核心收获、主线案例、需要核实的事实和推荐视觉结构。\n\n${list.map((x,i)=>`${i+1}. ${x.title||x.text}\n来源：${x.source}\n链接：${x.url}\n摘要：${x.editorial?.summaryZh||x.summary||x.excerpt||x.text}\n推荐角度：${x.editorial?.rednoteAngleZh||""}`).join("\n\n")}`;await navigator.clipboard.writeText(text);toast("Post brief copied")};
   $("export").onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),items:shortlistArray()},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`ai-shortlist-${dayKey(Date.now())}.json`;a.click();URL.revokeObjectURL(a.href)};
 
+  function authHeaders(token){return {Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}}
+
+  async function validateOwnerToken(token){
+    const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/summarize-one.yml`,{headers:authHeaders(token),cache:"no-store"});
+    if(res.ok)return true;
+    const body=await res.text().catch(()=>"");
+    if(res.status===401)throw new Error("This token is invalid, expired, or revoked. Create a new fine-grained token and paste it here.");
+    if(res.status===403||res.status===404)throw new Error("The token cannot access this workflow. Give it access to Yeping-Hu/ai-digest with Actions: Read and write.");
+    throw new Error(`GitHub token check failed (${res.status})${body?`: ${body.slice(0,160)}`:""}`);
+  }
+
   function setupOwner(){
     const toggle=$("ownerToggle"),panel=$("ownerPanel"),input=$("githubToken"),save=$("saveToken"),clear=$("clearToken"),msg=$("ownerMsg");
-    function reflect(){const t=getToken();OWNER=Boolean(t);clear.hidden=!t;input.value="";input.placeholder=t?"token saved ✓ (paste again to replace)":"repo-scoped GitHub token";msg.textContent=t?"Owner mode is on. Full-summary buttons work in this browser and update automatically when the workflow finishes.":"Paste a fine-grained token for this repo (Actions: read & write). Stored only in this browser."}
+    function reflect(note=""){const t=getToken();OWNER=Boolean(t);clear.hidden=!t;input.value="";input.placeholder=t?"token verified ✓ (paste again to replace)":"fine-grained GitHub token";msg.textContent=note||(t?"Owner mode is on. The saved token was verified for this repo.":"Use a fine-grained token for Yeping-Hu/ai-digest with Actions: Read and write. Stored only in this browser.")}
     toggle.onclick=()=>{panel.hidden=!panel.hidden};
-    save.onclick=()=>{const value=input.value.trim();if(value)setToken(value);reflect();render()};
-    clear.onclick=()=>{setToken("");reflect();render()};
+    save.onclick=async()=>{const value=input.value.trim();if(!value){reflect("Paste a token first.");return}save.disabled=true;save.textContent="Checking…";msg.textContent="Checking the token with GitHub…";try{await validateOwnerToken(value);setToken(value);reflect("Token verified. Owner mode is ready.");render()}catch(err){setToken("");reflect(err.message)}finally{save.disabled=false;save.textContent="Save"}};
+    clear.onclick=()=>{setToken("");reflect("Saved token removed from this browser.");render()};
     reflect();
   }
 
-  async function dispatch(workflow,inputs={}){const token=getToken();if(!token)throw new Error("Set the owner token first");const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/${workflow}/dispatches`,{method:"POST",headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28","Content-Type":"application/json"},body:JSON.stringify({ref:REPO.branch,inputs})});if(!res.ok)throw new Error(`${res.status} ${await res.text()}`)}
+  async function dispatch(workflow,inputs={}){
+    const token=getToken();if(!token)throw new Error("Set and verify the owner token first.");
+    const res=await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}/actions/workflows/${workflow}/dispatches`,{method:"POST",headers:{...authHeaders(token),"Content-Type":"application/json"},body:JSON.stringify({ref:REPO.branch,inputs})});
+    if(res.ok)return;
+    const body=await res.text().catch(()=>"");
+    if(res.status===401){setToken("");OWNER=false;throw new Error("The saved token is invalid, expired, or revoked. Open Owner mode and save a new token.")}
+    if(res.status===403||res.status===404)throw new Error("The token is valid but cannot run this workflow. It needs repository access plus Actions: Read and write.");
+    if(res.status===422)throw new Error("The workflow input does not match the site. Apply the owner-mode compatibility hotfix, then try again.");
+    throw new Error(`GitHub returned ${res.status}${body?`: ${body.slice(0,220)}`:""}`);
+  }
 
   async function requestFullSummary(itemId,btn){
     const current=itemById(itemId);if(!current)return;const baseline=current.fullSummaryAt||"";btn.disabled=true;btn.textContent="Queuing…";

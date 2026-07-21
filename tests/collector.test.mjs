@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { canonicalizeURL, deduplicate, localScore, parseFeed, readableArticleText, stripHTML } from "../collect.mjs";
+import { canonicalizeURL, deduplicate, localScore, parseFeed, readableArticleText, stripHTML, utcDayKey } from "../collect.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const fixture = (name) => fs.readFileSync(path.join(here, "fixtures", name), "utf8");
@@ -12,6 +12,7 @@ assert.equal(
   "https://example.com/post",
 );
 assert.equal(stripHTML("<![CDATA[<p>Hello &amp; <b>world</b></p>]]>"), "Hello & world");
+assert.equal(utcDayKey("2026-07-21T23:59:59Z"), "2026-07-21");
 
 const article = readableArticleText(`<!doctype html><html><head><script type="application/ld+json">{"@type":"Article","articleBody":"This is a long article body about agent workflows, verification, and human oversight. ${"detail ".repeat(90)}"}</script></head><body><nav>noise</nav></body></html>`);
 assert.match(article, /agent workflows/);

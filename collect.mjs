@@ -64,6 +64,11 @@ function unique(values) {
   return [...new Set((values || []).filter(Boolean))];
 }
 
+function utcDayKey(value) {
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 10) : "";
+}
+
 function compactText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
@@ -879,7 +884,7 @@ function migrateAndMerge(existingItems, collectedItems) {
       summary: previous?.summary || incoming.summary || incoming.excerpt || "",
       editorial: previous?.editorial || null,
       full: Boolean(previous?.full || incoming.full),
-      firstSeen: previous?.firstSeen || NOW,
+      firstSeen: previous?.firstSeen || incoming.firstSeen || previous?.ts || NOW,
       sourceTags: unique([...(previous?.sourceTags || []), ...(incoming.sourceTags || [incoming.source])]),
     };
     merged.set(id, value);
@@ -1039,8 +1044,16 @@ async function main() {
     .filter((item) => NOW - Number(item.ts || item.firstSeen || NOW) < RETENTION_MS)
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
-  run.newItems = newIds.size;
-  const newItems = kept.filter((item) => newIds.has(item.id));
+  const previousDay = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), { newIds: [] });
+  const dailyNewIds = unique([
+    ...(previousDay.newIds || []),
+    ...kept.filter((item) => item.firstSeen && utcDayKey(item.firstSeen) === DATE_KEY).map((item) => item.id),
+    ...newIds,
+  ]).filter((id) => merged.has(id));
+  const dailyNewSet = new Set(dailyNewIds);
+  run.newItemsThisRun = newIds.size;
+  run.newItems = dailyNewIds.length;
+  const newItems = kept.filter((item) => dailyNewSet.has(item.id));
   const fallbackCutoff = NOW - Math.max(1, Number(EDIT.fallbackWindowHours || 48)) * 36e5;
   const pool = [...newItems];
   if (pool.length < Number(EDIT.topPrimary || 3)) {
@@ -1104,8 +1117,8 @@ async function main() {
   const today = {
     generatedAt: run.finishedAt,
     date: DATE_KEY,
-    newCount: newIds.size,
-    newIds: [...newIds],
+    newCount: dailyNewIds.length,
+    newIds: dailyNewIds,
     topIds: ranking.filter((entry) => entry.tier === "top").map((entry) => entry.id),
     scanIds: ranking.filter((entry) => entry.tier === "scan").map((entry) => entry.id),
     ranking,
@@ -1123,7 +1136,7 @@ async function main() {
   updateTopHistory(today, merged);
   cleanDailySnapshots();
 
-  log(`\nDone. ${kept.length} archived · ${newIds.size} new · ${ranking.length} ranked · ${geminiCalls} Gemini call(s).`);
+  log(`\nDone. ${kept.length} archived · ${newIds.size} new this run · ${dailyNewIds.length} new today · ${ranking.length} ranked · ${geminiCalls} Gemini call(s).`);
 }
 
 const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -1136,6 +1149,7 @@ if (isDirectRun) {
 
 export {
   canonicalizeURL,
+  utcDayKey,
   deduplicate,
   localScore,
   normalizeEditorial,
