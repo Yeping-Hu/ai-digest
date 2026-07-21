@@ -97,6 +97,18 @@
   .stext.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .more{background:none;border:0;color:var(--pine);font-family:var(--mono);font-size:11px;cursor:pointer;padding:7px 0 0;font-weight:500}
   .more:hover{text-decoration:underline}
+  .owner{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  .ownerToggle{background:none;border:0;color:var(--ink3);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;padding:2px 0}
+  .ownerToggle:hover{color:var(--pine)}
+  .ownerPanel{margin-top:10px;display:flex;flex-direction:column;gap:7px}
+  .ownerPanel input{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px;font-family:var(--mono);font-size:11px;background:var(--card);color:var(--ink)}
+  .ownerPanel button{border:1px solid var(--line);background:var(--card);border-radius:7px;padding:7px 10px;font-size:12px;cursor:pointer;font-family:var(--body);color:var(--ink2);flex:1}
+  .ownerPanel button:hover{border-color:var(--pine);color:var(--pine)}
+  .ownerHint{font-size:10.5px;color:var(--ink3);line-height:1.5}
+  .getfull{margin-top:10px;background:var(--pine-s);color:var(--pine);border:0;border-radius:8px;padding:8px 13px;font-family:var(--body);font-weight:600;font-size:12.5px;cursor:pointer}
+  .getfull:hover{background:#DCE7E1}
+  .getfull:disabled{opacity:.65;cursor:default}
+  .fullbadge{color:var(--pine);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--pine-s);padding:2px 6px;border-radius:5px;margin-left:2px}
   .loading{padding:60px 30px;color:var(--ink3);font-family:var(--mono);font-size:13px}
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13px;padding:10px 18px;border-radius:100px;opacity:0;transition:.25s;pointer-events:none;font-weight:500}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -126,6 +138,14 @@
       <button class="btn export" id="export">Export shortlist</button>
       <div class="note"><b>Picks saved in this browser</b> — they stay after refresh, and after items leave the feed. Export any time for a permanent copy.</div>
     </div>
+    <div class="owner">
+      <button class="ownerToggle" id="ownerToggle">⚙ Owner mode</button>
+      <div class="ownerPanel" id="ownerPanel" hidden>
+        <input id="ghToken" type="password" placeholder="repo-scoped GitHub token">
+        <div style="display:flex;gap:6px"><button id="ghSave">Save</button><button id="ghClear" hidden>Turn off</button></div>
+        <div class="ownerHint" id="ownerHint"></div>
+      </div>
+    </div>
   </aside>
   <main class="main">
     <div class="top">
@@ -141,7 +161,7 @@
 const SEED={items:[
   {id:"x:1",kind:"x",source:"Builders",author:"@trq212",subtitle:"Thariq · Claude Code at Anthropic",text:"HTML is the new markdown. I’ve stopped writing markdown files for almost everything and switched to having Claude Code generate HTML for me — here’s why.",url:"#",ts:Date.now()-2*3600e3,likes:8721},
   {id:"x:2",kind:"x",source:"Builders",author:"@alexalbert__",subtitle:"Alex Albert · Research at Anthropic",text:"An early Claude Mythos Preview snapshot we gave METR has a time horizon more than 2× the next best model on their 80% success-rate benchmark.",url:"#",ts:Date.now()-5*3600e3,likes:880},
-  {id:"yt:1EZdpEhwmNc",kind:"youtube",source:"AI Engineer",author:"AI Engineer",title:"Through the AI Fog: The Architectural Decision Agentic Security Depends On — Manoj Nair, Snyk",url:"https://www.youtube.com/watch?v=1EZdpEhwmNc",ts:Date.now()-3*3600e3,likes:0,summary:"Frontier models are inconsistent at catching the same vulnerability across repeated runs, and a plain deterministic checker missed a meaningful share of issues. The talk argues security for agentic systems has to be an architectural decision, not a bolt-on, and lays out where verification belongs in the stack."},
+  {id:"yt:1EZdpEhwmNc",kind:"youtube",source:"AI Engineer",author:"AI Engineer",full:false,title:"Through the AI Fog: The Architectural Decision Agentic Security Depends On — Manoj Nair, Snyk",url:"https://www.youtube.com/watch?v=1EZdpEhwmNc",ts:Date.now()-3*3600e3,likes:0,summary:"这场演讲指出，即使是尚未公开的前沿模型，在重复检测同一个安全漏洞时也很不稳定，多次运行往往只有一半能发现问题；而仅靠确定性的检查器，最多也只能覆盖约四分之三的漏洞。讲者认为，面向智能体系统的安全必须作为一项架构决策来设计，而不是事后附加，并说明了验证环节应该放在技术栈中的哪个位置。"},
   {id:"x:3",kind:"x",source:"Builders",author:"@AmandaAskell",subtitle:"Amanda Askell · Ethics at Anthropic",text:"Alignment research often focuses on averting concerning behaviors, but the positive vision is training that gives models an honest, positive sense of what AI can be.",url:"#",ts:Date.now()-6*3600e3,likes:394},
   {id:"x:4",kind:"x",source:"Builders",author:"@levie",subtitle:"Aaron Levie · CEO of Box",text:"Token budgeting is becoming a real enterprise topic. As agents run longer tasks and use more compute, allocating tokens across teams becomes genuine resource planning.",url:"#",ts:Date.now()-7*3600e3,likes:328},
   {id:"x:5",kind:"x",source:"Builders",author:"@garrytan",subtitle:"Garry Tan · CEO of Y Combinator",text:"1M-token context with a usable coding agent, all on a 128GB MacBook Pro. Downloading now 🤯",url:"#",ts:Date.now()-27*3600e3,likes:301},
@@ -151,7 +171,8 @@ const SEED={items:[
 const store={mem:{},get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return this.mem[k]??d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){this.mem[k]=v}}};
 const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const $=id=>document.getElementById(id);
-let saved=store.get("shortlist",{}), lastVisit=store.get("lastVisit",0), items=[], filter="all";
+const OWNER_REPO="Yeping-Hu/ai-digest";
+let saved=store.get("shortlist",{}), lastVisit=store.get("lastVisit",0), items=[], filter="all", OWNER=!!store.get("gh_token","");
 
 function heat(l){if(l>1000)return["100%","var(--heat-hi)"];if(l>100)return["55%","var(--heat-mid)"];if(l>0)return["28%","var(--heat-lo)"];return null;}
 function ago(ts){const m=(Date.now()-ts)/60000;if(m<60)return Math.max(1,Math.round(m))+"m";if(m<1440)return Math.round(m/60)+"h";return Math.round(m/1440)+"d";}
@@ -182,11 +203,13 @@ function itemHTML(it){
   const thumb=yt?`<a class="thumb" href="${esc(it.url)}" target="_blank" rel="noopener" style="background-image:url('https://img.youtube.com/vi/${esc(vid)}/hqdefault.jpg')"><span class="play"></span></a>`:"";
   const titleTag=yt?`<a class="vtitle" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>`:`<div class="vtitle">${esc(it.title)}</div>`;
   const watch=yt?` · <a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">watch ↗</a>`:"";
+  const badge=yt&&it.full?`<span class="fullbadge">✓ full summary</span>`:"";
+  const getbtn=yt&&OWNER&&!it.full?`<button class="getfull" data-vid="${esc(vid)}">Get full summary</button>`:"";
   return `<div class="card${yt?"":" noimg"}${sel}" data-id="${esc(it.id)}"${match(it)?"":' style="display:none"'}>
     <button class="star" aria-label="Add to shortlist">${STAR}</button>${thumb}
-    <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}</div>
+    <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}${badge}</div>
     ${titleTag}<div class="vchan">${esc(it.author)} · ${ago(it.ts)} ago${watch}</div>
-    <div class="summary"><b>AI summary</b><span class="stext clamp">${esc(it.summary||"")}</span></div><button class="more" hidden>Show more</button></div></div>`;
+    <div class="summary"><b>AI summary</b><span class="stext clamp">${esc(it.summary||"")}</span></div><button class="more" hidden>Show more</button>${getbtn}</div></div>`;
 }
 
 function render(){
@@ -215,6 +238,7 @@ function render(){
     if(txt.scrollHeight>txt.clientHeight+2)btn.hidden=false;
     btn.addEventListener("click",()=>{txt.classList.toggle("clamp");btn.textContent=txt.classList.contains("clamp")?"Show more":"Show less";});
   });
+  stream.querySelectorAll(".getfull").forEach(b=>b.addEventListener("click",()=>getFull(b.dataset.vid,b)));
 }
 function snapshot(id){const it=items.find(i=>i.id===id)||{};return{author:it.author,text:it.text||it.title,url:it.url};}
 function updateBasket(){const n=Object.keys(saved).length;$("count").innerHTML=n+' <span>picked</span>';
@@ -252,6 +276,37 @@ $("export").addEventListener("click",()=>{
   const txt=lines.length?`My RedNote shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
   (navigator.clipboard?.writeText(txt)||Promise.reject()).then(()=>{const t=$("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}).catch(()=>{});
 });
+function setupOwner(){
+  const toggle=$("ownerToggle"),panel=$("ownerPanel"),input=$("ghToken"),save=$("ghSave"),clr=$("ghClear"),hint=$("ownerHint");
+  function reflect(){
+    const t=store.get("gh_token","");OWNER=!!t;clr.hidden=!t;input.value="";
+    input.placeholder=t?"token saved ✓ (paste again to replace)":"repo-scoped GitHub token";
+    hint.textContent=t
+      ?"Owner mode on. 'Get full summary' buttons are visible and work only in this browser."
+      :"Paste a fine-grained token scoped to this repo (Actions: read & write). Stored only in this browser, never on the page.";
+  }
+  toggle.addEventListener("click",()=>{panel.hidden=!panel.hidden;});
+  save.addEventListener("click",()=>{const v=input.value.trim();if(v)store.set("gh_token",v);reflect();render();});
+  clr.addEventListener("click",()=>{try{localStorage.removeItem("gh_token")}catch(e){store.mem["gh_token"]="";}reflect();render();});
+  reflect();
+}
+async function getFull(vid,btn){
+  const token=store.get("gh_token","");
+  if(!token){btn.textContent="Set owner token first";return;}
+  btn.disabled=true;btn.textContent="Summarizing…";
+  try{
+    const r=await fetch(`https://api.github.com/repos/${OWNER_REPO}/actions/workflows/summarize-one.yml/dispatches`,{
+      method:"POST",
+      headers:{"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28"},
+      body:JSON.stringify({ref:"main",inputs:{videoId:vid}})
+    });
+    if(r.status===204)btn.textContent="Working… refresh in ~2 min";
+    else if(r.status===401||r.status===403){btn.textContent="Token rejected";btn.disabled=false;}
+    else if(r.status===404){btn.textContent="Workflow not found";btn.disabled=false;}
+    else{btn.textContent="Error "+r.status;btn.disabled=false;}
+  }catch(e){btn.textContent="Network error";btn.disabled=false;}
+}
+setupOwner();
 load();
 </script>
 </body>

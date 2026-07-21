@@ -1,5 +1,6 @@
 {
   "retentionDays": 30,
+  "summaryLang": "zh",
   "sources": [
     {
       "type": "x-feed",
@@ -12,13 +13,14 @@
       "name": "AI Engineer",
       "handle": "@aiDotEngineer",
       "channelId": "",
-      "transcript": true,
+      "transcript": false,
       "enabled": true
     }
   ],
   "_howToAdd": {
-    "youtube": "Add { \"type\": \"youtube\", \"name\": \"Channel Name\", \"channelId\": \"UCxxxx\", \"transcript\": true }. Find channelId by opening the channel page, View Source, and searching for \"channelId\". Set transcript:false to save Supadata credits (uses the video description instead).",
-    "blog": "Add { \"type\": \"blog\", \"name\": \"Blog Name\", \"url\": \"https://site.com/feed\" }. Most blogs expose an RSS/Atom feed at /feed, /rss, or /atom.xml.",
-    "x": "Zara's feed is a fixed list of 26 builders. Following someone NOT on that list needs a paid X API + a new adapter — ask Claude."
+    "summaryLang": "Set to 'zh' for Chinese, 'en' for English, or 'bilingual' for both. Applies to video and blog summaries (tweets are shown as-is).",
+    "youtube": "Add { \"type\": \"youtube\", \"name\": \"Channel\", \"channelId\": \"UCxxxx\", \"transcript\": false }. transcript:false = free description summary by default; use the 'Get full summary' button in owner mode to spend a Supadata credit on the ones you pick.",
+    "blog": "Add { \"type\": \"blog\", \"name\": \"Blog\", \"url\": \"https://site.com/feed\" }.",
+    "x": "Zara's feed is a fixed list of 26 builders. A new X handle needs a paid X API + a new adapter — ask Claude."
   }
 }
