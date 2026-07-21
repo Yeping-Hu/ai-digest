@@ -55,10 +55,10 @@ function buildPrompt(kind, title, body, full) {
   const b = truncateWords(body, full ? 15000 : 4000);
   if (full) {
     if (LANG === "zh")
-      return `请阅读下面这个${kind}的完整文字记录，写一份详细、忠于原文的简体中文总结，让读者不用观看也能掌握其内容。先用一两句话概括核心主旨，然后另起一行，用要点列表列出主要观点、论据、结论或步骤——每个要点单独一行、以「• 」开头，可以写 5-12 个要点。信息要具体（包含关键数字、例子、结论）。直接输出正文，不要开场白，不要使用 markdown 标题或代码块。\n\n标题：${title}\n\n文字记录：${b}`;
+      return `请阅读下面这个${kind}的完整文字记录，写一份详细、忠于原文的简体中文总结，让读者不用观看也能掌握其内容。以连贯的段落为主进行叙述（可以分成几段），只有在列举多个并列的要点、步骤或清单时才使用要点列表（每行以「• 」开头）。内容要具体，包含关键论点、数字和例子。直接输出正文，不要开场白，不要使用 markdown 标题或代码块。\n\n标题：${title}\n\n文字记录：${b}`;
     if (LANG === "bilingual")
-      return `Read the full transcript below and write a detailed, faithful summary — in English first, then the same in Simplified Chinese. For each: one or two sentences of overall takeaway, then a bullet list of the main points, arguments, or steps (each bullet on its own line starting with "• ", 5-12 bullets, specific with key numbers and examples). No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
-    return `Read the full transcript below and write a detailed, faithful summary so someone can grasp the talk without watching. Start with one or two sentences of overall takeaway, then a bullet list of the main points, arguments, conclusions, or steps — each bullet on its own line starting with "• ", 5-12 bullets, specific with key numbers and examples. No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
+      return `Read the full transcript below and write a detailed, faithful summary — in English first, then the same in Simplified Chinese. Write it mainly as flowing paragraphs; use a bullet list (each line starting with "• ") only where it genuinely helps, i.e. when enumerating several parallel points, steps, or items. Be specific with key arguments, numbers, and examples. No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
+    return `Read the full transcript below and write a detailed, faithful summary so someone can grasp the talk without watching. Write it mainly as flowing paragraphs (a few paragraphs is fine); use a bullet list (each line starting with "• ") only where it genuinely helps — i.e. when enumerating several parallel points, steps, or items. Be detailed and specific with key arguments, numbers, and examples. No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
   }
   if (LANG === "zh")
     return `请用2-3句简体中文，总结下面这个${kind}的核心内容，帮助读者快速判断是否值得花时间。直接给出总结，不要任何开场白，不要使用 markdown。\n\n标题：${title}\n\n内容：${b}`;
@@ -139,14 +139,19 @@ async function summarize(kind, title, body, fallbackEn, full) {
   catch (e) { log("  summarize fallback (English):", e.message); return fallback; }
 }
 
-// ---- transcript (Supadata, optional) ----
+// ---- transcript (Supadata, optional). Saved in the repo so re-summarizing costs no credit. ----
+const TRANSCRIPT_DIR = "data/transcripts";
 async function transcript(videoId) {
+  const cacheFile = `${TRANSCRIPT_DIR}/${videoId}.txt`;
+  try { const cached = fs.readFileSync(cacheFile, "utf8"); if (cached.trim()) { log("  transcript: reused saved copy (no credit)"); return cached; } } catch {}
   if (!SUPADATA_KEY) return "";
   try {
     const d = await getJSON(`https://api.supadata.ai/v1/youtube/transcript?videoId=${videoId}`, { "x-api-key": SUPADATA_KEY });
-    if (Array.isArray(d?.content)) return d.content.map((s) => s.text).join(" ");
-    if (typeof d?.content === "string") return d.content;
-    return "";
+    let text = "";
+    if (Array.isArray(d?.content)) text = d.content.map((s) => s.text).join(" ");
+    else if (typeof d?.content === "string") text = d.content;
+    if (text.trim()) { fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true }); fs.writeFileSync(cacheFile, text); }
+    return text;
   } catch (e) { log("  transcript failed:", e.message); return ""; }
 }
 
