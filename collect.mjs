@@ -9,7 +9,7 @@ const ARCHIVE_PATH = "data/archive.json";
 const GEMINI_KEY = process.env.GEMINI_API_KEY || "";
 const SUPADATA_KEY = process.env.SUPADATA_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
-const YT_KEY = process.env.YOUTUBE_API_KEY || process.env.GEMINI_API_KEY || "";  // YouTube Data API v3
+const YT_KEY = process.env.YOUTUBE_API_KEY || "";  // must be a YouTube Data API v3 key (a Gemini/AI Studio key does NOT work here)
 const LANG = (CFG.summaryLang || "en").toLowerCase();  // "en" | "zh" | "bilingual"
 const RETENTION = (CFG.retentionDays || 30) * 864e5;
 const UA = "Mozilla/5.0 (compatible; ai-digest/1.0)";
@@ -114,7 +114,7 @@ async function ytUploadsPlaylist(src) {
   return up;
 }
 async function adapt_youtube(src, existingIds) {
-  if (!YT_KEY) throw new Error("no YouTube API key — set the YOUTUBE_API_KEY secret (or enable YouTube Data API v3 on your Gemini key's project)");
+  if (!YT_KEY) throw new Error("no YouTube API key — add a YOUTUBE_API_KEY secret (a YouTube Data API v3 key from Google Cloud)");
   const playlist = await ytUploadsPlaylist(src);
   const d = await getJSONSafe(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=${playlist}&key=${YT_KEY}`);
   const out = [];
