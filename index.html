@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signal Desk — AI Builders Digest</title>
+<title>AI Signal Desk — AI Builders Digest</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -152,14 +152,14 @@
 <body>
 <div class="app">
   <aside class="rail">
-    <div class="brand"><svg class="brandmark" viewBox="10 14 44 42" width="24" height="23" aria-hidden="true"><rect x="15" y="19" width="27" height="8" rx="4" fill="#1D4A38"/><circle cx="49" cy="23" r="4.4" fill="#BD5A34"/><rect x="15" y="30.5" width="34" height="8" rx="4" fill="#1D4A38"/><rect x="15" y="42" width="22" height="8" rx="4" fill="#1D4A38" opacity="0.42"/></svg><span><b>SIGNAL</b> DESK</span></div>
+    <div class="brand"><svg class="brandmark" viewBox="10 14 44 42" width="24" height="23" aria-hidden="true"><rect x="15" y="19" width="27" height="8" rx="4" fill="#1D4A38"/><circle cx="49" cy="23" r="4.4" fill="#BD5A34"/><rect x="15" y="30.5" width="34" height="8" rx="4" fill="#1D4A38"/><rect x="15" y="42" width="22" height="8" rx="4" fill="#1D4A38" opacity="0.42"/></svg><span><b>AI SIGNAL</b> DESK</span></div>
     <div class="status"><span class="dot"></span><span id="synced">loading…</span></div>
     <h4>Sources</h4>
     <div id="sources"></div>
     <h4>Filter</h4>
     <div class="filters" id="filters"></div>
     <div class="basket">
-      <div class="k">RedNote shortlist</div>
+      <div class="k">Shortlist</div>
       <div class="v" id="count">0 <span>picked</span></div>
       <button class="btn compose" id="compose" disabled>Compose post</button>
       <button class="btn export" id="export">Export shortlist</button>
@@ -176,7 +176,7 @@
   </aside>
   <main class="main">
     <div class="top">
-      <h1>Today’s signal</h1>
+      <h1>Today’s AI signal</h1>
       <div class="sub" id="sub">feed keeps the last 30 days</div>
       <div class="stats" id="stats"></div>
     </div>
@@ -309,7 +309,7 @@ async function load(){
 }
 $("export").addEventListener("click",()=>{
   const lines=Object.values(saved).map(s=>`• ${s.author}: ${s.text||s.title||""}${s.url&&s.url!=="#"?"  "+s.url:""}`);
-  const txt=lines.length?`My RedNote shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
+  const txt=lines.length?`My shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
   (navigator.clipboard?.writeText(txt)||Promise.reject()).then(()=>{const t=$("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}).catch(()=>{});
 });
 function setupOwner(){
