@@ -245,7 +245,9 @@ function parseFeed(xml, src) {
 
     const rawDate = stripHTML(tagValue(block, ["published", "pubDate", "updated", "date"]));
     const parsedDate = Date.parse(rawDate);
-    const ts = Number.isFinite(parsedDate) ? parsedDate : NOW;
+    // Preserve the source's publication date. A missing/invalid feed date must not
+    // masquerade as "published today" merely because we fetched it today.
+    const ts = Number.isFinite(parsedDate) ? parsedDate : null;
     const rawContent = tagValue(block, ["encoded", "content", "description", "summary"]);
     const fullFeedText = stripHTML(rawContent);
     const excerpt = truncateChars(fullFeedText, Number(src.excerptChars || 1600));
@@ -408,7 +410,10 @@ function mergeDuplicate(left, right) {
     categories: unique([...(left.categories || []), ...(right.categories || [])]),
     excerpt: winner.excerpt || other.excerpt || "",
     summary: winner.summary || other.summary || "",
-    ts: Math.max(Number(left.ts || 0), Number(right.ts || 0)),
+    ts: (() => {
+      const values = [left.ts, right.ts].map(Number).filter((value) => Number.isFinite(value) && value > 0);
+      return values.length ? Math.max(...values) : null;
+    })(),
     likes: Math.max(Number(left.likes || 0), Number(right.likes || 0)),
     views: Math.max(Number(left.views || 0), Number(right.views || 0)),
   };
@@ -458,7 +463,8 @@ function localScore(item) {
   score += sourceBonus;
   reasons.push(`${sourceType} source +${sourceBonus}`);
 
-  const hours = Math.max(0, (NOW - Number(item.ts || NOW)) / 36e5);
+  const publishedTs = Number(item.ts);
+  const hours = Number.isFinite(publishedTs) && publishedTs > 0 ? Math.max(0, (NOW - publishedTs) / 36e5) : Infinity;
   const freshness = hours <= 24 ? 15 : hours <= 48 ? 12 : hours <= 96 ? 8 : hours <= 168 ? 4 : 0;
   score += freshness;
   if (freshness) reasons.push(`fresh +${freshness}`);
@@ -542,7 +548,7 @@ function buildEditorialPrompt(candidates) {
     id: item.id,
     source: item.source,
     sourceType: item.sourceType,
-    publishedAt: new Date(item.ts || NOW).toISOString(),
+    publishedAt: Number.isFinite(Number(item.ts)) && Number(item.ts) > 0 ? new Date(Number(item.ts)).toISOString() : null,
     title: item.title || truncateChars(item.text, 160),
     excerpt: truncateChars(item.excerpt || item.text || item.summary, 1000),
     localScore: local.score,

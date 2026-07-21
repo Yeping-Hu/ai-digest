@@ -55,6 +55,7 @@
     .idea-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.idea{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff}.idea .eyebrow{color:var(--orange);font:600 10px var(--mono);letter-spacing:.12em;text-transform:uppercase}.idea h3{margin:9px 0 8px;font:600 18px/1.2 var(--disp)}.idea p{margin:0;color:var(--ink2);font-size:13px}.idea .why{margin-top:10px;color:var(--ink3);font-size:12px}
     .history-day{margin-top:27px}.history-day-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}.history-day-head h2{margin:0;font:600 17px var(--disp)}.history-day-head span{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px}.history-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.history-card{padding:15px;border:1px solid var(--line);border-radius:14px;background:#fff;display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px}.history-card .history-rank{font:600 27px var(--disp);color:#C4CBC2}.history-card h3{margin:4px 0 7px;font:600 16px/1.25 var(--disp)}.history-card .history-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
     .day{display:flex;align-items:center;gap:10px;margin:26px 0 7px}.day span:first-child{font:600 10px var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}.day span:last-child{font:10px var(--mono);color:var(--ink3);background:var(--line2);padding:2px 7px;border-radius:999px}
+    .archive-outline{display:grid;gap:10px;margin-top:18px}.archive-day{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.58)}.archive-day[open]{background:#fff;box-shadow:0 10px 30px rgba(24,32,25,.06)}.archive-day summary{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;list-style:none;user-select:none}.archive-day summary::-webkit-details-marker{display:none}.archive-day summary::before{content:"";width:8px;height:8px;flex:0 0 auto;border-right:2px solid var(--pine);border-bottom:2px solid var(--pine);transform:rotate(-45deg);transition:transform .16s ease}.archive-day[open] summary::before{transform:rotate(45deg)}.archive-date{font:600 15px/1.2 var(--disp);letter-spacing:-.01em}.archive-date small{display:block;margin-top:3px;color:var(--ink3);font:10px var(--mono);letter-spacing:.04em}.archive-count{margin-left:auto;padding:3px 8px;border-radius:999px;background:var(--line2);color:var(--ink3);font:10px var(--mono);white-space:nowrap}.archive-items{padding:0 16px 10px;border-top:1px solid var(--line2)}.archive-day:not([open]) .archive-items{display:none}.archive-day.unknown-date{opacity:.84}
     .item{position:relative;padding:15px 3px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:13px}.kind-icon{width:27px;height:27px;border-radius:8px;background:var(--pine2);display:grid;place-items:center;color:var(--pine);font:600 10px var(--mono)}.item-body h3{margin:3px 0 7px;font:600 17px/1.27 var(--disp)}.item-body .text{color:var(--ink2);font-size:14px;white-space:pre-wrap}.content-label{display:block;margin-bottom:5px;color:var(--pine);font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}.item-body .item-summary{margin-top:9px;color:var(--ink2);font-size:13px}.item-meta{margin-top:9px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--ink3);font:10px var(--mono)}.item-side{display:flex;gap:7px;align-items:start}.rank-mini{padding:4px 7px;border-radius:999px;background:var(--orange2);color:#9E4928;font:600 10px var(--mono)}
     .x-item{grid-template-columns:32px minmax(0,1fr) auto}.x-item .kind-icon{padding:0;background:transparent}.x-item .x-avatar{width:29px;height:29px}.x-who{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.x-handle{font:600 12px var(--mono);color:var(--ink)}.x-role{font:10px var(--mono);color:var(--pine);background:var(--pine2);padding:2px 6px;border-radius:5px;text-transform:none;letter-spacing:0}
     .video-card{position:relative;margin:12px 0;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;display:grid;grid-template-columns:210px minmax(0,1fr) auto;gap:16px}.thumb{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--line2)}.thumb img{width:100%;height:100%;object-fit:cover}.video-card h3{margin:4px 0 8px;font:600 18px/1.25 var(--disp)}
@@ -63,7 +64,7 @@
     .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
     .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
     @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.top-card:last-child,.idea:last-child{grid-column:1/-1}.video-card{grid-template-columns:160px minmax(0,1fr) auto}}
-    @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.nav button{justify-content:center;font-size:12px;border:1px solid var(--line)}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:15px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.rank-list,.idea-grid,.history-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.item-side{position:absolute;right:18px;top:14px}.item{grid-template-columns:28px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}.top-tabs{width:100%}.top-tabs button{flex:1}.history-card{grid-template-columns:40px 1fr}}
+    @media(max-width:760px){.app{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:16px}.rail h3,.source-list,.small-note{display:none}.nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.nav button{justify-content:center;font-size:12px;border:1px solid var(--line)}.shortlist-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0;border:0;background:transparent}.shortlist-box .label,.shortlist-box .small-note{display:none}.shortlist-box .number{font-size:15px;margin:0}.shortlist-box .btn{width:auto;margin:0}.owner{margin-top:10px}.topbar{padding:17px 15px 9px}.topbar-row{display:block}.run-chip{display:inline-block;margin-top:8px}.content{padding:2px 14px 50px}.top-grid,.rank-list,.idea-grid,.history-grid{grid-template-columns:1fr}.top-card:last-child,.idea:last-child{grid-column:auto}.top-card{min-height:0}.video-card{grid-template-columns:1fr}.thumb{width:100%}.video-card>.item-side{position:absolute;right:18px;top:14px}.item{grid-template-columns:28px 1fr}.item-side{grid-column:2}.stats{gap:13px}.section-head{display:block}.section-head p{margin-top:4px}.top-tabs{width:100%}.top-tabs button{flex:1}.history-card{grid-template-columns:40px 1fr}.archive-day summary{padding:13px 14px}.archive-items{padding:0 12px 8px}.archive-date{font-size:14px}}
     @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   </style>
 </head>
@@ -130,19 +131,29 @@
   function setToken(value){if(value){localStorage.setItem("gh_token",value);localStorage.removeItem("ai-signal-gh-token")}else{localStorage.removeItem("gh_token");localStorage.removeItem("ai-signal-gh-token")}OWNER=Boolean(value)}
   function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
   function dateTime(ts){return new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}).format(new Date(ts))}
-  function ago(ts){const parsed=typeof ts==="number"?ts:Date.parse(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} min ago`;if(h<24)return `${Math.round(h)}h ago`;return `${Math.round(h/24)}d ago`}
-  function timeValue(value){const parsed=typeof value==="number"?value:Date.parse(value);return Number.isFinite(parsed)?parsed:Date.now()}
-  function dayKey(ts){const d=new Date(timeValue(ts));return d.toISOString().slice(0,10)}
-  function dayLabel(ts){const today=dayKey(Date.now()),yesterday=dayKey(Date.now()-864e5),key=dayKey(ts);if(key===today)return"Today";if(key===yesterday)return"Yesterday";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric"}).format(new Date(ts))}
-  function digestDate(){return state.today.date||dayKey(state.today.generatedAt||Date.now())}
-  function dailyNewIdSet(){
-    const date=digestDate(),ids=new Set(state.today.newIds||[]);
-    for(const item of state.items){if(item.firstSeen&&dayKey(item.firstSeen)===date)ids.add(item.id)}
-    return ids;
+  function parseTime(value){
+    if(typeof value==="number")return Number.isFinite(value)?value:NaN;
+    const raw=String(value??"").trim();
+    if(!raw)return NaN;
+    const dateOnly=raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(dateOnly){const local=new Date(Number(dateOnly[1]),Number(dateOnly[2])-1,Number(dateOnly[3]),12,0,0,0);return local.getTime()}
+    const parsed=Date.parse(raw);return Number.isFinite(parsed)?parsed:NaN;
   }
-  function dailyNewItems(){const ids=dailyNewIdSet();return state.items.filter(item=>ids.has(item.id))}
-  function archiveGroupTime(item,ids=dailyNewIdSet()){if(ids.has(item.id)){const parsed=Date.parse(`${digestDate()}T12:00:00Z`);if(Number.isFinite(parsed))return parsed}return timeValue(item.firstSeen||item.ts)}
-  function formatHistoryDate(key){const d=new Date(`${key}T12:00:00Z`);return Number.isFinite(d.getTime())?new Intl.DateTimeFormat("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}).format(d):key}
+  function ago(ts){const parsed=parseTime(ts);const time=Number.isFinite(parsed)?parsed:Date.now();const h=Math.max(0,(Date.now()-time)/36e5);if(h<1)return `${Math.max(1,Math.round(h*60))} min ago`;if(h<24)return `${Math.round(h)}h ago`;return `${Math.round(h/24)}d ago`}
+  function timeValue(value){const parsed=parseTime(value);return Number.isFinite(parsed)?parsed:Date.now()}
+  function dayKey(ts){const d=new Date(timeValue(ts));const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`}
+  function shiftedDayKey(days){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);return dayKey(d)}
+  function dayLabel(ts){const key=dayKey(ts);if(key===shiftedDayKey(0))return"Today";if(key===shiftedDayKey(-1))return"Yesterday";return new Intl.DateTimeFormat("en-US",{month:"long",day:"numeric",year:"numeric"}).format(new Date(timeValue(ts)))}
+  function publishedTime(item){for(const value of [item?.ts,item?.publishedAt,item?.published,item?.date]){const parsed=parseTime(value);if(Number.isFinite(parsed))return parsed}return NaN}
+  function publishedDayKey(item){const ts=publishedTime(item);return Number.isFinite(ts)?dayKey(ts):""}
+  function dailyNewItems(){const today=shiftedDayKey(0);return state.items.filter(item=>publishedDayKey(item)===today).sort((a,b)=>publishedTime(b)-publishedTime(a))}
+  function formatDateKey(key,{weekday=false}={}){if(!/^\d{4}-\d{2}-\d{2}$/.test(String(key||"")))return"Unknown publication date";const [y,m,d]=key.split("-").map(Number);const local=new Date(y,m-1,d,12,0,0,0);return new Intl.DateTimeFormat("en-US",weekday?{weekday:"long",month:"long",day:"numeric",year:"numeric"}:{month:"long",day:"numeric",year:"numeric"}).format(local)}
+  function formatHistoryDate(key){return formatDateKey(key,{weekday:true})}
+  function publicationGroups(list){
+    const groups=new Map();
+    for(const item of list){const key=publishedDayKey(item)||"__unknown__";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)}
+    return [...groups.entries()].sort(([a],[b])=>a==="__unknown__"?1:b==="__unknown__"?-1:b.localeCompare(a)).map(([key,items])=>({key,items:items.sort((a,b)=>{const at=publishedTime(a),bt=publishedTime(b);if(Number.isFinite(at)&&Number.isFinite(bt))return bt-at;return timeValue(b.firstSeen)-timeValue(a.firstSeen)})}));
+  }
   function youtubeThumb(item){try{const id=item.videoId||new URL(item.url).searchParams.get("v");return id?`https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`:""}catch{return""}}
   function sourceTypeChip(item){const t=item.sourceType||"community";return `<span class="chip ${esc(t)}">${esc(typeLabel[t]||t)}</span>`}
   function rankingEntries(){const rank=[...(state.today.ranking||[])].sort((a,b)=>(a.rank||999)-(b.rank||999));if(rank.length)return rank;const ids=[...(state.today.topIds||[]),...(state.today.scanIds||[])];return ids.map((id,index)=>({id,rank:index+1,score:0,reason:""}))}
@@ -204,7 +215,7 @@
   function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
-    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Everything first added to the digest today, even when the original source was published earlier."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The rolling archive, grouped by the day each item entered this digest."]};
+    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, saved in this browser."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
     const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"Browse one source."]:(labels[state.filter]||labels.top);
     $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
     const showTopTabs=state.filter==="top";
@@ -215,7 +226,7 @@
     $("runChip").textContent=state.today.generatedAt?`Updated ${dateTime(state.today.generatedAt)} · ${run.usedGemini?"Gemini ranked":"Local ranking"}`:"Waiting for first run";
     $("synced").textContent=state.today.generatedAt?`synced ${ago(state.today.generatedAt)}`:"waiting for first run";
     $("stats").innerHTML=[
-      [dailyNewItems().length,"new today"],[rankingEntries().length,"ranked today"],[(state.today.ideas||[]).length,"content ideas"],[state.items.length,"30-day archive"]
+      [dailyNewItems().length,"published today"],[rankingEntries().length,"ranked today"],[(state.today.ideas||[]).length,"content ideas"],[state.items.length,"30-day archive"]
     ].map(([v,l])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   }
 
@@ -284,16 +295,30 @@
     return `<article class="item" data-id="${esc(item.id)}"><div class="kind-icon">↗</div><div class="item-body"><div class="meta">${itemMeta(item)}</div>${item.title?`<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></h3>`:""}<div class="item-summary"><span class="content-label">${item.full?"Full summary":item.editorial?"Chinese summary":"Excerpt"}</span>${collapsible(summary,item.full?7:4)}</div><div class="item-meta"><a href="${esc(item.url)}" target="_blank" rel="noopener">Open original ↗</a>${item.editorial?.rednoteAngleZh?`<span>· ${esc(item.editorial.rednoteAngleZh)}</span>`:""}${fullControls(item)}</div></div><div class="item-side">${rank?`<span class="rank-mini">#${rank.rank}</span>`:""}<button class="star ${saved?"on":""}" data-star="${esc(item.id)}">${saved?"★":"☆"}</button></div></article>`;
   }
 
+  function renderArchiveOutline(list){
+    const groups=publicationGroups(list);
+    if(!groups.length)return `<div class="empty">No archived items yet.</div>`;
+    const today=shiftedDayKey(0);
+    return `<div class="archive-outline">${groups.map((group,index)=>{
+      const unknown=group.key==="__unknown__";
+      const label=unknown?"Unknown publication date":formatDateKey(group.key,{weekday:true});
+      const relative=!unknown&&group.key===today?"Published today":!unknown&&group.key===shiftedDayKey(-1)?"Published yesterday":"Original publication date";
+      const open=!unknown&&(group.key===today||(!groups.some(g=>g.key===today)&&index===0));
+      return `<details class="archive-day ${unknown?"unknown-date":""}" ${open?"open":""}><summary><span class="archive-date">${esc(label)}<small>${esc(relative)}</small></span><span class="archive-count">${group.items.length} ${group.items.length===1?"item":"items"}</span></summary><div class="archive-items">${group.items.map(genericItem).join("")}</div></details>`;
+    }).join("")}</div>`;
+  }
+
+  function renderGroupedList(list){
+    const groups=publicationGroups(list);
+    return groups.map(group=>{const unknown=group.key==="__unknown__";const label=unknown?"Unknown publication date":group.key===shiftedDayKey(0)?"Today":group.key===shiftedDayKey(-1)?"Yesterday":formatDateKey(group.key);return `<div class="day"><span>${esc(label)}</span><span>${group.items.length}</span></div>${group.items.map(genericItem).join("")}`}).join("");
+  }
+
   function renderList(){
-    const list=filteredItems();if(!list.length)return `<div class="empty">Nothing here yet.</div>`;
-    if(state.filter==="today")return `<div class="day"><span>Added Today</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`;
-    const todayIds=dailyNewIdSet();
-    const groupTime=item=>state.filter==="all"?archiveGroupTime(item,todayIds):timeValue(item.firstSeen||item.ts);
-    const ordered=[...list].sort((a,b)=>groupTime(b)-groupTime(a)||Number(b.ts||0)-Number(a.ts||0));
-    let html="",day="";const counts=new Map();
-    for(const item of ordered){const key=dayKey(groupTime(item));counts.set(key,(counts.get(key)||0)+1)}
-    for(const item of ordered){const time=groupTime(item),key=dayKey(time);if(key!==day){day=key;html+=`<div class="day"><span>${dayLabel(time)}</span><span>${counts.get(key)}</span></div>`}html+=genericItem(item)}
-    return html;
+    const list=filteredItems();
+    if(!list.length){const message=state.filter==="today"?"No items were originally published today.":"Nothing here yet.";return `<div class="empty">${message}</div>`}
+    if(state.filter==="today")return `<div class="day"><span>Published Today</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`;
+    if(state.filter==="all")return renderArchiveOutline(list);
+    return renderGroupedList(list);
   }
 
   function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
