@@ -27,14 +27,16 @@ server, no local machine, no personal token.
 **2. Upload these files.** On the new repo page: **Add file → Upload files** →
 drag in everything here (keep the folders `data/` and `.github/`) → **Commit**.
 
-**3. Get two free API keys.**
-- **Gemini** (for summaries): https://aistudio.google.com/apikey → Create API key. Free.
-- **Supadata** (for YouTube transcripts): https://supadata.ai → sign up → copy your key. Free tier is 100 transcripts/month, no credit card. *Optional* — skip it and summaries come from the video description instead.
+**3. Get your free API keys.**
+- **Gemini** (summaries + Chinese translation): https://aistudio.google.com/apikey → Create API key. Free.
+- **YouTube Data API v3** (to list videos reliably from the cloud): in Google Cloud Console, enable "YouTube Data API v3" and create an API key. Free (10,000 requests/day). Tip: if you enable it on the *same* Google project as your Gemini key, your Gemini key works for it too and you can skip a separate secret.
+- **Supadata** (optional — full transcripts for the "Get full summary" button): https://supadata.ai → sign up → copy your key. Free tier is 100 transcripts/month, no card.
 
 **4. Add the keys as secrets.** Repo **Settings → Secrets and variables → Actions
 → New repository secret**. Add:
 - `GEMINI_API_KEY` = your Gemini key
-- `SUPADATA_API_KEY` = your Supadata key (skip if you're not using it)
+- `YOUTUBE_API_KEY` = your YouTube Data API key (skip if your Gemini key already has the API enabled)
+- `SUPADATA_API_KEY` = your Supadata key (skip if you're not using transcripts)
 
 **5. Let the bot write.** **Settings → Actions → General → Workflow permissions →
 Read and write permissions → Save.**

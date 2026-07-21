@@ -9,6 +9,7 @@ const ARCHIVE_PATH = "data/archive.json";
 const GEMINI_KEY = process.env.GEMINI_API_KEY || "";
 const SUPADATA_KEY = process.env.SUPADATA_API_KEY || "";
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const YT_KEY = process.env.YOUTUBE_API_KEY || process.env.GEMINI_API_KEY || "";  // YouTube Data API v3
 const LANG = (CFG.summaryLang || "en").toLowerCase();  // "en" | "zh" | "bilingual"
 const RETENTION = (CFG.retentionDays || 30) * 864e5;
 const UA = "Mozilla/5.0 (compatible; ai-digest/1.0)";
@@ -24,6 +25,12 @@ async function getText(url, headers = {}) {
 async function getJSON(url, headers = {}) {
   const r = await fetch(url, { headers: { "User-Agent": UA, ...headers } });
   if (!r.ok) throw new Error(`${r.status} ${url}`);
+  return r.json();
+}
+// like getJSON, but hides the api key from any error message (for keyed API URLs)
+async function getJSONSafe(url, headers = {}) {
+  const r = await fetch(url, { headers: { "User-Agent": UA, ...headers } });
+  if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(`${r.status} ${url.replace(/key=[^&]+/, "key=***")} ${t.slice(0, 140)}`); }
   return r.json();
 }
 const truncateWords = (s, n) => {
@@ -97,28 +104,29 @@ async function adapt_x_feed(src) {
   }
   return out;
 }
-async function resolveChannelId(src) {
-  if (src.channelId) return src.channelId;
+// Resolve the channel's "uploads" playlist via the official Data API (reliable from any IP).
+async function ytUploadsPlaylist(src) {
+  if (src.channelId) return "UU" + src.channelId.slice(2);
   const handle = (src.handle || "").replace(/^@/, "");
-  const html = await getText("https://www.youtube.com/@" + handle + "?hl=en&gl=US", { Cookie: "CONSENT=YES+1" });
-  const m = html.match(/youtube\.com\/channel\/(UC[\w-]{22})/)
-    || html.match(/"channelId":"(UC[\w-]{22})"/)
-    || html.match(/"externalId":"(UC[\w-]{22})"/);
-  if (!m) throw new Error("could not resolve @" + handle + " — set channelId manually in sources.json");
-  return m[1];
+  const d = await getJSONSafe(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle=${encodeURIComponent(handle)}&key=${YT_KEY}`);
+  const up = d?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!up) throw new Error("could not resolve channel for @" + handle + " (check the handle or set channelId)");
+  return up;
 }
 async function adapt_youtube(src, existingIds) {
-  const channelId = await resolveChannelId(src);
-  const xml = await getText("https://www.youtube.com/feeds/videos.xml?channel_id=" + channelId);
+  if (!YT_KEY) throw new Error("no YouTube API key — set the YOUTUBE_API_KEY secret (or enable YouTube Data API v3 on your Gemini key's project)");
+  const playlist = await ytUploadsPlaylist(src);
+  const d = await getJSONSafe(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=15&playlistId=${playlist}&key=${YT_KEY}`);
   const out = [];
-  for (const e of xml.split("<entry>").slice(1).slice(0, 15)) {
-    const vid = (e.match(/<yt:videoId>([^<]+)<\/yt:videoId>/) || [])[1];
+  for (const it of d.items || []) {
+    const sn = it.snippet || {};
+    const vid = sn.resourceId?.videoId;
     if (!vid) continue;
     const id = "yt:" + vid;
-    const title = decode((e.match(/<title>([\s\S]*?)<\/title>/) || [])[1]);
-    const url = (e.match(/<link rel="alternate" href="([^"]+)"/) || [])[1] || "https://www.youtube.com/watch?v=" + vid;
-    const ts = Date.parse((e.match(/<published>([^<]+)<\/published>/) || [])[1]) || now;
-    const desc = decode((e.match(/<media:description>([\s\S]*?)<\/media:description>/) || [])[1]);
+    const title = sn.title || "";
+    const desc = sn.description || "";
+    const url = "https://www.youtube.com/watch?v=" + vid;
+    const ts = Date.parse(sn.publishedAt) || now;
     const item = { id, source: src.name, kind: "youtube", author: src.name, subtitle: "YouTube", title, text: "", url, ts, likes: 0, summary: "", full: false };
     if (!existingIds.has(id)) {
       const tx = src.transcript === true ? await transcript(vid) : "";
