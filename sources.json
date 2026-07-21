@@ -1,0 +1,24 @@
+{
+  "retentionDays": 30,
+  "sources": [
+    {
+      "type": "x-feed",
+      "name": "Builders",
+      "url": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
+      "enabled": true
+    },
+    {
+      "type": "youtube",
+      "name": "AI Engineer",
+      "handle": "@aiDotEngineer",
+      "channelId": "",
+      "transcript": true,
+      "enabled": true
+    }
+  ],
+  "_howToAdd": {
+    "youtube": "Add { \"type\": \"youtube\", \"name\": \"Channel Name\", \"channelId\": \"UCxxxx\", \"transcript\": true }. Find channelId by opening the channel page, View Source, and searching for \"channelId\". Set transcript:false to save Supadata credits (uses the video description instead).",
+    "blog": "Add { \"type\": \"blog\", \"name\": \"Blog Name\", \"url\": \"https://site.com/feed\" }. Most blogs expose an RSS/Atom feed at /feed, /rss, or /atom.xml.",
+    "x": "Zara's feed is a fixed list of 26 builders. Following someone NOT on that list needs a paid X API + a new adapter — ask Claude."
+  }
+}

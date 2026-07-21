@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Desk — AI Builders Digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz@1,18..40&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F0; --surface:#FCFCFA; --card:#FFFFFF;
+    --ink:#181E1A; --ink2:#4E574F; --ink3:#8C948B;
+    --line:#E3E5DD; --line2:#EAEBE4;
+    --pine:#1D4A38; --pine-s:#E7EEEA; --ochre:#96712A;
+    --heat-lo:#8A9790; --heat-mid:#C0912F; --heat-hi:#BD5A34; --track:#ECEEE7;
+    --disp:"Bricolage Grotesque",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --serif:"Newsreader",Georgia,serif;
+    --body:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:#1d4a3820}
+  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+  .rail{border-right:1px solid var(--line);background:var(--surface);padding:22px 18px;position:sticky;top:0;height:100vh;overflow:auto}
+  .brand{font-family:var(--mono);font-weight:600;letter-spacing:.14em;font-size:12px;color:var(--pine);text-transform:uppercase}
+  .brand b{color:var(--ink)}
+  .status{margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:6px}
+  .dot{width:6px;height:6px;border-radius:50%;background:#2F9E6A;box-shadow:0 0 0 3px rgba(47,158,106,.15)}
+  .rail h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin:28px 0 10px}
+  .src{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;border-radius:8px;font-size:13.5px;color:var(--ink2)}
+  .src .n{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+  .filters{display:flex;flex-direction:column;gap:2px}
+  .flt{text-align:left;background:none;border:0;color:var(--ink2);font-family:var(--body);font-size:13.5px;padding:8px 11px;border-radius:8px;cursor:pointer}
+  .flt:hover{background:var(--paper);color:var(--ink)}
+  .flt.on{color:var(--pine);background:var(--pine-s);font-weight:500}
+  .basket{margin-top:26px;border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--card)}
+  .basket .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+  .basket .v{font-family:var(--disp);font-weight:600;font-size:30px;line-height:1.1;margin-top:4px}
+  .basket .v span{font-size:14px;color:var(--ink3);font-weight:400}
+  .basket .btn{margin-top:10px;width:100%;border-radius:8px;padding:9px;font-family:var(--disp);font-weight:600;font-size:13px;cursor:pointer;border:0}
+  .basket .compose{background:var(--pine);color:#fff}
+  .basket .compose:disabled{background:#EDEEE8;color:var(--ink3);cursor:default}
+  .basket .export{background:none;border:1px solid var(--line);color:var(--ink2);margin-top:7px}
+  .basket .export:hover{border-color:var(--pine);color:var(--pine)}
+  .note{margin-top:14px;font-size:11px;color:var(--ink3);line-height:1.5}
+  .note b{color:var(--ink2);font-weight:600}
+  .main{min-width:0}
+  .top{position:sticky;top:0;background:linear-gradient(180deg,var(--paper) 72%,transparent);padding:24px 30px 12px;z-index:5}
+  .top h1{font-family:var(--disp);font-weight:600;font-size:23px;margin:0;letter-spacing:-.015em}
+  .top .sub{color:var(--ink3);font-family:var(--mono);font-size:12px;margin-top:3px}
+  .stats{display:flex;gap:22px;margin-top:14px}
+  .stat b{font-family:var(--disp);font-weight:600;font-size:19px}
+  .stat span{color:var(--ink3);font-size:12px;font-family:var(--mono);margin-left:6px}
+  .stream{padding:4px 30px 60px}
+  .day{display:flex;align-items:center;gap:12px;margin:24px 0 6px}
+  .day .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+  .day .cnt{font-family:var(--mono);font-size:10.5px;color:var(--ink3);background:var(--line2);padding:2px 8px;border-radius:100px}
+  .day::after{content:"";flex:1;height:1px;background:var(--line2)}
+  .item{display:grid;grid-template-columns:26px 1fr 128px;gap:15px;padding:16px 6px;border-bottom:1px solid var(--line2)}
+  .item.hide{display:none}
+  .star{width:24px;height:24px;border:0;background:none;cursor:pointer;padding:0;color:var(--ink3);transition:color .15s;flex:none}
+  .star:hover{color:var(--pine)}
+  .sel .star{color:var(--pine)}
+  .star svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6}
+  .sel .star svg{fill:var(--pine);stroke:var(--pine)}
+  .who{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;margin-bottom:5px}
+  .handle{font-family:var(--mono);font-size:13px;color:var(--ink)}
+  .name{color:var(--ink2);font-size:12.5px}
+  .role{font-family:var(--mono);font-size:10.5px;color:var(--pine);background:var(--pine-s);padding:2px 7px;border-radius:5px}
+  .new{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--ochre);padding:2px 6px;border-radius:5px}
+  .time{color:var(--ink3);font-family:var(--mono);font-size:11px}
+  .body{font-size:14.5px;color:#2B322D;line-height:1.55;overflow-wrap:anywhere}
+  .meta{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px}
+  .heat{width:96px;height:5px;border-radius:3px;background:var(--track);overflow:hidden}
+  .heat i{display:block;height:100%;border-radius:3px}
+  .likes{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+  .open{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+  .open:hover{color:var(--pine)}
+  .card{margin:16px 0;border:1px solid var(--line);border-radius:14px;background:var(--card);padding:16px;display:grid;grid-template-columns:26px 172px 1fr;gap:16px;align-items:start}
+  .card.noimg{grid-template-columns:26px 1fr}
+  .card.hide{display:none}
+  .thumb{width:172px;height:97px;border-radius:9px;background:linear-gradient(135deg,#215140,#123125);display:flex;align-items:center;justify-content:center;position:relative}
+  .thumb .play{width:34px;height:34px;border-radius:50%;background:#ffffffe6;display:flex;align-items:center;justify-content:center}
+  .thumb .play::after{content:"";border-left:11px solid var(--pine);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+  .vtag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);display:flex;align-items:center;gap:7px}
+  .vtitle{font-family:var(--disp);font-weight:600;font-size:16.5px;margin:7px 0 4px;line-height:1.3}
+  .vchan{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-bottom:9px}
+  .summary{font-family:var(--serif);font-size:15px;color:var(--ink2);line-height:1.55;border-left:2px solid var(--line);padding-left:12px}
+  .summary b{color:var(--ochre);font-weight:500;font-family:var(--body);font-size:10px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .loading{padding:60px 30px;color:var(--ink3);font-family:var(--mono);font-size:13px}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:13px;padding:10px 18px;border-radius:100px;opacity:0;transition:.25s;pointer-events:none;font-weight:500}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (max-width:820px){
+    .app{grid-template-columns:1fr}.rail{display:none}
+    .item{grid-template-columns:24px 1fr;gap:12px}
+    .meta{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;margin-top:4px}
+    .card{grid-template-columns:24px 1fr}.thumb{width:100%;height:150px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:2px solid var(--pine);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><b>SIGNAL</b> DESK</div>
+    <div class="status"><span class="dot"></span><span id="synced">loading…</span></div>
+    <h4>Sources</h4>
+    <div id="sources"></div>
+    <h4>Filter</h4>
+    <div class="filters" id="filters"></div>
+    <div class="basket">
+      <div class="k">RedNote shortlist</div>
+      <div class="v" id="count">0 <span>picked</span></div>
+      <button class="btn compose" id="compose" disabled>Compose post</button>
+      <button class="btn export" id="export">Export shortlist</button>
+      <div class="note"><b>Picks saved in this browser</b> — they stay after refresh, and after items leave the feed. Export any time for a permanent copy.</div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <h1>Today’s signal</h1>
+      <div class="sub" id="sub">feed keeps the last 30 days</div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="stream" id="stream"><div class="loading">Fetching the latest signal…</div></div>
+  </main>
+</div>
+<div class="toast" id="toast">Shortlist copied to clipboard</div>
+<script>
+const SEED={items:[
+  {id:"x:1",kind:"x",source:"Builders",author:"@trq212",subtitle:"Thariq · Claude Code at Anthropic",text:"HTML is the new markdown. I’ve stopped writing markdown files for almost everything and switched to having Claude Code generate HTML for me — here’s why.",url:"#",ts:Date.now()-2*3600e3,likes:8721},
+  {id:"x:2",kind:"x",source:"Builders",author:"@alexalbert__",subtitle:"Alex Albert · Research at Anthropic",text:"An early Claude Mythos Preview snapshot we gave METR has a time horizon more than 2× the next best model on their 80% success-rate benchmark.",url:"#",ts:Date.now()-5*3600e3,likes:880},
+  {id:"yt:1",kind:"youtube",source:"AI Engineer",author:"AI Engineer",title:"Why most AI agents fail in production (and how to fix it)",url:"#",ts:Date.now()-3*3600e3,likes:0,summary:"Most agent failures are systems problems, not model problems: brittle tool schemas, no verification step, and missing evals. The speaker walks through a production stack — typed tool contracts, a check before every action, and continuous eval on live traffic — and shares the before-and-after failure rates."},
+  {id:"x:3",kind:"x",source:"Builders",author:"@AmandaAskell",subtitle:"Amanda Askell · Ethics at Anthropic",text:"Alignment research often focuses on averting concerning behaviors, but the positive vision is training that gives models an honest, positive sense of what AI can be.",url:"#",ts:Date.now()-6*3600e3,likes:394},
+  {id:"x:4",kind:"x",source:"Builders",author:"@levie",subtitle:"Aaron Levie · CEO of Box",text:"Token budgeting is becoming a real enterprise topic. As agents run longer tasks and use more compute, allocating tokens across teams becomes genuine resource planning.",url:"#",ts:Date.now()-7*3600e3,likes:328},
+  {id:"x:5",kind:"x",source:"Builders",author:"@garrytan",subtitle:"Garry Tan · CEO of Y Combinator",text:"1M-token context with a usable coding agent, all on a 128GB MacBook Pro. Downloading now 🤯",url:"#",ts:Date.now()-27*3600e3,likes:301},
+  {id:"x:6",kind:"x",source:"Builders",author:"@mattturck",subtitle:"Matt Turck · VC at FirstMark",text:"The less obvious it is that agent pricing stays purely consumption-based — enterprise agents may need identities, roles, budgets, audit logs. Oddly seat-like.",url:"#",ts:Date.now()-29*3600e3,likes:72}
+]};
+
+const store={mem:{},get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return this.mem[k]??d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){this.mem[k]=v}}};
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const $=id=>document.getElementById(id);
+let saved=store.get("shortlist",{}), lastVisit=store.get("lastVisit",0), items=[], filter="all";
+
+function heat(l){if(l>1000)return["100%","var(--heat-hi)"];if(l>100)return["55%","var(--heat-mid)"];if(l>0)return["28%","var(--heat-lo)"];return null;}
+function ago(ts){const m=(Date.now()-ts)/60000;if(m<60)return Math.max(1,Math.round(m))+"m";if(m<1440)return Math.round(m/60)+"h";return Math.round(m/1440)+"d";}
+function dayKey(ts){const d=new Date(ts);return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();}
+function dayLabel(ts){const d=new Date(ts),t=new Date(),y=new Date(Date.now()-864e5);
+  const s=d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+  if(dayKey(ts)===dayKey(t.getTime()))return["Today",s];
+  if(dayKey(ts)===dayKey(y.getTime()))return["Yesterday",s];
+  return[d.toLocaleDateString(undefined,{weekday:"long"}),s];}
+const isNew=it=>it.ts>lastVisit||Date.now()-it.ts<864e5;
+const STAR='<svg viewBox="0 0 24 24"><path d="M12 3l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 18.8 6 21.5l1.2-6.5L2.4 9.9 9 9z"/></svg>';
+
+function match(it){return filter==="all"||(filter==="new"&&isNew(it))||(filter==="hi"&&it.likes>1000)||it.source===filter;}
+
+function itemHTML(it){
+  const sel=saved[it.id]?" sel":"", nb=isNew(it)?`<span class="new">new</span>`:"";
+  if(it.kind==="x"){
+    const h=heat(it.likes), hb=h?`<div class="heat"><i style="width:${h[0]};background:${h[1]}"></i></div>`:"";
+    const role=it.subtitle?`<span class="role">${esc(it.subtitle)}</span>`:"";
+    return `<div class="item${sel}" data-id="${esc(it.id)}"${match(it)?"":' style="display:none"'}>
+      <button class="star" aria-label="Add to shortlist">${STAR}</button>
+      <div><div class="who"><span class="handle">${esc(it.author)}</span>${role}${nb}<span class="time">${ago(it.ts)}</span></div>
+      <div class="body">${esc(it.text)}</div></div>
+      <div class="meta">${hb}<span class="likes">${it.likes?it.likes.toLocaleString():""}</span><a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">open ↗</a></div></div>`;
+  }
+  const yt=it.kind==="youtube";
+  const thumb=yt?`<div class="thumb"><div class="play"></div></div>`:"";
+  return `<div class="card${yt?"":" noimg"}${sel}" data-id="${esc(it.id)}"${match(it)?"":' style="display:none"'}>
+    <button class="star" aria-label="Add to shortlist">${STAR}</button>${thumb}
+    <div><div class="vtag"><span class="dot" style="background:var(--heat-hi);box-shadow:0 0 0 3px rgba(189,90,52,.15)"></span>${yt?"Video":"Post"} · ${esc(it.source)}${nb?" · new":""}</div>
+    <div class="vtitle">${esc(it.title)}</div><div class="vchan">${esc(it.author)} · ${ago(it.ts)} ago</div>
+    <div class="summary"><b>AI summary</b>${esc(it.summary||"")}</div></div></div>`;
+}
+
+function render(){
+  const vis=items.filter(match);
+  const stream=$("stream");
+  if(!items.length){stream.innerHTML='<div class="loading">No items yet — the bot will fill this on its next run.</div>';return;}
+  let html="", curDay=null;
+  for(const it of items){
+    const dk=dayKey(it.ts);
+    if(dk!==curDay){curDay=dk;const[l,s]=dayLabel(it.ts);
+      html+=`<div class="day"><span class="lbl">${l}</span><span class="cnt">${s}</span></div>`;}
+    html+=itemHTML(it);
+  }
+  stream.innerHTML=html;
+  stream.querySelectorAll(".star").forEach(btn=>{
+    const el=btn.closest("[data-id]"), id=el.dataset.id;
+    btn.addEventListener("click",()=>{
+      el.classList.toggle("sel");
+      if(el.classList.contains("sel"))saved[id]=snapshot(id);else delete saved[id];
+      store.set("shortlist",saved);updateBasket();
+    });
+  });
+}
+function snapshot(id){const it=items.find(i=>i.id===id)||{};return{author:it.author,text:it.text||it.title,url:it.url};}
+function updateBasket(){const n=Object.keys(saved).length;$("count").innerHTML=n+' <span>picked</span>';
+  const c=$("compose");c.disabled=!n;c.textContent=n?`Compose post (${n})`:"Compose post";}
+
+function buildRail(){
+  const bySource={};items.forEach(i=>bySource[i.source]=(bySource[i.source]||0)+1);
+  $("sources").innerHTML=Object.entries(bySource).map(([s,n])=>`<div class="src"><span>${esc(s)}</span><span class="n">${n}</span></div>`).join("");
+  const filters=[["all","All signals"],["new","New since last visit"],["hi","Blowing up"]].concat(Object.keys(bySource).map(s=>[s,s]));
+  $("filters").innerHTML=filters.map(([f,l])=>`<button class="flt${f==="all"?" on":""}" data-f="${esc(f)}">${esc(l)}</button>`).join("");
+  $("filters").querySelectorAll(".flt").forEach(b=>b.addEventListener("click",()=>{
+    $("filters").querySelectorAll(".flt").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+    filter=b.dataset.f;render();}));
+}
+function buildStats(){
+  const posts=items.filter(i=>i.kind==="x").length;
+  const authors=new Set(items.filter(i=>i.kind==="x").map(i=>i.author)).size;
+  const vids=items.filter(i=>i.kind==="youtube"&&isNew(i)).length;
+  $("stats").innerHTML=`<div class="stat"><b>${posts}</b><span>posts</span></div><div class="stat"><b>${authors}</b><span>builders active</span></div><div class="stat"><b>${vids}</b><span>new videos</span></div>`;
+}
+
+async function load(){
+  let data;
+  try{const r=await fetch("data/archive.json",{cache:"no-store"});if(!r.ok)throw 0;data=await r.json();}
+  catch(e){data=SEED;}
+  items=(data.items||[]).sort((a,b)=>b.ts-a.ts);
+  const gen=data.generatedAt?new Date(data.generatedAt):new Date();
+  $("synced").textContent="synced "+gen.toLocaleDateString(undefined,{month:"short",day:"numeric"})+" · "+gen.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
+  $("sub").textContent=gen.toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})+" · feed keeps the last 30 days";
+  buildRail();buildStats();render();updateBasket();
+  store.set("lastVisit",Date.now());
+}
+$("export").addEventListener("click",()=>{
+  const lines=Object.values(saved).map(s=>`• ${s.author}: ${s.text}${s.url&&s.url!=="#"?"  "+s.url:""}`);
+  const txt=lines.length?`My RedNote shortlist (${lines.length}):\n\n`+lines.join("\n\n"):"Nothing shortlisted yet.";
+  (navigator.clipboard?.writeText(txt)||Promise.reject()).then(()=>{const t=$("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}).catch(()=>{});
+});
+load();
+</script>
+</body>
+</html>
