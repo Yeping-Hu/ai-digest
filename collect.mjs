@@ -51,8 +51,15 @@ function fmtDuration(iso) {
 }
 
 // ---- summarization + translation (Gemini) ----
-function buildPrompt(kind, title, body) {
-  const b = truncateWords(body, 4000);
+function buildPrompt(kind, title, body, full) {
+  const b = truncateWords(body, full ? 15000 : 4000);
+  if (full) {
+    if (LANG === "zh")
+      return `请阅读下面这个${kind}的完整文字记录，写一份详细、忠于原文的简体中文总结，让读者不用观看也能掌握其内容。先用一两句话概括核心主旨，然后另起一行，用要点列表列出主要观点、论据、结论或步骤——每个要点单独一行、以「• 」开头，可以写 5-12 个要点。信息要具体（包含关键数字、例子、结论）。直接输出正文，不要开场白，不要使用 markdown 标题或代码块。\n\n标题：${title}\n\n文字记录：${b}`;
+    if (LANG === "bilingual")
+      return `Read the full transcript below and write a detailed, faithful summary — in English first, then the same in Simplified Chinese. For each: one or two sentences of overall takeaway, then a bullet list of the main points, arguments, or steps (each bullet on its own line starting with "• ", 5-12 bullets, specific with key numbers and examples). No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
+    return `Read the full transcript below and write a detailed, faithful summary so someone can grasp the talk without watching. Start with one or two sentences of overall takeaway, then a bullet list of the main points, arguments, conclusions, or steps — each bullet on its own line starting with "• ", 5-12 bullets, specific with key numbers and examples. No preamble, no markdown headings or code blocks.\n\nTitle: ${title}\n\nTranscript: ${b}`;
+  }
   if (LANG === "zh")
     return `请用2-3句简体中文，总结下面这个${kind}的核心内容，帮助读者快速判断是否值得花时间。直接给出总结，不要任何开场白，不要使用 markdown。\n\n标题：${title}\n\n内容：${b}`;
   if (LANG === "bilingual")
@@ -125,10 +132,10 @@ async function geminiCall(prompt) {
 // Returns a summary string. If Gemini is unavailable or over its limit, falls
 // back to the ORIGINAL ENGLISH text (translation needs Gemini, so the fallback
 // can only be English).
-async function summarize(kind, title, body, fallbackEn) {
+async function summarize(kind, title, body, fallbackEn, full) {
   const fallback = truncateWords(fallbackEn || body || title, 180);
   if (!GEMINI_KEY || !body || geminiExhausted) return fallback;
-  try { return (await geminiCall(buildPrompt(kind, title, body))) || fallback; }
+  try { return (await geminiCall(buildPrompt(kind, title, body, full))) || fallback; }
   catch (e) { log("  summarize fallback (English):", e.message); return fallback; }
 }
 
@@ -193,7 +200,7 @@ async function adapt_youtube(src, existingIds) {
     if (!existingIds.has(id)) {
       const tx = src.transcript === true ? await transcript(vid) : "";
       item.full = !!tx;
-      item.summary = await summarize("YouTube talk", title, tx || desc || title, desc);
+      item.summary = await summarize("YouTube talk", title, tx || desc || title, desc, !!tx);
       log(`  + new video${tx ? " [transcript]" : ""}:`, title.slice(0, 55));
     }
     out.push(item);
@@ -228,7 +235,7 @@ async function summarizeOne(vid) {
   if (!item) { console.error("Video not found in archive:", vid); process.exit(1); }
   const tx = await transcript(vid);
   if (!tx) { console.error("No transcript available (check SUPADATA_API_KEY and your credit balance)."); process.exit(1); }
-  item.summary = await summarize("YouTube talk", item.title, tx, item.summary);
+  item.summary = await summarize("YouTube talk", item.title, tx, item.summary, true);
   item.full = true;
   fs.writeFileSync(ARCHIVE_PATH, JSON.stringify({ generatedAt: new Date().toISOString(), count: arch.length, items: arch }, null, 2));
   log("Upgraded to full summary:", vid);
