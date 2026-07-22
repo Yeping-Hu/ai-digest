@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-22T20:32:18.682Z",
+  "generatedAt": "2026-07-22T20:34:22.708Z",
   "count": 192,
   "items": [
     {
@@ -232,14 +232,14 @@
       "actualEndTime": "2026-07-22T17:27:24.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 111,
-      "views": 1303,
+      "views": 1326,
       "duration": "25:19",
-      "full": false,
+      "full": true,
       "categories": [],
-      "fullSummary": "",
+      "fullSummary": "在 Anthropic 举办的研讨会上，Lance Martin 分享了关于 Claude 在长周期（Long-Horizon）任务中的应用演进、架构设计及核心技术趋势。\n\n**从短周期到长周期的演进**\nClaude 的产品形态随着模型任务处理能力的提升而演变。在 2024 年早期（如 Opus 3 时代），模型仅能处理 10 到 20 分钟的自主工作，适用于聊天或自动补全等“人机紧密协作”场景。随着同步编码代理（如 Claude Code）的出现，任务时长提升至约 1 小时。目前，随着任务周期进一步延长，Anthropic 推出了“托管代理”（Managed Agents），旨在通过更完善的架构支持异步、长时间运行的自主任务。\n\n**长周期代理的核心架构原则**\n为了应对长周期任务的复杂性，Anthropic 提出了以下关键架构设计：\n\n• **大脑与手的分离（Decoupling Brain from Hands）：** 将负责逻辑的“大脑”（Harness，无状态进程）与执行工作的“手”（Sandboxes/Containers）解耦。这种设计确保了即使容器崩溃，会话状态仍能通过追加式事件日志（Append-only log）保存，且凭证存储在独立的保险库中，而非直接暴露在执行环境中，从而提升了安全性与可靠性。\n• **利用独立验证器（Use Verifiers）：** 避免让模型在同一上下文窗口中既执行任务又自我评估，因为这容易导致幻觉或逻辑偏差。通过建立“构建上下文”与“验证上下文”的循环，利用独立的验证代理根据预设目标或准则对工作进行评分，直到达到预期结果。\n• **内存管理与“做梦”机制（Memory and Dreaming）：** 模型通过“带内内存”（In-band memory，如直接写入文件系统）记录短期经验。为了修正这些记录中可能出现的错误或局部最优解，引入了“做梦”（Dreaming）机制——即一种离线或带外的处理过程，用于回顾历史会话、纠正错误并巩固长期记忆。\n• **组织级协作（Org-level Harnesses）：** 传统的代理多为单机、单用户模式。Claude Tag 等产品代表了向“组织级协作”的转变，允许多用户共享同一套配置、凭证和上下文，从而实现知识沉淀、内部研究共享及更主动的任务处理。\n\n**关键论点与经验总结**\nMartin 强调了以下几点核心观察：\n\n• **通用内存基底优于预设模式：** 在内存管理上，应提供通用的存储基底（如文件系统或数据库），让模型自主决定如何组织和抽象信息，而非预先设定僵化的内存模式（Schema）。这是“苦涩的教训”（Bitter Lesson）在内存工程中的体现，即模型在管理自身上下文结构方面已表现出超越人类设计的潜力。\n• **模型能力的差异：** 随着模型代际更迭，高能力模型在“带内内存写入”方面表现出更强的抽象能力，能够识别出哪些信息对未来任务具有通用价值，而非仅仅记录琐碎事实。\n• **长周期任务的复杂性：** 并非仅靠模型本身即可实现长周期运行，它需要模型能力、内存系统、安全架构（如防注入）以及代理架构（如大脑与手解耦）的协同配合。\n\n**不确定性与限制**\n尽管“做梦”机制在 Pokémon 等基准测试中证明了其修正错误的能力，但 Martin 指出，在实际应用中仍需通过评估（Evals）来验证离线计算的投入产出比。此外，虽然目前前沿模型在 12 小时以上的长周期任务中表现出显著优势，但该领域仍处于快速发展阶段，架构的健壮性与安全性仍是持续优化的重点。",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-22T20:32:07.874Z",
+      "availabilityUpdatedAt": "2026-07-22T20:34:15.117Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -257,7 +257,23 @@
       },
       "summaryZh": "Anthropic工程师分享了构建长周期Agent的经验，强调解耦“大脑”与“手”、自我验证及自我学习机制的重要性。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-07-22T20:32:18.681Z"
+      "summaryTranslatedAt": "2026-07-22T20:32:18.681Z",
+      "fullSummaryAt": "2026-07-22T20:34:22.708Z",
+      "fullSummarySource": "transcript",
+      "fullSummaryChars": 1501,
+      "fullSourcePath": "data/transcripts/9QebvrrY3KY.txt",
+      "sourceTextPath": "data/transcripts/9QebvrrY3KY.txt",
+      "transcriptPath": "data/transcripts/9QebvrrY3KY.txt",
+      "fullSourceChars": 24695,
+      "fullSourceCachedAt": "2026-07-22T20:34:22.708Z",
+      "fullSummaryAttemptAt": "2026-07-22T20:34:22.708Z",
+      "fullSummaryStatus": "ready",
+      "fullSummaryMessage": "",
+      "fullSummaryErrorCode": "",
+      "fullSummaryRetryAt": "",
+      "fullSummaryLastErrorAt": "",
+      "fullSummaryBillableRequests": 1,
+      "fullSummaryTranscriptStatus": 200
     },
     {
       "id": "article:e08c4d4e6d11f25f77a6eb4c",
