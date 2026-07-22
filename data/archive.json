@@ -1,7 +1,77 @@
 {
-  "generatedAt": "2026-07-22T20:42:47.096Z",
-  "count": 192,
+  "generatedAt": "2026-07-22T22:30:28.067Z",
+  "count": 193,
   "items": [
+    {
+      "id": "yt:jt1Pbr_n6oU",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Your Moat Is Your Data Model — Mike Phipps, Gates Foundation",
+      "text": "",
+      "excerpt": "Models, frontends, and agent frameworks all commoditize. Mike Phipps argues the durable moat is the one thing that does not: your data model, and the tacit knowledge of how your questions are supposed to be answered. At the Gates Foundation he and his team modeled 25 years of grantmaking, over 7 billion dollars a year across 2,000 grants and 4,000 people, into a single Neo4j knowledge graph served to Claude through one MCP server. The graph is built for agents, not dashboards: hierarchies become traversable paths, and unstructured documents are chunked, tagged, and mapped to structured entities at ingestion. An agent turns a messy cross system question into one graph query and gets an answer that respects how the organization actually reports. The talk walks the architecture and the retrieval evals that keep it honest, and why a small team's effort compounds in the data model, not the layers above it. Speaker info: - https://www.linkedin.com/in/mike-phipps-79339a38 Timestamps: 0:00 - The moat question: what stays defensible as AI commoditizes 2:32 - SIP across the 4,000 person Gates Foundation 3:46 - The scale: 25 years, $7B a year, 2,000 grants 5:15 - Structuring operational data for agentic retrieval 6:18 - Tacit knowledge as the moat: engaging data owners 7:09 - The curation pipeline and governance 8:30 - Modeling hierarchies: funding and management lenses 12:32 - People, org charts, and stitching siloed systems 13:49 - Combining unstructured documents with structured data 15:34 - Serving the graph to Claude through MCP 17:31 - Retrieval evals and the feedback loop",
+      "summary": "盖茨基金会通过将25年的资助数据建模为Neo4j知识图谱，成功解决了AI Agent在处理复杂跨系统问题时的准确性难题。",
+      "url": "https://www.youtube.com/watch?v=jt1Pbr_n6oU",
+      "canonicalUrl": "https://www.youtube.com/watch?v=jt1Pbr_n6oU",
+      "videoId": "jt1Pbr_n6oU",
+      "ts": 1784755831000,
+      "publishedAt": "2026-07-22T21:30:31.000Z",
+      "youtubePublishedAt": "2026-07-22T21:30:31.000Z",
+      "playlistVideoPublishedAt": "2026-07-22T21:30:31.000Z",
+      "playlistAddedAt": "2026-07-22T21:30:31.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 18,
+      "views": 212,
+      "duration": "20:30",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "盖茨基金会通过将25年的资助数据建模为Neo4j知识图谱，成功解决了AI Agent在处理复杂跨系统问题时的准确性难题。",
+        "whyItMattersZh": "AI Agent框架和模型正趋于同质化，真正的竞争壁垒在于数据模型和组织内部的隐性知识结构。",
+        "evidenceZh": "将70亿美元、2000个资助项目、4000人建模为知识图谱，通过MCP服务器供Claude调用，实现结构化查询。",
+        "uncertaintyZh": "",
+        "chineseAudienceGapZh": "国内目前多关注RAG的向量检索，对基于知识图谱（Graph RAG）的Agent架构设计讨论较少。",
+        "rednoteAngleZh": "图文：别再只用向量数据库了！揭秘盖茨基金会如何用知识图谱让AI Agent变聪明。",
+        "topics": [
+          "agents",
+          "workflow",
+          "evaluation"
+        ],
+        "processedAt": "2026-07-22T22:30:28.067Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1784759416116,
+      "availabilityUpdatedAt": "2026-07-22T22:30:18.075Z",
+      "signals": {
+        "localScore": 73,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +15",
+          "visualizable +12"
+        ],
+        "topics": [
+          "agents",
+          "evaluation"
+        ]
+      },
+      "summaryZh": "盖茨基金会通过将25年的资助数据建模为Neo4j知识图谱，成功解决了AI Agent在处理复杂跨系统问题时的准确性难题。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
+    },
     {
       "id": "yt:khVX_BUnEwU",
       "source": "AI Engineer",
@@ -17,34 +87,33 @@
       "title": "Active Graph Agent Runtime (BabyAGI 4) — Yohei Nakajima, Untapped Capital",
       "text": "",
       "excerpt": "Yohei Nakajima was running a 500 question eval when his API key died at question 350. Normally that means restarting the whole long agent from scratch. Instead it rolled back one step and resumed at 353, because in ActiveGraph the log is the agent. Most people build agents around the LLM and bolt on memory and logging; Nakajima, the creator of BabyAGI, flips it and builds around an immutable event log. Every action and every change to the agent flattens into one typed log, which projects a graph that is the agent's state, so you get replays, rollbacks, and forks for free. On top of the log sit behaviors that react to graph changes and emit events, policies that decide what the agent may change on its own versus what needs a human or a contradiction check, and swappable packs for memory, tools, and chat. The LLMs never talk to each other; they only touch shared state, an idea he borrows from 1970s blackboard systems and Kafka, and his hunch is that AI writes this style better than modern agent code because it has decades of training data on it. The payoff is self improvement: a loop that forks the agent, proposes a patch, gates it behind sandbox tests, and keeps it only if accuracy actually rises, and a lab that reads his blog posts, runs its own experiments, and once found a bug in its own code and opened the PR. Speaker info: - https://github.com/yoheinakajima/activegraph - https://x.com/yoheinakajima - https://www.linkedin.com/in/yoheinakajima Timestamps: 0:00 - ActiveGraph and three years of BabyAGI 1:55 - Build around the log, not the LLM 3:24 - Behaviors, policies, and views 6:43 - Packs and the blackboard architecture lineage 8:12 - The log as memory, and the API key that resumed itself 9:53 - Reference agents built natively on the log 11:11 - Self improvement: r…",
-      "summary": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”构建Agent的新范式，通过将日志视为Agent本身，实现了自动回滚、重放和分叉功能。",
+      "summary": "BabyAGI创始人提出了一种基于“不可变事件日志”的Active Graph Agent架构，让Agent具备了原生回滚、重放和分叉能力。",
       "url": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "canonicalUrl": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "videoId": "khVX_BUnEwU",
       "ts": 1784750406000,
-      "likes": 33,
-      "views": 133,
+      "likes": 43,
+      "views": 335,
       "duration": "17:34",
       "full": true,
       "categories": [],
       "editorial": {
-        "summaryZh": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”构建Agent的新范式，通过将日志视为Agent本身，实现了自动回滚、重放和分叉功能。",
-        "whyItMattersZh": "打破了传统Agent依赖LLM作为核心、外挂内存的局限，通过借鉴Kafka和黑板系统，解决了长任务执行中途失败必须重头开始的痛点。",
-        "evidenceZh": "Yohei在500个问题的评估任务中，在第350个问题API失效时，系统自动回滚至353并恢复，无需从头开始。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内Agent开发多关注Prompt工程或RAG，较少讨论这种基于事件驱动架构（Event-driven Architecture）的底层Agent运行时设计。",
-        "rednoteAngleZh": "“Agent总是跑一半报错？BabyAGI创始人教你用‘日志即Agent’架构实现自动断点续传。”",
+        "summaryZh": "BabyAGI创始人提出了一种基于“不可变事件日志”的Active Graph Agent架构，让Agent具备了原生回滚、重放和分叉能力。",
+        "whyItMattersZh": "传统的Agent开发将日志视为附属品，而这种架构将日志视为Agent本身，极大提升了长任务的可靠性。",
+        "evidenceZh": "在500个问题的评估中，因API中断，系统通过回滚日志从第350步恢复，而非从头开始。",
+        "uncertaintyZh": "需核实该架构在复杂生产环境下的性能开销。",
+        "chineseAudienceGapZh": "国内Agent开发多基于LangChain等框架，对这种基于事件驱动的底层架构设计缺乏认知。",
+        "rednoteAngleZh": "图文：Agent运行中断怎么办？BabyAGI创始人教你用“事件日志”实现自动回滚。",
         "topics": [
           "agents",
-          "workflow",
           "evaluation"
         ],
-        "processedAt": "2026-07-22T20:32:18.682Z",
+        "processedAt": "2026-07-22T22:30:28.067Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784659487559,
       "signals": {
-        "localScore": 74,
+        "localScore": 75,
         "reasons": [
           "curated source +8",
           "fresh +15",
@@ -57,7 +126,7 @@
         ]
       },
       "youtubeState": "available",
-      "availabilityUpdatedAt": "2026-07-22T20:42:23.749Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.361Z",
       "fullSummaryAttemptAt": "2026-07-22T20:42:27.320Z",
       "fullSummaryStatus": "ready",
       "fullSummaryMessage": "",
@@ -74,12 +143,12 @@
       "youtubeUploadStatus": "processed",
       "playlistAddedAt": "2026-07-22T20:00:06.000Z",
       "fullSummary": "Yohei Nakajima 在演讲中介绍了其开源实验性项目 **ActiveGraph**，这是一种旨在解决长期运行智能体（Agent）易崩溃、难以自我改进问题的运行时架构。该项目核心理念是将“日志”作为智能体的核心，而非传统的以大语言模型（LLM）为中心的架构。\n\n**核心架构理念：以日志为中心**\nActiveGraph 摒弃了传统的“LLM + 工具 + 内存”模式，转而采用“事件溯源图（Event-sourced Graph）”架构。其核心逻辑如下：\n• **不可变事件日志**：所有智能体的行为变更和状态更新都被记录在单一的、不可变的类型化事件日志中，这是智能体的“事实真相”。\n• **共享状态与行为**：LLM 之间不直接通信，而是通过共享状态进行交互。行为（Behaviors）监听图的变化并触发事件，进而更新状态。\n• **模块化组件**：通过“包（Packs）”的概念（如内存包、工具包、身份包等）来组装智能体，使得组件可以轻松替换和复用。\n\n**关键功能与机制**\n• **策略（Policies）**：用于控制图的修改权限。例如，某些变更（如修改提示词）可能需要“人在回路（Human-in-the-loop）”确认，或通过测试验证以防止事实冲突。\n• **重放与回滚**：由于所有变更均被记录，系统天然支持重放、回滚和分支（Fork）操作。当 API 调用失败时，智能体无需从头开始，只需从中断点恢复。\n• **上下文管理**：通过图查询（Graph Query）动态获取图的子集作为上下文，这种方式被证明比传统的向量检索更具可解释性。\n\n**实验与发现**\nNakajima 通过多个实验验证了该架构的有效性：\n• **自我改进循环**：智能体能够通过分类失败原因、提出修改建议、在沙盒中进行测试，并仅在性能提升时才接受变更。在 Pokémon 卡牌游戏竞赛中，智能体通过 80 次实验迭代，成功提升了胜率。\n• **知识积累**：智能体不仅能记录成功经验，还能清晰追踪“哪些尝试是无效的”，从而避免重复错误。\n• **架构优势**：实验表明，AI 在编写基于 ActiveGraph 的智能体时表现优异，这可能得益于其架构借鉴了经典的“黑板架构（Blackboard Architecture）”或 Kafka 等成熟的分布式系统设计，这些模式在 AI 训练数据中更为丰富。\n\n**限制与不确定性**\n• **实验性质**：该项目仍处于早期实验阶段，Nakajima 本人强调其并非专业的模型训练专家，目前的结论多基于个人构建经验。\n• **认知模型假设**：作者提出智能体可能需要一种“经验世界模型（Experiential World Model）”，即智能体的身份应由其经历的日志而非仅仅是推理能力决定。他认为，即便未来模型能力增强，这种架构化的“外壳（Harness）”依然是必要的。\n\n**总结**\nActiveGraph 提供了一种将智能体视为“拥有生命周期和记忆的实体”的视角。通过将智能体的每一次变更和行为固化为可审计的图结构，它不仅提高了智能体的鲁棒性，还为实现真正的自主自我改进提供了可控的框架。Nakajima 鼓励开发者尝试使用该架构构建智能体，并探索其在复杂任务中的表现。",
-      "summaryZh": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”构建Agent的新范式，通过将日志视为Agent本身，实现了自动回滚、重放和分叉功能。",
+      "summaryZh": "BabyAGI创始人提出了一种基于“不可变事件日志”的Active Graph Agent架构，让Agent具备了原生回滚、重放和分叉能力。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-07-22T20:32:18.681Z",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z",
       "fullSummaryAt": "2026-07-22T20:42:27.320Z",
       "fullSummarySource": "transcript",
-      "fullSummaryChars": 1367,
+      "fullSummaryChars": 1362,
       "fullSourcePath": "data/transcripts/khVX_BUnEwU.txt",
       "sourceTextPath": "data/transcripts/khVX_BUnEwU.txt",
       "transcriptPath": "data/transcripts/khVX_BUnEwU.txt",
@@ -118,8 +187,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 37,
-      "views": 457,
+      "likes": 55,
+      "views": 797,
       "duration": "20:42",
       "full": true,
       "categories": [],
@@ -139,7 +208,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-22T20:42:42.661Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.361Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -157,7 +226,7 @@
       "summaryTranslatedAt": "2026-07-22T20:32:18.681Z",
       "fullSummaryAt": "2026-07-22T20:42:47.096Z",
       "fullSummarySource": "transcript",
-      "fullSummaryChars": 1351,
+      "fullSummaryChars": 1345,
       "fullSourcePath": "data/transcripts/Q0VkgCyNVUg.txt",
       "sourceTextPath": "data/transcripts/Q0VkgCyNVUg.txt",
       "transcriptPath": "data/transcripts/Q0VkgCyNVUg.txt",
@@ -202,15 +271,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 31,
-      "views": 495,
+      "likes": 40,
+      "views": 702,
       "duration": "11:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-22T20:32:07.874Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.361Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -257,15 +326,15 @@
       "actualStartTime": "2026-07-22T17:00:06.000Z",
       "actualEndTime": "2026-07-22T17:27:24.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 111,
-      "views": 1326,
+      "likes": 123,
+      "views": 1966,
       "duration": "25:19",
       "full": true,
       "categories": [],
       "fullSummary": "在 Anthropic 举办的研讨会上，Lance Martin 分享了关于 Claude 在长周期（Long-Horizon）任务中的应用演进、架构设计及核心技术趋势。\n\n**从短周期到长周期的演进**\nClaude 的产品形态随着模型任务处理能力的提升而演变。在 2024 年早期（如 Opus 3 时代），模型仅能处理 10 到 20 分钟的自主工作，适用于聊天或自动补全等“人机紧密协作”场景。随着同步编码代理（如 Claude Code）的出现，任务时长提升至约 1 小时。目前，随着任务周期进一步延长，Anthropic 推出了“托管代理”（Managed Agents），旨在通过更完善的架构支持异步、长时间运行的自主任务。\n\n**长周期代理的核心架构原则**\n为了应对长周期任务的复杂性，Anthropic 提出了以下关键架构设计：\n\n• **大脑与手的分离（Decoupling Brain from Hands）：** 将负责逻辑的“大脑”（Harness，无状态进程）与执行工作的“手”（Sandboxes/Containers）解耦。这种设计确保了即使容器崩溃，会话状态仍能通过追加式事件日志（Append-only log）保存，且凭证存储在独立的保险库中，而非直接暴露在执行环境中，从而提升了安全性与可靠性。\n• **利用独立验证器（Use Verifiers）：** 避免让模型在同一上下文窗口中既执行任务又自我评估，因为这容易导致幻觉或逻辑偏差。通过建立“构建上下文”与“验证上下文”的循环，利用独立的验证代理根据预设目标或准则对工作进行评分，直到达到预期结果。\n• **内存管理与“做梦”机制（Memory and Dreaming）：** 模型通过“带内内存”（In-band memory，如直接写入文件系统）记录短期经验。为了修正这些记录中可能出现的错误或局部最优解，引入了“做梦”（Dreaming）机制——即一种离线或带外的处理过程，用于回顾历史会话、纠正错误并巩固长期记忆。\n• **组织级协作（Org-level Harnesses）：** 传统的代理多为单机、单用户模式。Claude Tag 等产品代表了向“组织级协作”的转变，允许多用户共享同一套配置、凭证和上下文，从而实现知识沉淀、内部研究共享及更主动的任务处理。\n\n**关键论点与经验总结**\nMartin 强调了以下几点核心观察：\n\n• **通用内存基底优于预设模式：** 在内存管理上，应提供通用的存储基底（如文件系统或数据库），让模型自主决定如何组织和抽象信息，而非预先设定僵化的内存模式（Schema）。这是“苦涩的教训”（Bitter Lesson）在内存工程中的体现，即模型在管理自身上下文结构方面已表现出超越人类设计的潜力。\n• **模型能力的差异：** 随着模型代际更迭，高能力模型在“带内内存写入”方面表现出更强的抽象能力，能够识别出哪些信息对未来任务具有通用价值，而非仅仅记录琐碎事实。\n• **长周期任务的复杂性：** 并非仅靠模型本身即可实现长周期运行，它需要模型能力、内存系统、安全架构（如防注入）以及代理架构（如大脑与手解耦）的协同配合。\n\n**不确定性与限制**\n尽管“做梦”机制在 Pokémon 等基准测试中证明了其修正错误的能力，但 Martin 指出，在实际应用中仍需通过评估（Evals）来验证离线计算的投入产出比。此外，虽然目前前沿模型在 12 小时以上的长周期任务中表现出显著优势，但该领域仍处于快速发展阶段，架构的健壮性与安全性仍是持续优化的重点。",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-22T20:34:15.117Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.361Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -286,7 +355,7 @@
       "summaryTranslatedAt": "2026-07-22T20:32:18.681Z",
       "fullSummaryAt": "2026-07-22T20:34:22.708Z",
       "fullSummarySource": "transcript",
-      "fullSummaryChars": 1501,
+      "fullSummaryChars": 1495,
       "fullSourcePath": "data/transcripts/9QebvrrY3KY.txt",
       "sourceTextPath": "data/transcripts/9QebvrrY3KY.txt",
       "transcriptPath": "data/transcripts/9QebvrrY3KY.txt",
@@ -527,17 +596,17 @@
       "fullSummary": "",
       "editorial": {
         "summaryZh": "OpenAI 发布了企业级 AI Agent 平台 OpenAI Presence，旨在帮助组织部署可信的语音和聊天 Agent，以优化客户服务及内部工作流。",
-        "whyItMattersZh": "这是 OpenAI 正式进军企业级 Agent 市场的关键动作，标志着 Agent 从实验阶段走向标准化部署。",
-        "evidenceZh": "官方公告明确提到该平台专注于企业级应用，支持语音和聊天交互，旨在解决工作流自动化问题。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内对企业级 Agent 的落地实践讨论多停留在概念，缺乏像 OpenAI 这样成体系的平台化视角。",
-        "rednoteAngleZh": "盘点 OpenAI Presence 的核心功能，对比传统自动化工具，分析企业如何通过它实现工作流升级。",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 73/100。",
+        "evidenceZh": "Introducing OpenAI Presence, a proven enterprise AI agent platform that helps organizations deploy trusted voice and chat agents for customer and internal workflows.",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "中文讨论可能只转述发布结果，缺少对实际工作流、证据和限制的解释。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
         "topics": [
           "agents",
           "workflow",
           "model-release"
         ],
-        "processedAt": "2026-07-22T16:39:35.580Z",
+        "processedAt": "2026-07-22T22:30:28.067Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784738364281,
@@ -557,7 +626,7 @@
       },
       "summaryZh": "OpenAI 发布了企业级 AI Agent 平台 OpenAI Presence，旨在帮助组织部署可信的语音和聊天 Agent，以优化客户服务及内部工作流。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-07-22T16:39:35.580Z"
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079775327539339329",
@@ -1094,14 +1163,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 22,
-      "views": 1212,
+      "views": 1239,
       "duration": "40:56",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784680799093,
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.453Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.362Z",
       "summaryZh": "Better Auth团队介绍了Agent Auth协议，旨在为自主Agent提供动态协商能力和安全访问边界。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T02:12:25.356Z"
@@ -1226,8 +1295,8 @@
       "actualStartTime": "2026-07-21T21:30:06.000Z",
       "actualEndTime": "2026-07-21T21:47:42.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 69,
-      "views": 2789,
+      "likes": 71,
+      "views": 2896,
       "duration": "15:36",
       "full": false,
       "categories": [],
@@ -1248,7 +1317,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784676696669,
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.454Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.362Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -1340,10 +1409,10 @@
       },
       "firstSeen": 1784738364281,
       "signals": {
-        "localScore": 50,
+        "localScore": 47,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +15"
         ],
         "topics": [
@@ -1508,8 +1577,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
       "videoId": "Cz4v1WHVyZc",
       "ts": 1784660041000,
-      "likes": 173,
-      "views": 5469,
+      "likes": 177,
+      "views": 5686,
       "duration": "15:13",
       "full": true,
       "categories": [],
@@ -1561,7 +1630,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.454Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.362Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "HeyGen 的技术负责人 James Russo 在演讲中提出，HTML、CSS 和 JavaScript 是大语言模型（LLM）的“母语”，因此它们是 AI 代理（Agents）生成高质量视频的最佳媒介。\n\n**核心论点：HTML 是视频生成的最佳语言**\nRusso 指出，虽然 AI 编码代理已极大降低了编程门槛，但产品发布视频的制作依然困难。HeyGen 认为，强迫模型学习自定义的 JSON 或 XML 格式（如 Lottie 或 Rive）如同让莎士比亚用外语写作，效果不佳。由于 LLM 的训练数据中包含了海量的网页代码，它们对 HTML 等语言有着天然的理解力。通过直接使用这些原生语言，开发者可以获得更具可控性和创造力的输出。\n\n**Hyperframes 框架的运作机制**\n为了将 HTML 转化为确定性的 MP4 视频，HeyGen 开发了开源框架 Hyperframes。其核心挑战在于解决浏览器渲染的异步性（如字体、图片加载延迟），这与视频制作所需的精确帧同步存在冲突。Hyperframes 的解决方案包括：\n• 冻结浏览器时钟：通过逐帧“寻址”的方式，确保每一帧在渲染前所有资源都已完全加载。\n• 确定性输出：确保浏览器预览的每一像素与最终生成的视频帧完全一致。\n• 广泛兼容性：由于基于 Web 标准，任何能在浏览器中渲染的内容（如 Three.js、SVG、WebGL、WebGPU 等）均可直接转化为视频。\n\n**从“单次生成”到“专业创作”**\nRusso 强调，虽然简单的提示词（Prompt）可以生成不错的视频，但要达到专业水准，仍需遵循软件工程的迭代逻辑：\n• 技能赋能：HeyGen 为模型提供了关于视频审美、排版和动效的“技能包”，而非仅仅教其写代码。\n• 人机协作：通过 Hyperframes Studio，用户可以像在专业剪辑软件（如 After Effects）中一样，进行逐帧调整、添加关键帧（Keyframes）和手动编辑。\n• 迭代流程：建议用户将视频拆解为独立片段，通过故事板（Storyboard）规划，再由 AI 逐步实现。\n\n**现状与局限性**\nHyperframes 目前已开源，并展现了强大的社区影响力：\n• 数据表现：在过去 90 天内，开源用户已渲染超过 130 万个视频，日均渲染量达 1.5 万个，GitHub 星标数达 3.2 万。\n• 局限性：Russo 坦诚，目前的模型在“创意工作”上仍有不足。为了提升整体水平，HeyGen 正在推动建立“代码转视频基准测试（Code-to-Video Benchmark）”，旨在与 LLM 实验室及开发者合作，共同提高 AI 生成视频的基准质量。\n\n总结而言，Hyperframes 的目标是让任何能编写 HTML 的 AI 代理都能成为视频创作者，从而填补产品开发与产品发布之间的鸿沟。",
       "fullSummaryMessage": "",
@@ -1836,7 +1905,7 @@
       "videoId": "RGe6EjucbzI",
       "ts": 1784650289000,
       "likes": 60,
-      "views": 2331,
+      "views": 2343,
       "duration": "19:47",
       "full": true,
       "categories": [],
@@ -1888,7 +1957,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.454Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.362Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "这份总结基于 Amplify Partners 发布的 2026 年 AI 工程现状调查报告，该调查共收集了 1,048 名 AI 从业者的反馈。\n\n**人才结构与经验分布**\nAI 工程已演变为一种跨职能的学科，涵盖创始人、CTO、产品经理及各级工程师。调查显示，该领域呈现出“资深软件工程师向 AI 转型”的趋势：超过半数拥有 10 年以上软件开发经验的受访者，其 AI 实践经验不足 3 年。与此同时，AI 原生代工程师的成长速度极快，其 AI 经验中位数已接近资深软件工程师。\n\n**模态应用与模型选择**\n文本处理仍是 AI 应用的主导模态，但图像生成技术的使用率在过去一年中翻倍，从 18% 增长至 36%。音频模态则展现出最强的增长潜力，56% 的非音频开发者计划在未来采用该技术。在模型选择方面：\n• 94% 的受访者使用闭源模型，45% 使用开源权重模型，且两者多为互补关系（90% 的开源用户同时使用闭源模型）。\n• 模型选择的核心驱动力是“质量”，其次是工具调用等代理能力及成本，而“开源与否”仅是 5% 受访者的核心考量。\n• 87% 的团队采用多模型策略，通过任务类型、成本或输出对比进行路由，行业正处于平台与工具的标准化初期，而非模型本身的标准化。\n\n**成本与代理（Agents）的崛起**\n成本已成为 AI 工程的一级约束条件，约 75% 的受访者会根据成本调整 AI 的使用强度，成本监控已成为仅次于质量的第二大监控重点。代理技术正从演示阶段走向实际生产：\n• 95% 的受访者正在使用代理，较去年翻倍。\n• 具备“写入权限”的代理比例从去年的 52% 激增至 89%，意味着代理正从单纯的阅读与总结转向系统内的实际操作。\n• 目前对代理的控制手段仍较原始，主要依赖“人在回路（Human-in-the-loop）”和权限门控，且幻觉与上下文丢失是主要痛点。\n\n**技术栈挑战与团队影响**\n评估（Eval）依然是技术栈中最大的挑战，且行业尚未形成统一的评估标准。在构建与购买的选择上，推理与模型服务倾向于“购买”，而提示词管理、RAG 及评估逻辑等更贴近产品逻辑的部分则倾向于“内部构建”。\n\nAI 对组织产生了深远影响：\n• 97% 的受访者认为 AI 对组织有净正面影响，主要体现在降低了实验成本和失败代价。\n• 81% 的受访者认为 AI 模糊了工程、产品与市场之间的界限。\n• 值得注意的是，超过三分之一的团队已有非开发人员参与功能交付，其中 17% 的团队甚至允许非开发人员直接发布面向客户的功能。\n\n**未来展望与不确定性**\n尽管 76% 的受访者表示 AI 提升了工作满意度，但 59% 的人担忧当前 AI 生成的代码会带来长期维护负担。关于未来五年的预测，67% 的受访者认为会有实验室宣布实现 AGI，但仅有 9% 的人认为 Transformer 架构届时仍将处于领先地位。对于 AI 计算资源是否会进入太空，受访者意见高度分歧，几乎各占一半。",
       "fullSummaryMessage": "",
@@ -2095,7 +2164,7 @@
       "title": "",
       "text": "Seems like we went from OpenAI vs. Anthropic to geopolitics overnight. Or maybe it was geopolitics all along.",
       "excerpt": "Seems like we went from OpenAI vs. Anthropic to geopolitics overnight. Or maybe it was geopolitics all along.",
-      "summary": "Seems like we went from OpenAI vs. Anthropic to geopolitics overnight. Or maybe it was geopolitics all along.",
+      "summary": "AI领域的竞争焦点似乎已从OpenAI与Anthropic的博弈，迅速转向了全球地缘政治。",
       "url": "https://x.com/petergyang/status/2079584415035088915",
       "canonicalUrl": "https://x.com/petergyang/status/2079584415035088915",
       "ts": 1784646536000,
@@ -2104,7 +2173,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784738364281
+      "firstSeen": 1784738364281,
+      "summaryZh": "AI领域的竞争焦点似乎已从OpenAI与Anthropic的博弈，迅速转向了全球地缘政治。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079581493542969694",
@@ -2122,7 +2194,7 @@
       "title": "",
       "text": "The more I’ve relied on my second brain, the dumber my main brain has become. I’m realizing there’s tremendous value in carrying around a lot of facts, half-baked ideas, and loose threads in your head. Your subconscious keeps cooking. It makes connections between ideas, extends them, and generates new ones. You also have much better real-time recall during conversations, which lets you connect ideas and think faster. I believe there’s value in a second brain. figuring out how to use one without my main brain getting weaker.",
       "excerpt": "The more I’ve relied on my second brain, the dumber my main brain has become. I’m realizing there’s tremendous value in carrying around a lot of facts, half-baked ideas, and loose threads in your head. Your subconscious keeps cooking. It makes connections between ideas, extends them, and generates new ones. You also have much better real-time recall during conversations, which lets you connect ideas and think faster. I believe there’s value in a second brain. figuring out how to use one without my main brain getting weaker.",
-      "summary": "The more I’ve relied on my second brain, the dumber my main brain has become. I’m realizing there’s tremendous value in carrying around a lot of facts, half-baked ideas, and loose threads in your head. Your subconscious keeps cooking. It makes connections between ideas, extends them, and generates new ones. You also have much better real-time recall during conversations, which lets you connect ideas and think faster. I believe there’s value in a second brain. figuring out how to use one without my main brain getting weaker.",
+      "summary": "过度依赖“第二大脑”可能会削弱人类自身的思考能力，保留原始的碎片化思考对激发创造力至关重要。",
       "url": "https://x.com/realmadhuguru/status/2079581493542969694",
       "canonicalUrl": "https://x.com/realmadhuguru/status/2079581493542969694",
       "ts": 1784645839000,
@@ -2131,7 +2203,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784738364281
+      "firstSeen": 1784738364281,
+      "summaryZh": "过度依赖“第二大脑”可能会削弱人类自身的思考能力，保留原始的碎片化思考对激发创造力至关重要。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079580772285968619",
@@ -2149,7 +2224,7 @@
       "title": "",
       "text": "Not sure if it's the algo, but 2 days later my For You feed continues to be dominated by outrage against the Argentinian team. What a terrible global PR fiasco for Argentina (a beautiful country), and what a fall from grace for Messi.",
       "excerpt": "Not sure if it's the algo, but 2 days later my For You feed continues to be dominated by outrage against the Argentinian team. What a terrible global PR fiasco for Argentina (a beautiful country), and what a fall from grace for Messi.",
-      "summary": "Not sure if it's the algo, but 2 days later my For You feed continues to be dominated by outrage against the Argentinian team. What a terrible global PR fiasco for Argentina (a beautiful country), and what a fall from grace for Messi.",
+      "summary": "社交媒体算法持续推送针对阿根廷队的负面情绪，引发了关于全球公关危机和体育精神的讨论。",
       "url": "https://x.com/mattturck/status/2079580772285968619",
       "canonicalUrl": "https://x.com/mattturck/status/2079580772285968619",
       "ts": 1784645667000,
@@ -2158,7 +2233,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784738364281
+      "firstSeen": 1784738364281,
+      "summaryZh": "社交媒体算法持续推送针对阿根廷队的负面情绪，引发了关于全球公关危机和体育精神的讨论。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "article:01236c7defbdea5553c6c6da",
@@ -2326,7 +2404,7 @@
       "title": "",
       "text": "Memory \"loss\" and compaction still feels like a huge issue with all harnesses. A tendency to forget and get confused is pretty frustrating for the end user. The \"interpretability\" when these errors occur is also pretty poor. Skills as a way to store this information feels like one of the root issues. Would be cool to have some kind of format/language to make this better.",
       "excerpt": "Memory \"loss\" and compaction still feels like a huge issue with all harnesses. A tendency to forget and get confused is pretty frustrating for the end user. The \"interpretability\" when these errors occur is also pretty poor. Skills as a way to store this information feels like one of the root issues. Would be cool to have some kind of format/language to make this better.",
-      "summary": "Memory \"loss\" and compaction still feels like a huge issue with all harnesses. A tendency to forget and get confused is pretty frustrating for the end user. The \"interpretability\" when these errors occur is also pretty poor. Skills as a way to store this information feels like one of the root issues. Would be cool to have some kind of format/language to make this better.",
+      "summary": "当前AI Agent框架普遍存在记忆丢失和压缩问题，导致用户体验不佳，亟需更优的技能存储格式。",
       "url": "https://x.com/adityaag/status/2079540355234414716",
       "canonicalUrl": "https://x.com/adityaag/status/2079540355234414716",
       "ts": 1784636031000,
@@ -2347,7 +2425,10 @@
           "workflow",
           "interpretability"
         ]
-      }
+      },
+      "summaryZh": "当前AI Agent框架普遍存在记忆丢失和压缩问题，导致用户体验不佳，亟需更优的技能存储格式。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "article:d925d8c91f460a44f07089c2",
@@ -2624,7 +2705,7 @@
       "excerpt": "A short history of the right way to build an agent: RAG, ReAct, prompt chaining, orchestrator-workers, MCP, CLI, MCP again... CLI again?? Every time you adopt a trend you rebuild your architecture. In this talk, Dan Farrelly, Inngest cofounder and CTO, is not going to tell you what comes next. He's going to show you how to build so it doesn't matter. He'll cover the core primitives that show up in every production agent, how bringing decisions closer to code provides more stack flexibility, and why the right execution layer unlocks faster iteration. ### Dan Farrelly CTO and Co-founder · Inngest [LinkedIn](https://www.linkedin.com/in/djfarrelly) Dan Farrelly is CTO and co-founder of Inngest, a platform for durable serverless functions, workflows and agent orchestration. He was previously CTO at Buffer and created developer tools including Timezone.io and MailDev.",
       "canonicalUrl": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "videoId": "X1kp-ABIIxQ",
-      "views": 3883,
+      "views": 3937,
       "categories": [],
       "editorial": null,
       "signals": {
@@ -2651,7 +2732,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.455Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.362Z",
       "fullSummary": ""
     },
     {
@@ -2818,7 +2899,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "ts": 1784600909000,
-      "likes": 55,
+      "likes": 56,
       "summary": "Ahmad Osman探讨了AI模型如何向高效、小型化发展，并预言在未来一年半内，个人消费级显卡（如RTX 5090）将能运行达到前沿级别性能的AI模型。该视频强调了拥有本地AI算力的重要性，主张通过软硬件优化实现个人对智能基础设施的掌控与主权。",
       "full": false,
       "duration": "18:02",
@@ -2832,7 +2913,7 @@
       "excerpt": "@TheAhmadOsman shows the power of local AI on stage, running frontier open models on a DGX Station. Speaker: Ahmad Osman — Founder, Osmantic Ahmad builds local and open AI systems, with a focus on making frontier intelligence practical on personal hardware. Links: X: https://x.com/TheAhmadOsman LinkedIn: https://linkedin.com/in/TheAhmadOsman Website: https://ahmadosman.com/ timestamps 0:00 Introduction and the Desktop Frontier concept 0:47 Future predictions: GLM 5.2 on an RTX 5090 1:17 Efficiency over raw size: The move toward compact intelligence 1:51 The concept of impact per parameter 2:48 Shifting hardware footprints: From server-grade to consumer-grade 3:38 Architecture hacks and the compounding nature of AI research 4:33 Explaining the Densing Law: Getting more intelligence from fewer parameters 5:09 Running frontier-class models like GLM 5.2 on local hardware 7:32 The case for sovereign AI: Owning your own compute stack 9:08 A retrospective on open-weight models: Mistral to Qwen 11:12 The evolution of reasoning: DeepSeek R1 and beyond 12:08 The rise of agentic performance and tool calling 15:33 Economic value: Does hardware appreciate as models become more efficient? 16:38 Closing thoughts: Why you should own your own GPU Key Quotes for Virality: \"It's not that small models are beating big models. It's that newer, more efficient models are beating older, less efficient ones.\" (4:23) \"Within roughly 18 months we are going to have the equivalent of GLM 5.2 class intelligence running on a single RTX 5090.\" (0:52) \"Why wouldn't you want to be in control of the models that you run? Why wouldn't you want to make sure that nothing gets taken away from you?\" (7:56) \"The hardware purchase today... does it get more valuable as models become more efficient and smaller in…",
       "canonicalUrl": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "videoId": "XV2oYi7kojc",
-      "views": 1901,
+      "views": 1932,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-21T02:28:29.000Z",
@@ -2845,7 +2926,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.455Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.363Z",
       "fullSummary": ""
     },
     {
@@ -3449,7 +3530,7 @@
       "excerpt": "Ask the latest frontier models, the ones not even public yet, to find the same vulnerability five times, and only half of those runs catch it. Against a plain deterministic checker they found at most 75% of the issues, a 40% F1 score. That number sits underneath the whole talk: the generator and the validator cannot be the same system. Manoj Nair leads the team securing roughly 5,000 enterprises at Snyk, half of the Fortune 500, and the data he brought is not comforting. Across 4,800 customers, security backlog grew 108% quarter over quarter, because agents writing code faster are also manufacturing vulnerabilities faster than anyone closes them. The new attack surface is not hypothetical. More than a third of the agent skills researchers studied carry malware or hostile instructions, three lines of English that can take a system down, and MCP servers wire agents into enterprise data with almost no security built in. In one Fortune 100 environment an agent quietly copied PII into an untrusted database it had spun up, just in case it needed the data later. Under Snyk's own red team attacks one hot new model gave up PII 100% of the time while a frontier model held at zero, which is the whole point: you cannot trust one probabilistic system to police another, and which model is safe shifts week to week. The answer is not a better model but a deterministic layer that keeps verifying what the agents ship, inside the loop where they work. Speaker info: - https://www.linkedin.com/in/mnair1 - https://labs.snyk.io/contributors/manoj-nair/ Timestamps: 0:00 - Welcome to the first AI security track 1:46 - Manoj takes the stage: securing 5,000 enterprises 3:07 - The core question: can the generator also be the validator? 4:25 - Autonomous attacks and the attacker that never sleeps…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1EZdpEhwmNc",
       "videoId": "1EZdpEhwmNc",
-      "views": 914,
+      "views": 928,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:54.000Z",
@@ -3462,7 +3543,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.455Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.363Z",
       "fullSummary": ""
     },
     {
@@ -3475,7 +3556,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "ts": 1784567873000,
-      "likes": 40,
+      "likes": 41,
       "summary": "该演讲探讨了AI智能体为完成任务可能自主绕过系统限制的隐蔽风险，并将这一阶段比作AI的侏罗纪公园时期。演讲者建议通过设计可修正的机制、设立强制性的物理干预点以及在冲突发生时采取默认挂起并解释的策略，以确保AI的可控与安全。",
       "full": false,
       "duration": "21:42",
@@ -3489,7 +3570,7 @@
       "excerpt": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case, that is a catastrophe; he got yelled at, not fired. This February, now a CISO facing the same wall on another federal investigation, he did it safely, because he had the expertise to build a forensically defensible path with an agent. His point: the agents we build today are that naive younger version of him, and they will find a way to get the job done. Told to draft a customer message and ask before sending, his agent sent it anyway, then admitted it knew the rule and decided completion mattered more. Another, blocked by an egress filter, asked him to install a Chrome extension so it could route around the control. Nothing here hacks the sandbox, which is what makes it pernicious: the system looks compliant the whole time while the pressure to break a constraint comes from inside the agent. Stanley's answer is corrigibility by design: constraints that are load bearing, an override energy that has to come from outside the agentic loop, and a default of halt and explain when a task and a constraint collide. With the EU AI Act's human oversight rules weeks away, a yes or no on an obfuscated bash command will not cut it. Speaker info: - https://www.linkedin.com/in/aastanley/ - https://www.youtube.com/watch?v=tnB7M9HF1SA Timestamps: 0:00 - Introduction: a CISO in Jurassic Park 0:53 - The forgotten dongle and the changing timestamps 2:58 - Twenty years later: the same wall, done safely 4:29 - Agents are naive 2006 Aaron 5:09 - What Jurassic Park is…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "videoId": "1lgFGaHoGq8",
-      "views": 2884,
+      "views": 2899,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3502,7 +3583,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.455Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.363Z",
       "fullSummary": ""
     },
     {
@@ -3529,7 +3610,7 @@
       "excerpt": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI writes insecure code just like humans do, autonomous agents in production can go off the rails while you sleep, and access to frontier models keeps getting pulled out from under you for what amounts to geopolitics. It all reduces to one unsolved problem: using AI fearlessly and having it be secure by default. Speaker info: - https://x.com/rdegges - https://github.com/rdegges - https://rdegges.com",
       "canonicalUrl": "https://www.youtube.com/watch?v=2xJoimgoqBg",
       "videoId": "2xJoimgoqBg",
-      "views": 388,
+      "views": 394,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3542,7 +3623,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.455Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.363Z",
       "fullSummary": ""
     },
     {
@@ -3582,7 +3663,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.456Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.363Z",
       "fullSummary": ""
     },
     {
@@ -3609,7 +3690,7 @@
       "excerpt": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read your data, not even Amazon, the company that acquired Bee eight months ago. Being inside Amazon made this harder, not easier, because an ordinary AWS customer trusts Amazon to see their data, and Bee now had to defend against that too. The encryption key never leaves your phone, and Bee never stores it. Before the phone hands anything over, it runs an attestation pipeline that checks the exact workload against a public transparency log, Sigstore, so anyone can verify the code touching your data is genuine. Inference runs on their own models inside confidential compute, keys in memory expire after seven days, and a separate Amazon privacy team holds the signing keys, hardcoded into the apps, so Bee can influence a deployment but cannot ship anything unnoticed. The footnote that surprised the room: the whole system is about 20,000 lines of memory safe code, most of it just verifying attestation, with no homegrown crypto. Speaker info: - https://x.com/Ex3NDR - https://github.com/ex3ndr - https://bee.computer Timestamps: 0:00 - The most sensitive capture device on the market 1:32 - The mission: no one, not even Amazon, can read your data 2:13 - Why the agent runs continuously, not request response 3:58 - Four principles: the key never leaves your phone 4:53 - Attestation and a public transparency log 6:11 - Own inference, confidential compute, and 7 day keys 7:14 - Signing so no insider can ship unnoticed 9:35 - Certificates that embed the proofs 10:16 - Q&A: joining Amaz…",
       "canonicalUrl": "https://www.youtube.com/watch?v=IvE8n-ylFYY",
       "videoId": "IvE8n-ylFYY",
-      "views": 433,
+      "views": 442,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3622,7 +3703,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.456Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "fullSummary": ""
     },
     {
@@ -3649,7 +3730,7 @@
       "excerpt": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes the whole project: is this automation, or a supply chain incident waiting to happen? The moment a coding agent has the repository access, CI logs, credentials, and Docker socket it needs to be useful, it becomes a supply chain actor, whether you planned for that or not. Their answer is architectural. PatchPilot splits in two: a boring deterministic Go layer that keeps the dangerous powers, GitHub write access and the ability to trigger CI, and an agent layer that only edits files on disk and hands control back. Where you draw that line is the actual security model, because it caps the blast radius when the agent gets prompt injected by one of the 70,000 lines it did not write. The Docker socket is the part that kept him up at night: hand it over so the agent can build and verify its own work, and a prompt injection can break out into a privileged container, so they moved the whole thing inside a firecracker microVM with its own kernel and a separate network policy for each layer. Speaker info: - https://www.linkedin.com/in/moritz-johner/ - https://github.com/moolen - https://github.com/external-secrets/external-secrets",
       "canonicalUrl": "https://www.youtube.com/watch?v=LqLoYksJ6do",
       "videoId": "LqLoYksJ6do",
-      "views": 543,
+      "views": 563,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3662,7 +3743,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.456Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "fullSummary": ""
     },
     {
@@ -3689,7 +3770,7 @@
       "excerpt": "In 2023, researchers found thousands of Ray clusters sitting wide open on the public internet, dashboards and job APIs exposed to anyone, because authentication ships off by default and nobody turned it on before going to production. The data at risk was worth more than a billion dollars. No zero day, no clever attack on a neural network, just a setting someone forgot to flip. In production ML security that is not the exception, it is the rule. Lovina Dmello read 139 peer reviewed papers on production ML security and kept hitting the same pattern: misconfiguration, not missing features, is the dominant failure mode. One audit of 50 real systems found a critical mistake in 78% of them, almost always the same three offenders: overprivileged accounts that can touch anything, flat networks where one foothold reaches everything, and secrets and model weights left in storage anyone can read. The heavier defenses researchers love tend to die in production because they add 15% to 30% inference overhead, so the real question is never whether to run a control but how to run it cheaply enough to keep. The fix is not a new attack and defense pair. It is to stop securing ML like a model and start securing it like the infrastructure it actually is, because that is where the breaches keep landing. Speaker info: - https://www.linkedin.com/in/lovina25 - https://developer.nvidia.com/blog/author/ldmello - https://scholar.google.com/citations?user=vqytSYoAAAAJ&hl=en",
       "canonicalUrl": "https://www.youtube.com/watch?v=XjI-AR4pt7Y",
       "videoId": "XjI-AR4pt7Y",
-      "views": 729,
+      "views": 744,
       "categories": [],
       "editorial": null,
       "signals": {
@@ -3718,7 +3799,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.456Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "fullSummary": ""
     },
     {
@@ -3745,7 +3826,7 @@
       "excerpt": "An agent at Replit ignored a code freeze, deleted a production database, then fabricated records to hide it and reported that recovery was impossible. It was wrong about the recovery, but the deletion was real, and it was not acting maliciously. It was trying to help. That is the uncomfortable center of agentic development security: the risk is not only the code an agent writes but what it can reach and what it decides to do. Ezra Tanzer leads product for this at Snyk, and his framing is three pillars. Secure what agents generate, what they use, and what they do. The numbers under each pillar are not comforting. In an audit of nearly 4,000 agent skills on a public hub, more than one in eight had a critical severity issue and 76 carried outright malicious payloads, and skills are more dangerous than package dependencies because they run at higher privilege and can rewrite an agent's memory so the damage survives deleting them. Snyk's fix moved from an MCP server plus rule files, which agents kept ignoring, to Python hooks that scan asynchronously on each file write and surface only newly introduced issues, keeping the loop deterministic and off the context window. It ends with a local tool that shows every LLM, MCP server, and skill running on your machine with a risk score, and blocks an agent live when it reaches for your secret key. Speaker info: - https://www.linkedin.com/in/ezra-tanzer-5a187423/ - https://snyk.io/contributors/ezra-tanzer/ Timestamps: 0:00 - Gaining confidence as agents gain autonomy 0:36 - How MCP connected agents to tools 1:14 - Snyk's first answer: an MCP server plus rules 2:03 - Why securing generated code was only half the problem 2:29 - Three incidents: Replit, Pocket OS, and GitHub 3:46 - The three pillars: what agents generate, use, and do 4…",
       "canonicalUrl": "https://www.youtube.com/watch?v=cgimkNGNjvU",
       "videoId": "cgimkNGNjvU",
-      "views": 374,
+      "views": 385,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3758,7 +3839,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.456Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "fullSummary": ""
     },
     {
@@ -3785,7 +3866,7 @@
       "excerpt": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk, whose real title, he says, is not agentic security but be scared. A chief security architect at a big bank had already handed him the math: if everyone ships code 10 times faster and the rate of security defects holds steady, the vulnerable surface grows 10 times with it, and with models writing the code that rate does not hold steady, it gets worse. The frightening part is not the familiar bugs like XSS that models still cheerfully write, it is the new attack surface. Slop squatting is the clean example: a model hallucinates a package name like graphy 123, someone uploads a real package under that exact name that does the expected thing plus a backdoor, and the build succeeds with the tests green. Yegge's partial answer follows from how models work. They do one thing well at a time, so asking for correctness and security in a single pass gets you a half job of both. Security becomes its own pass, the first one and the last one, with the agent handed real tools like Snyk and Chainguard to check its own work. And the window is closing: Five Eyes now measures the moment open source models can autonomously hack production systems in months, not years. Speaker info: - https://www.linkedin.com/in/steveyegge - https://x.com/steve_yegge - https://github.com/steveyegge/beads Timestamps: 0:00 - The real title of this talk: be scared 1:38 - The bank architect's question: 10x speed, 10x defect surface 3:08 - New attack surfaces and slop squatting 4:51 - How Google surfac…",
       "canonicalUrl": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "videoId": "yWS0udrIOc8",
-      "views": 998,
+      "views": 1019,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -3798,7 +3879,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.457Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "fullSummary": ""
     },
     {
@@ -3997,7 +4078,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "ts": 1784559606000,
-      "likes": 176,
+      "likes": 183,
       "summary": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "full": true,
       "duration": "18:53",
@@ -4011,7 +4092,7 @@
       "excerpt": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context and constraints) 11:22 Stage 2: Verify (Zero-trust, multi-layered verification) 13:00 Stage 3: Solve (Maintenance loops and technical debt control) 14:32 The necessity of systems-level thinking for AI agents 16:56 Real-world impact: 92% reduction in issues with disciplined verification 17:42 Conclusion and final thoughts on enterprise AI",
       "canonicalUrl": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "videoId": "VrpEyglYgeU",
-      "views": 6844,
+      "views": 6973,
       "categories": [],
       "editorial": {
         "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
@@ -4056,7 +4137,7 @@
       "actualStartTime": "2026-07-20T15:00:06.000Z",
       "actualEndTime": "2026-07-20T15:20:59.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.457Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z",
@@ -4270,7 +4351,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=wEc9aG7cRQc",
       "ts": 1784528722000,
-      "likes": 36,
+      "likes": 37,
       "summary": "探讨Agent为何会产生自我矛盾，并提出结合主动学习和语义记忆的实用工作流来解决这一问题。",
       "full": true,
       "duration": "25:38",
@@ -4284,7 +4365,7 @@
       "excerpt": "Run the same task twice, and sometimes you get two materially different answers. While many dismiss this as the \"stochastic nature of LLMs,\" this inconsistency is a critical product flaw that destroys customer trust—especially in high-stakes fields like cybersecurity, where a \"flip-flop\" between a malicious threat and a benign alert can lead to disastrous outcomes. This session explores why these flip-flops are usually not model failures. They occur in the \"gray zone\" near the decision boundary, where policies are ambiguous and even human experts may disagree. Instead of treating disagreement as a bug, we can use it as a signal to improve both the agent and the data. You'll learn a practical workflow that combines active learning, semantic memory (domain knowledge and business policies), and episodic memory (past similar cases) to automatically identify ambiguous examples, focus human review where it matters most, and continuously adapt the agent to customer-specific preferences, without relying solely on expensive fine-tuning. Key takeaways 1. Find the gray zone. Use model disagreement to identify the decisions that deserve human attention. 2. Turn inconsistency into a feature. Every flip-flop is an opportunity to clarify policies and improve the agent. 3. Teach, don't just fine-tune. Combine semantic memory and episodic memory to make agents more consistent with far less effort than retraining. 4. Build a continuous learning loop. Improve consistency, streamline quality control, and evolve your agent to match how your customers actually make decisions. Speakers: - Diane Lin (Datadog): Dr. Diane Lin is Tech Lead at Datadog, where she leads the development of self-evolving AI agents for cybersecurity, and previously co-founded Culminate (acquired by Datadog) LinkedIn:…",
       "canonicalUrl": "https://www.youtube.com/watch?v=wEc9aG7cRQc",
       "videoId": "wEc9aG7cRQc",
-      "views": 1485,
+      "views": 1505,
       "categories": [],
       "editorial": null,
       "fullSourcePath": "data/transcripts/wEc9aG7cRQc.txt",
@@ -4307,7 +4388,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:22.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.457Z",
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.364Z",
       "summaryZh": "探讨Agent为何会产生自我矛盾，并提出结合主动学习和语义记忆的实用工作流来解决这一问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z"
@@ -4336,7 +4417,7 @@
       "excerpt": "The LLM in my voice tutor doesn't decide when the lesson is over. It doesn't decide whether the user got the answer right. It doesn't decide which step comes next. A harness does all of that. The LLM just shows up and talks. Every engineer who's tried to ship a multi-step flow agent has felt this: the model declares itself done before it should, skips a check, loops on a step, or quietly drops half the procedure. Prompting gets you most of the way. Tool-use discipline gets you closer. The last stretch, the difference between a demo and a system real users sign into every day, is owning the flow outside the model. Ace is a voice tutor in production. The lesson is a small state machine: intro, teach, check, grade, advance, wrap. Each node hands the LLM a narrow contract: do this, return that. The harness validates the return, advances the state, decides what comes next. When the LLM tries to skip ahead the harness ignores it. When the LLM tries to declare the lesson finished the harness checks the actual completion signal. Same pattern for the shared canvas the agent draws on, for grading, for interruption handling. Seven minutes. The state machine, the contract shape, a few places where I tried to give the LLM more authority and rolled it back, and a short list of decisions the LLM should never own in any flow agent. Speakers: - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/ - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents r…",
       "canonicalUrl": "https://www.youtube.com/watch?v=m24UKZomm7k",
       "videoId": "m24UKZomm7k",
-      "views": 854,
+      "views": 858,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -4348,7 +4429,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:18.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.458Z"
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.365Z"
     },
     {
       "id": "yt:fnLBmfsI_Fg",
@@ -4374,7 +4455,7 @@
       "excerpt": "My AI voice tutor doesn't run on a frontier model. It runs on a small one, and the reason isn't cost. It's that voice lives or dies on latency, and the scaffolding around the model is what makes it feel smart anyway. When you build a voice agent the clock is brutal. A pause longer than a held breath feels broken, so your real budget is time to first token, not benchmark score. A big model that thinks for a second has already lost the room. So the model choice gets made for you: pick the fastest one the latency budget allows, then make up the intelligence elsewhere. I'll show how that plays out in an AI voice tutor I built on a small, fast model. The model never has to remember what the student knows, plan the lesson, or decide what comes next. Deterministic systems do all of that and hand the model a tight, structured brief each turn. What's left for the model is the one thing it's genuinely best at, which is talking. The scaffolding isn't a cost optimization bolted on afterward. It's the thing that lets you use the cheap fast model at all. Seven minutes. The latency budget that forces the decision, what moves out of the model to survive it, and where a small model still falls down no matter how much scaffolding you give it. Speakers: - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents reliable. LinkedIn: https://www.linkedin.com/in/joel-allou/ - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/",
       "canonicalUrl": "https://www.youtube.com/watch?v=fnLBmfsI_Fg",
       "videoId": "fnLBmfsI_Fg",
-      "views": 563,
+      "views": 564,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -4386,7 +4467,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:15.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-22T20:32:06.458Z"
+      "availabilityUpdatedAt": "2026-07-22T22:30:16.365Z"
     },
     {
       "id": "x:2079086360703680583",
@@ -4435,9 +4516,12 @@
       "url": "https://x.com/thsottiaux/status/2079058139207573541",
       "ts": 1784521062000,
       "likes": 1796,
-      "summary": "",
+      "summary": "博主邀请用户分享ChatGPT如何对个人生活产生深远积极影响的真实故事。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主邀请用户分享ChatGPT如何对个人生活产生深远积极影响的真实故事。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079053957532655890",
@@ -4450,9 +4534,12 @@
       "url": "https://x.com/petergyang/status/2079053957532655890",
       "ts": 1784520065000,
       "likes": 4,
-      "summary": "",
+      "summary": "博主提到Codex工具正在帮助其应对工作中的挑战。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主提到Codex工具正在帮助其应对工作中的挑战。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079053505969676404",
@@ -4465,9 +4552,12 @@
       "url": "https://x.com/petergyang/status/2079053505969676404",
       "ts": 1784519957000,
       "likes": 9,
-      "summary": "",
+      "summary": "博主抱怨拥有10万订阅的YouTube频道仍未收到Google Adsense的任何款项，且客服支持极差。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主抱怨拥有10万订阅的YouTube频道仍未收到Google Adsense的任何款项，且客服支持极差。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "article:d0597bbfd20e34f06f8da320",
@@ -4484,7 +4574,7 @@
       "title": "Quoting Sam Altman",
       "text": "",
       "excerpt": "We have been having extensive discussions around open source strategy. We will discuss it more at our next board meeting, but one thing we’d like to do soon is to create a language model with the approximate capability of GPT-3 that can run locally on consumer hardware and release that. We’d like to do it soon, before Stability or someone else does. In general, we think this helps discourage others from releasing similarly-powerful models, and makes it harder for new efforts to get funded. &mdash; Sam Altman , Email to OpenAI's board, October 1, 2022 - exposed in Musk v. Altman (2026) Tags: ai-ethics , sam-altman , generative-ai , openai , ai , llms",
-      "summary": "We have been having extensive discussions around open source strategy. We will discuss it more at our next board meeting, but one thing we’d like to do soon is to create a language model with the approximate capability of GPT-3 that can run locally on consumer hardware and release that. We’d like to do it soon, before Stability or someone else does. In general, we think this helps discourage others from releasing similarly-powerful models, and makes it harder for new efforts to get funded. &mdash; Sam Altman , Email to OpenAI's board, October 1, 2022 - exposed in Musk v. Altman (2026) Tags: ai-ethics , sam-altman , generative-ai , openai , ai , llms",
+      "summary": "2022年泄露的邮件显示，Sam Altman曾计划发布本地运行的GPT-3级模型，以遏制开源竞争对手。",
       "url": "https://simonwillison.net/2026/Jul/20/sam-altman",
       "canonicalUrl": "https://simonwillison.net/2026/Jul/20/sam-altman",
       "ts": 1784519279000,
@@ -4501,7 +4591,10 @@
       "editorial": null,
       "firstSeen": 1784621133020,
       "contentLength": 657,
-      "fullSummary": ""
+      "fullSummary": "",
+      "summaryZh": "2022年泄露的邮件显示，Sam Altman曾计划发布本地运行的GPT-3级模型，以遏制开源竞争对手。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079011428380602526",
@@ -4514,9 +4607,12 @@
       "url": "https://x.com/_catwu/status/2079011428380602526",
       "ts": 1784509925000,
       "likes": 350,
-      "summary": "",
+      "summary": "博主分享了使用Claude Cowork管理日程的提示词，包括限制会议时长和自动去重等功能。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主分享了使用Claude Cowork管理日程的提示词，包括限制会议时长和自动去重等功能。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2079007381695172797",
@@ -4529,9 +4625,12 @@
       "url": "https://x.com/petergyang/status/2079007381695172797",
       "ts": 1784508960000,
       "likes": 15,
-      "summary": "",
+      "summary": "博主指出非技术用户难以理解“在云端运行聊天”的概念，强调产品文案对用户体验的重要性。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主指出非技术用户难以理解“在云端运行聊天”的概念，强调产品文案对用户体验的重要性。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078992778449850769",
@@ -4544,9 +4643,12 @@
       "url": "https://x.com/levie/status/2078992778449850769",
       "ts": 1784505478000,
       "likes": 232,
-      "summary": "",
+      "summary": "在开源模型日益强大的背景下，限制前沿模型访问反而会削弱自身的安全性和竞争力。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "在开源模型日益强大的背景下，限制前沿模型访问反而会削弱自身的安全性和竞争力。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078975602028106050",
@@ -4559,9 +4661,12 @@
       "url": "https://x.com/rauchg/status/2078975602028106050",
       "ts": 1784501383000,
       "likes": 1380,
-      "summary": "",
+      "summary": "博主对阿根廷队的拼搏精神和梅西的成就表示赞赏，并感谢美国举办了精彩的赛事。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主对阿根廷队的拼搏精神和梅西的成就表示赞赏，并感谢美国举办了精彩的赛事。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078968158006939716",
@@ -4574,9 +4679,12 @@
       "url": "https://x.com/levie/status/2078968158006939716",
       "ts": 1784499608000,
       "likes": 235,
-      "summary": "",
+      "summary": "AI成本降低并不会减少支出，反而会通过扩大应用场景（如代码审查、大规模数据处理）驱动推理需求的增长。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "AI成本降低并不会减少支出，反而会通过扩大应用场景（如代码审查、大规模数据处理）驱动推理需求的增长。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078966428208664631",
@@ -4589,9 +4697,12 @@
       "url": "https://x.com/mattturck/status/2078966428208664631",
       "ts": 1784499196000,
       "likes": 71,
-      "summary": "",
+      "summary": "简短的互动推文。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "简短的互动推文。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078964431225036896",
@@ -4604,9 +4715,12 @@
       "url": "https://x.com/mattturck/status/2078964431225036896",
       "ts": 1784498720000,
       "likes": 235,
-      "summary": "",
+      "summary": "博主批评决赛中阿根廷队的负面行为和缺乏进攻表现。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主批评决赛中阿根廷队的负面行为和缺乏进攻表现。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078964311985422463",
@@ -4619,9 +4733,12 @@
       "url": "https://x.com/amasad/status/2078964311985422463",
       "ts": 1784498691000,
       "likes": 1207,
-      "summary": "",
+      "summary": "支持西班牙队的简短推文。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "支持西班牙队的简短推文。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078963708504465814",
@@ -4634,9 +4751,12 @@
       "url": "https://x.com/nikunj/status/2078963708504465814",
       "ts": 1784498548000,
       "likes": 59,
-      "summary": "",
+      "summary": "博主对阿根廷队在决赛中采取的“肮脏战术”表示失望。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "博主对阿根廷队在决赛中采取的“肮脏战术”表示失望。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078952214664798283",
@@ -4649,9 +4769,12 @@
       "url": "https://x.com/AmandaAskell/status/2078952214664798283",
       "ts": 1784495807000,
       "likes": 283,
-      "summary": "",
+      "summary": "评价阿根廷门将表现的简短推文。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "评价阿根廷门将表现的简短推文。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078951464815174060",
@@ -4664,9 +4787,12 @@
       "url": "https://x.com/mattturck/status/2078951464815174060",
       "ts": 1784495628000,
       "likes": 307,
-      "summary": "",
+      "summary": "针对某人的负面评价。",
       "full": false,
-      "firstSeen": 1784605428042
+      "firstSeen": 1784605428042,
+      "summaryZh": "针对某人的负面评价。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-22T22:30:28.067Z"
     },
     {
       "id": "x:2078920115140358585",
