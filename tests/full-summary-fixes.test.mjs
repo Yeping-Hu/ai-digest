@@ -51,7 +51,7 @@ assert.doesNotMatch(context.result, /more-toggle" hidden/);
 // Compact Top cards stay scannable by preferring the editorial summary, while
 // the full summary is available in the in-page reader. Every blog/article URL
 // is eligible for an on-demand full summary regardless of RSS excerpt length.
-assert.match(html, /function topPreview\(item\)\{const ed=item\.editorial\|\|\{\};if\(ed\.summaryZh\)return ed\.summaryZh/);
+assert.match(html, /function topPreview\(item\)\{return preferredShortSummary\(item\)\}/);
 assert.match(html, /function eligibleForFull\(item\)[\s\S]*?if\(\["blog","article"\]\.includes\(item\.kind\)\)return Boolean\(item\.url\)/);
 assert.match(html, /id="reader" hidden aria-hidden="true"/);
 assert.match(html, /function openReader\(id,context=\{\}\)/);

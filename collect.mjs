@@ -92,6 +92,21 @@ function compactText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function isChineseText(value) {
+  const text = String(value || "").trim();
+  if (!text) return false;
+  const han = text.match(/[\p{Script=Han}]/gu) || [];
+  const letters = text.match(/[\p{L}\p{N}]/gu) || [];
+  return han.length >= 4 && han.length / Math.max(1, letters.length) >= 0.06;
+}
+
+function existingChineseSummary(item) {
+  for (const value of [item?.editorial?.summaryZh, item?.summaryZh, item?.summary]) {
+    if (isChineseText(value)) return compactText(value);
+  }
+  return "";
+}
+
 function truncateChars(value, max = 400) {
   const text = compactText(value);
   if (text.length <= max) return text;
@@ -748,7 +763,7 @@ function selectWithDiversity(scored, limit, maxPerGroup) {
   return selected;
 }
 
-function buildEditorialPrompt(candidates) {
+function buildEditorialPrompt(candidates, translationTargets = candidates.map((entry) => entry.item)) {
   const payload = candidates.map(({ item, local }) => ({
     id: item.id,
     source: item.source,
@@ -759,8 +774,18 @@ function buildEditorialPrompt(candidates) {
     localScore: local.score,
     localTopics: local.topics,
   }));
+  const translationPayload = translationTargets.map((item) => ({
+    id: item.id,
+    source: item.source,
+    title: item.title || truncateChars(item.text, 160),
+    excerpt: truncateChars(item.excerpt || item.text || item.summary, 900),
+  }));
 
-  return `你是 @Kelly的科研日常 的英文 AI 信息源编辑。目标不是把新闻翻译成中文，而是从候选中找出真正值得认真阅读、能发展成高质量中文小红书知识图文的内容。\n\n请严格依据给出的标题和摘要，不要补充候选中没有出现的事实。聚合来源只能用于发现线索；若来源是 curated，请在 uncertaintyZh 中提醒回到原始来源核实。\n\n评分重点：\n1. 与 AI 协作、agent、workflow、科研、评测、开源工具的相关度；\n2. 来源质量和证据是否具体；\n3. 中文读者是否存在信息差；\n4. 是否容易用框架、对比、步骤或主线案例视觉化；\n5. 一个月后是否仍然有价值。\n\n从候选中最多选 ${Number(EDIT.topLimit || 8)} 条，全部属于 Today's Top。请严格按 score 从高到低排列，不要为了凑数选择普通内容。再给出最多 ${Number(EDIT.ideaLimit || 3)} 个彼此明显不同的小红书选题。不同选题必须有不同的核心问题、读者收获或叙事主线；同一个单一来源最多生成 1 个选题，优先组合多个来源，不要仅仅换一种标题重复同一角度。\n\n只输出一个 JSON 对象，不要 markdown。格式：\n{\n  \"items\": [\n    {\n      \"id\": \"候选id\",\n      \"rank\": 1,\n      \"score\": 0,\n      \"summaryZh\": \"1-2句准确中文摘要\",\n      \"whyItMattersZh\": \"为什么今天值得关注\",\n      \"evidenceZh\": \"候选中具体出现了什么证据或信息\",\n      \"uncertaintyZh\": \"需要核实或尚不确定的地方；没有则写空字符串\",\n      \"chineseAudienceGapZh\": \"中文内容可能缺少的角度\",\n      \"rednoteAngleZh\": \"最适合 Kelly 账号的图文切入点\",\n      \"topics\": [\"agents\"],\n      \"reason\": \"一句话入选理由\"\n    }\n  ],\n  \"ideas\": [\n    {\n      \"workingTitle\": \"可发布的中文标题\",\n      \"angle\": \"内容主线与读者收获\",\n      \"whyNow\": \"为什么现在值得做\",\n      \"sourceIds\": [\"候选id\"]\n    }\n  ]\n}\n\n候选：\n${JSON.stringify(payload)}`;
+  return `你是 @Kelly的科研日常 的英文 AI 信息源编辑。目标不是把新闻机械翻译成中文，而是从候选中找出真正值得认真阅读、能发展成高质量中文小红书知识图文的内容。\n\n请严格依据给出的标题和摘要，不要补充候选中没有出现的事实。聚合来源只能用于发现线索；若来源是 curated，请在 uncertaintyZh 中提醒回到原始来源核实。所有以 Zh 结尾的字段，以及 translations 中的 summaryZh，必须使用自然、准确的简体中文；可以保留必要的英文产品名和专有名词，但不能整段输出英文。\n\n评分重点：\n1. 与 AI 协作、agent、workflow、科研、评测、开源工具的相关度；\n2. 来源质量和证据是否具体；\n3. 中文读者是否存在信息差；\n4. 是否容易用框架、对比、步骤或主线案例视觉化；\n5. 一个月后是否仍然有价值。\n\n从候选中最多选 ${Number(EDIT.topLimit || 8)} 条，全部属于 Today's Top。请严格按 score 从高到低排列，不要为了凑数选择普通内容。再给出最多 ${Number(EDIT.ideaLimit || 3)} 个彼此明显不同的小红书选题。不同选题必须有不同的核心问题、读者收获或叙事主线；同一个单一来源最多生成 1 个选题，优先组合多个来源，不要仅仅换一种标题重复同一角度。\n\n此外，请为 translationTargets 中的每一项都生成 1-2 句自然的简体中文摘要，并在 translations 数组中逐项返回。不要遗漏任何 id。\n\n只输出一个 JSON 对象，不要 markdown。格式：\n{\n  "items": [\n    {\n      "id": "候选id",\n      "rank": 1,\n      "score": 0,\n      "summaryZh": "1-2句准确中文摘要",\n      "whyItMattersZh": "为什么今天值得关注",\n      "evidenceZh": "候选中具体出现了什么证据或信息",\n      "uncertaintyZh": "需要核实或尚不确定的地方；没有则写空字符串",\n      "chineseAudienceGapZh": "中文内容可能缺少的角度",\n      "rednoteAngleZh": "最适合 Kelly 账号的图文切入点",\n      "topics": ["agents"],\n      "reason": "一句话入选理由"\n    }\n  ],\n  "translations": [\n    {\n      "id": "translationTargets中的id",\n      "summaryZh": "1-2句自然、准确的简体中文摘要"\n    }\n  ],\n  "ideas": [\n    {\n      "workingTitle": "可发布的中文标题",\n      "angle": "内容主线与读者收获",\n      "whyNow": "为什么现在值得做",\n      "sourceIds": ["候选id"]\n    }\n  ]\n}\n\n候选：\n${JSON.stringify(payload)}\n\ntranslationTargets：\n${JSON.stringify(translationPayload)}`;
+}
+
+function buildChineseRepairPrompt(items) {
+  return `下面这些英文 AI 内容缺少有效的中文摘要。请严格依据标题和 excerpt，为每项写 1-2 句自然、准确的简体中文摘要。可以保留必要的英文专有名词，但不能整段输出英文。只输出 JSON，不要 markdown。\n\n格式：{"translations":[{"id":"...","summaryZh":"..."}]}\n\n内容：\n${JSON.stringify(items.map((item) => ({ id: item.id, title: item.title || truncateChars(item.text, 160), excerpt: truncateChars(item.excerpt || item.text || item.summary, 1000) })))}`;
 }
 
 async function geminiRequest(prompt, jsonMode = true) {
@@ -798,7 +823,7 @@ function parseJSONObject(raw) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-function fallbackEditorial(candidates) {
+function fallbackEditorial(candidates, translationTargets = []) {
   const max = Math.min(Number(EDIT.topLimit || 8), candidates.length);
   const items = candidates.slice(0, max).map(({ item, local }, index) => ({
     id: item.id,
@@ -814,7 +839,8 @@ function fallbackEditorial(candidates) {
     topics: local.topics,
     reason: local.reasons.slice(0, 3).join(" · ") || "本地规则排序",
   }));
-  return { items, ideas: buildFallbackIdeas(items, candidates) };
+  const translations = translationTargets.map((item) => ({ id: item.id, summaryZh: existingChineseSummary(item) })).filter((entry) => entry.summaryZh);
+  return { items, ideas: buildFallbackIdeas(items, candidates), translations };
 }
 
 function buildFallbackIdeas(selected, candidates) {
@@ -843,13 +869,25 @@ function buildFallbackIdeas(selected, candidates) {
   return ideas;
 }
 
-function normalizeEditorial(raw, candidates) {
+function normalizeEditorial(raw, candidates, translationTargets = candidates.map((entry) => entry.item)) {
   const candidateMap = new Map(candidates.map((entry) => [entry.item.id, entry]));
+  const translationTargetMap = new Map(translationTargets.map((item) => [item.id, item]));
   const requested = Array.isArray(raw?.items) ? raw.items : [];
   const maxTop = Number(EDIT.topLimit || 8);
   const maxPerSource = Number(EDIT.maxTopPerSource || 2);
   const sourceCounts = new Map();
   const items = [];
+  const translationMap = new Map();
+
+  for (const value of Array.isArray(raw?.translations) ? raw.translations : []) {
+    if (!translationTargetMap.has(value?.id) || !isChineseText(value?.summaryZh)) continue;
+    translationMap.set(value.id, truncateChars(value.summaryZh, 360));
+  }
+  for (const value of requested) {
+    if (translationTargetMap.has(value?.id) && isChineseText(value?.summaryZh)) {
+      translationMap.set(value.id, truncateChars(value.summaryZh, 360));
+    }
+  }
 
   const sorted = [...requested].sort((a, b) => {
     const scoreA = Number(a?.score ?? candidateMap.get(a?.id)?.local?.score ?? 0);
@@ -863,12 +901,15 @@ function normalizeEditorial(raw, candidates) {
     if ((sourceCounts.get(group) || 0) >= maxPerSource) continue;
     sourceCounts.set(group, (sourceCounts.get(group) || 0) + 1);
     const rank = items.length + 1;
+    const summaryZh = isChineseText(value.summaryZh)
+      ? truncateChars(value.summaryZh, 320)
+      : translationMap.get(value.id) || existingChineseSummary(candidate.item);
     items.push({
       id: value.id,
       rank,
       tier: "top",
       score: clamp(Number(value.score || candidate.local.score), 0, 100),
-      summaryZh: truncateChars(value.summaryZh || candidate.item.summary || candidate.item.excerpt, 320),
+      summaryZh: summaryZh || "",
       whyItMattersZh: truncateChars(value.whyItMattersZh, 280),
       evidenceZh: truncateChars(value.evidenceZh || candidate.item.excerpt, 300),
       uncertaintyZh: truncateChars(value.uncertaintyZh, 260),
@@ -887,7 +928,8 @@ function normalizeEditorial(raw, candidates) {
       const group = candidate.item.sourceGroup || candidate.item.source;
       if ((sourceCounts.get(group) || 0) >= maxPerSource) continue;
       sourceCounts.set(group, (sourceCounts.get(group) || 0) + 1);
-      const fallback = fallbackEditorial([candidate]).items[0];
+      const fallback = fallbackEditorial([candidate], translationTargets).items[0];
+      fallback.summaryZh = translationMap.get(candidate.item.id) || existingChineseSummary(candidate.item) || "";
       fallback.rank = items.length + 1;
       fallback.tier = "top";
       items.push(fallback);
@@ -905,28 +947,58 @@ function normalizeEditorial(raw, candidates) {
     }))
     .filter((idea) => idea.workingTitle && idea.angle && idea.sourceIds.length), Number(EDIT.ideaLimit || 3));
 
-  return { items, ideas: ideas.length ? ideas : dedupeIdeas(buildFallbackIdeas(items, candidates), Number(EDIT.ideaLimit || 3)) };
+  const translations = [...translationMap.entries()].map(([id, summaryZh]) => ({ id, summaryZh }));
+  return { items, ideas: ideas.length ? ideas : dedupeIdeas(buildFallbackIdeas(items, candidates), Number(EDIT.ideaLimit || 3)), translations };
 }
 
-async function runEditorial(candidates) {
-  if (!candidates.length) return { result: { items: [], ideas: [] }, usedGemini: false, error: "" };
-  if (!GEMINI_KEY || GEMINI_MAX_CALLS < 1) return { result: fallbackEditorial(candidates), usedGemini: false, error: "Gemini disabled" };
+function missingChineseTranslationItems(result, translationTargets) {
+  const translated = new Set((result?.translations || []).filter((entry) => isChineseText(entry?.summaryZh)).map((entry) => entry.id));
+  return translationTargets.filter((item) => !translated.has(item.id) && !existingChineseSummary(item));
+}
+
+function applyChineseTranslationRepair(result, raw, translationTargets) {
+  const allowed = new Set(translationTargets.map((item) => item.id));
+  const merged = new Map((result.translations || []).map((entry) => [entry.id, entry.summaryZh]));
+  for (const entry of Array.isArray(raw?.translations) ? raw.translations : []) {
+    if (allowed.has(entry?.id) && isChineseText(entry?.summaryZh)) merged.set(entry.id, truncateChars(entry.summaryZh, 360));
+  }
+  result.translations = [...merged.entries()].map(([id, summaryZh]) => ({ id, summaryZh }));
+  const byId = new Map(result.translations.map((entry) => [entry.id, entry.summaryZh]));
+  result.items = (result.items || []).map((item) => ({ ...item, summaryZh: isChineseText(item.summaryZh) ? item.summaryZh : byId.get(item.id) || item.summaryZh || "" }));
+  return result;
+}
+
+async function runEditorial(candidates, translationTargets = candidates.map((entry) => entry.item)) {
+  if (!candidates.length && !translationTargets.length) return { result: { items: [], ideas: [], translations: [] }, usedGemini: false, error: "" };
+  if (!GEMINI_KEY || GEMINI_MAX_CALLS < 1) return { result: fallbackEditorial(candidates, translationTargets), usedGemini: false, error: "Gemini disabled" };
 
   try {
-    const first = await geminiRequest(buildEditorialPrompt(candidates), true);
+    const first = await geminiRequest(buildEditorialPrompt(candidates, translationTargets), true);
+    let normalized;
     try {
-      return { result: normalizeEditorial(parseJSONObject(first), candidates), usedGemini: true, error: "" };
+      normalized = normalizeEditorial(parseJSONObject(first), candidates, translationTargets);
     } catch (parseError) {
       if (geminiCalls >= GEMINI_MAX_CALLS) throw parseError;
       const repair = await geminiRequest(
-        `把下面内容修复成有效 JSON。不要改变事实，不要添加解释或 markdown。\n\n${truncateChars(first, 16000)}`,
+        `把下面内容修复成有效 JSON。不要改变事实，不要添加解释或 markdown。所有 summaryZh 和以 Zh 结尾的字段必须使用简体中文。\n\n${truncateChars(first, 16000)}`,
         true,
       );
-      return { result: normalizeEditorial(parseJSONObject(repair), candidates), usedGemini: true, error: "" };
+      normalized = normalizeEditorial(parseJSONObject(repair), candidates, translationTargets);
     }
+
+    const missing = missingChineseTranslationItems(normalized, translationTargets);
+    if (missing.length && geminiCalls < GEMINI_MAX_CALLS) {
+      try {
+        const repair = await geminiRequest(buildChineseRepairPrompt(missing), true);
+        normalized = applyChineseTranslationRepair(normalized, parseJSONObject(repair), translationTargets);
+      } catch (error) {
+        log("  ! Chinese summary repair skipped:", error.message);
+      }
+    }
+    return { result: normalized, usedGemini: true, error: "" };
   } catch (error) {
     log("  ! Gemini editorial fallback:", error.message);
-    return { result: fallbackEditorial(candidates), usedGemini: false, error: error.message };
+    return { result: fallbackEditorial(candidates, translationTargets), usedGemini: false, error: error.message };
   }
 }
 
@@ -1999,17 +2071,51 @@ async function main() {
     Number(EDIT.candidateLimit || 18),
     Number(EDIT.maxCandidatesPerSource || 5),
   );
+  const translationPool = [];
+  const addTranslationTarget = (item) => {
+    if (!item || existingChineseSummary(item) || translationPool.some((value) => value.id === item.id)) return;
+    translationPool.push(item);
+  };
+  for (const item of newItems) addTranslationTarget(item);
+  for (const rank of previousDay.ranking || []) addTranslationTarget(merged.get(rank.id));
+  for (const { item } of candidates) addTranslationTarget(item);
+  // Repair recently ingested English-only descriptions as well. This catches items
+  // that were first collected before the translation pass was installed or when a
+  // prior Gemini request returned incomplete output. Processed items drop out on
+  // subsequent runs because existingChineseSummary() recognizes the saved Chinese.
+  const translationBackfillCutoff = NOW - Math.max(1, Number(EDIT.translationBackfillDays || 7)) * 864e5;
+  for (const item of kept) {
+    const itemTime = Number(item.ts || item.firstSeen || 0);
+    if (itemTime >= translationBackfillCutoff) addTranslationTarget(item);
+  }
+  const translationTargets = translationPool
+    .sort((a, b) => Number(b.ts || b.firstSeen || 0) - Number(a.ts || a.firstSeen || 0))
+    .slice(0, Math.max(1, Number(EDIT.translationLimit || 20)));
   run.candidates = candidates.length;
+  run.translationTargets = translationTargets.length;
 
   for (const { item, local } of candidates) {
     const target = merged.get(item.id);
     if (target) target.signals = { localScore: local.score, reasons: local.reasons, topics: local.topics };
   }
 
-  const editorial = await runEditorial(candidates);
+  const editorial = await runEditorial(candidates, translationTargets);
   run.geminiCalls = geminiCalls;
   run.usedGemini = editorial.usedGemini;
   if (editorial.error) run.errors.push(`Gemini: ${editorial.error}`);
+
+  const translatedAt = new Date().toISOString();
+  for (const entry of editorial.result.translations || []) {
+    const target = merged.get(entry.id);
+    if (!target || !isChineseText(entry.summaryZh)) continue;
+    target.summary = entry.summaryZh;
+    target.summaryZh = entry.summaryZh;
+    target.summaryLanguage = "zh";
+    target.summaryTranslatedAt = translatedAt;
+    if (target.editorial && typeof target.editorial === "object") {
+      target.editorial = { ...target.editorial, summaryZh: entry.summaryZh };
+    }
+  }
 
   const currentRanking = editorial.result.items
     .map((entry) => ({
@@ -2024,9 +2130,15 @@ async function main() {
   for (const entry of editorial.result.items) {
     const target = merged.get(entry.id);
     if (!target) continue;
-    target.summary = entry.summaryZh || target.summary;
+    if (isChineseText(entry.summaryZh)) {
+      target.summary = entry.summaryZh;
+      target.summaryZh = entry.summaryZh;
+      target.summaryLanguage = "zh";
+      target.summaryTranslatedAt = translatedAt;
+    }
+    const finalSummaryZh = isChineseText(entry.summaryZh) ? entry.summaryZh : existingChineseSummary(target);
     target.editorial = {
-      summaryZh: entry.summaryZh,
+      summaryZh: finalSummaryZh,
       whyItMattersZh: entry.whyItMattersZh,
       evidenceZh: entry.evidenceZh,
       uncertaintyZh: entry.uncertaintyZh,

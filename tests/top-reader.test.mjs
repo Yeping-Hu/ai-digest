@@ -16,11 +16,13 @@ assert.doesNotMatch(html, /function rankCard\(/);
 assert.match(html, /sort\(\(a,b\)=>rankingScore\(b\)-rankingScore\(a\)\|\|Number\(b\.selectionCount\|\|0\)-Number\(a\.selectionCount\|\|0\)/);
 
 // The compact card opens the dedicated reader; long summaries do not stretch it.
-assert.match(html, /\.top-card\{height:540px/);
+assert.match(html, /\.top-card\{min-height:540px;height:auto/);
 assert.match(html, /data-reader-id=/);
 assert.match(html, /id="reader" hidden aria-hidden="true"/);
 assert.match(html, /function openReader\(id,context=\{\}\)/);
 assert.match(html, /body\.reader-open\{overflow:hidden\}/);
+assert.match(html, /class="reader-media"/);
+assert.match(html, /youtubeThumb\(item,"maxresdefault"\)/);
 
 
 // Top Archive is grouped by day using the same expandable outline pattern as
