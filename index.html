@@ -242,6 +242,47 @@
   }
   function eligibleForFull(item){const body=String(item.excerpt||item.text||item.summary||"");if(item.kind==="youtube")return Boolean(item.videoId||String(item.id||"").startsWith("yt:"));if(["blog","article"].includes(item.kind))return Boolean(item.url);if(item.kind==="x")return body.length>=600;return false}
   function fullControls(item){const eligible=eligibleForFull(item),hasFull=hasFullSummary(item);const stateBadge=hasFull?`<span class="full-state">✓ Full summary generated</span>`:"";const block=summaryBlock(item);const due=item.kind==="youtube"&&youtubeState(item)==="upcoming"&&scheduleReached(item);let note="",button="";if(!hasFull&&item.fullSummaryStatus==="error")note=`<span class="summary-note" title="${esc(item.fullSummaryMessage||"")}">Summary failed</span>`;if(!hasFull&&item.fullSummaryStatus==="needs_regeneration")note=`<span class="summary-note" title="${esc(item.fullSummaryMessage||"")}">Full summary needs regeneration</span>`;if(OWNER&&eligible){const label=hasFull||item.fullSummaryStatus==="needs_regeneration"?"Regenerate":due?"Check availability & summarize":"Generate full summary";button=block?`<button class="full-btn blocked" data-summary-block="${esc(block.message)}">${esc(block.label)}</button>`:`<button class="full-btn" data-summary-item="${esc(item.id)}">${label}</button>`}return `${stateBadge}${note}${button}`}
+  async function load(){
+    try{
+      const stamp=Date.now();
+      const fetchJson=async(path,fallback,required=false)=>{
+        const res=await fetch(`${path}?v=${stamp}`,{cache:"no-store"});
+        if(!res.ok){
+          if(required)throw new Error(`${path} returned HTTP ${res.status}`);
+          return fallback;
+        }
+        try{return await res.json()}
+        catch(err){
+          if(required)throw new Error(`${path} is not valid JSON: ${err.message}`);
+          return fallback;
+        }
+      };
+      const [archive,today,history]=await Promise.all([
+        fetchJson("data/archive.json",{items:[]},true),
+        fetchJson("data/today.json",{}),
+        fetchJson("data/top-history.json",{days:[]}),
+      ]);
+      state.items=(Array.isArray(archive.items)?archive.items:[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));
+      state.today={topIds:[],scanIds:[],ranking:[],ideas:[],run:{},...(today&&typeof today==="object"?today:{})};
+      state.history={days:[],...(history&&typeof history==="object"?history:{})};
+      if(!Array.isArray(state.today.topIds))state.today.topIds=[];
+      if(!Array.isArray(state.today.scanIds))state.today.scanIds=[];
+      if(!Array.isArray(state.today.ranking))state.today.ranking=[];
+      if(!Array.isArray(state.today.ideas))state.today.ideas=[];
+      if(!Array.isArray(state.history.days))state.history.days=[];
+      syncSavedWithLive();
+      setupOwner();
+      buildRail();
+      updateHeader();
+      render();
+    }catch(err){
+      console.error("AI Signal Desk failed to initialize",err);
+      $("synced").textContent="load failed";
+      $("runChip").textContent="Data load failed";
+      $("content").innerHTML=`<div class="empty"><strong>Could not load the digest.</strong><br>${esc(err?.message||err)}<br><br>Check that data/archive.json exists and is valid JSON, then reload.</div>`;
+    }
+  }
+
   function navDefinitions(){
     return [
       ["top","Today's Top",rankingEntries().length],
