@@ -30,8 +30,8 @@ const TRANSCRIPT_DIR = path.join(ROOT, "data", "transcripts");
 const CFG = readJSON(CONFIG_PATH, {});
 const EDIT = CFG.editorial || {};
 const NOW = Date.now();
-const EDIT_TIME_ZONE = String(EDIT.timeZone || "America/Los_Angeles");
-const DATE_KEY = dayKeyInTimeZone(NOW, EDIT_TIME_ZONE);
+const EDITORIAL_TIME_ZONE = String(EDIT.timeZone || "America/Los_Angeles");
+const DATE_KEY = zonedDayKey(NOW, EDITORIAL_TIME_ZONE);
 const RETENTION_MS = Math.max(1, Number(CFG.retentionDays || 30)) * 864e5;
 const LANG = String(CFG.summaryLang || "zh").toLowerCase();
 const USER_AGENT = "Mozilla/5.0 (compatible; ai-signal-desk/2.0; +https://github.com/Yeping-Hu/ai-digest)";
@@ -74,21 +74,18 @@ function utcDayKey(value) {
   return Number.isFinite(date.getTime()) ? date.toISOString().slice(0, 10) : "";
 }
 
-function dayKeyInTimeZone(value, timeZone = EDIT_TIME_ZONE) {
+function zonedDayKey(value, timeZone = EDITORIAL_TIME_ZONE) {
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) return "";
-  try {
-    const parts = new Intl.DateTimeFormat("en-US", {
-      timeZone,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).formatToParts(date);
-    const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-    return `${values.year}-${values.month}-${values.day}`;
-  } catch {
-    return date.toISOString().slice(0, 10);
-  }
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const get = (type) => parts.find((part) => part.type === type)?.value || "";
+  const year = get("year"), month = get("month"), day = get("day");
+  return year && month && day ? `${year}-${month}-${day}` : "";
 }
 
 function compactText(value) {
@@ -104,6 +101,22 @@ function truncateChars(value, max = 400) {
 function truncateWords(value, max = 200) {
   const words = compactText(value).split(" ").filter(Boolean);
   return words.length <= max ? words.join(" ") : `${words.slice(0, max).join(" ")}…`;
+}
+
+function looksLikeFullSummary(value) {
+  const text = String(value || "").trim();
+  if (!text) return false;
+  const compact = compactText(text);
+  const paragraphs = text.split(/\n\s*\n/).filter((part) => compactText(part)).length;
+  const bullets = (text.match(/^(?:[-*•]|\d+[.)])\s+/gm) || []).length;
+  return compact.length >= 650 || (compact.length >= 420 && (paragraphs >= 3 || bullets >= 4));
+}
+
+function fullSummaryValue(item) {
+  const explicit = String(item?.fullSummary || "").trim();
+  if (explicit) return explicit;
+  const legacy = String(item?.summary || "").trim();
+  return item?.full && looksLikeFullSummary(legacy) ? legacy : "";
 }
 
 function decodeEntities(value) {
@@ -371,11 +384,13 @@ function youtubeLifecycle(video = {}, playlistItem = {}, now = NOW) {
 }
 
 class SourceNotReadyError extends Error {
-  constructor(code, message, retryAt = "") {
+  constructor(code, message, retryAt = "", details = {}) {
     super(message);
     this.name = "SourceNotReadyError";
     this.code = code;
     this.retryAt = retryAt;
+    this.billableRequests = Number(details.billableRequests || 0);
+    this.httpStatus = Number(details.httpStatus || 0);
   }
 }
 
@@ -405,6 +420,56 @@ function youtubeNotReady(item) {
     );
   }
   return null;
+}
+
+async function refreshSingleYouTubeItem(item) {
+  if (!item || item.kind !== "youtube" || !YOUTUBE_KEY) return item;
+  const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
+  if (!videoId) return item;
+  const data = await getJSON(
+    `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics,liveStreamingDetails,status&id=${encodeURIComponent(videoId)}&key=${YOUTUBE_KEY}`,
+  );
+  const detail = data?.items?.[0];
+  if (!detail) return item;
+  const fakePlaylistItem = {
+    snippet: { publishedAt: item.playlistAddedAt || "" },
+    contentDetails: { videoPublishedAt: item.playlistVideoPublishedAt || "" },
+  };
+  const lifecycle = youtubeLifecycle(detail, fakePlaylistItem);
+  const snippet = detail.snippet || {};
+  const description = stripHTML(snippet.description || item.excerpt || "");
+  Object.assign(item, {
+    title: snippet.title || item.title || "",
+    author: snippet.channelTitle || item.author || item.source || "",
+    excerpt: description ? truncateChars(description, 1800) : item.excerpt || "",
+    duration: fmtDuration(detail.contentDetails?.duration) || item.duration || "",
+    likes: Number(detail.statistics?.likeCount || item.likes || 0),
+    views: Number(detail.statistics?.viewCount || item.views || 0),
+    youtubeState: lifecycle.state,
+    liveBroadcastContent: lifecycle.liveBroadcastContent,
+    scheduledStartTime: lifecycle.scheduledStartTime || item.scheduledStartTime || "",
+    actualStartTime: lifecycle.actualStartTime || item.actualStartTime || "",
+    actualEndTime: lifecycle.actualEndTime || item.actualEndTime || "",
+    youtubePublishedAt: lifecycle.youtubePublishedAt || item.youtubePublishedAt || "",
+    playlistVideoPublishedAt: lifecycle.playlistVideoPublishedAt || item.playlistVideoPublishedAt || "",
+    publishedAt: lifecycle.effectivePublishedAt || item.publishedAt || "",
+    youtubeUploadStatus: lifecycle.uploadStatus || item.youtubeUploadStatus || "",
+    availabilityUpdatedAt: new Date().toISOString(),
+  });
+  if (Number.isFinite(Number(lifecycle.ts)) && Number(lifecycle.ts) > 0) item.ts = Number(lifecycle.ts);
+  const block = youtubeNotReady(item);
+  if (block) {
+    item.fullSummaryStatus = "not_ready";
+    item.fullSummaryMessage = block.message;
+    item.fullSummaryErrorCode = block.code;
+    item.fullSummaryRetryAt = block.retryAt || item.scheduledStartTime || "";
+  } else if (item.fullSummaryStatus === "not_ready" && String(item.fullSummaryErrorCode || "").startsWith("youtube_")) {
+    item.fullSummaryStatus = "";
+    item.fullSummaryMessage = "";
+    item.fullSummaryErrorCode = "";
+    item.fullSummaryRetryAt = "";
+  }
+  return item;
 }
 
 function withinRetention(item) {
@@ -695,7 +760,7 @@ function buildEditorialPrompt(candidates) {
     localTopics: local.topics,
   }));
 
-  return `你是 @Kelly的科研日常 的英文 AI 信息源编辑。目标不是把新闻翻译成中文，而是从候选中找出真正值得认真阅读、能发展成高质量中文小红书知识图文的内容。\n\n请严格依据给出的标题和摘要，不要补充候选中没有出现的事实。聚合来源只能用于发现线索；若来源是 curated，请在 uncertaintyZh 中提醒回到原始来源核实。\n\n评分重点：\n1. 与 AI 协作、agent、workflow、科研、评测、开源工具的相关度；\n2. 来源质量和证据是否具体；\n3. 中文读者是否存在信息差；\n4. 是否容易用框架、对比、步骤或主线案例视觉化；\n5. 一个月后是否仍然有价值。\n\n从候选中最多选 ${Number(EDIT.topLimit || 8)} 条。前 ${Number(EDIT.topPrimary || 3)} 条 tier=\"top\"，其余 tier=\"scan\"。不要为了凑数选择普通内容。再给出最多 ${Number(EDIT.ideaLimit || 3)} 个可组合多个来源的小红书选题。\n\n只输出一个 JSON 对象，不要 markdown。格式：\n{\n  \"items\": [\n    {\n      \"id\": \"候选id\",\n      \"rank\": 1,\n      \"tier\": \"top 或 scan\",\n      \"score\": 0,\n      \"summaryZh\": \"1-2句准确中文摘要\",\n      \"whyItMattersZh\": \"为什么今天值得关注\",\n      \"evidenceZh\": \"候选中具体出现了什么证据或信息\",\n      \"uncertaintyZh\": \"需要核实或尚不确定的地方；没有则写空字符串\",\n      \"chineseAudienceGapZh\": \"中文内容可能缺少的角度\",\n      \"rednoteAngleZh\": \"最适合 Kelly 账号的图文切入点\",\n      \"topics\": [\"agents\"],\n      \"reason\": \"一句话入选理由\"\n    }\n  ],\n  \"ideas\": [\n    {\n      \"workingTitle\": \"可发布的中文标题\",\n      \"angle\": \"内容主线与读者收获\",\n      \"whyNow\": \"为什么现在值得做\",\n      \"sourceIds\": [\"候选id\"]\n    }\n  ]\n}\n\n候选：\n${JSON.stringify(payload)}`;
+  return `你是 @Kelly的科研日常 的英文 AI 信息源编辑。目标不是把新闻翻译成中文，而是从候选中找出真正值得认真阅读、能发展成高质量中文小红书知识图文的内容。\n\n请严格依据给出的标题和摘要，不要补充候选中没有出现的事实。聚合来源只能用于发现线索；若来源是 curated，请在 uncertaintyZh 中提醒回到原始来源核实。\n\n评分重点：\n1. 与 AI 协作、agent、workflow、科研、评测、开源工具的相关度；\n2. 来源质量和证据是否具体；\n3. 中文读者是否存在信息差；\n4. 是否容易用框架、对比、步骤或主线案例视觉化；\n5. 一个月后是否仍然有价值。\n\n从候选中最多选 ${Number(EDIT.topLimit || 8)} 条，全部属于 Today's Top。请严格按 score 从高到低排列，不要为了凑数选择普通内容。再给出最多 ${Number(EDIT.ideaLimit || 3)} 个彼此明显不同的小红书选题。不同选题必须有不同的核心问题、读者收获或叙事主线；同一个单一来源最多生成 1 个选题，优先组合多个来源，不要仅仅换一种标题重复同一角度。\n\n只输出一个 JSON 对象，不要 markdown。格式：\n{\n  \"items\": [\n    {\n      \"id\": \"候选id\",\n      \"rank\": 1,\n      \"score\": 0,\n      \"summaryZh\": \"1-2句准确中文摘要\",\n      \"whyItMattersZh\": \"为什么今天值得关注\",\n      \"evidenceZh\": \"候选中具体出现了什么证据或信息\",\n      \"uncertaintyZh\": \"需要核实或尚不确定的地方；没有则写空字符串\",\n      \"chineseAudienceGapZh\": \"中文内容可能缺少的角度\",\n      \"rednoteAngleZh\": \"最适合 Kelly 账号的图文切入点\",\n      \"topics\": [\"agents\"],\n      \"reason\": \"一句话入选理由\"\n    }\n  ],\n  \"ideas\": [\n    {\n      \"workingTitle\": \"可发布的中文标题\",\n      \"angle\": \"内容主线与读者收获\",\n      \"whyNow\": \"为什么现在值得做\",\n      \"sourceIds\": [\"候选id\"]\n    }\n  ]\n}\n\n候选：\n${JSON.stringify(payload)}`;
 }
 
 async function geminiRequest(prompt, jsonMode = true) {
@@ -735,11 +800,10 @@ function parseJSONObject(raw) {
 
 function fallbackEditorial(candidates) {
   const max = Math.min(Number(EDIT.topLimit || 8), candidates.length);
-  const primary = Number(EDIT.topPrimary || 3);
   const items = candidates.slice(0, max).map(({ item, local }, index) => ({
     id: item.id,
     rank: index + 1,
-    tier: index < primary ? "top" : "scan",
+    tier: "top",
     score: local.score,
     summaryZh: truncateChars(item.summary || item.excerpt || item.text || item.title, 260),
     whyItMattersZh: `本地规则认为它与 Kelly 的内容方向高度相关，当前评分 ${local.score}/100。`,
@@ -779,100 +843,6 @@ function buildFallbackIdeas(selected, candidates) {
   return ideas;
 }
 
-
-function rankingScore(entry) {
-  return clamp(Number(entry?.peakScore ?? entry?.score ?? entry?.lastScore ?? 0), 0, 100);
-}
-
-function mergeDailyRanking(previousRanking = [], currentRanking = [], itemMap = new Map(), selectedAt = new Date().toISOString()) {
-  const byId = new Map();
-
-  for (const value of previousRanking || []) {
-    if (!value?.id) continue;
-    const peakScore = rankingScore(value);
-    byId.set(value.id, {
-      ...value,
-      tier: "top",
-      score: peakScore,
-      peakScore,
-      lastScore: clamp(Number(value.lastScore ?? value.score ?? peakScore), 0, 100),
-      selectionCount: Math.max(1, Number(value.selectionCount || 1)),
-      firstSelectedAt: value.firstSelectedAt || value.selectedAt || selectedAt,
-      lastSelectedAt: value.lastSelectedAt || value.selectedAt || selectedAt,
-    });
-  }
-
-  for (const value of currentRanking || []) {
-    if (!value?.id) continue;
-    const previous = byId.get(value.id);
-    const currentScore = clamp(Number(value.score || 0), 0, 100);
-    const peakScore = Math.max(rankingScore(previous), currentScore);
-    byId.set(value.id, {
-      ...(previous || {}),
-      ...value,
-      tier: "top",
-      score: peakScore,
-      peakScore,
-      lastScore: currentScore,
-      selectionCount: Number(previous?.selectionCount || 0) + 1,
-      firstSelectedAt: previous?.firstSelectedAt || selectedAt,
-      lastSelectedAt: selectedAt,
-      reason: value.reason || previous?.reason || "",
-    });
-  }
-
-  const publicationValue = (entry) => {
-    const item = itemMap.get(entry.id);
-    const published = Number(item?.ts);
-    if (Number.isFinite(published) && published > 0) return published;
-    return Number(item?.firstSeen || 0);
-  };
-
-  return [...byId.values()]
-    .sort((a, b) =>
-      rankingScore(b) - rankingScore(a)
-      || Number(b.selectionCount || 0) - Number(a.selectionCount || 0)
-      || publicationValue(b) - publicationValue(a)
-      || String(a.firstSelectedAt || "").localeCompare(String(b.firstSelectedAt || ""))
-      || String(a.id).localeCompare(String(b.id)))
-    .map((entry, index) => ({ ...entry, rank: index + 1, tier: "top", score: rankingScore(entry) }));
-}
-
-function mergeDailyIdeas(previousIdeas = [], currentIdeas = [], selectedAt = new Date().toISOString()) {
-  const byKey = new Map();
-  const keyFor = (idea) => {
-    const title = compactText(idea?.workingTitle).toLowerCase();
-    const sources = unique(idea?.sourceIds || []).sort().join("|");
-    return `${title}::${sources}`;
-  };
-  for (const idea of previousIdeas || []) {
-    const key = keyFor(idea);
-    if (!key || key === "::") continue;
-    byKey.set(key, {
-      ...idea,
-      firstSuggestedAt: idea.firstSuggestedAt || selectedAt,
-      lastSuggestedAt: idea.lastSuggestedAt || selectedAt,
-      suggestionCount: Math.max(1, Number(idea.suggestionCount || 1)),
-    });
-  }
-  for (const idea of currentIdeas || []) {
-    const key = keyFor(idea);
-    if (!key || key === "::") continue;
-    const previous = byKey.get(key);
-    byKey.set(key, {
-      ...(previous || {}),
-      ...idea,
-      firstSuggestedAt: previous?.firstSuggestedAt || selectedAt,
-      lastSuggestedAt: selectedAt,
-      suggestionCount: Number(previous?.suggestionCount || 0) + 1,
-    });
-  }
-  return [...byKey.values()]
-    .sort((a, b) => Number(b.suggestionCount || 0) - Number(a.suggestionCount || 0)
-      || String(b.lastSuggestedAt || "").localeCompare(String(a.lastSuggestedAt || "")))
-    .slice(0, Math.max(9, Number(EDIT.ideaLimit || 3)));
-}
-
 function normalizeEditorial(raw, candidates) {
   const candidateMap = new Map(candidates.map((entry) => [entry.item.id, entry]));
   const requested = Array.isArray(raw?.items) ? raw.items : [];
@@ -881,7 +851,11 @@ function normalizeEditorial(raw, candidates) {
   const sourceCounts = new Map();
   const items = [];
 
-  const sorted = [...requested].sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Number(a.rank || 999) - Number(b.rank || 999));
+  const sorted = [...requested].sort((a, b) => {
+    const scoreA = Number(a?.score ?? candidateMap.get(a?.id)?.local?.score ?? 0);
+    const scoreB = Number(b?.score ?? candidateMap.get(b?.id)?.local?.score ?? 0);
+    return scoreB - scoreA || Number(a?.rank || 999) - Number(b?.rank || 999);
+  });
   for (const value of sorted) {
     const candidate = candidateMap.get(value?.id);
     if (!candidate || items.some((item) => item.id === value.id)) continue;
@@ -892,7 +866,7 @@ function normalizeEditorial(raw, candidates) {
     items.push({
       id: value.id,
       rank,
-      tier: rank <= Number(EDIT.topPrimary || 3) ? "top" : "scan",
+      tier: "top",
       score: clamp(Number(value.score || candidate.local.score), 0, 100),
       summaryZh: truncateChars(value.summaryZh || candidate.item.summary || candidate.item.excerpt, 320),
       whyItMattersZh: truncateChars(value.whyItMattersZh, 280),
@@ -915,30 +889,23 @@ function normalizeEditorial(raw, candidates) {
       sourceCounts.set(group, (sourceCounts.get(group) || 0) + 1);
       const fallback = fallbackEditorial([candidate]).items[0];
       fallback.rank = items.length + 1;
-      fallback.tier = fallback.rank <= Number(EDIT.topPrimary || 3) ? "top" : "scan";
+      fallback.tier = "top";
       items.push(fallback);
       if (items.length >= Number(EDIT.topPrimary || 3)) break;
     }
   }
 
-  items.sort((a, b) => Number(b.score || 0) - Number(a.score || 0) || Number(a.rank || 999) - Number(b.rank || 999));
-  items.forEach((item, index) => {
-    item.rank = index + 1;
-    item.tier = "top";
-  });
-
   const validIds = new Set(candidateMap.keys());
-  const ideas = (Array.isArray(raw?.ideas) ? raw.ideas : [])
+  const ideas = dedupeIdeas((Array.isArray(raw?.ideas) ? raw.ideas : [])
     .map((idea) => ({
       workingTitle: truncateChars(idea?.workingTitle, 120),
       angle: truncateChars(idea?.angle, 260),
       whyNow: truncateChars(idea?.whyNow, 220),
       sourceIds: unique((idea?.sourceIds || []).filter((id) => validIds.has(id))).slice(0, 5),
     }))
-    .filter((idea) => idea.workingTitle && idea.angle && idea.sourceIds.length)
-    .slice(0, Number(EDIT.ideaLimit || 3));
+    .filter((idea) => idea.workingTitle && idea.angle && idea.sourceIds.length), Number(EDIT.ideaLimit || 3));
 
-  return { items, ideas: ideas.length ? ideas : buildFallbackIdeas(items, candidates) };
+  return { items, ideas: ideas.length ? ideas : dedupeIdeas(buildFallbackIdeas(items, candidates), Number(EDIT.ideaLimit || 3)) };
 }
 
 async function runEditorial(candidates) {
@@ -963,47 +930,202 @@ async function runEditorial(candidates) {
   }
 }
 
+function rankingScore(entry) {
+  const value = Number(entry?.peakScore ?? entry?.score ?? entry?.lastScore ?? 0);
+  return Number.isFinite(value) ? clamp(value, 0, 100) : 0;
+}
+
+function mergeDailyRanking(previousRanking, currentRanking, itemMap, selectedAt = new Date().toISOString()) {
+  const merged = new Map();
+  for (const previous of Array.isArray(previousRanking) ? previousRanking : []) {
+    if (!previous?.id || !itemMap.has(previous.id)) continue;
+    const score = rankingScore(previous);
+    merged.set(previous.id, {
+      ...previous,
+      id: previous.id,
+      score,
+      peakScore: score,
+      lastScore: Number.isFinite(Number(previous.lastScore)) ? Number(previous.lastScore) : score,
+      firstSelectedAt: previous.firstSelectedAt || previous.lastSelectedAt || selectedAt,
+      lastSelectedAt: previous.lastSelectedAt || previous.firstSelectedAt || selectedAt,
+      selectionCount: Math.max(1, Number(previous.selectionCount || 1)),
+      tier: "top",
+    });
+  }
+
+  for (const current of Array.isArray(currentRanking) ? currentRanking : []) {
+    if (!current?.id || !itemMap.has(current.id)) continue;
+    const previous = merged.get(current.id);
+    const currentScore = rankingScore(current);
+    merged.set(current.id, {
+      ...(previous || {}),
+      ...current,
+      id: current.id,
+      score: Math.max(rankingScore(previous), currentScore),
+      peakScore: Math.max(rankingScore(previous), currentScore),
+      lastScore: currentScore,
+      firstSelectedAt: previous?.firstSelectedAt || selectedAt,
+      lastSelectedAt: selectedAt,
+      selectionCount: previous ? Math.max(1, Number(previous.selectionCount || 1)) + 1 : 1,
+      tier: "top",
+      reason: current.reason || previous?.reason || "",
+    });
+  }
+
+  return [...merged.values()]
+    .sort((a, b) => {
+      const scoreDiff = rankingScore(b) - rankingScore(a);
+      if (scoreDiff) return scoreDiff;
+      const countDiff = Number(b.selectionCount || 0) - Number(a.selectionCount || 0);
+      if (countDiff) return countDiff;
+      const publishedDiff = Number(itemMap.get(b.id)?.ts || 0) - Number(itemMap.get(a.id)?.ts || 0);
+      if (publishedDiff) return publishedDiff;
+      return String(a.firstSelectedAt || "").localeCompare(String(b.firstSelectedAt || ""));
+    })
+    .map((entry, index) => ({ ...entry, rank: index + 1, tier: "top", score: rankingScore(entry) }));
+}
+
+function ideaTokens(idea) {
+  const raw = `${idea?.workingTitle || ""} ${idea?.angle || ""} ${idea?.whyNow || ""}`
+    .toLowerCase()
+    .replace(/https?:\/\/\S+/g, " ")
+    .replace(/[\p{P}\p{S}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const tokens = new Set();
+  for (const token of raw.match(/[a-z0-9][a-z0-9-]{1,}|[\p{Script=Han}]{2,}/gu) || []) {
+    if (/^[\p{Script=Han}]+$/u.test(token)) {
+      const compact = token.replace(/[的了和与是把在对从为用中及而也都就会更个一这那]/gu, "");
+      if (compact.length <= 2) {
+        if (compact.length === 2) tokens.add(compact);
+      } else {
+        for (let index = 0; index < compact.length - 1; index += 1) tokens.add(compact.slice(index, index + 2));
+      }
+    } else if (!new Set(["the", "and", "for", "with", "from", "into", "why", "what", "how", "ai"]).has(token)) {
+      tokens.add(token);
+    }
+  }
+  return tokens;
+}
+
+function setOverlap(left, right) {
+  if (!left.size || !right.size) return 0;
+  let shared = 0;
+  for (const value of left) if (right.has(value)) shared += 1;
+  return shared / Math.max(1, Math.min(left.size, right.size));
+}
+
+function ideaDuplicate(left, right) {
+  const leftTitle = compactText(left?.workingTitle).toLowerCase();
+  const rightTitle = compactText(right?.workingTitle).toLowerCase();
+  if (!leftTitle || !rightTitle) return false;
+  if (leftTitle === rightTitle) return true;
+
+  const leftSources = unique(left?.sourceIds || []).sort();
+  const rightSources = unique(right?.sourceIds || []).sort();
+  const sameSources = leftSources.length === rightSources.length
+    && leftSources.every((value, index) => value === rightSources[index]);
+  // A single source should not generate two near-identical daily ideas. Keeping
+  // the richer one is more useful than presenting title variations as choices.
+  if (sameSources && leftSources.length === 1) return true;
+
+  const textSimilarity = setOverlap(ideaTokens(left), ideaTokens(right));
+  const sourceSimilarity = setOverlap(new Set(leftSources), new Set(rightSources));
+  return textSimilarity >= 0.58 || (sourceSimilarity >= 0.75 && textSimilarity >= 0.28);
+}
+
+function ideaRichness(idea) {
+  return compactText(`${idea?.workingTitle || ""} ${idea?.angle || ""} ${idea?.whyNow || ""}`).length
+    + unique(idea?.sourceIds || []).length * 40;
+}
+
+function dedupeIdeas(ideas, limit = Number(EDIT.ideaLimit || 3)) {
+  // Input order is editorial priority: mergeDailyIdeas passes the newest run
+  // first, so a fresh angle wins over a stale title variation from earlier.
+  const candidates = (Array.isArray(ideas) ? ideas : [])
+    .filter((idea) => idea?.workingTitle && idea?.angle && Array.isArray(idea.sourceIds) && idea.sourceIds.length);
+  const selected = [];
+  for (const idea of candidates) {
+    if (selected.some((existing) => ideaDuplicate(existing, idea))) continue;
+    selected.push(idea);
+    if (selected.length >= limit) break;
+  }
+  return selected;
+}
+
+function mergeDailyIdeas(previousIdeas, currentIdeas, limit = Number(EDIT.ideaLimit || 3)) {
+  // Prefer ideas from the latest run, but keep a distinct idea from an earlier
+  // run if the new batch does not cover the same editorial angle.
+  return dedupeIdeas([
+    ...(Array.isArray(currentIdeas) ? currentIdeas : []),
+    ...(Array.isArray(previousIdeas) ? previousIdeas : []),
+  ], limit);
+}
+
 async function transcript(videoId) {
   const cacheFile = path.join(TRANSCRIPT_DIR, `${videoId}.txt`);
   try {
     const cached = fs.readFileSync(cacheFile, "utf8");
     if (cached.trim()) {
-      log("Transcript: reused cached copy");
-      return cached;
+      log("Transcript: reused cached copy (0 Supadata credits)");
+      return { text: cached, billableRequests: 0, httpStatus: 200, cached: true };
     }
   } catch {}
 
   if (!SUPADATA_KEY) throw new Error("SUPADATA_API_KEY is missing.");
-  const url = `https://api.supadata.ai/v1/youtube/transcript?videoId=${encodeURIComponent(videoId)}`;
-  const response = await fetch(url, {
+  const endpoint = new URL("https://api.supadata.ai/v1/transcript");
+  endpoint.searchParams.set("url", `https://www.youtube.com/watch?v=${videoId}`);
+  endpoint.searchParams.set("text", "true");
+  endpoint.searchParams.set("mode", "native");
+  const response = await fetch(endpoint, {
     headers: { "User-Agent": USER_AGENT, Accept: "application/json", "x-api-key": SUPADATA_KEY },
   });
   const body = await response.text().catch(() => "");
+  const billableRequests = Math.max(0, Number(response.headers.get("x-billable-requests") || 0));
+  log(`Supadata transcript response: HTTP ${response.status}; billable requests: ${billableRequests}`);
+  let data = {};
+  try { data = body ? JSON.parse(body) : {}; } catch {}
+  const lower = `${body} ${data?.error || ""} ${data?.message || ""} ${data?.details || ""}`.toLowerCase();
+
+  if (response.status === 206 || /transcript[- ]unavailable|no transcript is available/.test(lower)) {
+    throw new SourceNotReadyError(
+      "youtube_transcript_unavailable",
+      "The video is published, but a native transcript is not available yet. Please try again later.",
+      "",
+      { billableRequests, httpStatus: response.status },
+    );
+  }
   if (!response.ok) {
-    const lower = body.toLowerCase();
     if (/currently live streaming|currently live|live stream(?:ing)?/.test(lower)) {
       throw new SourceNotReadyError(
         "youtube_live",
         "This video is live now. A full summary will be available after the stream ends and a transcript is published.",
+        "",
+        { billableRequests, httpStatus: response.status },
       );
     }
     if (/scheduled|upcoming|premiere|not yet published|has not (?:started|premiered)/.test(lower)) {
       throw new SourceNotReadyError(
         "youtube_upcoming",
         "This video has not been published yet. A full summary will be available after it is released and a transcript exists.",
+        "",
+        { billableRequests, httpStatus: response.status },
       );
     }
     if (/transcript.*not available yet|replay.*processing|still processing|caption.*processing/.test(lower)) {
       throw new SourceNotReadyError(
         "youtube_processing",
         "The video is available, but its replay or transcript is still processing. Please try again later.",
+        "",
+        { billableRequests, httpStatus: response.status },
       );
     }
-    throw new Error(`Transcript service returned ${response.status}: ${body.slice(0, 240) || "unknown error"}`);
+    const error = new Error(`Transcript service returned ${response.status}: ${body.slice(0, 240) || "unknown error"}`);
+    error.billableRequests = billableRequests;
+    error.httpStatus = response.status;
+    throw error;
   }
 
-  let data = {};
-  try { data = body ? JSON.parse(body) : {}; } catch {}
   const text = Array.isArray(data?.content)
     ? data.content.map((segment) => segment.text || "").join(" ")
     : typeof data?.content === "string"
@@ -1011,9 +1133,10 @@ async function transcript(videoId) {
       : "";
   if (text.trim()) {
     fs.mkdirSync(TRANSCRIPT_DIR, { recursive: true });
-    fs.writeFileSync(cacheFile, text);
+    fs.writeFileSync(cacheFile, `${text.trim()}
+`);
   }
-  return text;
+  return { text, billableRequests, httpStatus: response.status, cached: false };
 }
 
 function fullSummaryPrompt(item, text) {
@@ -1126,9 +1249,16 @@ async function sourceTextForItem(item) {
     const blocked = youtubeNotReady(item);
     if (blocked) throw blocked;
     const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
-    const text = await transcript(videoId);
-    if (!text) throw new Error("No transcript was returned. The transcript may still be processing, or the Supadata key/quota may need attention.");
-    return { text, source: "transcript", path: saveSourceCache(item, text) };
+    const result = await transcript(videoId);
+    if (!result?.text) throw new Error("No transcript was returned. The transcript may still be processing, or the Supadata key/quota may need attention.");
+    return {
+      text: result.text,
+      source: "transcript",
+      path: saveSourceCache(item, result.text),
+      billableRequests: Number(result.billableRequests || 0),
+      transcriptHttpStatus: Number(result.httpStatus || 0),
+      transcriptCached: Boolean(result.cached),
+    };
   }
   if (item.kind === "x") {
     const text = String(item.text || item.excerpt || "").trim();
@@ -1145,7 +1275,7 @@ async function sourceTextForItem(item) {
       log("Article fetch fallback:", error.message);
     }
   }
-  const fallback = compactText(item.excerpt || item.text || (!item.full ? item.summary : "") || item.title);
+  const fallback = compactText(item.excerpt || item.text || (!fullSummaryValue(item) ? item.summary : "") || item.title);
   const text = article.length >= Math.max(700, fallback.length) ? article : fallback;
   if (!text) throw new Error("No readable article text was available.");
   return { text, source: article === text ? "article" : "feed", path: saveSourceCache(item, text) };
@@ -1172,6 +1302,8 @@ function writeFullSummaryStatus(archiveDoc, items, item, status, details = {}) {
   item.fullSummaryMessage = details.message || "";
   item.fullSummaryErrorCode = details.code || "";
   item.fullSummaryRetryAt = details.retryAt || "";
+  item.fullSummaryBillableRequests = Number(details.billableRequests || 0);
+  item.fullSummaryTranscriptStatus = Number(details.httpStatus || 0);
   if (status !== "ready") item.fullSummaryLastErrorAt = at;
   writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: at, count: items.length, items });
   updateItemInTopHistory(item);
@@ -1185,6 +1317,13 @@ async function summarizeOneItem(itemId) {
   if (!item) throw new Error(`Item not found in archive: ${normalizedId}`);
 
   try {
+    if (item.kind === "youtube" && YOUTUBE_KEY) {
+      try {
+        await refreshSingleYouTubeItem(item);
+      } catch (error) {
+        log("YouTube preflight refresh failed; using archived availability:", error.message);
+      }
+    }
     const blocked = item.kind === "youtube" ? youtubeNotReady(item) : null;
     if (blocked) throw blocked;
     if (!GEMINI_KEY) throw new Error("GEMINI_API_KEY is required for a full summary.");
@@ -1200,11 +1339,12 @@ async function summarizeOneItem(itemId) {
       item.availabilityUpdatedAt = new Date().toISOString();
     }
     const summary = await geminiRequest(fullSummaryPrompt(item, source.text), false);
-    item.summary = summary || item.summary;
-    item.full = true;
+    item.fullSummary = summary || fullSummaryValue(item);
+    if (!item.summary) item.summary = truncateChars(item.fullSummary, 320);
+    item.full = Boolean(item.fullSummary);
     item.fullSummaryAt = new Date().toISOString();
     item.fullSummarySource = source.source;
-    item.fullSummaryChars = source.text.length;
+    item.fullSummaryChars = item.fullSummary.length;
     item.fullSourcePath = source.path || relativeSourcePath(sourceCachePath(item));
     item.sourceTextPath = item.fullSourcePath;
     item.transcriptPath = item.fullSourcePath;
@@ -1216,6 +1356,8 @@ async function summarizeOneItem(itemId) {
     item.fullSummaryErrorCode = "";
     item.fullSummaryRetryAt = "";
     item.fullSummaryLastErrorAt = "";
+    item.fullSummaryBillableRequests = Number(source.billableRequests || 0);
+    item.fullSummaryTranscriptStatus = Number(source.transcriptHttpStatus || 0);
     writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
     updateItemInTopHistory(item);
     log("Upgraded full summary:", item.id);
@@ -1234,6 +1376,8 @@ async function summarizeOneItem(itemId) {
       message,
       code: error.code || (notReady ? "source_not_ready" : "summary_failed"),
       retryAt: error.retryAt || item.scheduledStartTime || "",
+      billableRequests: Number(error.billableRequests || 0),
+      httpStatus: Number(error.httpStatus || 0),
     });
     if (notReady) log("Full summary deferred:", item.id, "—", message);
     else log("Full summary failed and was recorded:", item.id, "—", error.message);
@@ -1303,7 +1447,77 @@ async function backfillFullSourceCaches() {
   log(`Source cache backfill complete: ${cachedCount} cached, ${skippedCount} skipped.`);
 }
 
+function legacyFullSummaryCandidates(item, history = { days: [] }) {
+  const values = [];
+  const add = (value) => {
+    const text = String(value || "").trim();
+    if (text && !values.includes(text)) values.push(text);
+  };
+  add(item?.fullSummary);
+  if (item?.full && (looksLikeFullSummary(item.summary) || compactText(item.summary).length >= 350)) add(item.summary);
+  for (const day of history.days || []) {
+    const snapshot = (day.items || []).find((entry) => entry?.id === item?.id);
+    if (!snapshot) continue;
+    add(snapshot.fullSummary);
+    if (snapshot.full && (looksLikeFullSummary(snapshot.summary) || compactText(snapshot.summary).length >= 350)) add(snapshot.summary);
+  }
+  return values.sort((a, b) => compactText(b).length - compactText(a).length);
+}
+
+function migrateLegacyFullSummaryItems(items, history = readJSON(TOP_HISTORY_PATH, { days: [] })) {
+  let changed = false;
+  for (const item of items || []) {
+    const recovered = legacyFullSummaryCandidates(item, history)[0] || "";
+    if (recovered) {
+      if (item.fullSummary !== recovered) {
+        item.fullSummary = recovered;
+        changed = true;
+      }
+      if (item.summary === recovered) {
+        item.summary = item.editorial?.summaryZh || truncateChars(recovered, 320);
+        changed = true;
+      }
+      if (!item.full || item.fullSummaryStatus !== "ready") {
+        item.full = true;
+        item.fullSummaryStatus = "ready";
+        item.fullSummaryMessage = "";
+        item.fullSummaryErrorCode = "";
+        item.fullSummaryRetryAt = "";
+        changed = true;
+      }
+      item.fullSummaryChars = compactText(recovered).length;
+      continue;
+    }
+    if (item.full) {
+      item.full = false;
+      item.fullSummaryStatus = "needs_regeneration";
+      item.fullSummaryMessage = "The previous full-summary flag survived, but the summary text did not. Regenerate it from the cached source or original URL.";
+      item.fullSummaryErrorCode = "full_summary_text_missing";
+      changed = true;
+    }
+  }
+  return changed;
+}
+
+async function migrateFullSummariesInArchive() {
+  const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
+  const items = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  const history = readJSON(TOP_HISTORY_PATH, { days: [] });
+  const changed = migrateLegacyFullSummaryItems(items, history);
+  if (changed) {
+    const generatedAt = new Date().toISOString();
+    writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt, count: items.length, items });
+    for (const item of items) updateItemInTopHistory(item);
+    log("Migrated legacy full-summary fields.");
+  } else {
+    log("Legacy full-summary fields are already consistent.");
+  }
+}
+
 function migrateAndMerge(existingItems, collectedItems) {
+  // Normalize legacy records even in isolated maintenance/tests where the
+  // full main() migration pass is not invoked first.
+  migrateLegacyFullSummaryItems(existingItems, { days: [] });
   const existingById = new Map(existingItems.map((item) => [item.id, item]));
   const existingByURL = new Map(
     existingItems
@@ -1326,14 +1540,19 @@ function migrateAndMerge(existingItems, collectedItems) {
     const lifecycleChanged = incoming.kind === "youtube" && (
       !previous || lifecycleKeys.some((key) => String(previous?.[key] ?? "") !== String(incoming?.[key] ?? ""))
     );
+    const preservedFullSummary = fullSummaryValue(previous) || fullSummaryValue(incoming);
+    const previousShortSummary = previous?.summary === preservedFullSummary
+      ? previous?.editorial?.summaryZh || truncateChars(previous?.summary, 320)
+      : previous?.summary;
     const value = {
       ...(previous || {}),
       ...incoming,
       id,
       canonicalUrl: canonical,
-      summary: previous?.summary || incoming.summary || incoming.excerpt || "",
+      summary: previousShortSummary || incoming.summary || incoming.excerpt || "",
+      fullSummary: preservedFullSummary,
       editorial: previous?.editorial || null,
-      full: Boolean(previous?.full || incoming.full),
+      full: Boolean(preservedFullSummary),
       firstSeen: previous?.firstSeen || incoming.firstSeen || previous?.ts || NOW,
       sourceTags: unique([...(previous?.sourceTags || []), ...(incoming.sourceTags || [incoming.source])]),
     };
@@ -1343,7 +1562,8 @@ function migrateAndMerge(existingItems, collectedItems) {
         : previous?.availabilityUpdatedAt || incoming.availabilityUpdatedAt || "";
       const state = String(value.youtubeState || "");
       const availabilityBlock = youtubeNotReady(value);
-      if (value.full) {
+      if (fullSummaryValue(value)) {
+        value.full = true;
         value.fullSummaryStatus = "ready";
       } else if (availabilityBlock) {
         value.fullSummaryStatus = "not_ready";
@@ -1397,6 +1617,7 @@ function historySnapshot(item) {
     text: item.text || "",
     excerpt: item.excerpt || "",
     summary: item.summary || "",
+    fullSummary: fullSummaryValue(item),
     url: item.url,
     ts: item.ts,
     likes: item.likes || 0,
@@ -1419,6 +1640,9 @@ function historySnapshot(item) {
     fullSummaryErrorCode: item.fullSummaryErrorCode || "",
     fullSummaryRetryAt: item.fullSummaryRetryAt || "",
     fullSummarySource: item.fullSummarySource || "",
+    fullSummaryChars: item.fullSummaryChars || compactText(fullSummaryValue(item)).length,
+    fullSummaryBillableRequests: Number(item.fullSummaryBillableRequests || 0),
+    fullSummaryTranscriptStatus: Number(item.fullSummaryTranscriptStatus || 0),
     fullSourcePath: item.fullSourcePath || item.sourceTextPath || item.transcriptPath || "",
     sourceTextPath: item.sourceTextPath || item.fullSourcePath || item.transcriptPath || "",
     transcriptPath: item.transcriptPath || item.fullSourcePath || item.sourceTextPath || "",
@@ -1479,10 +1703,101 @@ function cleanDailySnapshots() {
   }
 }
 
+async function refreshArchivedYouTubeItems(existingItems) {
+  if (!YOUTUBE_KEY) return { items: existingItems, releasedIds: new Set(), changedItems: [] };
+  const youtubeItems = (existingItems || []).filter(
+    (item) => item?.kind === "youtube" && (item.videoId || String(item.id || "").startsWith("yt:")),
+  );
+  if (!youtubeItems.length) return { items: existingItems, releasedIds: new Set(), changedItems: [] };
+
+  const byVideoId = new Map(
+    youtubeItems.map((item) => [item.videoId || String(item.id).replace(/^yt:/, ""), item]),
+  );
+  const details = new Map();
+  const ids = [...byVideoId.keys()].filter(Boolean);
+  for (let start = 0; start < ids.length; start += 50) {
+    const batch = ids.slice(start, start + 50);
+    try {
+      const data = await getJSON(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics,liveStreamingDetails,status&id=${batch.join(",")}&key=${YOUTUBE_KEY}`,
+      );
+      for (const video of data.items || []) details.set(video.id, video);
+    } catch (error) {
+      log("  ! archived YouTube lifecycle lookup failed:", error.message);
+    }
+  }
+
+  const releasedIds = new Set();
+  const changedItems = [];
+  const items = existingItems.map((item) => {
+    if (item?.kind !== "youtube") return item;
+    const videoId = item.videoId || String(item.id || "").replace(/^yt:/, "");
+    const detail = details.get(videoId);
+    if (!detail) return item;
+    const fakePlaylistItem = {
+      snippet: { publishedAt: item.playlistAddedAt || "" },
+      contentDetails: { videoPublishedAt: item.playlistVideoPublishedAt || "" },
+    };
+    const lifecycle = youtubeLifecycle(detail, fakePlaylistItem);
+    const beforeState = String(item.youtubeState || "");
+    const next = {
+      ...item,
+      title: detail.snippet?.title || item.title,
+      author: detail.snippet?.channelTitle || item.author,
+      excerpt: detail.snippet?.description ? truncateChars(stripHTML(detail.snippet.description), 1800) : item.excerpt,
+      youtubeState: lifecycle.state,
+      liveBroadcastContent: lifecycle.liveBroadcastContent,
+      scheduledStartTime: lifecycle.scheduledStartTime || item.scheduledStartTime || "",
+      actualStartTime: lifecycle.actualStartTime || item.actualStartTime || "",
+      actualEndTime: lifecycle.actualEndTime || item.actualEndTime || "",
+      youtubePublishedAt: lifecycle.youtubePublishedAt || item.youtubePublishedAt || "",
+      playlistVideoPublishedAt: lifecycle.playlistVideoPublishedAt || item.playlistVideoPublishedAt || "",
+      publishedAt: lifecycle.effectivePublishedAt || item.publishedAt || "",
+      youtubeUploadStatus: lifecycle.uploadStatus || item.youtubeUploadStatus || "",
+      likes: Math.max(Number(item.likes || 0), Number(detail.statistics?.likeCount || 0)),
+      views: Math.max(Number(item.views || 0), Number(detail.statistics?.viewCount || 0)),
+      duration: fmtDuration(detail.contentDetails?.duration) || item.duration || "",
+      availabilityUpdatedAt: new Date().toISOString(),
+    };
+    if (Number.isFinite(Number(lifecycle.ts)) && Number(lifecycle.ts) > 0) next.ts = Number(lifecycle.ts);
+    const availabilityBlock = youtubeNotReady(next);
+    if (fullSummaryValue(next)) {
+      next.full = true;
+      next.fullSummaryStatus = "ready";
+      next.fullSummaryMessage = "";
+      next.fullSummaryErrorCode = "";
+      next.fullSummaryRetryAt = "";
+    } else if (availabilityBlock) {
+      next.fullSummaryStatus = "not_ready";
+      next.fullSummaryMessage = availabilityBlock.message;
+      next.fullSummaryErrorCode = availabilityBlock.code;
+      next.fullSummaryRetryAt = availabilityBlock.retryAt || next.scheduledStartTime || "";
+    } else if (next.fullSummaryStatus === "not_ready" && String(next.fullSummaryErrorCode || "").startsWith("youtube_")) {
+      next.fullSummaryStatus = "";
+      next.fullSummaryMessage = "";
+      next.fullSummaryErrorCode = "";
+      next.fullSummaryRetryAt = "";
+    }
+    const keys = [
+      "youtubeState", "scheduledStartTime", "actualStartTime", "actualEndTime",
+      "publishedAt", "ts", "youtubeUploadStatus", "fullSummaryStatus",
+      "fullSummaryMessage", "fullSummaryErrorCode", "fullSummaryRetryAt",
+    ];
+    if (keys.some((key) => String(item?.[key] ?? "") !== String(next?.[key] ?? ""))) changedItems.push(next);
+    if (beforeState === "upcoming" && lifecycle.state !== "upcoming" && Number.isFinite(Number(lifecycle.ts))) {
+      releasedIds.add(item.id);
+    }
+    return next;
+  });
+  return { items, releasedIds, changedItems };
+}
+
 async function refreshYouTubeMetadata() {
   if (!YOUTUBE_KEY) throw new Error("YOUTUBE_API_KEY is required to refresh YouTube availability.");
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
-  const existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  let existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  const lifecycleRefresh = await refreshArchivedYouTubeItems(existingItems);
+  existingItems = lifecycleRefresh.items;
   let collected = [];
   for (const src of CFG.sources || []) {
     if (src.enabled === false || src.type !== "youtube") continue;
@@ -1566,6 +1881,10 @@ async function main() {
     await refreshYouTubeMetadata();
     return;
   }
+  if (String(process.env.MIGRATE_FULL_SUMMARIES || "").trim() === "1") {
+    await migrateFullSummariesInArchive();
+    return;
+  }
   if (String(process.env.BACKFILL_FULL_SOURCES || "").trim() === "1") {
     await backfillFullSourceCaches();
     return;
@@ -1577,19 +1896,14 @@ async function main() {
     return;
   }
 
-  // The former youtube-availability workflow is now part of every full digest
-  // run. It refreshes stable archive IDs before ranking, so scheduled videos can
-  // move through upcoming → live → processing → available without a separate job.
-  if (YOUTUBE_KEY && (CFG.sources || []).some((source) => source.enabled !== false && source.type === "youtube")) {
-    try {
-      await refreshYouTubeMetadata();
-    } catch (error) {
-      log("YouTube lifecycle refresh skipped:", error.message);
-    }
-  }
-
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
-  const existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  let existingItems = Array.isArray(archiveDoc.items) ? archiveDoc.items : [];
+  const historyDoc = readJSON(TOP_HISTORY_PATH, { days: [] });
+  migrateLegacyFullSummaryItems(existingItems, historyDoc);
+  const lifecycleRefresh = YOUTUBE_KEY
+    ? await refreshArchivedYouTubeItems(existingItems)
+    : { items: existingItems, releasedIds: new Set(), changedItems: [] };
+  existingItems = lifecycleRefresh.items;
   const run = {
     status: "ok",
     startedAt: new Date().toISOString(),
@@ -1638,21 +1952,27 @@ async function main() {
 
   const deduped = deduplicate(collected);
   run.itemsAfterDedup = deduped.length;
-  const { merged, newIds, releasedIds } = migrateAndMerge(existingItems, deduped);
+  const mergeResult = migrateAndMerge(existingItems, deduped);
+  const { merged, newIds } = mergeResult;
+  const releasedIds = new Set([...lifecycleRefresh.releasedIds, ...mergeResult.releasedIds]);
 
   let kept = [...merged.values()]
     .filter(withinRetention)
     .sort((a, b) => Number(b.ts || 0) - Number(a.ts || 0));
 
-  const dailySnapshot = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), null);
-  const todaySnapshot = readJSON(TODAY_PATH, null);
-  const sameDaySnapshots = [dailySnapshot, todaySnapshot]
-    .filter((doc) => doc && doc.date === DATE_KEY)
-    .sort((a, b) => Date.parse(String(b.generatedAt || "")) - Date.parse(String(a.generatedAt || "")));
-  const previousDay = sameDaySnapshots[0] || { newIds: [], ranking: [], ideas: [] };
+  const datedPreviousDay = readJSON(path.join(DAILY_DIR, `${DATE_KEY}.json`), null);
+  const previousToday = readJSON(TODAY_PATH, null);
+  const previousTodayKey = previousToday
+    ? zonedDayKey(previousToday.generatedAt || `${previousToday.date || ""}T12:00:00Z`, EDITORIAL_TIME_ZONE)
+    : "";
+  const previousHistoryDay = (readJSON(TOP_HISTORY_PATH, { days: [] }).days || []).find((day) => day?.date === DATE_KEY) || null;
+  const previousDay = datedPreviousDay
+    || (previousTodayKey === DATE_KEY ? previousToday : null)
+    || previousHistoryDay
+    || { newIds: [], ranking: [], ideas: [] };
   const dailyNewIds = unique([
     ...(previousDay.newIds || []),
-    ...kept.filter((item) => item.firstSeen && dayKeyInTimeZone(item.firstSeen, EDIT_TIME_ZONE) === DATE_KEY).map((item) => item.id),
+    ...kept.filter((item) => item.firstSeen && zonedDayKey(item.firstSeen) === DATE_KEY).map((item) => item.id),
     ...newIds,
     ...releasedIds,
   ]).filter((id) => merged.has(id));
@@ -1691,15 +2011,15 @@ async function main() {
   run.usedGemini = editorial.usedGemini;
   if (editorial.error) run.errors.push(`Gemini: ${editorial.error}`);
 
-  const selectedAt = new Date().toISOString();
-  const currentRanking = editorial.result.items.map((entry, index) => ({
-    id: entry.id,
-    rank: index + 1,
-    tier: "top",
-    score: clamp(Number(entry.score || 0), 0, 100),
-    reason: entry.reason,
-    selectedAt,
-  }));
+  const currentRanking = editorial.result.items
+    .map((entry) => ({
+      id: entry.id,
+      score: clamp(Number(entry.score || 0), 0, 100),
+      reason: entry.reason,
+      tier: "top",
+    }))
+    .sort((a, b) => b.score - a.score || Number(merged.get(b.id)?.ts || 0) - Number(merged.get(a.id)?.ts || 0))
+    .map((entry, index) => ({ ...entry, rank: index + 1 }));
 
   for (const entry of editorial.result.items) {
     const target = merged.get(entry.id);
@@ -1724,20 +2044,19 @@ async function main() {
 
   run.finishedAt = new Date().toISOString();
   const ranking = mergeDailyRanking(previousDay.ranking || [], currentRanking, merged, run.finishedAt);
-  const ideas = mergeDailyIdeas(previousDay.ideas || [], editorial.result.ideas || [], run.finishedAt);
   run.rankedThisRun = currentRanking.length;
-  run.rankedToday = ranking.length;
-  run.timeZone = EDIT_TIME_ZONE;
+  run.accumulatedTop = ranking.length;
+  run.youtubeLifecycleUpdates = lifecycleRefresh.changedItems.length;
   const today = {
     generatedAt: run.finishedAt,
     date: DATE_KEY,
-    timeZone: EDIT_TIME_ZONE,
+    timeZone: EDITORIAL_TIME_ZONE,
     newCount: dailyNewIds.length,
     newIds: dailyNewIds,
     topIds: ranking.map((entry) => entry.id),
     scanIds: [],
     ranking,
-    ideas,
+    ideas: mergeDailyIdeas(previousDay.ideas || [], editorial.result.ideas || []),
     run,
   };
 
@@ -1746,12 +2065,16 @@ async function main() {
     count: kept.length,
     items: kept,
   });
+  for (const changed of lifecycleRefresh.changedItems) {
+    const live = merged.get(changed.id);
+    if (live) updateItemInTopHistory(live);
+  }
   writeJSONAtomic(TODAY_PATH, today);
   writeJSONAtomic(path.join(DAILY_DIR, `${DATE_KEY}.json`), today);
   updateTopHistory(today, merged);
   cleanDailySnapshots();
 
-  log(`\nDone. ${kept.length} archived · ${newIds.size} new this run · ${dailyNewIds.length} new today · ${ranking.length} ranked · ${geminiCalls} Gemini call(s).`);
+  log(`\nDone. ${kept.length} archived · ${newIds.size} new this run · ${dailyNewIds.length} discovered today · ${currentRanking.length} selected this run · ${ranking.length} accumulated top · ${geminiCalls} Gemini call(s).`);
 }
 
 const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -1765,9 +2088,14 @@ if (isDirectRun) {
 export {
   canonicalizeURL,
   utcDayKey,
-  dayKeyInTimeZone,
+  zonedDayKey,
   deduplicate,
   localScore,
+  dedupeIdeas,
+  ideaDuplicate,
+  fullSummaryValue,
+  migrateLegacyFullSummaryItems,
+  mergeDailyIdeas,
   mergeDailyRanking,
   migrateAndMerge,
   normalizeEditorial,

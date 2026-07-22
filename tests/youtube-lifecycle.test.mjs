@@ -172,6 +172,15 @@ assert.equal(stored.fullSummaryRetryAt, "2026-07-22T18:00:00.000Z");
 assert.match(stored.fullSummaryMessage, /scheduled|not started/i);
 fs.rmSync(tmp, { recursive: true, force: true });
 
+
+// Full-summary dispatch must refresh official YouTube metadata before touching
+// Supadata, and the current generic transcript endpoint must stay in native mode.
+const collectorSource = fs.readFileSync(path.join(root, "collect.mjs"), "utf8");
+assert.match(collectorSource, /await refreshSingleYouTubeItem\(item\)/);
+assert.match(collectorSource, /api\.supadata\.ai\/v1\/transcript/);
+assert.match(collectorSource, /searchParams\.set\("mode", "native"\)/);
+assert.doesNotMatch(collectorSource, /\/v1\/youtube\/transcript\?videoId=/);
+
 // Front-end contract: upcoming status is visible, summary dispatch is blocked,
 // the item is grouped separately until publication, and shortlist snapshots are
 // refreshed from the stable live archive object.
