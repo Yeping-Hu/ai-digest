@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-22T20:34:22.708Z",
+  "generatedAt": "2026-07-22T20:36:39.884Z",
   "count": 192,
   "items": [
     {
@@ -22,10 +22,10 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "videoId": "khVX_BUnEwU",
       "ts": 1784750406000,
-      "likes": 30,
-      "views": 96,
+      "likes": 31,
+      "views": 105,
       "duration": "17:34",
-      "full": false,
+      "full": true,
       "categories": [],
       "editorial": {
         "summaryZh": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”构建Agent的新范式，通过将日志视为Agent本身，实现了自动回滚、重放和分叉功能。",
@@ -57,13 +57,13 @@
         ]
       },
       "youtubeState": "available",
-      "availabilityUpdatedAt": "2026-07-22T20:32:07.874Z",
-      "fullSummaryAttemptAt": "2026-07-21T21:55:07.726Z",
-      "fullSummaryStatus": "",
+      "availabilityUpdatedAt": "2026-07-22T20:36:34.118Z",
+      "fullSummaryAttemptAt": "2026-07-22T20:36:39.884Z",
+      "fullSummaryStatus": "ready",
       "fullSummaryMessage": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
-      "fullSummaryLastErrorAt": "2026-07-21T21:55:07.726Z",
+      "fullSummaryLastErrorAt": "",
       "liveBroadcastContent": "none",
       "scheduledStartTime": "2026-07-22T20:00:00.000Z",
       "actualStartTime": "2026-07-22T20:00:06.000Z",
@@ -73,10 +73,20 @@
       "publishedAt": "2026-07-22T20:00:06.000Z",
       "youtubeUploadStatus": "processed",
       "playlistAddedAt": "2026-07-22T20:00:06.000Z",
-      "fullSummary": "",
+      "fullSummary": "Yohei Nakajima 在演讲中介绍了其开源实验性项目 **ActiveGraph**，这是一种旨在解决长期运行智能体（Agent）易崩溃、难以自我改进问题的运行时架构。该项目不仅是 BabyAGI 的最新迭代，更提出了一种从“以大模型为中心”转向“以日志为中心”的智能体构建范式。\n\n**核心架构理念：日志即智能体**\nActiveGraph 的核心思想是将智能体的所有行为、状态变更及演进过程记录在一个不可变的、类型化的事件日志中。\n• **共享状态：** 不同于传统智能体中大模型（LLM）直接通信，ActiveGraph 中的所有组件通过共享的图状态进行交互。\n• **行为（Behaviors）：** 行为是监听图状态变化的逻辑单元，它们可以是确定性的代码，也可以包含 LLM。当图状态发生变化时，行为被触发并产生新的事件，进而更新状态。\n• **策略（Policies）：** 策略用于控制图的修改权限。例如，修改提示词可能需要“人在回路（Human-in-the-loop）”确认，或者在修改事实前需进行矛盾检测。\n• **模块化（Packs）：** 智能体由多个“包（Packs）”组成，如内存包、工具包、通信包等。这些包是模块化的，可以跨仓库复用。\n\n**主要优势与功能**\n• **可审计与可回溯：** 由于所有变更均记录在案，系统原生支持重放（Replay）、回滚（Rollback）和分支（Fork）。当 API 调用失败时，系统无需从头开始，而是能从中断点恢复。\n• **自我改进循环：** 智能体可以基于实验结果进行自我修改。例如，通过在模拟环境中测试不同的策略，只有当性能指标（如胜率或准确率）确实提升时，系统才会接受该补丁。\n• **调试效率：** 调试过程从查看混乱的会话日志转变为直接查询结构化的 ActiveGraph 数据库。\n\n**实验与发现**\nNakajima 通过多个实验验证了该架构的有效性：\n• **Long Mem Eval：** 在不进行复杂语义提取的情况下，仅利用结构化日志作为记忆，在长记忆评估中表现良好。\n• **自我修复：** 在“ActiveGraph Lab”实验中，智能体能够自行阅读文档、发现代码错误、编写 PR 并修复自身。\n• **策略优化：** 在 Kaggle 的宝可梦卡牌对战竞赛中，智能体通过 80 次实验迭代，自动记录了成功与失败的尝试，并根据预设的统计显著性标准逐步优化了策略。\n\n**限制与不确定性**\n• **架构复杂性：** 这种基于黑板架构（Blackboard Architecture）的模式对开发者而言可能较为陌生，且编写逻辑与传统的顺序式编程不同。\n• **实验性质：** 该项目仍处于高度实验阶段，虽然在特定任务中表现出优于传统“YOLO（只管运行）”式智能体的能力，但其通用性和在大规模生产环境下的表现仍有待验证。\n• **理论假设：** Nakajima 提出智能体不仅需要预测性世界模型，还需要一种基于经验的“体验式世界模型”。他认为智能体的身份应源于其自身的日志记录，而非仅仅是推理能力，这一观点仍处于探索阶段。\n\n总结而言，ActiveGraph 试图通过将智能体的“生命历程”固化为可查询、可修改的图结构，赋予智能体类似生物的记忆与自我演进能力，而非仅仅依赖于大模型的即时推理。",
       "summaryZh": "BabyAGI创始人Yohei Nakajima提出了一种基于“不可变事件日志”构建Agent的新范式，通过将日志视为Agent本身，实现了自动回滚、重放和分叉功能。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-07-22T20:32:18.681Z"
+      "summaryTranslatedAt": "2026-07-22T20:32:18.681Z",
+      "fullSummaryAt": "2026-07-22T20:36:39.884Z",
+      "fullSummarySource": "transcript",
+      "fullSummaryChars": 1401,
+      "fullSourcePath": "data/transcripts/khVX_BUnEwU.txt",
+      "sourceTextPath": "data/transcripts/khVX_BUnEwU.txt",
+      "transcriptPath": "data/transcripts/khVX_BUnEwU.txt",
+      "fullSourceChars": 19739,
+      "fullSourceCachedAt": "2026-07-22T20:36:39.884Z",
+      "fullSummaryBillableRequests": 1,
+      "fullSummaryTranscriptStatus": 200
     },
     {
       "id": "yt:Q0VkgCyNVUg",
