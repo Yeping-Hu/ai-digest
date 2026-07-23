@@ -302,7 +302,7 @@
       ["today","All New Today",dailyNewItems().length],
       ["shortlist","My Shortlist",Object.keys(state.saved).length],
       ["links","My Links",(state.added||[]).length],
-      ["full","Full Summaries",state.items.filter(hasFullSummary).length],
+      ["full","Full Summaries",fullSummaryItems().length],
       ["all","All 30 Days",state.items.length],
     ];
   }
@@ -406,10 +406,11 @@
   function refreshReader(){if(!readerContext||$("reader").hidden)return;const item=readerItemById(readerContext.id);if(!item)return;$("readerContent").innerHTML=readerMarkup(item,readerContext);bindReaderActions()}
   function bindReaderActions(){const root=$("readerContent");root.querySelectorAll("[data-reader-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.readerStar,item=readerItemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render();refreshReader()});root.querySelectorAll("[data-summary-item]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.summaryItem,btn));root.querySelectorAll("[data-summary-block]").forEach(btn=>btn.onclick=()=>toast(btn.dataset.summaryBlock||"This item is not available for a full summary yet."))}
 
+  function fullSummaryItems(){const seen=new Set();return [...state.items,...(state.added||[])].filter(x=>hasFullSummary(x)&&!seen.has(x.id)&&seen.add(x.id))}
   function filteredItems(){
     if(state.filter==="shortlist")return Object.keys(state.saved).map(itemById).filter(Boolean).sort((a,b)=>(b.ts||0)-(a.ts||0));
     if(state.filter==="today")return dailyNewItems();
-    if(state.filter==="full")return state.items.filter(hasFullSummary).sort((a,b)=>timeValue(b.fullSummaryAt||b.ts)-timeValue(a.fullSummaryAt||a.ts));
+    if(state.filter==="full")return fullSummaryItems().sort((a,b)=>timeValue(b.fullSummaryAt||b.ts)-timeValue(a.fullSummaryAt||a.ts));
     if(state.filter.startsWith("source:"))return state.items.filter(x=>(x.sourceGroup||x.source)===state.filter.slice(7));
     return state.items;
   }

@@ -1409,13 +1409,32 @@ async function fetchArticleMeta(url) {
   return { title: truncateChars(title, 300), desc: truncateChars(desc, 1800), published };
 }
 async function fetchXMeta(url) {
+  const idMatch = String(url).match(/status(?:es)?\/(\d+)/);
+  const id = idMatch ? idMatch[1] : "";
+  if (!id) return { author: "", handle: "", text: "" };
   try {
-    const data = await getJSON(`https://publish.twitter.com/oembed?omit_script=1&dnt=true&url=${encodeURIComponent(url)}`);
-    const handleMatch = String(data.author_url || "").match(/(?:twitter\.com|x\.com)\/([^/?#]+)/i);
-    const text = stripHTML(String(data.html || "").replace(/<script[\s\S]*?<\/script>/gi, ""))
-      .replace(/https?:\/\/t\.co\/\S+/g, "").replace(/\s+/g, " ").trim();
-    return { author: data.author_name || "", handle: handleMatch ? handleMatch[1] : "", text: truncateChars(text, 1200) };
-  } catch (error) { log("  add: X oEmbed failed:", error.message); return { author: "", handle: "", text: "" }; }
+    const token = ((Number(id) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, "");
+    const data = await getJSON(`https://cdn.syndication.twimg.com/tweet-result?id=${id}&lang=en&token=${token}`);
+    const handle = data?.user?.screen_name || "";
+    const author = data?.user?.name || "";
+    let body = stripHTML(String(data?.text || "")).replace(/https?:\/\/t\.co\/\S+/g, "").replace(/\s+/g, " ").trim();
+    const art = data?.article;
+    if (art && (art.title || art.preview_text)) {
+      const artText = [art.title, art.preview_text].filter(Boolean).join(" — ");
+      body = body ? `${body}\n\n${artText}` : artText;
+    }
+    if (!body) {
+      const bv = data?.card?.binding_values || {};
+      const cardText = [bv.title?.string_value, bv.description?.string_value].filter(Boolean).join(" — ");
+      if (cardText) body = cardText;
+    }
+    if (!body && data?.quoted_tweet?.text) body = stripHTML(String(data.quoted_tweet.text)).replace(/\s+/g, " ").trim();
+    if (!body) {
+      const link = (data?.entities?.urls || []).map((u) => u.expanded_url).find(Boolean);
+      if (link) body = link;
+    }
+    return { author, handle, text: truncateChars(body, 4000), likes: Number(data?.favorite_count || 0), createdAt: data?.created_at || "" };
+  } catch (error) { log("  add: X syndication failed:", error.message); return { author: "", handle: "", text: "" }; }
 }
 async function addedShortSummary(item) {
   if (!GEMINI_KEY) return "";
@@ -1443,7 +1462,7 @@ async function addManualItem(rawUrl) {
     if (!item.title) item.title = "YouTube video";
   } else if (xId) {
     const meta = await fetchXMeta(url);
-    item = { id: `x:${xId}`, kind: "x", source: "My Links", author: meta.handle ? `@${meta.handle}` : (meta.author || "X post"), subtitle: meta.author || "X", title: "", text: meta.text, excerpt: meta.text, summary: "", url, canonicalUrl: url, ts: NOW, likes: 0 };
+    item = { id: `x:${xId}`, kind: "x", source: "My Links", author: meta.handle ? `@${meta.handle}` : (meta.author || "X post"), subtitle: meta.author || "X", title: "", text: meta.text, excerpt: meta.text, summary: "", url, canonicalUrl: url, ts: Date.parse(meta.createdAt) || NOW, likes: Number(meta.likes || 0) };
   } else {
     const meta = await fetchArticleMeta(url);
     const label = addedDomainLabel(url);

@@ -26,7 +26,7 @@ assert.match(xPath, /data[\\/]transcripts[\\/]x-123456789-[a-f0-9]{10}\.txt$/);
 assert.match(html, /\["full","Full Summaries"/);
 assert.match(html, /state\.filter==="shortlist"\)return Object\.keys\(state\.saved\)\.map\(itemById\)/);
 assert.match(html, /function syncSavedWithLive\(\)/);
-assert.match(html, /state\.items\.filter\(hasFullSummary\)/);
+assert.match(html, /function fullSummaryItems\(\)\{[\s\S]*?state\.added[\s\S]*?hasFullSummary/);
 assert.match(html, /Newest summaries first/);
 assert.match(html, /actions\/workflows\/daily\.yml/);
 assert.match(html, /dispatch\("daily\.yml",\{itemId\}\)/);
