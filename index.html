@@ -61,6 +61,12 @@
     .clamp-text{white-space:normal;overflow-wrap:anywhere;line-height:1.62}.clamp-text strong{font-weight:750;color:var(--ink)}.clamp-text .md-heading{display:inline-block;margin:.55em 0 .12em;font-weight:750}.clamp-text code{padding:1px 4px;border-radius:4px;background:var(--line2);font:11px var(--mono)}.clamp-text.is-clamped{display:-webkit-box;-webkit-line-clamp:var(--clamp-lines,4);-webkit-box-orient:vertical;overflow:hidden}.more-toggle{border:0;background:transparent;color:var(--pine);cursor:pointer;padding:6px 0 0;font:600 11px var(--mono)}.more-toggle:hover{text-decoration:underline}.more-toggle[hidden]{display:none}
     .full-state{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;background:var(--pine2);color:var(--pine);font:600 10px var(--mono)}.full-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer;color:var(--pine);font:600 11px var(--mono)}.full-btn:hover{border-color:var(--pine)}.full-btn:disabled{opacity:.62;cursor:default}.full-btn.blocked{border-color:#E3C17B;background:#FFF7E4;color:#815C17}.full-btn.blocked:hover{border-color:#D6A94F}.availability-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;border-radius:999px;font:600 10px var(--mono);letter-spacing:0;text-transform:none}.availability-chip.upcoming{background:#FFF0CA;color:#79550D}.availability-chip.live{background:#F8D9D2;color:#A33D28}.availability-chip.processing{background:var(--blue2);color:#394CA3}.availability-chip.summary-error{background:#F5E1DE;color:#963B2D}.availability-chip:before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}.summary-note{display:inline-flex;align-items:center;padding:4px 7px;border-radius:999px;background:#FFF7E4;color:#815C17;font:600 10px var(--mono)}
     .empty{padding:55px 20px;text-align:center;color:var(--ink3);border:1px dashed var(--line);border-radius:14px;background:rgba(255,255,255,.4)}
+    .addlink{margin-bottom:22px;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+    .addlink-row{display:flex;gap:10px;flex-wrap:wrap}
+    .addlink-row input{flex:1;min-width:220px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font:14px var(--body);background:var(--paper);color:var(--ink)}
+    .addlink-row button{border:0;border-radius:10px;padding:11px 20px;background:var(--pine);color:#fff;font:600 14px var(--body);cursor:pointer}
+    .addlink-row button:disabled{opacity:.6;cursor:default}
+    .addlink-note{margin-top:9px;color:var(--ink3);font:11px var(--mono)}
     body.reader-open{overflow:hidden}.reader{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:rgba(15,21,16,.58);backdrop-filter:blur(7px)}.reader[hidden]{display:none}.reader-shell{position:relative;width:min(980px,96vw);max-height:92vh;overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:0 30px 90px rgba(0,0,0,.26)}.reader-close{position:sticky;z-index:3;top:14px;float:right;margin:14px 14px 0 0;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;color:var(--ink);font:600 20px/1 var(--disp)}.reader-content{padding:34px 46px 48px}.reader-kicker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--ink3);font:11px var(--mono);text-transform:uppercase;letter-spacing:.05em}.reader-rank{font:600 38px/1 var(--disp);color:#AAB3A8}.reader-title{margin:18px 0 0;font:600 clamp(30px,4vw,50px)/1.08 var(--disp);letter-spacing:-.035em}.reader-title a:hover{text-decoration:underline;text-underline-offset:5px}.reader-media{display:block;margin-top:20px;aspect-ratio:16/9;max-height:470px;overflow:hidden;border:1px solid var(--line);border-radius:17px;background:var(--line2)}.reader-media img{display:block;width:100%;height:100%;object-fit:cover}.reader-section{margin-top:24px;padding-top:21px;border-top:1px solid var(--line2)}.reader-section h3{margin:0 0 10px;color:var(--pine);font:600 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}.reader-prose{color:var(--ink2);font-size:16px;line-height:1.78;white-space:normal;overflow-wrap:anywhere}.reader-prose strong{color:var(--ink);font-weight:750}.reader-prose .md-heading{display:block;margin:1.1em 0 .35em;font:700 20px/1.3 var(--disp)}.reader-insights{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:24px}.reader-insight{padding:16px;border-radius:14px;background:var(--paper)}.reader-insight.angle{background:var(--orange2)}.reader-insight.evidence{background:var(--blue2)}.reader-insight h3{margin:0 0 7px;font:600 10px var(--mono);letter-spacing:.11em;text-transform:uppercase}.reader-insight p{margin:0;color:var(--ink2);line-height:1.58}.reader-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
     .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
     @media(max-width:1050px){.top-grid,.idea-grid{grid-template-columns:1fr 1fr}.video-card{grid-template-columns:160px minmax(0,1fr) auto}.reader-insights{grid-template-columns:1fr}}
@@ -127,7 +133,7 @@
   const REPO={owner:"Yeping-Hu",repo:"ai-digest",branch:"main"};
   const $=id=>document.getElementById(id);
   const esc=s=>String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-  const state={items:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},history:{days:[]},filter:"top",topView:"today",saved:loadSaved()};
+  const state={items:[],added:[],today:{topIds:[],scanIds:[],ranking:[],ideas:[],run:{}},history:{days:[]},filter:"top",topView:"today",saved:loadSaved()};
   const typeLabel={official:"Official",independent:"Independent",curated:"Curated",community:"Community"};
   let OWNER=false;
   let readerContext=null;
@@ -199,7 +205,7 @@
   function rankingEntries(){const rank=[...(state.today.ranking||[])].sort((a,b)=>rankingScore(b)-rankingScore(a)||Number(b.selectionCount||0)-Number(a.selectionCount||0)||Number(b.rank||999)-Number(a.rank||999));if(rank.length)return rank.map((entry,index)=>({...entry,rank:index+1,score:rankingScore(entry)}));const ids=[...(state.today.topIds||[]),...(state.today.scanIds||[])];return ids.map((id,index)=>({id,rank:index+1,score:0,reason:""}))}
   function rankingMap(){return new Map(rankingEntries().map(x=>[x.id,x]))}
   function rankFor(id){return rankingMap().get(id)}
-  function itemById(id){return state.items.find(x=>x.id===id)||state.saved[id]}
+  function itemById(id){return state.items.find(x=>x.id===id)||(state.added||[]).find(x=>x.id===id)||state.saved[id]}
   function isSaved(id){return Boolean(state.saved[id])}
   function snapshot(item){return JSON.parse(JSON.stringify(item))}
   function syncSavedWithLive(){
@@ -260,12 +266,14 @@
           return fallback;
         }
       };
-      const [archive,today,history]=await Promise.all([
+      const [archive,today,history,added]=await Promise.all([
         fetchJson("data/archive.json",{items:[]},true),
         fetchJson("data/today.json",{}),
         fetchJson("data/top-history.json",{days:[]}),
+        fetchJson("data/added.json",{items:[]}),
       ]);
       state.items=(Array.isArray(archive.items)?archive.items:[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));
+      state.added=(Array.isArray(added.items)?added.items:[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));
       state.today={topIds:[],scanIds:[],ranking:[],ideas:[],run:{},...(today&&typeof today==="object"?today:{})};
       state.history={days:[],...(history&&typeof history==="object"?history:{})};
       if(!Array.isArray(state.today.topIds))state.today.topIds=[];
@@ -291,6 +299,7 @@
       ["top","Today's Top",rankingEntries().length],
       ["today","All New Today",dailyNewItems().length],
       ["shortlist","My Shortlist",Object.keys(state.saved).length],
+      ["links","My Links",(state.added||[]).length],
       ["full","Full Summaries",state.items.filter(hasFullSummary).length],
       ["all","All 30 Days",state.items.length],
     ];
@@ -308,7 +317,7 @@
   function setFilter(filter){state.filter=filter;buildRail();updateHeader();render();window.scrollTo({top:0,behavior:"smooth"})}
 
   function updateHeader(){
-    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, always synced with the latest archive copy."],full:["Full Summaries","Every item for which you generated a detailed summary."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
+    const labels={top:["Today's Top","Daily editorial ranking; you keep the final judgment."],today:["All New Today","Items whose original publication date is today in your current timezone."],shortlist:["My Shortlist","Your own editorial judgment, always synced with the latest archive copy."],links:["My Links","Links and videos you added by URL. They stay only here."],full:["Full Summaries","Every item for which you generated a detailed summary."],all:["All 30 Days","The rolling archive, grouped by each item's original publication date."]};
     const pair=state.filter.startsWith("source:")?[state.filter.slice(7),"Browse one source."]:(labels[state.filter]||labels.top);
     $("pageTitle").textContent=pair[0];$("pageSub").textContent=pair[1];
     const showTopTabs=state.filter==="top";
@@ -445,7 +454,32 @@
     return renderGroupedList(list);
   }
 
-  function render(){$("content").innerHTML=state.filter==="top"?renderTop():renderList();bindActions()}
+  function render(){$("content").innerHTML=state.filter==="top"?renderTop():state.filter==="links"?renderMyLinks():renderList();bindActions()}
+
+  function renderMyLinks(){
+    const box=OWNER?`<div class="addlink"><div class="addlink-row"><input id="addLinkUrl" type="url" placeholder="Paste a YouTube, article, or X / Twitter URL"><button id="addLinkBtn">Add link</button></div><div class="addlink-note">Owner only. The link is fetched and saved to the repo, and stays only in My Links.</div></div>`:"";
+    const list=(state.added||[]).slice().sort((a,b)=>sortItemTime(b)-sortItemTime(a));
+    const body=list.length?`<div class="day"><span>Added by you</span><span>${list.length}</span></div>${list.map(genericItem).join("")}`:`<div class="empty">${OWNER?"No saved links yet. Paste a URL above to add one.":"No saved links yet."}</div>`;
+    return box+body;
+  }
+  async function addLink(){
+    const input=$("addLinkUrl"),btn=$("addLinkBtn");if(!input||!btn)return;
+    const url=input.value.trim();
+    if(!/^https?:\/\/\S+/i.test(url)){toast("Paste a full http(s) URL first.");return}
+    btn.disabled=true;btn.textContent="Adding…";
+    const known=new Set((state.added||[]).map(x=>x.id));
+    try{
+      await dispatch("daily.yml",{itemId:`add:${url}`});
+      toast("Link queued — it will appear here shortly");input.value="";
+      for(let attempt=0;attempt<24;attempt++){
+        await new Promise(r=>setTimeout(r,10000));
+        try{const res=await fetch(`data/added.json?v=${Date.now()}`,{cache:"no-store"});if(res.ok){const doc=await res.json();const items=Array.isArray(doc.items)?doc.items:[];if(items.length>known.size||items.some(x=>!known.has(x.id))){state.added=items.sort((a,b)=>sortItemTime(b)-sortItemTime(a));buildRail();updateHeader();render();toast("Link added");return}}}catch{}
+        if(btn.isConnected)btn.textContent=`Adding… ${Math.min(99,(attempt+1)*4)}%`;
+      }
+      if(btn.isConnected){btn.disabled=false;btn.textContent="Add link"}
+      toast("Still processing — it should appear here shortly.");
+    }catch(err){if(btn.isConnected){btn.disabled=false;btn.textContent="Add link"}toast(`Could not add: ${err.message}`)}
+  }
 
   function bindActions(){
     document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render()});
@@ -456,6 +490,8 @@
       card.onclick=event=>{if(event.target.closest("a,button,input,summary"))return;open()};
       card.onkeydown=event=>{if((event.key==="Enter"||event.key===" ")&&!event.target.closest("a,button,input,summary")){event.preventDefault();open()}};
     });
+    const addBtn=$("addLinkBtn");if(addBtn)addBtn.onclick=addLink;
+    const addInput=$("addLinkUrl");if(addInput)addInput.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addLink()}};
     bindClamps();
   }
 
@@ -529,8 +565,23 @@
   async function pollSummary(itemId,baseline,btn){
     for(let attempt=0;attempt<30;attempt++){
       await new Promise(resolve=>setTimeout(resolve,10000));
-      try{const res=await fetch(`data/archive.json?v=${Date.now()}`,{cache:"no-store"});if(!res.ok)continue;const archive=await res.json();const updated=(archive.items||[]).find(x=>x.id===itemId);if(!updated)continue;const changed=hasFullSummary(updated)&&(!baseline.fullSummaryAt||updated.fullSummaryAt!==baseline.fullSummaryAt);const attempted=updated.fullSummaryAttemptAt&&updated.fullSummaryAttemptAt!==baseline.attemptAt;if(changed){state.items=(archive.items||[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));syncSavedWithLive();storeSaved();buildRail();updateHeader();render();refreshReader();toast("Full summary is ready");return}if(attempted&&["not_ready","error"].includes(updated.fullSummaryStatus)){state.items=(archive.items||[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));syncSavedWithLive();storeSaved();buildRail();updateHeader();render();refreshReader();toast(updated.fullSummaryMessage||"The full summary is not available yet.");return}}
-      catch{}
+      try{
+        const stamp=Date.now();
+        const [aRes,dRes]=await Promise.all([fetch(`data/archive.json?v=${stamp}`,{cache:"no-store"}),fetch(`data/added.json?v=${stamp}`,{cache:"no-store"})]);
+        const archive=aRes.ok?await aRes.json():{items:state.items};
+        const added=dRes.ok?await dRes.json():{items:state.added};
+        const updated=[...(archive.items||[]),...(added.items||[])].find(x=>x.id===itemId);
+        if(!updated)continue;
+        const changed=hasFullSummary(updated)&&(!baseline.fullSummaryAt||updated.fullSummaryAt!==baseline.fullSummaryAt);
+        const attempted=updated.fullSummaryAttemptAt&&updated.fullSummaryAttemptAt!==baseline.attemptAt;
+        if(changed||(attempted&&["not_ready","error"].includes(updated.fullSummaryStatus))){
+          state.items=(archive.items||[]).sort((a,b)=>sortItemTime(b)-sortItemTime(a));
+          if(Array.isArray(added.items))state.added=added.items.sort((a,b)=>sortItemTime(b)-sortItemTime(a));
+          syncSavedWithLive();storeSaved();buildRail();updateHeader();render();refreshReader();
+          toast(changed?"Full summary is ready":(updated.fullSummaryMessage||"The full summary is not available yet."));
+          return;
+        }
+      }catch{}
       if(btn&&btn.isConnected)btn.textContent=`Generating… ${Math.min(99,(attempt+1)*3)}%`;
     }
     if(btn&&btn.isConnected){btn.disabled=false;btn.textContent="Still running — check Actions"}toast("The workflow is still running. No manual page refresh is required; reopen later if needed.")
