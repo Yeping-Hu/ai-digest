@@ -24,6 +24,7 @@ const CONFIG_PATH = path.join(ROOT, "sources.json");
 const ARCHIVE_PATH = path.join(ROOT, "data", "archive.json");
 const TODAY_PATH = path.join(ROOT, "data", "today.json");
 const TOP_HISTORY_PATH = path.join(ROOT, "data", "top-history.json");
+const ADDED_PATH = path.join(ROOT, "data", "added.json");
 const DAILY_DIR = path.join(ROOT, "data", "daily");
 const TRANSCRIPT_DIR = path.join(ROOT, "data", "transcripts");
 
@@ -1367,7 +1368,7 @@ function updateItemInTopHistory(item) {
   if (changed) writeJSONAtomic(TOP_HISTORY_PATH, history);
 }
 
-function writeFullSummaryStatus(archiveDoc, items, item, status, details = {}) {
+function writeFullSummaryStatus(archiveDoc, items, item, status, details = {}, targetPath = ARCHIVE_PATH, isManual = false) {
   const at = new Date().toISOString();
   item.fullSummaryAttemptAt = at;
   item.fullSummaryStatus = status;
@@ -1377,16 +1378,109 @@ function writeFullSummaryStatus(archiveDoc, items, item, status, details = {}) {
   item.fullSummaryBillableRequests = Number(details.billableRequests || 0);
   item.fullSummaryTranscriptStatus = Number(details.httpStatus || 0);
   if (status !== "ready") item.fullSummaryLastErrorAt = at;
-  writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: at, count: items.length, items });
-  updateItemInTopHistory(item);
+  writeJSONAtomic(targetPath, { ...archiveDoc, generatedAt: at, count: items.length, items });
+  if (!isManual) updateItemInTopHistory(item);
+}
+
+// ---- Owner-added items ("My Links"). Stored separately in data/added.json so they never
+// enter the editorial pipeline (Today's Top, All New Today, All 30 Days), yet still support
+// full summaries and shortlisting via their normal stable IDs. ----
+function youtubeIdFromUrl(url) {
+  const m = String(url).match(/(?:v=|\/shorts\/|youtu\.be\/|\/embed\/|\/live\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : "";
+}
+function xStatusFromUrl(url) {
+  const m = String(url).match(/(?:twitter\.com|x\.com)\/[^/]+\/status(?:es)?\/(\d+)/i);
+  return m ? m[1] : "";
+}
+function addedDomainLabel(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return "Added link"; }
+}
+async function fetchArticleMeta(url) {
+  const html = await getText(url);
+  const pick = (re) => { const m = html.match(re); return m ? stripHTML(m[1]).trim() : ""; };
+  const title = pick(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)
+    || pick(/<meta[^>]+name=["']twitter:title["'][^>]+content=["']([^"']+)["']/i)
+    || pick(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  const desc = pick(/<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i)
+    || pick(/<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i);
+  const published = pick(/<meta[^>]+property=["']article:published_time["'][^>]+content=["']([^"']+)["']/i)
+    || pick(/<meta[^>]+itemprop=["']datePublished["'][^>]+content=["']([^"']+)["']/i);
+  return { title: truncateChars(title, 300), desc: truncateChars(desc, 1800), published };
+}
+async function fetchXMeta(url) {
+  try {
+    const data = await getJSON(`https://publish.twitter.com/oembed?omit_script=1&dnt=true&url=${encodeURIComponent(url)}`);
+    const handleMatch = String(data.author_url || "").match(/(?:twitter\.com|x\.com)\/([^/?#]+)/i);
+    const text = stripHTML(String(data.html || "").replace(/<script[\s\S]*?<\/script>/gi, ""))
+      .replace(/https?:\/\/t\.co\/\S+/g, "").replace(/\s+/g, " ").trim();
+    return { author: data.author_name || "", handle: handleMatch ? handleMatch[1] : "", text: truncateChars(text, 1200) };
+  } catch (error) { log("  add: X oEmbed failed:", error.message); return { author: "", handle: "", text: "" }; }
+}
+async function addedShortSummary(item) {
+  if (!GEMINI_KEY) return "";
+  const basis = item.excerpt || item.text || item.title;
+  if (!basis) return "";
+  const kindWord = item.kind === "youtube" ? "视频" : item.kind === "x" ? "帖子" : "文章";
+  try {
+    const zh = await geminiRequest(
+      `用1-2句自然、准确的简体中文，总结下面这个${kindWord}的核心内容，帮助读者快速判断是否值得花时间。只输出中文总结，不要开场白或 markdown。\n\n标题：${item.title || ""}\n\n内容：${truncateChars(basis, 3000)}`,
+      false,
+    );
+    return zh && isChineseText(zh) ? truncateChars(zh, 320) : "";
+  } catch (error) { log("  add: summary failed:", error.message); return ""; }
+}
+async function addManualItem(rawUrl) {
+  const url = canonicalizeURL(String(rawUrl || "").trim());
+  if (!/^https?:\/\//i.test(url)) throw new Error(`Not a valid URL: ${rawUrl}`);
+  const ytId = youtubeIdFromUrl(url);
+  const xId = xStatusFromUrl(url);
+  let item;
+  if (ytId) {
+    const watch = canonicalizeURL(`https://www.youtube.com/watch?v=${ytId}`);
+    item = { id: `yt:${ytId}`, kind: "youtube", videoId: ytId, source: "My Links", subtitle: "YouTube", author: "", title: "", text: "", excerpt: "", summary: "", url: watch, canonicalUrl: watch, ts: NOW, likes: 0 };
+    if (YOUTUBE_KEY) { try { await refreshSingleYouTubeItem(item); } catch (error) { log("  add: YouTube metadata failed:", error.message); } }
+    if (!item.title) item.title = "YouTube video";
+  } else if (xId) {
+    const meta = await fetchXMeta(url);
+    item = { id: `x:${xId}`, kind: "x", source: "My Links", author: meta.handle ? `@${meta.handle}` : (meta.author || "X post"), subtitle: meta.author || "X", title: "", text: meta.text, excerpt: meta.text, summary: "", url, canonicalUrl: url, ts: NOW, likes: 0 };
+  } else {
+    const meta = await fetchArticleMeta(url);
+    const label = addedDomainLabel(url);
+    item = { id: articleId(url, url), kind: "blog", source: "My Links", subtitle: label, author: label, title: meta.title || label, text: "", excerpt: meta.desc, summary: meta.desc, url, canonicalUrl: url, ts: Date.parse(meta.published) || NOW, likes: 0 };
+    if (meta.published) item.publishedAt = meta.published;
+  }
+  item.manual = true;
+  item.sourceType = "added";
+  item.sourceGroup = "My Links";
+  item.sourceTags = ["My Links"];
+  item.addedAt = new Date().toISOString();
+  const zh = await addedShortSummary(item);
+  if (zh) { item.summary = zh; item.editorial = { ...(item.editorial || {}), summaryZh: zh }; }
+
+  const doc = readJSON(ADDED_PATH, { items: [] });
+  const items = Array.isArray(doc.items) ? doc.items : [];
+  const idx = items.findIndex((entry) => entry.id === item.id);
+  const merged = idx >= 0 ? { ...items[idx], ...item } : item;
+  if (idx >= 0) items[idx] = merged; else items.unshift(merged);
+  writeJSONAtomic(ADDED_PATH, { generatedAt: new Date().toISOString(), count: items.length, items });
+  log(`Added manual item: ${merged.id} — ${String(merged.title || merged.text || "").slice(0, 60)}`);
 }
 
 async function summarizeOneItem(itemId) {
   const archiveDoc = readJSON(ARCHIVE_PATH, { items: [] });
-  const items = archiveDoc.items || [];
+  let items = archiveDoc.items || [];
   const normalizedId = String(itemId || "").trim();
-  const item = items.find((entry) => entry.id === normalizedId || entry.videoId === normalizedId || entry.id === `yt:${normalizedId}`);
-  if (!item) throw new Error(`Item not found in archive: ${normalizedId}`);
+  const finder = (entry) => entry.id === normalizedId || entry.videoId === normalizedId || entry.id === `yt:${normalizedId}`;
+  let item = items.find(finder);
+  let targetPath = ARCHIVE_PATH, targetDoc = archiveDoc, isManual = false;
+  if (!item) {
+    const addedDoc = readJSON(ADDED_PATH, { items: [] });
+    const addedItems = Array.isArray(addedDoc.items) ? addedDoc.items : [];
+    item = addedItems.find(finder);
+    if (item) { targetPath = ADDED_PATH; targetDoc = addedDoc; items = addedItems; isManual = true; }
+  }
+  if (!item) throw new Error(`Item not found: ${normalizedId}`);
 
   try {
     if (item.kind === "youtube" && YOUTUBE_KEY) {
@@ -1430,8 +1524,8 @@ async function summarizeOneItem(itemId) {
     item.fullSummaryLastErrorAt = "";
     item.fullSummaryBillableRequests = Number(source.billableRequests || 0);
     item.fullSummaryTranscriptStatus = Number(source.transcriptHttpStatus || 0);
-    writeJSONAtomic(ARCHIVE_PATH, { ...archiveDoc, generatedAt: new Date().toISOString(), count: items.length, items });
-    updateItemInTopHistory(item);
+    writeJSONAtomic(targetPath, { ...targetDoc, generatedAt: new Date().toISOString(), count: items.length, items });
+    if (!isManual) updateItemInTopHistory(item);
     log("Upgraded full summary:", item.id);
   } catch (error) {
     const notReady = error instanceof SourceNotReadyError || error?.name === "SourceNotReadyError";
@@ -1444,13 +1538,13 @@ async function summarizeOneItem(itemId) {
     const message = notReady
       ? error.message
       : `Full summary could not be generated: ${error.message}`;
-    writeFullSummaryStatus(archiveDoc, items, item, status, {
+    writeFullSummaryStatus(targetDoc, items, item, status, {
       message,
       code: error.code || (notReady ? "source_not_ready" : "summary_failed"),
       retryAt: error.retryAt || item.scheduledStartTime || "",
       billableRequests: Number(error.billableRequests || 0),
       httpStatus: Number(error.httpStatus || 0),
-    });
+    }, targetPath, isManual);
     if (notReady) log("Full summary deferred:", item.id, "—", message);
     else log("Full summary failed and was recorded:", item.id, "—", error.message);
   }
@@ -1964,6 +2058,7 @@ async function main() {
 
   const requestedItem = String(process.env.SUMMARIZE_ITEM_ID || process.env.SUMMARIZE_VIDEO_ID || "").trim();
   if (requestedItem) {
+    if (/^add:/i.test(requestedItem)) { await addManualItem(requestedItem.replace(/^add:/i, "")); return; }
     await summarizeOneItem(requestedItem);
     return;
   }
