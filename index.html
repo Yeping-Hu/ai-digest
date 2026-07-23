@@ -453,8 +453,8 @@
     document.querySelectorAll("[data-summary-block]").forEach(btn=>btn.onclick=()=>toast(btn.dataset.summaryBlock||"This item is not available for a full summary yet."));
     document.querySelectorAll("[data-reader-id]").forEach(card=>{
       const open=()=>openReader(card.dataset.readerId,{rank:Number(card.dataset.readerRank||0),score:Number(card.dataset.readerScore||0),date:card.dataset.readerDate||""});
-      card.onclick=event=>{if(event.target.closest("a,button,input,summary,details"))return;open()};
-      card.onkeydown=event=>{if((event.key==="Enter"||event.key===" ")&&!event.target.closest("a,button,input,summary,details")){event.preventDefault();open()}};
+      card.onclick=event=>{if(event.target.closest("a,button,input,summary"))return;open()};
+      card.onkeydown=event=>{if((event.key==="Enter"||event.key===" ")&&!event.target.closest("a,button,input,summary")){event.preventDefault();open()}};
     });
     bindClamps();
   }
