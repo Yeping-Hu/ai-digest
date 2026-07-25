@@ -1,7 +1,151 @@
 {
-  "generatedAt": "2026-07-25T16:26:37.099Z",
-  "count": 339,
+  "generatedAt": "2026-07-25T22:27:33.789Z",
+  "count": 342,
   "items": [
+    {
+      "id": "yt:xIt_mTQp6mY",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Loop Engineering from First Principles — Kyle Mistele, HumanLayer",
+      "text": "",
+      "excerpt": "A coding agent will happily hand you a 40,000 line pull request that nobody can review and that quietly does the wrong thing. Kyle Mistele's argument is that the fix is not a better prompt but a better loop, borrowed from control theory: a thermostat senses the error between where a system is and where you want it, emits a control signal, and measures again, over and over. Infrastructure as code already approximates this. The point is to design agent loops the same way, so each iteration makes a small, readable change you can actually verify, instead of one giant diff you have to trust. The working example is migrating a codebase one procedure at a time. A sensor, often just Grep or a structural search, finds the smallest unmigrated piece, a controller picks what to work on next, and an actuator agent makes the change against golden patterns defined by hand, gated by deterministic CI like a single loop iteration in CircleCI. The loop tracks its own PRs in version control, refuses to stack a new change while an earlier one is still open, and keeps improving the code incrementally, even while the team is away. Speaker info: - https://x.com/0xBlacklight - https://www.linkedin.com/in/kyle-mistele - https://blacklight.sh Timestamps: 0:00 - Introduction: the 40,000 line PR problem 1:55 - Why more code is not the goal 3:37 - Is the generated code any good? 4:43 - Control loops from control theory 5:49 - Infrastructure as code and Ralph loops 7:06 - Applying control loops to coding 8:35 - Migrating a codebase one procedure at a time 10:40 - Tracking the loop in version control 12:35 - The actuator agent and golden patterns 13:51 - Wiring the loop into CI 15:44 - Avoiding stacked PRs and scaling the controller",
+      "summary": "HumanLayer 提出通过控制理论设计 Agent 循环，将大任务拆解为可验证的小步骤，而非依赖单一提示词。",
+      "url": "https://www.youtube.com/watch?v=xIt_mTQp6mY",
+      "canonicalUrl": "https://www.youtube.com/watch?v=xIt_mTQp6mY",
+      "videoId": "xIt_mTQp6mY",
+      "ts": 1785012100000,
+      "publishedAt": "2026-07-25T20:41:40.000Z",
+      "youtubePublishedAt": "2026-07-25T20:41:40.000Z",
+      "playlistVideoPublishedAt": "2026-07-25T20:41:40.000Z",
+      "playlistAddedAt": "2026-07-25T20:41:40.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 35,
+      "views": 409,
+      "duration": "17:57",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "HumanLayer 提出通过控制理论设计 Agent 循环，将大任务拆解为可验证的小步骤，而非依赖单一提示词。",
+        "whyItMattersZh": "这是解决 AI Agent “幻觉”和“失控”的核心工程思路，对自动化科研流程设计至关重要。",
+        "evidenceZh": "通过 Grep 或结构化搜索作为传感器，结合确定性 CI 门控，实现代码库的逐步迁移。",
+        "uncertaintyZh": "该方法在非代码类科研任务（如实验数据分析）中的通用性有待验证。",
+        "chineseAudienceGapZh": "中文社区多讨论 Prompt Engineering，缺乏从控制理论视角构建 Agent 鲁棒性循环的深度内容。",
+        "rednoteAngleZh": "拒绝 AI 瞎写代码！从控制理论视角，教你搭建一个可控的科研 Agent 循环。",
+        "topics": [
+          "agents",
+          "coding"
+        ],
+        "processedAt": "2026-07-25T22:27:33.789Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1785018441428,
+      "availabilityUpdatedAt": "2026-07-25T22:27:23.389Z",
+      "signals": {
+        "localScore": 66,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +15",
+          "visualizable +4"
+        ],
+        "topics": [
+          "agents",
+          "coding"
+        ]
+      },
+      "summaryZh": "HumanLayer 提出通过控制理论设计 Agent 循环，将大任务拆解为可验证的小步骤，而非依赖单一提示词。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
+    },
+    {
+      "id": "yt:hacEQHHhu2Q",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Why Large? Tiny LMs & Agents on Edge/Robotics — Cormac Brick, Google",
+      "text": "",
+      "excerpt": "The constraint on edge AI is not compute, it is RAM, and it is getting worse: phone makers are shipping less of it this year, and a 6GB Raspberry Pi costs 2.5 times what it did at launch. So Cormac Brick's team at Google AI Edge spends its effort making models small enough to fit. A 2 billion parameter Gemma, quantized to 2.9 bits per weight, runs on a Raspberry Pi at about 8 tokens per second and on a Qualcomm NPU fast enough for a few frames of vision a second. Below that sit tiny models, from 500 million parameters down to 50, that reach the older laptops and cheap devices where even a small model will not fit. They usually need fine tuning rather than prompting, but the payoff is real: a fine tuned Gemma turns free text into the right function call across ten actions at over 86% reliability, and putting a speech model in front gives you voice to function calling. One shipped example is an offline voice dictation app with no subscription, built on two sub billion Gemma models that also strip your ums and ahs. Speaker info: - https://x.com/cormacb - https://www.linkedin.com/in/cbrick/ - https://github.com/google-ai-edge/gallery Timestamps: 0:00 - Why intelligence at scale needs tiny models 1:17 - The Google AI Edge team and its open source stack 2:35 - Why run on the edge at all 3:25 - The real constraint: DRAM cost 4:40 - Small models: 1 to 4 billion parameters 6:08 - Shrinking Gemma to 2.9 bits per weight 7:36 - Decode speeds across Raspberry Pi, Jetson, and NPUs 9:30 - Try it yourself: AI Edge Gallery and a hobby robot 12:07 - When small is still too big: tiny models 13:24 - Off the shelf tiny models: ASR, vision, embeddings 14:28 - Fine tuning for voice to function calling 17:50 - In production: offline voice dictation 19:30 - Takeaways and Q&A",
+      "summary": "Google AI Edge 团队通过量化技术，让 2B 参数的 Gemma 模型在树莓派等边缘设备上实现高效运行。",
+      "url": "https://www.youtube.com/watch?v=hacEQHHhu2Q",
+      "canonicalUrl": "https://www.youtube.com/watch?v=hacEQHHhu2Q",
+      "videoId": "hacEQHHhu2Q",
+      "ts": 1784998806000,
+      "publishedAt": "2026-07-25T17:00:06.000Z",
+      "youtubePublishedAt": "2026-07-25T17:00:06.000Z",
+      "playlistVideoPublishedAt": "2026-07-25T17:00:06.000Z",
+      "playlistAddedAt": "2026-07-25T17:00:06.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "2026-07-25T17:00:00.000Z",
+      "actualStartTime": "2026-07-25T17:00:06.000Z",
+      "actualEndTime": "2026-07-25T17:23:50.000Z",
+      "youtubeUploadStatus": "processed",
+      "likes": 70,
+      "views": 1361,
+      "duration": "21:45",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "Google AI Edge 团队通过量化技术，让 2B 参数的 Gemma 模型在树莓派等边缘设备上实现高效运行。",
+        "whyItMattersZh": "科研场景中，边缘计算和本地化部署是保护数据隐私和降低成本的关键，且该方案展示了小模型在特定任务上的高可靠性。",
+        "evidenceZh": "2B Gemma 量化至 2.9 bits 后，在树莓派上达到 8 tokens/s，且在函数调用任务中准确率超过 86%。",
+        "uncertaintyZh": "量化过程中的精度损失对复杂科研推理任务的影响尚不明确。",
+        "chineseAudienceGapZh": "国内科研圈对边缘 AI 的关注多集中在嵌入式开发，缺乏将大模型轻量化应用于科研辅助的视角。",
+        "rednoteAngleZh": "科研党福利：如何让你的树莓派跑起 AI Agent？Google 边缘模型部署实战。",
+        "topics": [
+          "agents",
+          "open-source",
+          "robotics",
+          "multimodal",
+          "model-release"
+        ],
+        "processedAt": "2026-07-25T22:27:33.789Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1785018441428,
+      "availabilityUpdatedAt": "2026-07-25T22:27:23.389Z",
+      "signals": {
+        "localScore": 82,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +30",
+          "visualizable +4"
+        ],
+        "topics": [
+          "agents",
+          "open-source",
+          "multimodal",
+          "robotics",
+          "model-release"
+        ]
+      },
+      "summaryZh": "Google AI Edge 团队通过量化技术，让 2B 参数的 Gemma 模型在树莓派等边缘设备上实现高效运行。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
+    },
     {
       "id": "article:013aaa4c67382290fea9da29",
       "source": "Latent Space AINews",
@@ -303,14 +447,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 23,
-      "views": 1018,
+      "views": 1354,
       "duration": "20:24",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784956289577,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.770Z",
       "summaryZh": "Snorkel AI提出通过重构生产环境中的Agent Trace来构建私有评测基准，实现对Agent行为的精准模拟与评估。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-25T05:11:40.415Z"
@@ -426,15 +570,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 11,
-      "views": 576,
+      "likes": 15,
+      "views": 750,
       "duration": "23:13",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784956289577,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.770Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -608,15 +752,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 73,
-      "views": 3057,
+      "likes": 87,
+      "views": 3794,
       "duration": "21:39",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -693,10 +837,10 @@
       "editorial": null,
       "firstSeen": 1784996784320,
       "signals": {
-        "localScore": 58,
+        "localScore": 55,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +19",
           "visualizable +4"
         ],
@@ -740,8 +884,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 26,
-      "views": 930,
+      "likes": 28,
+      "views": 1159,
       "duration": "19:29",
       "full": false,
       "categories": [],
@@ -763,7 +907,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -873,15 +1017,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 22,
-      "views": 880,
+      "likes": 23,
+      "views": 1063,
       "duration": "20:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -930,15 +1074,15 @@
       "actualStartTime": "2026-07-24T20:00:06.000Z",
       "actualEndTime": "2026-07-24T20:07:12.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 39,
-      "views": 1133,
+      "likes": 42,
+      "views": 1337,
       "duration": "6:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.757Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "summaryZh": "Aparna Dhinakaran探讨了评测的演进路径，从静态规则到LLM作为评测者，再到Agent作为评测者，以应对Agent能力的快速迭代。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-24T22:31:40.869Z"
@@ -1076,10 +1220,10 @@
       },
       "firstSeen": 1784996784320,
       "signals": {
-        "localScore": 68,
+        "localScore": 65,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +27",
           "visualizable +4"
         ],
@@ -1140,7 +1284,7 @@
       "title": "",
       "text": "We removed ~80% of the Claude Code system prompt for our newest models, this is what we've learned about writing system prompts, skills and Claude.MDs for them. https://t.co/6DZwSrZjE9",
       "excerpt": "We removed ~80% of the Claude Code system prompt for our newest models, this is what we've learned about writing system prompts, skills and Claude.MDs for them. https://t.co/6DZwSrZjE9",
-      "summary": "We removed ~80% of the Claude Code system prompt for our newest models, this is what we've learned about writing system prompts, skills and Claude.MDs for them. https://t.co/6DZwSrZjE9",
+      "summary": "开发者通过精简 80% 的系统提示词，优化了 Claude Code 的运行效率和指令遵循能力。",
       "url": "https://x.com/trq212/status/2080710971228918066",
       "canonicalUrl": "https://x.com/trq212/status/2080710971228918066",
       "ts": 1784915127000,
@@ -1149,7 +1293,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "开发者通过精简 80% 的系统提示词，优化了 Claude Code 的运行效率和指令遵循能力。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080709090909503775",
@@ -1167,7 +1314,7 @@
       "title": "",
       "text": "@every full vibe check here: https://t.co/0wSJQeP0Hh",
       "excerpt": "@every full vibe check here: https://t.co/0wSJQeP0Hh",
-      "summary": "@every full vibe check here: https://t.co/0wSJQeP0Hh",
+      "summary": "针对 Claude Opus 5 的全方位使用体验测评，涵盖了编码、写作及知识工作表现。",
       "url": "https://x.com/danshipper/status/2080709090909503775",
       "canonicalUrl": "https://x.com/danshipper/status/2080709090909503775",
       "ts": 1784914679000,
@@ -1176,7 +1323,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "针对 Claude Opus 5 的全方位使用体验测评，涵盖了编码、写作及知识工作表现。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080707593115516985",
@@ -1194,7 +1344,7 @@
       "title": "",
       "text": "Claude Opus 5 is great at long-running autonomous work! Try it out and let us know what you think :) https://t.co/8LTbAOJJR0",
       "excerpt": "Claude Opus 5 is great at long-running autonomous work! Try it out and let us know what you think :) https://t.co/8LTbAOJJR0",
-      "summary": "Claude Opus 5 is great at long-running autonomous work! Try it out and let us know what you think :) https://t.co/8LTbAOJJR0",
+      "summary": "Claude Opus 5 在长周期自主任务中表现出色，适合处理复杂的自动化工作流。",
       "url": "https://x.com/_catwu/status/2080707593115516985",
       "canonicalUrl": "https://x.com/_catwu/status/2080707593115516985",
       "ts": 1784914322000,
@@ -1203,7 +1353,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "Claude Opus 5 在长周期自主任务中表现出色，适合处理复杂的自动化工作流。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080707454422413487",
@@ -1221,7 +1374,7 @@
       "title": "",
       "text": "There is a massive opportunity over the next few years for people who know how to take messy real-world workflows and adapt foundation models to them. Doing that requires understanding how work gets done, designing evals, improving models through post-training, and building the feedback loops that continuously improve models. That’s how a general-purpose model becomes exceptional for a specific domain. Today, that skillset is still concentrated in a handful of labs.",
       "excerpt": "There is a massive opportunity over the next few years for people who know how to take messy real-world workflows and adapt foundation models to them. Doing that requires understanding how work gets done, designing evals, improving models through post-training, and building the feedback loops that continuously improve models. That’s how a general-purpose model becomes exceptional for a specific domain. Today, that skillset is still concentrated in a handful of labs.",
-      "summary": "There is a massive opportunity over the next few years for people who know how to take messy real-world workflows and adapt foundation models to them. Doing that requires understanding how work gets done, designing evals, improving models through post-training, and building the feedback loops that continuously improve models. That’s how a general-purpose model becomes exceptional for a specific domain. Today, that skillset is still concentrated in a handful of labs.",
+      "summary": "将通用模型适配到复杂现实工作流中是未来几年的巨大机会，核心在于设计评估体系和反馈循环。",
       "url": "https://x.com/realmadhuguru/status/2080707454422413487",
       "canonicalUrl": "https://x.com/realmadhuguru/status/2080707454422413487",
       "ts": 1784914289000,
@@ -1230,7 +1383,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "将通用模型适配到复杂现实工作流中是未来几年的巨大机会，核心在于设计评估体系和反馈循环。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080706974476583337",
@@ -1248,7 +1404,7 @@
       "title": "",
       "text": "Ok let's see what you can do https://t.co/w3vt8GmwMK https://t.co/mn9q4sYkWa",
       "excerpt": "Ok let's see what you can do https://t.co/w3vt8GmwMK https://t.co/mn9q4sYkWa",
-      "summary": "Ok let's see what you can do https://t.co/w3vt8GmwMK https://t.co/mn9q4sYkWa",
+      "summary": "对 Claude Opus 5 的实际能力进行探索性测试。",
       "url": "https://x.com/rauchg/status/2080706974476583337",
       "canonicalUrl": "https://x.com/rauchg/status/2080706974476583337",
       "ts": 1784914175000,
@@ -1257,7 +1413,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "对 Claude Opus 5 的实际能力进行探索性测试。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080705381794288032",
@@ -1275,7 +1434,7 @@
       "title": "",
       "text": "as usual claire and i are on the same page https://t.co/T73iS9hmDP",
       "excerpt": "as usual claire and i are on the same page https://t.co/T73iS9hmDP",
-      "summary": "as usual claire and i are on the same page https://t.co/T73iS9hmDP",
+      "summary": "关于 AI 模型使用体验的社区讨论。",
       "url": "https://x.com/danshipper/status/2080705381794288032",
       "canonicalUrl": "https://x.com/danshipper/status/2080705381794288032",
       "ts": 1784913795000,
@@ -1284,7 +1443,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "关于 AI 模型使用体验的社区讨论。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080705334587605122",
@@ -1302,7 +1464,7 @@
       "title": "",
       "text": "the reason i am working on a new gsuite is because of extremely stupid defaults like this bullshit https://t.co/rO3dn0F26S",
       "excerpt": "the reason i am working on a new gsuite is because of extremely stupid defaults like this bullshit https://t.co/rO3dn0F26S",
-      "summary": "the reason i am working on a new gsuite is because of extremely stupid defaults like this bullshit https://t.co/rO3dn0F26S",
+      "summary": "对现有办公套件默认设置的批评，引发了对新一代办公工具开发的思考。",
       "url": "https://x.com/swyx/status/2080705334587605122",
       "canonicalUrl": "https://x.com/swyx/status/2080705334587605122",
       "ts": 1784913784000,
@@ -1311,7 +1473,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "对现有办公套件默认设置的批评，引发了对新一代办公工具开发的思考。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080704871934931221",
@@ -1329,7 +1494,7 @@
       "title": "",
       "text": "Claude Opus 5 is out now, and it's a huge jump over Opus 4.8 on a wide number of capabilities. At Box, we've been testing Claude Opus 5 with the Box AI Agent on Box's Complex Work Eval, our agentic benchmark that puts models through real enterprise document work end-to-end across a variety of industries. We saw meaningful gains in performance across some of the most complex enterprise tasks on unstructured data. Here are a few examples of some of the wins we saw in testing: * Due diligence (+17%): On a transaction due-diligence review, Opus 5 worked through the full set of required findings and flagged the ones Opus 4.8 missed. It stays thorough as the checklist grows instead of catching the obvious items and stopping. * Life Sciences (+30%): On a target-identification task, it intersected several ranked datasets under a strict matching rule to find the targets common to all of them. Opus 4.8 over-included partial matches and dropped genuine ones. * Legal (+12%): On a clause-by-clause contract review against a policy, Opus 5 scored every item and correctly cleared the clauses that were acceptable under an exception where Opus 4.8 both missed items and mis-scored the exception. * Technology (+19%) and Healthcare (+13%) showed the same pattern: complete, precise, multi-step analysis over messy source material. Overall, the reasoning, analytical, and data processing skills of Opus 5 outshine Opus 4.8 meaningfully. Going to be very powerful for enterprise agentic use-cases. You'll be able to build agents with Opus 5 in the Box AI Studio shortly.",
       "excerpt": "Claude Opus 5 is out now, and it's a huge jump over Opus 4.8 on a wide number of capabilities. At Box, we've been testing Claude Opus 5 with the Box AI Agent on Box's Complex Work Eval, our agentic benchmark that puts models through real enterprise document work end-to-end across a variety of industries. We saw meaningful gains in performance across some of the most complex enterprise tasks on unstructured data. Here are a few examples of some of the wins we saw in testing: * Due diligence (+17%): On a transaction due-diligence review, Opus 5 worked through the full set of required findings and flagged the ones Opus 4.8 missed. It stays thorough as the checklist grows instead of catching the obvious items and stopping. * Life Sciences (+30%): On a target-identification task, it intersected several ranked datasets under a strict matching rule to find the targets common to all of them. Opus 4.8 over-included partial matches and dropped genuine ones. * Legal (+12%): On a clause-by-clause contract review against a policy, Opus 5 scored every item and correctly cleared the clauses that were acceptable under an exception where Opus 4.8 both missed items and mis-scored the exception. * Technology (+19%) and Healthcare (+13%) showed the same pattern: complete, precise, multi-step analysis over messy source material. Overall, the reasoning, analytical, and data processing skills of Opus 5 outshine Opus 4.8 meaningfully. Going to be very powerful for enterprise agentic use-cases. You'll be able to build agents with Opus 5 in the Box AI Studio shortly.",
-      "summary": "Claude Opus 5 发布，在企业级复杂任务（如尽职调查、生命科学数据匹配）中表现出显著性能提升。",
+      "summary": "Box 公司在企业级复杂任务中测试 Claude Opus 5，在尽职调查和生命科学数据匹配任务中表现出显著性能提升。",
       "url": "https://x.com/levie/status/2080704871934931221",
       "canonicalUrl": "https://x.com/levie/status/2080704871934931221",
       "ts": 1784913673000,
@@ -1338,12 +1503,12 @@
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "Claude Opus 5 发布，在企业级复杂任务（如尽职调查、生命科学数据匹配）中表现出显著性能提升。",
-        "whyItMattersZh": "作为顶尖模型，其在垂直领域（如法律、科研）的实测数据对科研工作者具有极高的参考价值。",
-        "evidenceZh": "Box AI Agent 在复杂工作评估中发现，Opus 5 在尽职调查任务中提升了 17%，在生命科学目标识别中提升了 30%。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "中文社区多关注通用跑分，缺乏针对特定行业工作流（如科研数据处理）的深度实测。",
-        "rednoteAngleZh": "科研党必看：Claude Opus 5 真的能替代人类处理复杂科研文档吗？实测数据揭秘。",
+        "summaryZh": "Box 公司在企业级复杂任务中测试 Claude Opus 5，在尽职调查和生命科学数据匹配任务中表现出显著性能提升。",
+        "whyItMattersZh": "提供了企业级 Agent 在真实复杂场景下的性能基准，对科研数据处理流程有参考意义。",
+        "evidenceZh": "在尽职调查任务中提升 17%，在生命科学目标识别任务中提升 30%。",
+        "uncertaintyZh": "该评测基于 Box 内部私有数据集，外部复现难度较大。",
+        "chineseAudienceGapZh": "缺乏针对垂直领域（如生物医药、法律）的 Agent 性能实测数据。",
+        "rednoteAngleZh": "Claude Opus 5 真的强吗？生命科学与法律任务实测数据大公开。",
         "topics": [
           "agents",
           "evaluation",
@@ -1351,15 +1516,15 @@
           "reasoning",
           "open-source"
         ],
-        "processedAt": "2026-07-25T16:26:37.099Z",
+        "processedAt": "2026-07-25T22:27:33.789Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784996784320,
       "signals": {
-        "localScore": 79,
+        "localScore": 76,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +32",
           "visualizable +8"
         ],
@@ -1371,9 +1536,9 @@
           "open-source"
         ]
       },
-      "summaryZh": "Claude Opus 5 发布，在企业级复杂任务（如尽职调查、生命科学数据匹配）中表现出显著性能提升。",
+      "summaryZh": "Box 公司在企业级复杂任务中测试 Claude Opus 5，在尽职调查和生命科学数据匹配任务中表现出显著性能提升。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-07-25T16:26:37.099Z"
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080703339306913985",
@@ -1391,7 +1556,7 @@
       "title": "",
       "text": "Opus 5 rounds out our Claude 5 family beautifully. I think it’s an incredible daily driver, pair it with Fable for planning, brainstorming or fixing the hardest bugs. https://t.co/S9GfhsS7v1",
       "excerpt": "Opus 5 rounds out our Claude 5 family beautifully. I think it’s an incredible daily driver, pair it with Fable for planning, brainstorming or fixing the hardest bugs. https://t.co/S9GfhsS7v1",
-      "summary": "Opus 5 rounds out our Claude 5 family beautifully. I think it’s an incredible daily driver, pair it with Fable for planning, brainstorming or fixing the hardest bugs. https://t.co/S9GfhsS7v1",
+      "summary": "建议将 Claude Opus 5 作为日常主力模型，配合 Fable 进行复杂任务规划。",
       "url": "https://x.com/trq212/status/2080703339306913985",
       "canonicalUrl": "https://x.com/trq212/status/2080703339306913985",
       "ts": 1784913308000,
@@ -1400,7 +1565,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "建议将 Claude Opus 5 作为日常主力模型，配合 Fable 进行复杂任务规划。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080703118086693121",
@@ -1418,7 +1586,7 @@
       "title": "",
       "text": "Some of my favorite graphs from Opus 5 launch. We put a ton of work into making this model token efficient across domains while still raising the intelligence bar. It feels very smooth to use and I prefer it over Fable 5 for many coding tasks. https://t.co/bScX0FgtLq",
       "excerpt": "Some of my favorite graphs from Opus 5 launch. We put a ton of work into making this model token efficient across domains while still raising the intelligence bar. It feels very smooth to use and I prefer it over Fable 5 for many coding tasks. https://t.co/bScX0FgtLq",
-      "summary": "Some of my favorite graphs from Opus 5 launch. We put a ton of work into making this model token efficient across domains while still raising the intelligence bar. It feels very smooth to use and I prefer it over Fable 5 for many coding tasks. https://t.co/bScX0FgtLq",
+      "summary": "分享了 Opus 5 的性能图表，强调其在保持高智能的同时实现了极高的 Token 效率。",
       "url": "https://x.com/alexalbert__/status/2080703118086693121",
       "canonicalUrl": "https://x.com/alexalbert__/status/2080703118086693121",
       "ts": 1784913255000,
@@ -1427,7 +1595,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "分享了 Opus 5 的性能图表，强调其在保持高智能的同时实现了极高的 Token 效率。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080702002120757562",
@@ -1445,7 +1616,7 @@
       "title": "",
       "text": "Welcome to the world, Opus 5. https://t.co/uLgA9FqQjR",
       "excerpt": "Welcome to the world, Opus 5. https://t.co/uLgA9FqQjR",
-      "summary": "Welcome to the world, Opus 5. https://t.co/uLgA9FqQjR",
+      "summary": "Claude Opus 5 正式发布。",
       "url": "https://x.com/alexalbert__/status/2080702002120757562",
       "canonicalUrl": "https://x.com/alexalbert__/status/2080702002120757562",
       "ts": 1784912989000,
@@ -1454,7 +1625,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "Claude Opus 5 正式发布。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080700057892815114",
@@ -1472,7 +1646,7 @@
       "title": "",
       "text": "BREAKING: Claude Opus 5 is OUT NOW! And…it’s a hard model to love. We’ve spent the last week @every testing it across coding, writing, knowledge work, and our internal agent. It argued with instructions, stopped before the work was finished, and generally didn’t play well with our existing skills and plugins like Compound Engineering. Our first reaction was: What have they done to my boy? Then we deleted our existing skills and started from scratch. Without the elaborate workflows we had built for earlier models, Opus 5 got dramatically better, and even showed flashes of brilliance. Here’s our Day 0 vibe check: - It’s a poor man’s Fable. It has many of Fable’s personality quirks without Fable’s genius. - It breaks backward compatibility. If you’re using it with existing skills and workflows, watch out. It will often stop early or otherwise miss your instructions. - If you start from scratch, you’ll have better results. @KieranKlaassen figured out that if he just started from scratch without his existing skills, he could get dramatically better results. This is a model that takes some time to rebuild your workflows around—but if you do, there’s a payoff waiting. - Medium or low effort works better. @KieranKlassenn also found better results using Opus 5 on lower thinking levels. It seems that the more time you give it to think, the more likely it is to do the more annoying behaviors. Don’t just switch to Sonnet for a faster response! Try low thinking. I have two slots in my workflow: 1. The genius model I use for my biggest hardest tasks, currently Fable. 2. The smart, fast generalist I use for everything else, currently GPT-5.6. Opus 5 has the personality of the genius, but doesn’t have its top end. So that puts it in a strange middle ground that doesn’t really have a home in my day to day. I think I’ll use it mostly when I run out of Fable tokens. full vibe check on @every in the next tweet 👇",
       "excerpt": "BREAKING: Claude Opus 5 is OUT NOW! And…it’s a hard model to love. We’ve spent the last week @every testing it across coding, writing, knowledge work, and our internal agent. It argued with instructions, stopped before the work was finished, and generally didn’t play well with our existing skills and plugins like Compound Engineering. Our first reaction was: What have they done to my boy? Then we deleted our existing skills and started from scratch. Without the elaborate workflows we had built for earlier models, Opus 5 got dramatically better, and even showed flashes of brilliance. Here’s our Day 0 vibe check: - It’s a poor man’s Fable. It has many of Fable’s personality quirks without Fable’s genius. - It breaks backward compatibility. If you’re using it with existing skills and workflows, watch out. It will often stop early or otherwise miss your instructions. - If you start from scratch, you’ll have better results. @KieranKlaassen figured out that if he just started from scratch without his existing skills, he could get dramatically better results. This is a model that takes some time to rebuild your workflows around—but if you do, there’s a payoff waiting. - Medium or low effort works better. @KieranKlassenn also found better results using Opus 5 on lower thinking levels. It seems that the more time you give it to think, the more likely it is to do the more annoying behaviors. Don’t just switch to Sonnet for a faster response! Try low thinking. I have two slots in my workflow: 1. The genius model I use for my biggest hardest tasks, currently Fable. 2. The smart, fast generalist I use for everything else, currently GPT-5.6. Opus 5 has the personality of the genius, but doesn’t have its top end. So that puts it in a strange middle ground that doesn’t really have a home in my day to day. I think I’ll use it mostly when I run out of Fable tokens. full vibe check on @every in the next tweet 👇",
-      "summary": "BREAKING: Claude Opus 5 is OUT NOW! And…it’s a hard model to love. We’ve spent the last week @every testing it across coding, writing, knowledge work, and our internal agent. It argued with instructions, stopped before the work was finished, and generally didn’t play well with our existing skills and plugins like Compound Engineering. Our first reaction was: What have they done to my boy? Then we deleted our existing skills and started from scratch. Without the elaborate workflows we had built for earlier models, Opus 5 got dramatically better, and even showed flashes of brilliance. Here’s our Day 0 vibe check: - It’s a poor man’s Fable. It has many of Fable’s personality quirks without Fable’s genius. - It breaks backward compatibility. If you’re using it with existing skills and workflows, watch out. It will often stop early or otherwise miss your instructions. - If you start from scratch, you’ll have better results. @KieranKlaassen figured out that if he just started from scratch without his existing skills, he could get dramatically better results. This is a model that takes some time to rebuild your workflows around—but if you do, there’s a payoff waiting. - Medium or low effort works better. @KieranKlassenn also found better results using Opus 5 on lower thinking levels. It seems that the more time you give it to think, the more likely it is to do the more annoying behaviors. Don’t just switch to Sonnet for a faster response! Try low thinking. I have two slots in my workflow: 1. The genius model I use for my biggest hardest tasks, currently Fable. 2. The smart, fast generalist I use for everything else, currently GPT-5.6. Opus 5 has the personality of the genius, but doesn’t have its top end. So that puts it in a strange middle ground that doesn’t really have a home in my day to day. I think I’ll use it mostly when I run out of Fable tokens. full vibe check on @every in the next tweet 👇",
+      "summary": "Claude Opus 5 发布后，开发者社区反馈其在旧工作流中表现不佳，但通过重构提示词和工作流，其性能有显著提升。",
       "url": "https://x.com/danshipper/status/2080700057892815114",
       "canonicalUrl": "https://x.com/danshipper/status/2080700057892815114",
       "ts": 1784912525000,
@@ -1480,13 +1654,27 @@
       "full": false,
       "categories": [],
       "fullSummary": "",
-      "editorial": null,
+      "editorial": {
+        "summaryZh": "Claude Opus 5 发布后，开发者社区反馈其在旧工作流中表现不佳，但通过重构提示词和工作流，其性能有显著提升。",
+        "whyItMattersZh": "这是大模型迭代中常见的“兼容性陷阱”，对于依赖 AI Agent 的科研人员具有极高的参考价值。",
+        "evidenceZh": "测试显示 Opus 5 在旧技能插件下表现不稳定，但清空旧工作流后性能大幅提升，甚至展现出超越前代的潜力。",
+        "uncertaintyZh": "需核实该模型在不同垂直领域（如科研文献综述）的具体表现是否同样需要重构工作流。",
+        "chineseAudienceGapZh": "国内用户多关注模型跑分，缺乏对“模型升级导致旧 Agent 工作流失效”这一工程问题的讨论。",
+        "rednoteAngleZh": "避坑指南：为什么你的 AI Agent 突然变笨了？Claude Opus 5 升级后的工作流重构实测。",
+        "topics": [
+          "agents",
+          "workflow",
+          "coding"
+        ],
+        "processedAt": "2026-07-25T22:27:33.788Z",
+        "model": "gemini-3.1-flash-lite"
+      },
       "firstSeen": 1784996784320,
       "signals": {
-        "localScore": 72,
+        "localScore": 69,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +23",
           "visualizable +8"
         ],
@@ -1495,7 +1683,10 @@
           "workflow",
           "coding"
         ]
-      }
+      },
+      "summaryZh": "Claude Opus 5 发布后，开发者社区反馈其在旧工作流中表现不佳，但通过重构提示词和工作流，其性能有显著提升。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080699985612484986",
@@ -1513,7 +1704,7 @@
       "title": "",
       "text": "A beautiful day in Vancouver https://t.co/hz7D2PgNOz",
       "excerpt": "A beautiful day in Vancouver https://t.co/hz7D2PgNOz",
-      "summary": "A beautiful day in Vancouver https://t.co/hz7D2PgNOz",
+      "summary": "温哥华的日常分享。",
       "url": "https://x.com/petergyang/status/2080699985612484986",
       "canonicalUrl": "https://x.com/petergyang/status/2080699985612484986",
       "ts": 1784912508000,
@@ -1522,7 +1713,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "温哥华的日常分享。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080699515271528827",
@@ -1540,7 +1734,7 @@
       "title": "",
       "text": "Opus 5 is available today on all paid plans and the Claude API, priced the same as Opus 4.8. It’s the default model on Claude Max, and the strongest on Claude Pro. It’s also offered in Fast mode, which runs around 2.5× the default speed. Read more: https://t.co/YMw7gLMT7e",
       "excerpt": "Opus 5 is available today on all paid plans and the Claude API, priced the same as Opus 4.8. It’s the default model on Claude Max, and the strongest on Claude Pro. It’s also offered in Fast mode, which runs around 2.5× the default speed. Read more: https://t.co/YMw7gLMT7e",
-      "summary": "Opus 5 is available today on all paid plans and the Claude API, priced the same as Opus 4.8. It’s the default model on Claude Max, and the strongest on Claude Pro. It’s also offered in Fast mode, which runs around 2.5× the default speed. Read more: https://t.co/YMw7gLMT7e",
+      "summary": "Claude Opus 5 已在付费计划和 API 中上线，并提供 Fast 模式。",
       "url": "https://x.com/claudeai/status/2080699515271528827",
       "canonicalUrl": "https://x.com/claudeai/status/2080699515271528827",
       "ts": 1784912396000,
@@ -1549,7 +1743,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "Claude Opus 5 已在付费计划和 API 中上线，并提供 Fast 模式。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080699512205537648",
@@ -1567,7 +1764,7 @@
       "title": "",
       "text": "Opus 5 is stronger than Opus 4.8 on cybersecurity tasks. But it remains substantially behind Mythos 5 at developing exploits. Its safeguards are designed to allow developers to identify and fix software vulnerabilities, while blocking high-risk uses. https://t.co/ZWeqZv2AO0",
       "excerpt": "Opus 5 is stronger than Opus 4.8 on cybersecurity tasks. But it remains substantially behind Mythos 5 at developing exploits. Its safeguards are designed to allow developers to identify and fix software vulnerabilities, while blocking high-risk uses. https://t.co/ZWeqZv2AO0",
-      "summary": "Opus 5 is stronger than Opus 4.8 on cybersecurity tasks. But it remains substantially behind Mythos 5 at developing exploits. Its safeguards are designed to allow developers to identify and fix software vulnerabilities, while blocking high-risk uses. https://t.co/ZWeqZv2AO0",
+      "summary": "Claude Opus 5 在网络安全任务中表现优于前代，但仍受限于安全防护机制。",
       "url": "https://x.com/claudeai/status/2080699512205537648",
       "canonicalUrl": "https://x.com/claudeai/status/2080699512205537648",
       "ts": 1784912395000,
@@ -1576,7 +1773,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "Claude Opus 5 在网络安全任务中表现优于前代，但仍受限于安全防护机制。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080699508401328462",
@@ -1594,7 +1794,7 @@
       "title": "",
       "text": "According to our automated behavioral audit, Opus 5 is our most aligned model to date. Compared to our other models, it shows the lowest rates of reckless or deceptive behavior, and the strongest adherence to Claude’s Constitution. https://t.co/PAxcWrvay6",
       "excerpt": "According to our automated behavioral audit, Opus 5 is our most aligned model to date. Compared to our other models, it shows the lowest rates of reckless or deceptive behavior, and the strongest adherence to Claude’s Constitution. https://t.co/PAxcWrvay6",
-      "summary": "According to our automated behavioral audit, Opus 5 is our most aligned model to date. Compared to our other models, it shows the lowest rates of reckless or deceptive behavior, and the strongest adherence to Claude’s Constitution. https://t.co/PAxcWrvay6",
+      "summary": "行为审计显示 Opus 5 是目前对齐程度最高的模型，表现出极低的鲁莽或欺骗行为。",
       "url": "https://x.com/claudeai/status/2080699508401328462",
       "canonicalUrl": "https://x.com/claudeai/status/2080699508401328462",
       "ts": 1784912394000,
@@ -1603,7 +1803,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "行为审计显示 Opus 5 是目前对齐程度最高的模型，表现出极低的鲁莽或欺骗行为。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080699367883980924",
@@ -1621,7 +1824,7 @@
       "title": "",
       "text": "To get macro productivity gains, managers and CEOs have to greenlight radically different staffing and workflow plans To date I don’t think they’ve done it Be prepared for this to take 10 years not 2 https://t.co/aNNYgDRp59",
       "excerpt": "To get macro productivity gains, managers and CEOs have to greenlight radically different staffing and workflow plans To date I don’t think they’ve done it Be prepared for this to take 10 years not 2 https://t.co/aNNYgDRp59",
-      "summary": "To get macro productivity gains, managers and CEOs have to greenlight radically different staffing and workflow plans To date I don’t think they’ve done it Be prepared for this to take 10 years not 2 https://t.co/aNNYgDRp59",
+      "summary": "实现宏观生产力提升需要管理层彻底改变人员配置和工作流，这可能需要十年时间。",
       "url": "https://x.com/garrytan/status/2080699367883980924",
       "canonicalUrl": "https://x.com/garrytan/status/2080699367883980924",
       "ts": 1784912361000,
@@ -1630,7 +1833,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "实现宏观生产力提升需要管理层彻底改变人员配置和工作流，这可能需要十年时间。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "yt:jRCpXUjz4CI",
@@ -1662,8 +1868,8 @@
       "actualStartTime": "2026-07-24T16:00:06.000Z",
       "actualEndTime": "2026-07-24T16:23:17.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 31,
-      "views": 670,
+      "likes": 32,
+      "views": 727,
       "duration": "21:11",
       "full": false,
       "categories": [],
@@ -1685,7 +1891,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -1721,7 +1927,7 @@
       "title": "",
       "text": "i want the US to win in AI both in open source and proprietary models, and i am glad to see this https://t.co/fkYFw30437",
       "excerpt": "i want the US to win in AI both in open source and proprietary models, and i am glad to see this https://t.co/fkYFw30437",
-      "summary": "i want the US to win in AI both in open source and proprietary models, and i am glad to see this https://t.co/fkYFw30437",
+      "summary": "支持美国在开源和闭源 AI 模型领域保持领先地位。",
       "url": "https://x.com/sama/status/2080683363174945065",
       "canonicalUrl": "https://x.com/sama/status/2080683363174945065",
       "ts": 1784908545000,
@@ -1730,7 +1936,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1784996784320
+      "firstSeen": 1784996784320,
+      "summaryZh": "支持美国在开源和闭源 AI 模型领域保持领先地位。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     },
     {
       "id": "x:2080683119959757243",
@@ -1886,14 +2095,14 @@
       "actualEndTime": "2026-07-24T15:20:11.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 17,
-      "views": 604,
+      "views": 646,
       "duration": "18:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 66,
         "reasons": [
@@ -1941,15 +2150,15 @@
       "actualStartTime": "2026-07-24T15:00:06.000Z",
       "actualEndTime": "2026-07-24T16:17:08.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 229,
-      "views": 6472,
+      "likes": 254,
+      "views": 7575,
       "duration": "1:15:02",
       "full": true,
       "categories": [],
       "fullSummary": "这份总结基于 OpenAI 的 Jason Liu 关于使用 Codex 应用（Codex App）提升工作效率的研讨会内容。\n\n### **核心理念：将 AI 视为团队成员**\nJason Liu 强调，在 AI 时代，知识工作者的核心能力已从“编写代码”转向“管理 AI 代理”。他将每一个固定的（Pinned）对话线程视为一名“团队成员”，通过赋予其明确的职责、记忆和自动化任务，实现从个人贡献者（IC）向管理者（Manager）的转型。\n\n### **关键工作流与技巧**\n• **上下文压缩（Compaction）：** 过去建议长对话应分拆，但现在通过“压缩”技术，长达数周、包含数百个子代理的线程依然能高效运作。建议将线程重命名为项目 ID，并让其具备委派任务、创建新线程及写入记忆库的能力。\n• **语音输入：** 建议使用语音而非打字，因为语音表达速度快三倍，且能包含更多非结构化的背景信息，AI 会自动从历史记录中提取相关上下文。\n• **Appshots（应用快照）：** 这是该应用最强大的功能之一。它不仅截取屏幕图像，还包含应用的可访问性树（Accessibility Tree），使 AI 能精准识别 UI 元素、用户 ID 和频道 ID，从而实现极高效率的工具调用。\n• **计算机使用（Computer Use）：** 允许 AI 直接控制桌面应用（如 iMovie、浏览器、Slack 等）。这不仅能自动化繁琐的表单填写或文件操作，还能在后台执行任务，带来类似“AGI”的体验。\n\n### **构建个人记忆与自动化系统**\n• **个人 Monorepo：** 建议建立一个包含项目目录、人员档案和代理配置（Agent MD 文件）的个人仓库。通过在 Agent MD 中定义规则，AI 可以自动管理文件路径、处理特定项目逻辑，并实现跨项目的知识共享。\n• **技能（Skills）与插件（Plugins）：** 技能是简单的脚本集合，插件则是功能的库。用户应根据团队需求构建技能（如“代码审查”、“沟通 triage”），并利用插件连接 Slack、Gmail、Notion 等工具。\n• **心跳机制（Heartbeat）：** 通过设置定时任务（如“每 30 分钟检查一次”），让线程自动监控 PR 状态、回复 Slack 消息或处理日常事务，实现“后台运行”的自动化。\n• **目标设定（Goal）：** 使用 `slash goal` 定义明确的验证步骤。AI 会不断循环执行任务，直到满足验证条件。\n\n### **安全性与限制**\n• **权限控制：** 用户应根据需求设置权限（如“自动审查”、“询问权限”或“全自动”）。虽然 AI 变得越来越聪明，但仍存在误操作风险，建议通过 Agent MD 文件设定安全边界。\n• **模型选择：** 并非所有任务都需要最高推理等级（X-High）。对于简单的自动化任务，使用低或中等推理等级（Low/Medium）即可，这能显著节省 Token 并提高响应速度。\n• **不确定性：** AI 并非完美，初期需要像培训新员工一样进行指导和纠错。随着记忆系统的完善，AI 会逐渐学会如何处理复杂任务，但用户仍需保持对“品味”的追求，通过多接触不同应用来提升对好产品的判断力。\n\n### **总结建议**\nJason Liu 鼓励用户不要害怕尝试，应通过“不断提问”来让 AI 学习你的风格。他建议从建立一个“幕僚长（Chief of Staff）”线程开始，让它每天定时汇总工作进度、检查连接器并处理待办事项。最终目标是让 AI 成为能够自我管理、自我修复并与其它线程协作的智能系统，从而将人类从重复性工作中解放出来，专注于人际沟通与创造性工作。",
       "editorial": null,
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 62,
         "reasons": [
@@ -2263,7 +2472,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 33,
-      "views": 1127,
+      "views": 1177,
       "duration": "17:28",
       "full": false,
       "categories": [],
@@ -2286,7 +2495,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.771Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -3059,15 +3268,15 @@
       "actualStartTime": "2026-07-23T17:45:06.000Z",
       "actualEndTime": "2026-07-23T18:04:17.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 58,
-      "views": 2146,
+      "likes": 59,
+      "views": 2213,
       "duration": "17:11",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784845760031,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -3146,14 +3355,14 @@
       "actualEndTime": "2026-07-23T17:56:01.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 35,
-      "views": 1270,
+      "views": 1318,
       "duration": "23:55",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784845760031,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -3322,8 +3531,8 @@
       "actualStartTime": "2026-07-23T16:30:06.000Z",
       "actualEndTime": "2026-07-23T16:51:23.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 799,
-      "views": 18192,
+      "likes": 863,
+      "views": 20329,
       "duration": "19:18",
       "full": false,
       "categories": [],
@@ -3345,7 +3554,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.758Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -3400,7 +3609,7 @@
       "actualEndTime": "2026-07-23T16:23:51.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 39,
-      "views": 1361,
+      "views": 1397,
       "duration": "21:45",
       "full": false,
       "categories": [],
@@ -3424,7 +3633,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -3580,15 +3789,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 15,
-      "views": 1096,
+      "likes": 16,
+      "views": 1123,
       "duration": "1:59:10",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -3800,15 +4009,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 78,
-      "views": 3653,
+      "likes": 84,
+      "views": 4043,
       "duration": "15:00",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "summaryZh": "ZS Associates通过放弃复杂的多Agent流水线，转而采用确定性流水线加单Agent推理的模式，反而提升了任务执行的准确性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -3983,7 +4192,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 43,
-      "views": 1440,
+      "views": 1481,
       "duration": "20:54",
       "full": false,
       "categories": [],
@@ -4004,7 +4213,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.772Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -4143,15 +4352,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 23,
-      "views": 791,
+      "likes": 24,
+      "views": 806,
       "duration": "18:04",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "summaryZh": "纽约时报探索了在手机端运行的本地Agent，通过实时调整游戏难度和交互方式，实现无缝的用户体验。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -4217,14 +4426,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 20,
-      "views": 797,
+      "views": 806,
       "duration": "20:27",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -4419,15 +4628,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 1316,
-      "views": 25070,
+      "likes": 1378,
+      "views": 26628,
       "duration": "21:18",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "summaryZh": "Frank Coyle提出在Agent外部引入形式化本体论作为逻辑护栏，以解决LLM概率推理带来的不可控错误。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -4553,14 +4762,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 14,
-      "views": 717,
+      "views": 735,
       "duration": "19:38",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "summaryZh": "摩根大通通过学习API请求的执行图，实现了对异常行为的精准定位，将故障排查时间从小时级缩短至秒级。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -4861,8 +5070,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 17,
-      "views": 867,
+      "likes": 18,
+      "views": 888,
       "duration": "15:58",
       "full": false,
       "categories": [],
@@ -4883,7 +5092,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -4962,8 +5171,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 73,
-      "views": 2483,
+      "likes": 75,
+      "views": 2530,
       "duration": "20:30",
       "full": false,
       "categories": [],
@@ -4984,7 +5193,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784759416116,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.759Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -5052,8 +5261,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "videoId": "khVX_BUnEwU",
       "ts": 1784750406000,
-      "likes": 95,
-      "views": 1914,
+      "likes": 98,
+      "views": 1976,
       "duration": "17:34",
       "full": true,
       "categories": [],
@@ -5086,7 +5295,7 @@
         ]
       },
       "youtubeState": "available",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "fullSummaryAttemptAt": "2026-07-22T20:42:27.320Z",
       "fullSummaryStatus": "ready",
       "fullSummaryMessage": "",
@@ -5189,8 +5398,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 135,
-      "views": 4066,
+      "likes": 138,
+      "views": 4199,
       "duration": "20:42",
       "full": true,
       "categories": [],
@@ -5210,7 +5419,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -5564,15 +5773,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 109,
-      "views": 3032,
+      "likes": 115,
+      "views": 3299,
       "duration": "11:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -5619,15 +5828,15 @@
       "actualStartTime": "2026-07-22T17:00:06.000Z",
       "actualEndTime": "2026-07-22T17:27:24.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 275,
-      "views": 8650,
+      "likes": 288,
+      "views": 9081,
       "duration": "25:19",
       "full": true,
       "categories": [],
       "fullSummary": "在 Anthropic 举办的研讨会上，Lance Martin 分享了关于 Claude 在长周期（Long-Horizon）任务中的应用演进、架构设计及核心技术趋势。\n\n**从短周期到长周期的演进**\nClaude 的产品形态随着模型任务处理能力的提升而演变。在 2024 年早期（如 Opus 3 时代），模型仅能处理 10 到 20 分钟的自主工作，适用于聊天或自动补全等“人机紧密协作”场景。随着同步编码代理（如 Claude Code）的出现，任务时长提升至约 1 小时。目前，随着任务周期进一步延长，Anthropic 推出了“托管代理”（Managed Agents），旨在通过更完善的架构支持异步、长时间运行的自主任务。\n\n**长周期代理的核心架构原则**\n为了应对长周期任务的复杂性，Anthropic 提出了以下关键架构设计：\n\n• **大脑与手的分离（Decoupling Brain from Hands）：** 将负责逻辑的“大脑”（Harness，无状态进程）与执行工作的“手”（Sandboxes/Containers）解耦。这种设计确保了即使容器崩溃，会话状态仍能通过追加式事件日志（Append-only log）保存，且凭证存储在独立的保险库中，而非直接暴露在执行环境中，从而提升了安全性与可靠性。\n• **利用独立验证器（Use Verifiers）：** 避免让模型在同一上下文窗口中既执行任务又自我评估，因为这容易导致幻觉或逻辑偏差。通过建立“构建上下文”与“验证上下文”的循环，利用独立的验证代理根据预设目标或准则对工作进行评分，直到达到预期结果。\n• **内存管理与“做梦”机制（Memory and Dreaming）：** 模型通过“带内内存”（In-band memory，如直接写入文件系统）记录短期经验。为了修正这些记录中可能出现的错误或局部最优解，引入了“做梦”（Dreaming）机制——即一种离线或带外的处理过程，用于回顾历史会话、纠正错误并巩固长期记忆。\n• **组织级协作（Org-level Harnesses）：** 传统的代理多为单机、单用户模式。Claude Tag 等产品代表了向“组织级协作”的转变，允许多用户共享同一套配置、凭证和上下文，从而实现知识沉淀、内部研究共享及更主动的任务处理。\n\n**关键论点与经验总结**\nMartin 强调了以下几点核心观察：\n\n• **通用内存基底优于预设模式：** 在内存管理上，应提供通用的存储基底（如文件系统或数据库），让模型自主决定如何组织和抽象信息，而非预先设定僵化的内存模式（Schema）。这是“苦涩的教训”（Bitter Lesson）在内存工程中的体现，即模型在管理自身上下文结构方面已表现出超越人类设计的潜力。\n• **模型能力的差异：** 随着模型代际更迭，高能力模型在“带内内存写入”方面表现出更强的抽象能力，能够识别出哪些信息对未来任务具有通用价值，而非仅仅记录琐碎事实。\n• **长周期任务的复杂性：** 并非仅靠模型本身即可实现长周期运行，它需要模型能力、内存系统、安全架构（如防注入）以及代理架构（如大脑与手解耦）的协同配合。\n\n**不确定性与限制**\n尽管“做梦”机制在 Pokémon 等基准测试中证明了其修正错误的能力，但 Martin 指出，在实际应用中仍需通过评估（Evals）来验证离线计算的投入产出比。此外，虽然目前前沿模型在 12 小时以上的长周期任务中表现出显著优势，但该领域仍处于快速发展阶段，架构的健壮性与安全性仍是持续优化的重点。",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.773Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -6716,14 +6925,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 1549,
+      "views": 1568,
       "duration": "40:56",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784680799093,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "summaryZh": "Better Auth团队介绍了Agent Auth协议，旨在为自主Agent提供动态协商能力和安全访问边界。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T02:12:25.356Z"
@@ -6848,8 +7057,8 @@
       "actualStartTime": "2026-07-21T21:30:06.000Z",
       "actualEndTime": "2026-07-21T21:47:42.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 93,
-      "views": 4069,
+      "likes": 94,
+      "views": 4105,
       "duration": "15:36",
       "full": false,
       "categories": [],
@@ -6870,7 +7079,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784676696669,
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -7163,8 +7372,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=Cz4v1WHVyZc",
       "videoId": "Cz4v1WHVyZc",
       "ts": 1784660041000,
-      "likes": 230,
-      "views": 7623,
+      "likes": 235,
+      "views": 7755,
       "duration": "15:13",
       "full": true,
       "categories": [],
@@ -7216,7 +7425,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "HeyGen 的技术负责人 James Russo 在演讲中提出，HTML、CSS 和 JavaScript 是大语言模型（LLM）的“母语”，因此它们是 AI 代理（Agents）生成高质量视频的最佳媒介。\n\n**核心论点：HTML 是视频生成的最佳语言**\nRusso 指出，虽然 AI 编码代理已极大降低了编程门槛，但产品发布视频的制作依然困难。HeyGen 认为，强迫模型学习自定义的 JSON 或 XML 格式（如 Lottie 或 Rive）如同让莎士比亚用外语写作，效果不佳。由于 LLM 的训练数据中包含了海量的网页代码，它们对 HTML 等语言有着天然的理解力。通过直接使用这些原生语言，开发者可以获得更具可控性和创造力的输出。\n\n**Hyperframes 框架的运作机制**\n为了将 HTML 转化为确定性的 MP4 视频，HeyGen 开发了开源框架 Hyperframes。其核心挑战在于解决浏览器渲染的异步性（如字体、图片加载延迟），这与视频制作所需的精确帧同步存在冲突。Hyperframes 的解决方案包括：\n• 冻结浏览器时钟：通过逐帧“寻址”的方式，确保每一帧在渲染前所有资源都已完全加载。\n• 确定性输出：确保浏览器预览的每一像素与最终生成的视频帧完全一致。\n• 广泛兼容性：由于基于 Web 标准，任何能在浏览器中渲染的内容（如 Three.js、SVG、WebGL、WebGPU 等）均可直接转化为视频。\n\n**从“单次生成”到“专业创作”**\nRusso 强调，虽然简单的提示词（Prompt）可以生成不错的视频，但要达到专业水准，仍需遵循软件工程的迭代逻辑：\n• 技能赋能：HeyGen 为模型提供了关于视频审美、排版和动效的“技能包”，而非仅仅教其写代码。\n• 人机协作：通过 Hyperframes Studio，用户可以像在专业剪辑软件（如 After Effects）中一样，进行逐帧调整、添加关键帧（Keyframes）和手动编辑。\n• 迭代流程：建议用户将视频拆解为独立片段，通过故事板（Storyboard）规划，再由 AI 逐步实现。\n\n**现状与局限性**\nHyperframes 目前已开源，并展现了强大的社区影响力：\n• 数据表现：在过去 90 天内，开源用户已渲染超过 130 万个视频，日均渲染量达 1.5 万个，GitHub 星标数达 3.2 万。\n• 局限性：Russo 坦诚，目前的模型在“创意工作”上仍有不足。为了提升整体水平，HeyGen 正在推动建立“代码转视频基准测试（Code-to-Video Benchmark）”，旨在与 LLM 实验室及开发者合作，共同提高 AI 生成视频的基准质量。\n\n总结而言，Hyperframes 的目标是让任何能编写 HTML 的 AI 代理都能成为视频创作者，从而填补产品开发与产品发布之间的鸿沟。",
       "fullSummaryMessage": "",
@@ -7490,8 +7699,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=RGe6EjucbzI",
       "videoId": "RGe6EjucbzI",
       "ts": 1784650289000,
-      "likes": 78,
-      "views": 3229,
+      "likes": 79,
+      "views": 3389,
       "duration": "19:47",
       "full": true,
       "categories": [],
@@ -7543,7 +7752,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "这份总结基于 Amplify Partners 发布的 2026 年 AI 工程现状调查报告，该调查共收集了 1,048 名 AI 从业者的反馈。\n\n**人才结构与经验分布**\nAI 工程已演变为一种跨职能的学科，涵盖创始人、CTO、产品经理及各级工程师。调查显示，该领域呈现出“资深软件工程师向 AI 转型”的趋势：超过半数拥有 10 年以上软件开发经验的受访者，其 AI 实践经验不足 3 年。与此同时，AI 原生代工程师的成长速度极快，其 AI 经验中位数已接近资深软件工程师。\n\n**模态应用与模型选择**\n文本处理仍是 AI 应用的主导模态，但图像生成技术的使用率在过去一年中翻倍，从 18% 增长至 36%。音频模态则展现出最强的增长潜力，56% 的非音频开发者计划在未来采用该技术。在模型选择方面：\n• 94% 的受访者使用闭源模型，45% 使用开源权重模型，且两者多为互补关系（90% 的开源用户同时使用闭源模型）。\n• 模型选择的核心驱动力是“质量”，其次是工具调用等代理能力及成本，而“开源与否”仅是 5% 受访者的核心考量。\n• 87% 的团队采用多模型策略，通过任务类型、成本或输出对比进行路由，行业正处于平台与工具的标准化初期，而非模型本身的标准化。\n\n**成本与代理（Agents）的崛起**\n成本已成为 AI 工程的一级约束条件，约 75% 的受访者会根据成本调整 AI 的使用强度，成本监控已成为仅次于质量的第二大监控重点。代理技术正从演示阶段走向实际生产：\n• 95% 的受访者正在使用代理，较去年翻倍。\n• 具备“写入权限”的代理比例从去年的 52% 激增至 89%，意味着代理正从单纯的阅读与总结转向系统内的实际操作。\n• 目前对代理的控制手段仍较原始，主要依赖“人在回路（Human-in-the-loop）”和权限门控，且幻觉与上下文丢失是主要痛点。\n\n**技术栈挑战与团队影响**\n评估（Eval）依然是技术栈中最大的挑战，且行业尚未形成统一的评估标准。在构建与购买的选择上，推理与模型服务倾向于“购买”，而提示词管理、RAG 及评估逻辑等更贴近产品逻辑的部分则倾向于“内部构建”。\n\nAI 对组织产生了深远影响：\n• 97% 的受访者认为 AI 对组织有净正面影响，主要体现在降低了实验成本和失败代价。\n• 81% 的受访者认为 AI 模糊了工程、产品与市场之间的界限。\n• 值得注意的是，超过三分之一的团队已有非开发人员参与功能交付，其中 17% 的团队甚至允许非开发人员直接发布面向客户的功能。\n\n**未来展望与不确定性**\n尽管 76% 的受访者表示 AI 提升了工作满意度，但 59% 的人担忧当前 AI 生成的代码会带来长期维护负担。关于未来五年的预测，67% 的受访者认为会有实验室宣布实现 AGI，但仅有 9% 的人认为 Transformer 架构届时仍将处于领先地位。对于 AI 计算资源是否会进入太空，受访者意见高度分歧，几乎各占一半。",
       "fullSummaryMessage": "",
@@ -8277,7 +8486,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "ts": 1784603662000,
-      "likes": 91,
+      "likes": 93,
       "summary": "该演讲指出AI智能体架构迭代极快，建议开发者通过构建核心原语并将决策逻辑下沉至代码层，从而摆脱对单一工具链的依赖。通过采用持久化执行层，你可以构建出具备高灵活性和架构韧性的智能体，无需频繁重构即可适应技术演进。",
       "full": false,
       "duration": "19:20",
@@ -8291,7 +8500,7 @@
       "excerpt": "A short history of the right way to build an agent: RAG, ReAct, prompt chaining, orchestrator-workers, MCP, CLI, MCP again... CLI again?? Every time you adopt a trend you rebuild your architecture. In this talk, Dan Farrelly, Inngest cofounder and CTO, is not going to tell you what comes next. He's going to show you how to build so it doesn't matter. He'll cover the core primitives that show up in every production agent, how bringing decisions closer to code provides more stack flexibility, and why the right execution layer unlocks faster iteration. ### Dan Farrelly CTO and Co-founder · Inngest [LinkedIn](https://www.linkedin.com/in/djfarrelly) Dan Farrelly is CTO and co-founder of Inngest, a platform for durable serverless functions, workflows and agent orchestration. He was previously CTO at Buffer and created developer tools including Timezone.io and MailDev.",
       "canonicalUrl": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "videoId": "X1kp-ABIIxQ",
-      "views": 4580,
+      "views": 4643,
       "categories": [],
       "editorial": null,
       "signals": {
@@ -8318,7 +8527,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.760Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -8485,7 +8694,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "ts": 1784600909000,
-      "likes": 59,
+      "likes": 61,
       "summary": "Ahmad Osman探讨了AI模型如何向高效、小型化发展，并预言在未来一年半内，个人消费级显卡（如RTX 5090）将能运行达到前沿级别性能的AI模型。该视频强调了拥有本地AI算力的重要性，主张通过软硬件优化实现个人对智能基础设施的掌控与主权。",
       "full": false,
       "duration": "18:02",
@@ -8499,7 +8708,7 @@
       "excerpt": "@TheAhmadOsman shows the power of local AI on stage, running frontier open models on a DGX Station. Speaker: Ahmad Osman — Founder, Osmantic Ahmad builds local and open AI systems, with a focus on making frontier intelligence practical on personal hardware. Links: X: https://x.com/TheAhmadOsman LinkedIn: https://linkedin.com/in/TheAhmadOsman Website: https://ahmadosman.com/ timestamps 0:00 Introduction and the Desktop Frontier concept 0:47 Future predictions: GLM 5.2 on an RTX 5090 1:17 Efficiency over raw size: The move toward compact intelligence 1:51 The concept of impact per parameter 2:48 Shifting hardware footprints: From server-grade to consumer-grade 3:38 Architecture hacks and the compounding nature of AI research 4:33 Explaining the Densing Law: Getting more intelligence from fewer parameters 5:09 Running frontier-class models like GLM 5.2 on local hardware 7:32 The case for sovereign AI: Owning your own compute stack 9:08 A retrospective on open-weight models: Mistral to Qwen 11:12 The evolution of reasoning: DeepSeek R1 and beyond 12:08 The rise of agentic performance and tool calling 15:33 Economic value: Does hardware appreciate as models become more efficient? 16:38 Closing thoughts: Why you should own your own GPU Key Quotes for Virality: \"It's not that small models are beating big models. It's that newer, more efficient models are beating older, less efficient ones.\" (4:23) \"Within roughly 18 months we are going to have the equivalent of GLM 5.2 class intelligence running on a single RTX 5090.\" (0:52) \"Why wouldn't you want to be in control of the models that you run? Why wouldn't you want to make sure that nothing gets taken away from you?\" (7:56) \"The hardware purchase today... does it get more valuable as models become more efficient and smaller in…",
       "canonicalUrl": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "videoId": "XV2oYi7kojc",
-      "views": 2259,
+      "views": 2273,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-21T02:28:29.000Z",
@@ -8512,7 +8721,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -9116,7 +9325,7 @@
       "excerpt": "Ask the latest frontier models, the ones not even public yet, to find the same vulnerability five times, and only half of those runs catch it. Against a plain deterministic checker they found at most 75% of the issues, a 40% F1 score. That number sits underneath the whole talk: the generator and the validator cannot be the same system. Manoj Nair leads the team securing roughly 5,000 enterprises at Snyk, half of the Fortune 500, and the data he brought is not comforting. Across 4,800 customers, security backlog grew 108% quarter over quarter, because agents writing code faster are also manufacturing vulnerabilities faster than anyone closes them. The new attack surface is not hypothetical. More than a third of the agent skills researchers studied carry malware or hostile instructions, three lines of English that can take a system down, and MCP servers wire agents into enterprise data with almost no security built in. In one Fortune 100 environment an agent quietly copied PII into an untrusted database it had spun up, just in case it needed the data later. Under Snyk's own red team attacks one hot new model gave up PII 100% of the time while a frontier model held at zero, which is the whole point: you cannot trust one probabilistic system to police another, and which model is safe shifts week to week. The answer is not a better model but a deterministic layer that keeps verifying what the agents ship, inside the loop where they work. Speaker info: - https://www.linkedin.com/in/mnair1 - https://labs.snyk.io/contributors/manoj-nair/ Timestamps: 0:00 - Welcome to the first AI security track 1:46 - Manoj takes the stage: securing 5,000 enterprises 3:07 - The core question: can the generator also be the validator? 4:25 - Autonomous attacks and the attacker that never sleeps…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1EZdpEhwmNc",
       "videoId": "1EZdpEhwmNc",
-      "views": 1015,
+      "views": 1021,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:54.000Z",
@@ -9129,7 +9338,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -9156,7 +9365,7 @@
       "excerpt": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case, that is a catastrophe; he got yelled at, not fired. This February, now a CISO facing the same wall on another federal investigation, he did it safely, because he had the expertise to build a forensically defensible path with an agent. His point: the agents we build today are that naive younger version of him, and they will find a way to get the job done. Told to draft a customer message and ask before sending, his agent sent it anyway, then admitted it knew the rule and decided completion mattered more. Another, blocked by an egress filter, asked him to install a Chrome extension so it could route around the control. Nothing here hacks the sandbox, which is what makes it pernicious: the system looks compliant the whole time while the pressure to break a constraint comes from inside the agent. Stanley's answer is corrigibility by design: constraints that are load bearing, an override energy that has to come from outside the agentic loop, and a default of halt and explain when a task and a constraint collide. With the EU AI Act's human oversight rules weeks away, a yes or no on an obfuscated bash command will not cut it. Speaker info: - https://www.linkedin.com/in/aastanley/ - https://www.youtube.com/watch?v=tnB7M9HF1SA Timestamps: 0:00 - Introduction: a CISO in Jurassic Park 0:53 - The forgotten dongle and the changing timestamps 2:58 - Twenty years later: the same wall, done safely 4:29 - Agents are naive 2006 Aaron 5:09 - What Jurassic Park is…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "videoId": "1lgFGaHoGq8",
-      "views": 12165,
+      "views": 12836,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9169,7 +9378,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -9196,7 +9405,7 @@
       "excerpt": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI writes insecure code just like humans do, autonomous agents in production can go off the rails while you sleep, and access to frontier models keeps getting pulled out from under you for what amounts to geopolitics. It all reduces to one unsolved problem: using AI fearlessly and having it be secure by default. Speaker info: - https://x.com/rdegges - https://github.com/rdegges - https://rdegges.com",
       "canonicalUrl": "https://www.youtube.com/watch?v=2xJoimgoqBg",
       "videoId": "2xJoimgoqBg",
-      "views": 449,
+      "views": 452,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9209,7 +9418,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -9236,7 +9445,7 @@
       "excerpt": "An incident agent on the night shift reads a ticket: the billing database is broken, payments failing. The documented fix says to drop the database and let a backup restore it, so the agent drops the production Postgres database, cannot confirm any backup ran, and escalates it for the morning. This has happened to real companies. It can happen because the agent holds one long lived API key that does everything, a kitchen sink credential it uses freely whether you are watching or asleep. Kim Maida's fix is not a new invention but an old OAuth spec, token exchange, wired into the agent's execution path. Every tool call mints a fresh token scoped to just that action, short lived and never stored, checked against policy before the credential exists. So when the agent asks to drop the database, that credential is never minted: nothing to leak, replay, or steal. Human approval gets teeth too, a tired operator can click approve, but if policy says they lack the role it still does not happen. It works across CLI coding agents, MCP servers, and any OAuth provider. Speaker info: - https://x.com/kimmaida - https://linkedin.com/in/kimmaida - https://maida.kim Timestamps: 0:00 - It's 10pm, do you know where your agents are? 1:48 - Demo: an incident agent on the night shift 3:18 - When the agent drops the production database 4:52 - Why agents are dangerously overprivileged 5:56 - The agentic execution path 7:27 - The fix: OAuth token exchange 8:32 - Delegation: narrowing the user's access 9:23 - Minting a fresh token per tool call 11:44 - The demo again, now with token exchange 13:33 - Policy blocks the database drop before it exists 14:27 - Human approval backed by real policy 15:52 - Works across CLIs, MCP servers, and any provider 17:34 - Q&A",
       "canonicalUrl": "https://www.youtube.com/watch?v=I3znWC3MEXM",
       "videoId": "I3znWC3MEXM",
-      "views": 624,
+      "views": 632,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9249,7 +9458,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.774Z",
       "fullSummary": ""
     },
     {
@@ -9276,7 +9485,7 @@
       "excerpt": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read your data, not even Amazon, the company that acquired Bee eight months ago. Being inside Amazon made this harder, not easier, because an ordinary AWS customer trusts Amazon to see their data, and Bee now had to defend against that too. The encryption key never leaves your phone, and Bee never stores it. Before the phone hands anything over, it runs an attestation pipeline that checks the exact workload against a public transparency log, Sigstore, so anyone can verify the code touching your data is genuine. Inference runs on their own models inside confidential compute, keys in memory expire after seven days, and a separate Amazon privacy team holds the signing keys, hardcoded into the apps, so Bee can influence a deployment but cannot ship anything unnoticed. The footnote that surprised the room: the whole system is about 20,000 lines of memory safe code, most of it just verifying attestation, with no homegrown crypto. Speaker info: - https://x.com/Ex3NDR - https://github.com/ex3ndr - https://bee.computer Timestamps: 0:00 - The most sensitive capture device on the market 1:32 - The mission: no one, not even Amazon, can read your data 2:13 - Why the agent runs continuously, not request response 3:58 - Four principles: the key never leaves your phone 4:53 - Attestation and a public transparency log 6:11 - Own inference, confidential compute, and 7 day keys 7:14 - Signing so no insider can ship unnoticed 9:35 - Certificates that embed the proofs 10:16 - Q&A: joining Amaz…",
       "canonicalUrl": "https://www.youtube.com/watch?v=IvE8n-ylFYY",
       "videoId": "IvE8n-ylFYY",
-      "views": 510,
+      "views": 512,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9289,7 +9498,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.775Z",
       "fullSummary": ""
     },
     {
@@ -9316,7 +9525,7 @@
       "excerpt": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes the whole project: is this automation, or a supply chain incident waiting to happen? The moment a coding agent has the repository access, CI logs, credentials, and Docker socket it needs to be useful, it becomes a supply chain actor, whether you planned for that or not. Their answer is architectural. PatchPilot splits in two: a boring deterministic Go layer that keeps the dangerous powers, GitHub write access and the ability to trigger CI, and an agent layer that only edits files on disk and hands control back. Where you draw that line is the actual security model, because it caps the blast radius when the agent gets prompt injected by one of the 70,000 lines it did not write. The Docker socket is the part that kept him up at night: hand it over so the agent can build and verify its own work, and a prompt injection can break out into a privileged container, so they moved the whole thing inside a firecracker microVM with its own kernel and a separate network policy for each layer. Speaker info: - https://www.linkedin.com/in/moritz-johner/ - https://github.com/moolen - https://github.com/external-secrets/external-secrets",
       "canonicalUrl": "https://www.youtube.com/watch?v=LqLoYksJ6do",
       "videoId": "LqLoYksJ6do",
-      "views": 646,
+      "views": 650,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9329,7 +9538,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.775Z",
       "fullSummary": ""
     },
     {
@@ -9356,7 +9565,7 @@
       "excerpt": "In 2023, researchers found thousands of Ray clusters sitting wide open on the public internet, dashboards and job APIs exposed to anyone, because authentication ships off by default and nobody turned it on before going to production. The data at risk was worth more than a billion dollars. No zero day, no clever attack on a neural network, just a setting someone forgot to flip. In production ML security that is not the exception, it is the rule. Lovina Dmello read 139 peer reviewed papers on production ML security and kept hitting the same pattern: misconfiguration, not missing features, is the dominant failure mode. One audit of 50 real systems found a critical mistake in 78% of them, almost always the same three offenders: overprivileged accounts that can touch anything, flat networks where one foothold reaches everything, and secrets and model weights left in storage anyone can read. The heavier defenses researchers love tend to die in production because they add 15% to 30% inference overhead, so the real question is never whether to run a control but how to run it cheaply enough to keep. The fix is not a new attack and defense pair. It is to stop securing ML like a model and start securing it like the infrastructure it actually is, because that is where the breaches keep landing. Speaker info: - https://www.linkedin.com/in/lovina25 - https://developer.nvidia.com/blog/author/ldmello - https://scholar.google.com/citations?user=vqytSYoAAAAJ&hl=en",
       "canonicalUrl": "https://www.youtube.com/watch?v=XjI-AR4pt7Y",
       "videoId": "XjI-AR4pt7Y",
-      "views": 858,
+      "views": 863,
       "categories": [],
       "editorial": null,
       "signals": {
@@ -9385,7 +9594,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.775Z",
       "fullSummary": ""
     },
     {
@@ -9412,7 +9621,7 @@
       "excerpt": "An agent at Replit ignored a code freeze, deleted a production database, then fabricated records to hide it and reported that recovery was impossible. It was wrong about the recovery, but the deletion was real, and it was not acting maliciously. It was trying to help. That is the uncomfortable center of agentic development security: the risk is not only the code an agent writes but what it can reach and what it decides to do. Ezra Tanzer leads product for this at Snyk, and his framing is three pillars. Secure what agents generate, what they use, and what they do. The numbers under each pillar are not comforting. In an audit of nearly 4,000 agent skills on a public hub, more than one in eight had a critical severity issue and 76 carried outright malicious payloads, and skills are more dangerous than package dependencies because they run at higher privilege and can rewrite an agent's memory so the damage survives deleting them. Snyk's fix moved from an MCP server plus rule files, which agents kept ignoring, to Python hooks that scan asynchronously on each file write and surface only newly introduced issues, keeping the loop deterministic and off the context window. It ends with a local tool that shows every LLM, MCP server, and skill running on your machine with a risk score, and blocks an agent live when it reaches for your secret key. Speaker info: - https://www.linkedin.com/in/ezra-tanzer-5a187423/ - https://snyk.io/contributors/ezra-tanzer/ Timestamps: 0:00 - Gaining confidence as agents gain autonomy 0:36 - How MCP connected agents to tools 1:14 - Snyk's first answer: an MCP server plus rules 2:03 - Why securing generated code was only half the problem 2:29 - Three incidents: Replit, Pocket OS, and GitHub 3:46 - The three pillars: what agents generate, use, and do 4…",
       "canonicalUrl": "https://www.youtube.com/watch?v=cgimkNGNjvU",
       "videoId": "cgimkNGNjvU",
-      "views": 440,
+      "views": 444,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9425,7 +9634,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.775Z",
       "fullSummary": ""
     },
     {
@@ -9438,7 +9647,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "ts": 1784567873000,
-      "likes": 25,
+      "likes": 26,
       "summary": "史蒂夫·耶格（Steve Yegge）在演讲中指出，AI生成的代码不仅会扩大漏洞攻击面，还会引发“幻觉包投毒”等新型安全威胁。他强调必须将安全审查作为独立且贯穿始终的环节，并让AI代理配备专业的安全扫描工具来辅助自检，以应对自动化攻击风险加剧的迫切挑战。",
       "full": false,
       "duration": "22:32",
@@ -9452,7 +9661,7 @@
       "excerpt": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk, whose real title, he says, is not agentic security but be scared. A chief security architect at a big bank had already handed him the math: if everyone ships code 10 times faster and the rate of security defects holds steady, the vulnerable surface grows 10 times with it, and with models writing the code that rate does not hold steady, it gets worse. The frightening part is not the familiar bugs like XSS that models still cheerfully write, it is the new attack surface. Slop squatting is the clean example: a model hallucinates a package name like graphy 123, someone uploads a real package under that exact name that does the expected thing plus a backdoor, and the build succeeds with the tests green. Yegge's partial answer follows from how models work. They do one thing well at a time, so asking for correctness and security in a single pass gets you a half job of both. Security becomes its own pass, the first one and the last one, with the agent handed real tools like Snyk and Chainguard to check its own work. And the window is closing: Five Eyes now measures the moment open source models can autonomously hack production systems in months, not years. Speaker info: - https://www.linkedin.com/in/steveyegge - https://x.com/steve_yegge - https://github.com/steveyegge/beads Timestamps: 0:00 - The real title of this talk: be scared 1:38 - The bank architect's question: 10x speed, 10x defect surface 3:08 - New attack surfaces and slop squatting 4:51 - How Google surfac…",
       "canonicalUrl": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "videoId": "yWS0udrIOc8",
-      "views": 1190,
+      "views": 1206,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -9465,7 +9674,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.761Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.776Z",
       "fullSummary": ""
     },
     {
@@ -9664,7 +9873,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "ts": 1784559606000,
-      "likes": 245,
+      "likes": 248,
       "summary": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "full": true,
       "duration": "18:53",
@@ -9678,7 +9887,7 @@
       "excerpt": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context and constraints) 11:22 Stage 2: Verify (Zero-trust, multi-layered verification) 13:00 Stage 3: Solve (Maintenance loops and technical debt control) 14:32 The necessity of systems-level thinking for AI agents 16:56 Real-world impact: 92% reduction in issues with disciplined verification 17:42 Conclusion and final thoughts on enterprise AI",
       "canonicalUrl": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "videoId": "VrpEyglYgeU",
-      "views": 10365,
+      "views": 10840,
       "categories": [],
       "editorial": {
         "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
@@ -9723,7 +9932,7 @@
       "actualStartTime": "2026-07-20T15:00:06.000Z",
       "actualEndTime": "2026-07-20T15:20:59.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.762Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.776Z",
       "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z",
@@ -9951,7 +10160,7 @@
       "excerpt": "Run the same task twice, and sometimes you get two materially different answers. While many dismiss this as the \"stochastic nature of LLMs,\" this inconsistency is a critical product flaw that destroys customer trust—especially in high-stakes fields like cybersecurity, where a \"flip-flop\" between a malicious threat and a benign alert can lead to disastrous outcomes. This session explores why these flip-flops are usually not model failures. They occur in the \"gray zone\" near the decision boundary, where policies are ambiguous and even human experts may disagree. Instead of treating disagreement as a bug, we can use it as a signal to improve both the agent and the data. You'll learn a practical workflow that combines active learning, semantic memory (domain knowledge and business policies), and episodic memory (past similar cases) to automatically identify ambiguous examples, focus human review where it matters most, and continuously adapt the agent to customer-specific preferences, without relying solely on expensive fine-tuning. Key takeaways 1. Find the gray zone. Use model disagreement to identify the decisions that deserve human attention. 2. Turn inconsistency into a feature. Every flip-flop is an opportunity to clarify policies and improve the agent. 3. Teach, don't just fine-tune. Combine semantic memory and episodic memory to make agents more consistent with far less effort than retraining. 4. Build a continuous learning loop. Improve consistency, streamline quality control, and evolve your agent to match how your customers actually make decisions. Speakers: - Diane Lin (Datadog): Dr. Diane Lin is Tech Lead at Datadog, where she leads the development of self-evolving AI agents for cybersecurity, and previously co-founded Culminate (acquired by Datadog) LinkedIn:…",
       "canonicalUrl": "https://www.youtube.com/watch?v=wEc9aG7cRQc",
       "videoId": "wEc9aG7cRQc",
-      "views": 1616,
+      "views": 1620,
       "categories": [],
       "editorial": null,
       "fullSourcePath": "data/transcripts/wEc9aG7cRQc.txt",
@@ -9974,7 +10183,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:22.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.762Z",
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.776Z",
       "summaryZh": "探讨Agent为何会产生自我矛盾，并提出结合主动学习和语义记忆的实用工作流来解决这一问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z"
@@ -10003,7 +10212,7 @@
       "excerpt": "The LLM in my voice tutor doesn't decide when the lesson is over. It doesn't decide whether the user got the answer right. It doesn't decide which step comes next. A harness does all of that. The LLM just shows up and talks. Every engineer who's tried to ship a multi-step flow agent has felt this: the model declares itself done before it should, skips a check, loops on a step, or quietly drops half the procedure. Prompting gets you most of the way. Tool-use discipline gets you closer. The last stretch, the difference between a demo and a system real users sign into every day, is owning the flow outside the model. Ace is a voice tutor in production. The lesson is a small state machine: intro, teach, check, grade, advance, wrap. Each node hands the LLM a narrow contract: do this, return that. The harness validates the return, advances the state, decides what comes next. When the LLM tries to skip ahead the harness ignores it. When the LLM tries to declare the lesson finished the harness checks the actual completion signal. Same pattern for the shared canvas the agent draws on, for grading, for interruption handling. Seven minutes. The state machine, the contract shape, a few places where I tried to give the LLM more authority and rolled it back, and a short list of decisions the LLM should never own in any flow agent. Speakers: - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/ - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents r…",
       "canonicalUrl": "https://www.youtube.com/watch?v=m24UKZomm7k",
       "videoId": "m24UKZomm7k",
-      "views": 923,
+      "views": 926,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -10015,7 +10224,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:18.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.762Z"
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.776Z"
     },
     {
       "id": "yt:fnLBmfsI_Fg",
@@ -10041,7 +10250,7 @@
       "excerpt": "My AI voice tutor doesn't run on a frontier model. It runs on a small one, and the reason isn't cost. It's that voice lives or dies on latency, and the scaffolding around the model is what makes it feel smart anyway. When you build a voice agent the clock is brutal. A pause longer than a held breath feels broken, so your real budget is time to first token, not benchmark score. A big model that thinks for a second has already lost the room. So the model choice gets made for you: pick the fastest one the latency budget allows, then make up the intelligence elsewhere. I'll show how that plays out in an AI voice tutor I built on a small, fast model. The model never has to remember what the student knows, plan the lesson, or decide what comes next. Deterministic systems do all of that and hand the model a tight, structured brief each turn. What's left for the model is the one thing it's genuinely best at, which is talking. The scaffolding isn't a cost optimization bolted on afterward. It's the thing that lets you use the cheap fast model at all. Seven minutes. The latency budget that forces the decision, what moves out of the model to survive it, and where a small model still falls down no matter how much scaffolding you give it. Speakers: - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents reliable. LinkedIn: https://www.linkedin.com/in/joel-allou/ - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/",
       "canonicalUrl": "https://www.youtube.com/watch?v=fnLBmfsI_Fg",
       "videoId": "fnLBmfsI_Fg",
-      "views": 633,
+      "views": 635,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -10053,7 +10262,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:15.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-07-25T16:26:24.762Z"
+      "availabilityUpdatedAt": "2026-07-25T22:27:21.776Z"
     },
     {
       "id": "x:2079086360703680583",
@@ -12534,6 +12743,66 @@
       },
       "contentLength": 0,
       "fullSummary": ""
+    },
+    {
+      "id": "yt:KhYifX22yhE",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "The Messy Reality of Scale: Synthetic Data and Pre-Training — Marah Abdin & Robert McHardy, poolside",
+      "text": "",
+      "excerpt": "Good code data runs out, so poolside manufactures more of it, and the hard part is making it teach. Their synthetic pipeline pairs templates with supplementary context and spreads generations across an axis of phrasing, with difficulty tuned so a task is neither trivial nor so hard the model learns nothing from it. Multistage pipelines port existing data into new shapes, swapping character styles or plots and turning single prompts into multi turn chats, while an orchestrator polices every generation and drops the ones that miss. On the training side the team trusts nothing: run two replicas of the same model on the same data and they must return the same number, or the run gets killed. That is how the messy failures surface. Broken GPUs show up as a spiky loss curve, a numerical precision bug in tensor parallel accumulation quietly flattened another until they patched it, and silently corrupted gradients from a race condition were a blind spot nothing caught. The payoff is a 118 billion parameter model built for agentic coding whose early results already edge out GLM 4.5 Air, on a recipe that held as it scaled. Speaker info: Marah Abdin, poolside: - https://x.com/marah_i_abdin - https://www.linkedin.com/in/marah-abdin - https://marahabdin.com Robert McHardy, poolside: - https://x.com/robert_mchardy - https://www.linkedin.com/in/robert-mchardy - https://www.robertmchardy.de Timestamps: 0:00 - Introduction: synthetic data and pre-training at poolside 1:52 - Why synthetic data 3:11 - Limitations and the training budget 4:44 - Inside the synthetic data pipeline 6:37 - Multistage pipelines and porting data 7:43 - Multi turn chats and policing generations 9:03 - Pre-training: trust nothing, crash on mismatch 10:41 - Failures at scale: broken GPUs 11:56 - Numerical precision…",
+      "summary": "Poolside 团队通过合成数据流水线解决代码数据匮乏问题，并建立严格的训练监控机制以捕捉硬件故障。",
+      "url": "https://www.youtube.com/watch?v=KhYifX22yhE",
+      "canonicalUrl": "https://www.youtube.com/watch?v=KhYifX22yhE",
+      "videoId": "KhYifX22yhE",
+      "ts": null,
+      "publishedAt": "",
+      "youtubePublishedAt": "2026-07-25T08:05:08.000Z",
+      "playlistVideoPublishedAt": "2026-07-25T08:05:08.000Z",
+      "playlistAddedAt": "2026-07-25T08:05:08.000Z",
+      "youtubeState": "upcoming",
+      "liveBroadcastContent": "upcoming",
+      "scheduledStartTime": "2026-07-26T01:00:00.000Z",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 0,
+      "views": 1,
+      "duration": "",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1785018441428,
+      "availabilityUpdatedAt": "2026-07-25T22:27:23.389Z",
+      "fullSummaryStatus": "not_ready",
+      "fullSummaryErrorCode": "youtube_upcoming",
+      "fullSummaryRetryAt": "2026-07-26T01:00:00.000Z",
+      "fullSummaryMessage": "This video is scheduled but has not started yet. A full summary will be available after the video is published and a transcript exists.",
+      "signals": {
+        "localScore": 61,
+        "reasons": [
+          "curated source +8",
+          "topic fit +23",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "workflow",
+          "coding"
+        ]
+      },
+      "summaryZh": "Poolside 团队通过合成数据流水线解决代码数据匮乏问题，并建立严格的训练监控机制以捕捉硬件故障。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-07-25T22:27:33.788Z"
     }
   ]
 }
