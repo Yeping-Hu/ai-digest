@@ -1,7 +1,64 @@
 {
-  "generatedAt": "2026-08-12T19:41:23.171Z",
-  "count": 1070,
+  "generatedAt": "2026-08-12T22:55:03.991Z",
+  "count": 1074,
   "items": [
+    {
+      "id": "yt:CvRngaQZQ3Y",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Improving Agents is a Data Mining Problem — Vivek Trivedy, LangChain",
+      "text": "",
+      "excerpt": "Does your agent get dumber after the first compaction? After the second? You cannot read that off the code, only off the traces, and there are far too many to read yourself. So LangChain points agents at the traces of other agents and asks exactly that, alongside questions like where users got upset and what a different model would have done at the same step. Vivek Trivedy's argument is that observability and continual learning are the same problem in different clothing, because an agent acting in an environment produces the only real record of what happened, and that record is the substrate everything else is built on. The economics fall out of reading it. Working with Harvey on a legal benchmark, they found an open model could match their frontier model's trace judging at one to two orders of magnitude lower cost, arrived at through harness engineering that the traces themselves pointed to. His rule for when to stop tuning prompts and start finetuning is speed of feedback: harness engineering answers in about two minutes, so you exhaust that ceiling first, finetune to break through it, then return to harness engineering. He also argues that dense feedback is what agents lack most, since a benchmark returning only pass or fail gives an agent nothing to act on, while traces already hold the fine grained signal. The claim worth arguing with is that you can describe an agent's behavior just by showing the evals it was measured against, because those are what it hill climbs. Speaker info: - https://x.com/Vtrivedy10 - https://www.linkedin.com/in/vivek-trivedy-433509134/ - https://www.vtrivedy.com/ Timestamps: 0:00 - My agent made mistakes, now what 1:28 - Ship it, collect traces, mine them 2:44 - Observability and continual learning are the same problem 4:00 - Why agents a…",
+      "summary": "LangChain指出，Agent的持续学习本质上是数据挖掘问题，通过分析Agent的执行Trace，可以以极低成本实现模型优化。",
+      "url": "https://www.youtube.com/watch?v=CvRngaQZQ3Y",
+      "canonicalUrl": "https://www.youtube.com/watch?v=CvRngaQZQ3Y",
+      "videoId": "CvRngaQZQ3Y",
+      "ts": 1786561201000,
+      "publishedAt": "2026-08-12T19:00:01.000Z",
+      "youtubePublishedAt": "2026-08-12T19:00:01.000Z",
+      "playlistVideoPublishedAt": "2026-08-12T19:00:01.000Z",
+      "playlistAddedAt": "2026-08-12T19:00:01.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 23,
+      "views": 428,
+      "duration": "20:02",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1786575288128,
+      "availabilityUpdatedAt": "2026-08-12T22:54:50.040Z",
+      "signals": {
+        "localScore": 79,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +23",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "workflow",
+          "evaluation"
+        ]
+      },
+      "summaryZh": "LangChain指出，Agent的持续学习本质上是数据挖掘问题，通过分析Agent的执行Trace，可以以极低成本实现模型优化。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
+    },
     {
       "id": "yt:5ZGyKWjQDr0",
       "source": "AI Engineer",
@@ -17,7 +74,7 @@
       "title": "Lessons from Studying Every Memory System — Shlok Khemani, Independent",
       "text": "",
       "excerpt": "A profile ChatGPT keeps on Shlok Khemani says he travelled to Turkey in 2025. He never has. The memory came from conversations where he was choosing between Turkey and Thailand, he went to Thailand, and the profile kept both with overlapping dates. What bothers him is not the mistake but the incuriosity: nothing notices the conflict, and the evidence to settle it was sitting in his email as flight and hotel bookings. He calls that a product problem, not a technology one. The rest is a year of reverse engineering how consumer memory systems are built, all of it his reading from the outside rather than anything documented. By his account ChatGPT went from a user managed list of facts to a running profile rebuilt in the background, roughly 4,000 tokens of dense keyword clues he could only inspect by jailbreaking his way to it. Claude started opposite, with no profile and two retrieval tools over past conversations, then added one about a quarter the size, in full sentences, refreshed daily and visible in settings. His frame for the difference is that memory is a function of compute: a profile costs to maintain and costs again in every context window it enters, so a large profile updated rarely and a small one updated daily are two answers to one budget question. Speaker info: - https://x.com/shloked - https://www.linkedin.com/in/shlokkhemani/ - https://shloked.com Timestamps: 0:00 - What memory means here: consumer personalization 2:09 - ChatGPT memory v1, a list of facts 4:08 - The running profile arrives 6:04 - The trip that never happened 6:45 - A profile you cannot look at 7:23 - Claude's first version, tools instead of a profile 8:03 - Publishing that they were opposites 9:18 - Three years of convergence 11:14 - There is no single way to do memory 12:30 - Memory is a…",
-      "summary": "A profile ChatGPT keeps on Shlok Khemani says he travelled to Turkey in 2025. He never has. The memory came from conversations where he was choosing between Turkey and Thailand, he went to Thailand, and the profile kept both with overlapping dates. What bothers him is not the mistake but the incuriosity: nothing notices the conflict, and the evidence to settle it was sitting in his email as flight and hotel bookings. He calls that a product problem, not a technology one. The rest is a year of reverse engineering how consumer memory systems are built, all of it his reading from the outside rather than anything documented. By his account ChatGPT went from a user managed list of facts to a running profile rebuilt in the background, roughly 4,000 tokens of dense keyword clues he could only inspect by jailbreaking his way to it. Claude started opposite, with no profile and two retrieval tool…",
+      "summary": "研究发现消费级AI的记忆系统存在严重的“不求甚解”问题，且缺乏对冲突信息的校验机制，这更多是产品设计而非技术瓶颈。",
       "url": "https://www.youtube.com/watch?v=5ZGyKWjQDr0",
       "canonicalUrl": "https://www.youtube.com/watch?v=5ZGyKWjQDr0",
       "videoId": "5ZGyKWjQDr0",
@@ -32,19 +89,140 @@
       "actualStartTime": "2026-08-12T18:30:06.000Z",
       "actualEndTime": "2026-08-12T18:51:36.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 20,
-      "views": 178,
+      "likes": 29,
+      "views": 350,
       "duration": "19:31",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:23.171Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.892Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
-      "fullSummaryMessage": ""
+      "fullSummaryMessage": "",
+      "summaryZh": "研究发现消费级AI的记忆系统存在严重的“不求甚解”问题，且缺乏对冲突信息的校验机制，这更多是产品设计而非技术瓶颈。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
+    },
+    {
+      "id": "yt:jHMiYtjoJfA",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Designing Agents (The Floor Is the Frontier) — Ben Hylak, Raindrop",
+      "text": "",
+      "excerpt": "Build the thousand example eval suite everyone tells you to build, switch harnesses, and 80% of it stops meaning anything. Ben Hylak's complaint is that eval advice is still written for the chatbot era, back when you knew the answer to nearly every question a user would ask. His reframing is that the useful question is not what issues your agent has, since it will have effectively infinite issues, but which ones matter. That turns on the gap between your ceiling, the most impressive thing your agent can do, and your floor, the worst. The floor is what breaks trust: recommending a competitor, deleting data, sending slop to a customer because the agent happened to have email access. The practical core is two numbers per issue, when it started and what share of users it hits. Learning that something began yesterday is what makes you ask what changed. Learning it hit three users rather than a hundred thousand is what tells you whether to care at all. From there he offers three findings from running this at Raindrop. Clustering traces is not issue detection, because boundaries drift, you do not control them, and what counts as one issue is specific to your product, so a cluster called price issues quietly merges a wrong quote with a wrong refund that have nothing in common. Code mode scales to traces, meaning you write classifiers and run them in a sandbox at production volume. And agents are poor at finding anomalies while being good at investigating them, so surface something deterministic like a keyword spike first and hand them that. Underneath all of it is the argument that evals now belong in your repo as tests rather than in a prompt playground, because the harness is the product. Speaker info: - https://x.com/benhylak - https://www.linkedin.com/in/benhylak/ Timestam…",
+      "summary": "Agent评估不应追求完美，而应关注“底线”——即哪些错误会破坏用户信任，并据此建立动态监控体系。",
+      "url": "https://www.youtube.com/watch?v=jHMiYtjoJfA",
+      "canonicalUrl": "https://www.youtube.com/watch?v=jHMiYtjoJfA",
+      "videoId": "jHMiYtjoJfA",
+      "ts": 1786557634000,
+      "publishedAt": "2026-08-12T18:00:34.000Z",
+      "youtubePublishedAt": "2026-08-12T18:00:34.000Z",
+      "playlistVideoPublishedAt": "2026-08-12T18:00:34.000Z",
+      "playlistAddedAt": "2026-08-12T18:00:34.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 9,
+      "views": 221,
+      "duration": "19:46",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1786575288128,
+      "availabilityUpdatedAt": "2026-08-12T22:54:50.040Z",
+      "summaryZh": "Agent评估不应追求完美，而应关注“底线”——即哪些错误会破坏用户信任，并据此建立动态监控体系。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
+    },
+    {
+      "id": "yt:ZTA0GwpAUak",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Bringing Continual Learning into Enterprises — Samuel Denton, Applied Compute",
+      "text": "",
+      "excerpt": "A Qwen thinking model was taking up to 80 turns to submit on SWE bench. Applied Compute wanted it wrapping up by turn 40 and got the submit tool call rate from 22% to 60% with test pass rate flat. The interesting part is the mechanism: because the rollout was conditioned on an old production trace that never called the tool, the teacher never touched the tool call tokens at all. It moved the reasoning path toward the call instead, and the call followed. Sam Denton's frame is a grid. One axis is how online the traces are, from a single dump of production traces to a unified engine where serving and training are the same loop. The other is where the hint comes from, either static priors, such as knowing a support agent is too quick to refund, or a hint built dynamically from what the on policy model just did. Applied Compute works two corners of that grid. Offline hints on offline traces need no replayable environment and can improve an enterprise agent from a data dump on day one. Online hints on online traces have the far higher ceiling, and that is what fixed a customer whose harness required unusual hyperlink formatting: rewarding the format directly and finetuning on correct examples both degraded coding ability, while a hint written against each rollout took correct formatting from 15% to 80%. Two things he says make it work in practice. Let a judge pick where in the rollout the hint goes and distill only the next few steps, since the learning signal decays with distance from the hint. And mask which tokens you learn from, because the teacher has strong opinions about connector words that have nothing to do with the lesson. Throughout, the constraint he keeps is doing all of this without a golden answer to distill toward. Speaker info: - https://x.com/samueldenton…",
+      "summary": "Applied Compute通过优化推理路径，将AI Agent在SWE-bench上的工具调用率从22%提升至60%。核心在于利用生产环境的Trace进行持续学习，而非仅仅依赖静态提示词。",
+      "url": "https://www.youtube.com/watch?v=ZTA0GwpAUak",
+      "canonicalUrl": "https://www.youtube.com/watch?v=ZTA0GwpAUak",
+      "videoId": "ZTA0GwpAUak",
+      "ts": 1786555806000,
+      "publishedAt": "2026-08-12T17:30:06.000Z",
+      "youtubePublishedAt": "2026-08-12T17:30:06.000Z",
+      "playlistVideoPublishedAt": "2026-08-12T17:30:06.000Z",
+      "playlistAddedAt": "2026-08-12T17:30:06.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 7,
+      "views": 191,
+      "duration": "19:03",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "Applied Compute通过优化推理路径，将AI Agent在SWE-bench上的工具调用率从22%提升至60%。核心在于利用生产环境的Trace进行持续学习，而非仅仅依赖静态提示词。",
+        "whyItMattersZh": "这是企业级Agent从“能用”到“好用”的关键工程突破，展示了如何通过闭环训练提升Agent的实际执行能力。",
+        "evidenceZh": "通过将推理路径引导至工具调用，在保持测试通过率不变的情况下，显著提升了工具调用成功率。",
+        "uncertaintyZh": "该方法对不同模型架构的通用性尚需进一步验证。",
+        "chineseAudienceGapZh": "国内目前多关注模型本身，较少讨论如何通过生产环境Trace进行Agent的持续工程化优化。",
+        "rednoteAngleZh": "AI Agent开发进阶：如何通过Trace挖掘提升Agent的工具调用成功率？",
+        "topics": [
+          "agents",
+          "workflow",
+          "evaluation",
+          "coding",
+          "reasoning"
+        ],
+        "processedAt": "2026-08-12T22:55:03.991Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1786575288128,
+      "availabilityUpdatedAt": "2026-08-12T22:54:50.040Z",
+      "signals": {
+        "localScore": 87,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +32",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "workflow",
+          "coding",
+          "evaluation",
+          "reasoning"
+        ]
+      },
+      "summaryZh": "Applied Compute通过优化推理路径，将AI Agent在SWE-bench上的工具调用率从22%提升至60%。核心在于利用生产环境的Trace进行持续学习，而非仅仅依赖静态提示词。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:I3bpdgFJCUY",
@@ -61,7 +239,7 @@
       "title": "LLM Knowledge Bases: a practical guide — Ben Holmes, Warp",
       "text": "",
       "excerpt": "Talking runs about 200 words a minute and typing does not, which is why Ben Holmes starts a knowledge base with voice dictation rather than with organization. The pipeline only works if there is enough raw material, so the capture step is deliberately sloppy: ramble into your phone after a podcast or a meeting, skip the formatting, and let agents impose structure afterward. He points at Handy and Voice Ink as local, on device options, so none of it needs a subscription. Structure then arrives in passes. An enrich note skill stamps each file with a timestamp so later runs know what has been processed, assigns tags from a fixed reference list instead of inventing new ones, since as he puts it Claude loves to get creative, researches the source on the web, and adds backlinks found by key term search. On top of that pile, a wiki generated from a Karpathy gist produces browsable entries for the people, concepts, organizations, and sources buried in your own notes. Then the whole thing runs on a schedule in a cloud sandbox: the Obsidian headless CLI syncs the markdown down, the agent enriches whatever is not yet stamped, and it syncs back, so you wake up to a refreshed wiki he describes as the daily paper except it is yours. The closing trick is a graph view of every note, built in HTML and Tailwind purely by asking an agent for it, which turns out to be a decent map of where your own thinking has gaps. Speaker info: - https://x.com/bholmesdev - https://bholmes.dev - https://linkedin.com/in/bholmesdev Timestamps: 0:00 - The disorganized notes folder problem 1:30 - Where we are going: raw notes to a browsable wiki 2:46 - Getting raw thoughts down is the hard part 3:25 - Why dictation beats typing 4:02 - Local voice tools that need no subscription 5:17 - Be scrappy, you need v…",
-      "summary": "Talking runs about 200 words a minute and typing does not, which is why Ben Holmes starts a knowledge base with voice dictation rather than with organization. The pipeline only works if there is enough raw material, so the capture step is deliberately sloppy: ramble into your phone after a podcast or a meeting, skip the formatting, and let agents impose structure afterward. He points at Handy and Voice Ink as local, on device options, so none of it needs a subscription. Structure then arrives in passes. An enrich note skill stamps each file with a timestamp so later runs know what has been processed, assigns tags from a fixed reference list instead of inventing new ones, since as he puts it Claude loves to get creative, researches the source on the web, and adds backlinks found by key term search. On top of that pile, a wiki generated from a Karpathy gist produces browsable entries for…",
+      "summary": "Ben Holmes建议通过语音输入作为知识库的原始素材，再利用Agent进行结构化处理，从而降低知识管理门槛。",
       "url": "https://www.youtube.com/watch?v=I3bpdgFJCUY",
       "canonicalUrl": "https://www.youtube.com/watch?v=I3bpdgFJCUY",
       "videoId": "I3bpdgFJCUY",
@@ -76,14 +254,14 @@
       "actualStartTime": "2026-08-12T17:00:22.000Z",
       "actualEndTime": "2026-08-12T17:23:23.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 27,
-      "views": 345,
+      "likes": 34,
+      "views": 584,
       "duration": "21:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "Ben Holmes建议通过语音输入作为知识库的原始素材，再利用Agent进行结构化处理，从而降低知识管理门槛。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 72/100。",
         "evidenceZh": "Talking runs about 200 words a minute and typing does not, which is why Ben Holmes starts a knowledge base with voice dictation rather than with organization. The pipeline only works if there is enough raw material, so…",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -97,7 +275,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.912Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.892Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -114,7 +292,10 @@
           "agents",
           "research"
         ]
-      }
+      },
+      "summaryZh": "Ben Holmes建议通过语音输入作为知识库的原始素材，再利用Agent进行结构化处理，从而降低知识管理门槛。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:XEd_SRVHBgU",
@@ -131,7 +312,7 @@
       "title": "Adaption Labs: Gradient-Free Continual Learning — Sara Hooker, Adaption",
       "text": "",
       "excerpt": "Fewer than five thousand people in the world know how to train a frontier model at scale, by Sara Hooker's estimate, and that knowledge travels like an apprenticeship rather than a literature. Modern computer science is 77 years old, two generations, and in that time the route to contributing at the frontier narrowed into one funnel: the right PhD, the right industry lab, the right problem at the right moment. She calls it the unreasonably narrow path, and notes it got compounded in this field by compute, so that a handful of labs build what everyone else uses and whole regions of the world appear nowhere on the map of where breakthroughs happen. Her case that the funnel is about to widen rests on two things. AutoScientist automates the training of models, optimizing the whole loop together from data through alignment and evolving itself per domain, and it beats research staff partly because people carry priors about particular architectures while the search ranges across sizes and across dense and mixture of experts designs. It only started paying off once they controlled data quality alongside the model rather than leaving that to the agent. One nice piece of honesty: the win rates all sit just above 60% because the budget was set to stop there, and lifting that ceiling let them keep climbing. The second reason is her slow death of scaling argument, that pretraining size is no longer the most rewarding axis. That matters for access, because pretraining compute has to be colocated and enormous while the compute that now pays off is distributable. If no lab is going to quadruple model size again on this architecture, recipes and algorithms start to matter more than hoarded GPUs. Speaker info: - https://x.com/sarahookr - https://www.linkedin.com/in/sararosehooker/ - htt…",
-      "summary": "Fewer than five thousand people in the world know how to train a frontier model at scale, by Sara Hooker's estimate, and that knowledge travels like an apprenticeship rather than a literature. Modern computer science is 77 years old, two generations, and in that time the route to contributing at the frontier narrowed into one funnel: the right PhD, the right industry lab, the right problem at the right moment. She calls it the unreasonably narrow path, and notes it got compounded in this field by compute, so that a handful of labs build what everyone else uses and whole regions of the world appear nowhere on the map of where breakthroughs happen. Her case that the funnel is about to widen rests on two things. AutoScientist automates the training of models, optimizing the whole loop together from data through alignment and evolving itself per domain, and it beats research staff partly be…",
+      "summary": "Sara Hooker认为AI训练的“狭窄路径”即将拓宽，AutoScientist等自动化工具正在打破少数实验室对前沿模型训练的垄断。",
       "url": "https://www.youtube.com/watch?v=XEd_SRVHBgU",
       "canonicalUrl": "https://www.youtube.com/watch?v=XEd_SRVHBgU",
       "videoId": "XEd_SRVHBgU",
@@ -146,14 +327,14 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 14,
-      "views": 195,
+      "likes": 16,
+      "views": 321,
       "duration": "20:51",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "Sara Hooker认为AI训练的“狭窄路径”即将拓宽，AutoScientist等自动化工具正在打破少数实验室对前沿模型训练的垄断。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 85/100。",
         "evidenceZh": "Fewer than five thousand people in the world know how to train a frontier model at scale, by Sara Hooker's estimate, and that knowledge travels like an apprenticeship rather than a literature. Modern computer science is…",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -169,7 +350,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -184,7 +365,10 @@
           "research",
           "safety"
         ]
-      }
+      },
+      "summaryZh": "Sara Hooker认为AI训练的“狭窄路径”即将拓宽，AutoScientist等自动化工具正在打破少数实验室对前沿模型训练的垄断。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:249a5e1ede4df4c078023a6f",
@@ -202,7 +386,7 @@
       "text": "",
       "excerpt": "",
       "contentLength": 0,
-      "summary": "",
+      "summary": "Hugging Face推出OlmoEarth embeddings，支持自定义嵌入导出，助力下游分析任务。",
       "url": "https://huggingface.co/blog/allenai/olmoearth-embeddings",
       "canonicalUrl": "https://huggingface.co/blog/allenai/olmoearth-embeddings",
       "ts": 1786551276000,
@@ -222,7 +406,10 @@
         "topics": [
           "model-release"
         ]
-      }
+      },
+      "summaryZh": "Hugging Face推出OlmoEarth embeddings，支持自定义嵌入导出，助力下游分析任务。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:I6aiEf3aEFQ",
@@ -239,7 +426,7 @@
       "title": "Intelligence + Continual Learning = Expertise — Yu Su, NeoCognition",
       "text": "",
       "excerpt": "Scheduling a meeting is not finding a shared slot on everyone's calendar. It is a constraint optimization over authority, priority, and urgency, and an expert sees that immediately where a very capable model does not. Yu Su uses examples like that one to separate two things the field keeps collapsing together. Intelligence is reasoning through an unfamiliar problem from the context you were handed, which frontier models keep getting better at and where each episode stands alone. Expertise is accumulated, situated competence, and almost nobody is scaling it. His account of why coding agents work while everything else stays brittle is a modern Moravec's paradox. Code is already a language native world, symbolic and structured, with tests standing in for rewards. The rest of digital work is millions of micro worlds, each with its own local physics, far too heterogeneous for one static model to compress. The slide he calls the most important plots raw intelligence against expertise and finds them roughly orthogonal: scale intelligence alone and you get what he calls the world's smartest novice, brilliant at whatever is put in front of it and accumulating nothing between problems. Intelligence expands the search, spinning up a hundred parallel attempts. Expertise compresses it, because the shortcuts are already learned. The provocation he leaves is unbounded expertise from bounded intelligence: if continual learning gets good enough past some threshold of raw capability, the thing worth scaling stops being the model. Speaker info: - https://x.com/ysu_nlp - https://www.linkedin.com/in/ysu1989/ - https://ysu1989.github.io/ Timestamps: 0:00 - Why coding agents work and little else does 1:30 - Agents before language models 2:06 - What multimodal language agents changed 3:26 - W…",
-      "summary": "Scheduling a meeting is not finding a shared slot on everyone's calendar. It is a constraint optimization over authority, priority, and urgency, and an expert sees that immediately where a very capable model does not. Yu Su uses examples like that one to separate two things the field keeps collapsing together. Intelligence is reasoning through an unfamiliar problem from the context you were handed, which frontier models keep getting better at and where each episode stands alone. Expertise is accumulated, situated competence, and almost nobody is scaling it. His account of why coding agents work while everything else stays brittle is a modern Moravec's paradox. Code is already a language native world, symbolic and structured, with tests standing in for rewards. The rest of digital work is millions of micro worlds, each with its own local physics, far too heterogeneous for one static mode…",
+      "summary": "Yu Su提出智能（Intelligence）与专业知识（Expertise）的区别，认为Agent的未来在于构建针对特定领域的积累性能力。",
       "url": "https://www.youtube.com/watch?v=I6aiEf3aEFQ",
       "canonicalUrl": "https://www.youtube.com/watch?v=I6aiEf3aEFQ",
       "videoId": "I6aiEf3aEFQ",
@@ -254,14 +441,14 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 39,
-      "views": 705,
+      "likes": 52,
+      "views": 1301,
       "duration": "19:43",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "Yu Su提出智能（Intelligence）与专业知识（Expertise）的区别，认为Agent的未来在于构建针对特定领域的积累性能力。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 83/100。",
         "evidenceZh": "Scheduling a meeting is not finding a shared slot on everyone's calendar. It is a constraint optimization over authority, priority, and urgency, and an expert sees that immediately where a very capable model does not. Y…",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -278,9 +465,9 @@
         "model": "local-fallback"
       },
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
       "signals": {
-        "localScore": 83,
+        "localScore": 84,
         "reasons": [
           "curated source +8",
           "fresh +15",
@@ -294,7 +481,10 @@
           "reasoning",
           "multimodal"
         ]
-      }
+      },
+      "summaryZh": "Yu Su提出智能（Intelligence）与专业知识（Expertise）的区别，认为Agent的未来在于构建针对特定领域的积累性能力。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:WiqDvX6isc4",
@@ -311,7 +501,7 @@
       "title": "Scaling Compute on Context — Jack Morris, Engram",
       "text": "",
       "excerpt": "Train a model directly on ten thousand financial reports and you can drive the loss to 0.00001. It knows the documents perfectly. Then you generate from it and it collapses. Jack Morris uses that failure to set up the real problem. The three axes that powered the entire deep learning revolution, more data, more compute, bigger models, all run on public data. Models are superb on Wikipedia, arXiv, and GitHub, and know nothing about your emails, your meetings, or your company. Against your own corpus the data axis is fixed and training from scratch is off the table, which leaves compute as the only axis you can still push, and that is what he means by scaling compute on context. The rest is a tour of what people try and exactly where each one stops. KV compaction only reaches what already fits in context and skips the gradients entirely. On policy distillation works, but raises the question of what you distill, since raw documents will not do, which is the gap self study in the cartridges paper is aimed at. Continued pretraining on synthetic data conditioned on your corpus is promising, but it overwrites some of the pretraining and assumes you have a base model rather than the post trained one most people actually start from. Every approach shares a ceiling: you define a dataset, you train, and unless the model is underparameterized it eventually absorbs everything you made. A synthetic data wall, with none of pretraining's scaling behavior. The property he wants is the one that made AlphaGo work, where getting better makes the training questions harder, so that adding compute keeps buying depth instead of flattening out. Speaker info: - https://x.com/jxmnop - https://jxmo.io - https://substack.com/@jxmnop Timestamps: 0:00 - Scaling compute on context, and Engram 1:28 -…",
-      "summary": "Train a model directly on ten thousand financial reports and you can drive the loss to 0.00001. It knows the documents perfectly. Then you generate from it and it collapses. Jack Morris uses that failure to set up the real problem. The three axes that powered the entire deep learning revolution, more data, more compute, bigger models, all run on public data. Models are superb on Wikipedia, arXiv, and GitHub, and know nothing about your emails, your meetings, or your company. Against your own corpus the data axis is fixed and training from scratch is off the table, which leaves compute as the only axis you can still push, and that is what he means by scaling compute on context. The rest is a tour of what people try and exactly where each one stops. KV compaction only reaches what already fits in context and skips the gradients entirely. On policy distillation works, but raises the questi…",
+      "summary": "Jack Morris探讨了在私有数据上扩展计算能力的挑战，认为在数据轴固定的情况下，通过上下文扩展计算是唯一出路。",
       "url": "https://www.youtube.com/watch?v=WiqDvX6isc4",
       "canonicalUrl": "https://www.youtube.com/watch?v=WiqDvX6isc4",
       "videoId": "WiqDvX6isc4",
@@ -326,15 +516,18 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 8,
-      "views": 153,
+      "likes": 11,
+      "views": 271,
       "duration": "19:42",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z"
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
+      "summaryZh": "Jack Morris探讨了在私有数据上扩展计算能力的挑战，认为在数据轴固定的情况下，通过上下文扩展计算是唯一出路。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:8ce9f137579cbf5f1ee557b2",
@@ -352,7 +545,7 @@
       "text": "",
       "excerpt": "But then users start to report a weird bug. It's the 4th time your team has been trying to fix it. I mean... asking AI to fix it. Unfortunately, it seems like not even Fable can figure it out. You go talk to the person who worked on this feature. \"So where does the data come from?\" \"Hmm... actually I don't know. Let me ask Claude.\" You sit next to each other watching an endless wall of text appear on the screen. Neither of you has any idea whether any of it is true but Claude seems very confident. [...] This project has become so convoluted, with so many layers and services, that no one on your team could possibly start to understand what's going on. &mdash; Florian Herrengt , AI is removing the middle class of software engineering Tags: ai-misuse , cognitive-debt , generative-ai , ai , llms , ai-assisted-programming",
       "contentLength": 828,
-      "summary": "But then users start to report a weird bug. It's the 4th time your team has been trying to fix it. I mean... asking AI to fix it. Unfortunately, it seems like not even Fable can figure it out. You go talk to the person who worked on this feature. \"So where does the data come from?\" \"Hmm... actually I don't know. Let me ask Claude.\" You sit next to each other watching an endless wall of text appear on the screen. Neither of you has any idea whether any of it is true but Claude seems very confident. [...] This project has become so convoluted, with so many layers and services, that no one on your team could possibly start to understand what's going on. &mdash; Florian Herrengt , AI is removing the middle class of software engineering Tags: ai-misuse , cognitive-debt , generative-ai , ai , llms , ai-assisted-programming",
+      "summary": "Florian Herrengt指出，AI正在导致软件工程中层人才的流失，因为系统变得过于复杂，以至于没人能理解其底层逻辑。",
       "url": "https://simonwillison.net/2026/Aug/12/florian-herrengt",
       "canonicalUrl": "https://simonwillison.net/2026/Aug/12/florian-herrengt",
       "ts": 1786547327000,
@@ -380,7 +573,10 @@
           "coding",
           "safety"
         ]
-      }
+      },
+      "summaryZh": "Florian Herrengt指出，AI正在导致软件工程中层人才的流失，因为系统变得过于复杂，以至于没人能理解其底层逻辑。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:R3-anFK1YM8",
@@ -397,7 +593,7 @@
       "title": "Memory Harnesses for Long-Running Research Agents — Stefania Druga, Sakana.ai",
       "text": "",
       "excerpt": "On a literature review task where every paper already fit inside the context window, adding a memory harness changed nothing: the same accuracy, at higher cost. That negative result is the most useful thing in Stefania Druga's experiment, because it marks the boundary. Move to a long horizon task where the answer sits at step 124 and the question arrives at step 500, far outside the window, and the harness becomes the entire game. Her framing is that memory is a write, manage, read control loop wrapped around the model, not a database you attach to it. She held the model fixed and varied only the recall policy across a ladder: no recall at all, vector RAG, a decisions ledger that tracks and prioritizes what was decided each turn, and an oracle handed the correct memory outright. Across 68 xbench questions the ranked ledger won, beating even the approach of gating the harness on whether memory seemed necessary. The oracle pointedly does not reach the ceiling, because giving a model the right memory does not make it use the right memory. Ranked recall was also cheaper, which is the line worth keeping: bad memory is expensive, since it burns tokens and sends the agent the wrong way. The whole thing runs on a local M3 Ultra in Tokyo that she is driving from her phone, with fans stacked around it because the evals have not stopped. Speaker info: - https://x.com/Stefania_druga - https://www.linkedin.com/in/drugastefania/ - https://stefania11.github.io/ Timestamps: 0:00 - Context rot on long horizon tasks 1:04 - Longer tasks, fewer model releases 1:56 - Cutting spend by moving work local 2:24 - Local models crossing the usefulness line 2:50 - The machine in Tokyo, and the fans 3:44 - Memory as a write, manage, read loop 4:11 - The harness: core, recall, archival 4:36 - The re…",
-      "summary": "On a literature review task where every paper already fit inside the context window, adding a memory harness changed nothing: the same accuracy, at higher cost. That negative result is the most useful thing in Stefania Druga's experiment, because it marks the boundary. Move to a long horizon task where the answer sits at step 124 and the question arrives at step 500, far outside the window, and the harness becomes the entire game. Her framing is that memory is a write, manage, read control loop wrapped around the model, not a database you attach to it. She held the model fixed and varied only the recall policy across a ladder: no recall at all, vector RAG, a decisions ledger that tracks and prioritizes what was decided each turn, and an oracle handed the correct memory outright. Across 68 xbench questions the ranked ledger won, beating even the approach of gating the harness on whether…",
+      "summary": "Sakana.ai的研究表明，对于长周期任务，简单的RAG不足以支撑Agent，必须构建包含决策记录（Decisions Ledger）的记忆控制环。",
       "url": "https://www.youtube.com/watch?v=R3-anFK1YM8",
       "canonicalUrl": "https://www.youtube.com/watch?v=R3-anFK1YM8",
       "videoId": "R3-anFK1YM8",
@@ -412,19 +608,19 @@
       "actualStartTime": "2026-08-12T15:00:06.000Z",
       "actualEndTime": "2026-08-12T15:15:10.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 21,
-      "views": 393,
+      "likes": 28,
+      "views": 641,
       "duration": "13:04",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
-        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 83/100。",
-        "evidenceZh": "On a literature review task where every paper already fit inside the context window, adding a memory harness changed nothing: the same accuracy, at higher cost. That negative result is the most useful thing in Stefania…",
-        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
-        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
-        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
+        "summaryZh": "Sakana.ai的研究表明，对于长周期任务，简单的RAG不足以支撑Agent，必须构建包含决策记录（Decisions Ledger）的记忆控制环。",
+        "whyItMattersZh": "重新定义了Agent的记忆系统，从“数据库”转向“控制环”，是解决长任务Agent遗忘问题的关键。",
+        "evidenceZh": "在68个xbench问题测试中，决策记录（Ledger）方案优于传统的向量RAG。",
+        "uncertaintyZh": "该方案在极大规模任务下的计算开销评估。",
+        "chineseAudienceGapZh": "目前国内Agent开发多依赖简单的向量检索，缺乏对记忆控制环的系统性认知。",
+        "rednoteAngleZh": "Agent总是“失忆”？Sakana.ai揭秘长周期任务的记忆控制环设计。",
         "topics": [
           "agents",
           "workflow",
@@ -432,13 +628,13 @@
           "research",
           "model-release"
         ],
-        "processedAt": "2026-08-12T17:07:04.373Z",
-        "model": "local-fallback"
+        "processedAt": "2026-08-12T22:55:03.991Z",
+        "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
       "signals": {
-        "localScore": 83,
+        "localScore": 84,
         "reasons": [
           "curated source +8",
           "fresh +15",
@@ -452,7 +648,10 @@
           "research",
           "model-release"
         ]
-      }
+      },
+      "summaryZh": "Sakana.ai的研究表明，对于长周期任务，简单的RAG不足以支撑Agent，必须构建包含决策记录（Decisions Ledger）的记忆控制环。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:zL1kLftVTlo",
@@ -469,7 +668,7 @@
       "title": "Scaling up Continual Learning — Ronak Malde, Trajectory",
       "text": "",
       "excerpt": "Scale on policy self distillation to trajectories with a hundred tool calls and the model collapses into hedging. The tokens it learns to favor fill up with wait, but, and maybe, until, as Ronak Malde puts it, everything just turns into maybe. He calls it the but wait problem, and it happens because the student drifts far enough on a long task that the teacher course corrects at every opportunity, leaving the model parked between two divergent distributions. The algorithm underneath is a good trick. At the frontier there is no smarter model to distill from, so you make the model its own teacher: put privileged information, a hint, in the teacher's prompt, and match the log probs of the student that never saw it. Malde scores post training methods against four properties, an online task distribution, on policy sampling, no parallel rollouts, and a per token reward, and shows SFT, RLHF, and GRPO each buying some at the cost of others. GRPO gets on policy sampling but explodes parallelism and collapses feedback into one sequence level score, which he compares to being handed 87 out of 100 on an essay and told to work out why. Self distillation gets all four, and it optimizes across the entire vocabulary at every token instead of sharpening the one that was sampled, which is why it keeps climbing past where GRPO plateaus while tokens to solve go down rather than up. The failure modes are the useful part: step level KL weighting to handle divergence, and residual guidance for hint leakage, the self distillation analogue of reward hacking, where a hint containing the answer teaches the model to state it and back fill the reasoning afterward. Speaker info: - https://x.com/rronak_ - https://www.linkedin.com/in/ronak-malde Timestamps: 0:00 - From Windsurf to Trajectory 1:05 - B…",
-      "summary": "Scale on policy self distillation to trajectories with a hundred tool calls and the model collapses into hedging. The tokens it learns to favor fill up with wait, but, and maybe, until, as Ronak Malde puts it, everything just turns into maybe. He calls it the but wait problem, and it happens because the student drifts far enough on a long task that the teacher course corrects at every opportunity, leaving the model parked between two divergent distributions. The algorithm underneath is a good trick. At the frontier there is no smarter model to distill from, so you make the model its own teacher: put privileged information, a hint, in the teacher's prompt, and match the log probs of the student that never saw it. Malde scores post training methods against four properties, an online task distribution, on policy sampling, no parallel rollouts, and a per token reward, and shows SFT, RLHF, a…",
+      "summary": "Ronak Malde分析了长轨迹Agent在自蒸馏过程中的“但、等、也许”问题，并提出了基于特权信息的持续学习优化方案。",
       "url": "https://www.youtube.com/watch?v=zL1kLftVTlo",
       "canonicalUrl": "https://www.youtube.com/watch?v=zL1kLftVTlo",
       "videoId": "zL1kLftVTlo",
@@ -484,15 +683,18 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 10,
-      "views": 298,
+      "likes": 11,
+      "views": 424,
       "duration": "23:03",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z"
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
+      "summaryZh": "Ronak Malde分析了长轨迹Agent在自蒸馏过程中的“但、等、也许”问题，并提出了基于特权信息的持续学习优化方案。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:c26c8d5a4e90c67829e9c660",
@@ -510,7 +712,7 @@
       "text": "",
       "excerpt": "Introducing sign-language-to-text (SL2T), our breakthrough model powering new sign language features for Deaf and hard of hearing users.",
       "contentLength": 136,
-      "summary": "Introducing sign-language-to-text (SL2T), our breakthrough model powering new sign language features for Deaf and hard of hearing users.",
+      "summary": "Google DeepMind推出手语转文本模型（SL2T），旨在为听障人士提供更便捷的交流工具。",
       "url": "https://deepmind.google/blog/putting-sign-language-ai-into-users-hands",
       "canonicalUrl": "https://deepmind.google/blog/putting-sign-language-ai-into-users-hands",
       "ts": 1786543319000,
@@ -530,7 +732,10 @@
         "topics": [
           "model-release"
         ]
-      }
+      },
+      "summaryZh": "Google DeepMind推出手语转文本模型（SL2T），旨在为听障人士提供更便捷的交流工具。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:2c563947428818b93259f9d0",
@@ -548,7 +753,7 @@
       "text": "",
       "excerpt": "",
       "contentLength": 0,
-      "summary": "",
+      "summary": "Hugging Face发布LFM2.5-VL-3B模型，旨在为边缘设备提供更快、更强的视觉处理能力。",
       "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-vl-3b",
       "canonicalUrl": "https://huggingface.co/blog/LiquidAI/lfm2-5-vl-3b",
       "ts": 1786543251000,
@@ -569,7 +774,10 @@
         "topics": [
           "multimodal"
         ]
-      }
+      },
+      "summaryZh": "Hugging Face发布LFM2.5-VL-3B模型，旨在为边缘设备提供更快、更强的视觉处理能力。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "yt:iqloyWCGYQQ",
@@ -586,7 +794,7 @@
       "title": "Beyond Static Intelligence: Evaluating Continual Learning — Parth Asawa, UC Berkeley",
       "text": "",
       "excerpt": "Every leaderboard you have seen was built by asking a model to do one task, wiping its memory, and asking it another. Parth Asawa's objection is that this quietly assumes learning across instances does not count. His benchmark measures what that assumption hides, using a metric called gain: run a system with state, then run the identical system reset between every single instance, and take the difference. Cumulative reward cannot show you this, because a stronger base model can post a higher total while learning less than a weaker one that genuinely improves. Building tasks that can measure learning turns out to be the hard part, and he sets three requirements. Headroom, so the task is not already solved by pretraining. Shared latent structure across instances, since standard benchmarks are deliberately independent and therefore offer nothing to improve on, which is why chaining existing benchmarks together does not work. And a learning signal in the environment, whether reward, error messages, or plain text. Continual Learning Bench 1.0 spans six domains including database exploration, where a system should need fewer SQL queries by the tenth question, after which a schema migration tests whether it can throw away stale knowledge without throwing away the useful kind. The headline result is uncomfortable: plain in context learning tops the leaderboard, beating the more elaborate context management systems on reward, on gain, and on cost. Failure modes land on either side of stability and plasticity, including a forecasting model that overpredicts, is corrected, underpredicts, is corrected again, and then jumps straight back to its original overprediction instead of splitting the difference. Speaker info: - https://x.com/pgasawa - https://www.linkedin.com/in/pgasawa/ -…",
-      "summary": "Every leaderboard you have seen was built by asking a model to do one task, wiping its memory, and asking it another. Parth Asawa's objection is that this quietly assumes learning across instances does not count. His benchmark measures what that assumption hides, using a metric called gain: run a system with state, then run the identical system reset between every single instance, and take the difference. Cumulative reward cannot show you this, because a stronger base model can post a higher total while learning less than a weaker one that genuinely improves. Building tasks that can measure learning turns out to be the hard part, and he sets three requirements. Headroom, so the task is not already solved by pretraining. Shared latent structure across instances, since standard benchmarks are deliberately independent and therefore offer nothing to improve on, which is why chaining existin…",
+      "summary": "Parth Asawa提出了一种新的评估指标“增益（Gain）”，用于衡量系统在持续学习过程中的真实进步，而非仅仅依赖静态测试。",
       "url": "https://www.youtube.com/watch?v=iqloyWCGYQQ",
       "canonicalUrl": "https://www.youtube.com/watch?v=iqloyWCGYQQ",
       "videoId": "iqloyWCGYQQ",
@@ -601,14 +809,14 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 21,
-      "views": 284,
+      "likes": 22,
+      "views": 370,
       "duration": "20:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "Parth Asawa提出了一种新的评估指标“增益（Gain）”，用于衡量系统在持续学习过程中的真实进步，而非仅仅依赖静态测试。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 66/100。",
         "evidenceZh": "Every leaderboard you have seen was built by asking a model to do one task, wiping its memory, and asking it another. Parth Asawa's objection is that this quietly assumes learning across instances does not count. His be…",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -621,7 +829,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1786554404233,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.914Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.893Z",
       "signals": {
         "localScore": 66,
         "reasons": [
@@ -633,7 +841,10 @@
         "topics": [
           "evaluation"
         ]
-      }
+      },
+      "summaryZh": "Parth Asawa提出了一种新的评估指标“增益（Gain）”，用于衡量系统在持续学习过程中的真实进步，而非仅仅依赖静态测试。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:68b415c71f0bdd5538df2f09",
@@ -651,7 +862,7 @@
       "text": "",
       "excerpt": "It’s not very often that a paper breaks through to become headline story of the day. For understandable reasons both domestic and foreign , there is renewed interest in the Interpretability Venn Diagram of alignment, security, and chain of thought monitoring, so today’s paper could not have come at a better time: Since the o1 launch , frontier lab reasoning models have obscured their traces, with cryptographic signatures, for fear of distillation (not that this prevented anyone from Chinese labs accusing them of doing so). The first compromise was responsibly reported by Matthew Green in May, who broke down how it works and figured out how to replay and side channel these indirectly using latency measures. Today’s paper demonstrates that it is possible to DECODE and port these encrypted thoughts to different models/sessions/users… and to dramatically improve open models as a result The alarming note is here: “Further, if you ever shared online a Claude Code/Codex session with encrypted reasoning blobs, they can be decoded and leak your personal data. We did a preliminary scan of ~7,000 public traces and found 62 unique API keys, 33 email addresses, 33 passwords, and other sensitive data.” ( 64 appeared exclusively inside the reasoning blocks and nowhere in the visible session.) The authors also detail alignment issues: COT Summarizers hiding answers Unintelligible reasoning Considerations of cheating Attacking Websites The website has more examples. The technique is somewhat described in the paper: Obtain a legitimate encrypted/signed reasoning block from an API response.…",
       "contentLength": 25871,
-      "summary": "It’s not very often that a paper breaks through to become headline story of the day. For understandable reasons both domestic and foreign , there is renewed interest in the Interpretability Venn Diagram of alignment, security, and chain of thought monitoring, so today’s paper could not have come at a better time: Since the o1 launch , frontier lab reasoning models have obscured their traces, with cryptographic signatures, for fear of distillation (not that this prevented anyone from Chinese labs accusing them of doing so). The first compromise was responsibly reported by Matthew Green in May, who broke down how it works and figured out how to replay and side channel these indirectly using latency measures. Today’s paper demonstrates that it is possible to DECODE and port these encrypted thoughts to different models/sessions/users… and to dramatically improve open models as a result The alarming note is here: “Further, if you ever shared online a Claude Code/Codex session with encrypted reasoning blobs, they can be decoded and leak your personal data. We did a preliminary scan of ~7,000 public traces and found 62 unique API keys, 33 email addresses, 33 passwords, and other sensitive data.” ( 64 appeared exclusively inside the reasoning blocks and nowhere in the visible session.) The authors also detail alignment issues: COT Summarizers hiding answers Unintelligible reasoning Considerations of cheating Attacking Websites The website has more examples. The technique is somewhat described in the paper: Obtain a legitimate encrypted/signed reasoning block from an API response.…",
+      "summary": "最新研究展示了如何解码并提取加密的推理轨迹（Reasoning Trace），并将其用于提升开源模型性能。",
       "url": "https://www.latent.space/p/ainews-how-to-steal-a-reasoning-trace",
       "canonicalUrl": "https://www.latent.space/p/ainews-how-to-steal-a-reasoning-trace",
       "ts": 1786518668000,
@@ -660,12 +871,12 @@
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
-        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 86/100。",
-        "evidenceZh": "It’s not very often that a paper breaks through to become headline story of the day. For understandable reasons both domestic and foreign , there is renewed interest in the Interpretability Venn Diagram of alignment, se…",
-        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
-        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
-        "rednoteAngleZh": "用「新能力 / 旧限制 / 适合谁」三栏，避免只翻译发布公告。",
+        "summaryZh": "最新研究展示了如何解码并提取加密的推理轨迹（Reasoning Trace），并将其用于提升开源模型性能。",
+        "whyItMattersZh": "打破了闭源模型在推理过程上的“黑盒”垄断，对模型可解释性与开源生态有深远影响。",
+        "evidenceZh": "论文证明了可以解码加密的思维链，并将其移植到其他模型中以提升效果。",
+        "uncertaintyZh": "需核实该技术在不同加密协议下的适用范围。",
+        "chineseAudienceGapZh": "国内对推理模型加密机制的讨论多停留在猜测层面，缺乏技术层面的深度解析。",
+        "rednoteAngleZh": "AI推理黑盒被破解？如何利用提取的思维链提升开源模型？",
         "topics": [
           "research",
           "reasoning",
@@ -673,8 +884,8 @@
           "safety",
           "model-release"
         ],
-        "processedAt": "2026-08-12T17:07:04.372Z",
-        "model": "local-fallback"
+        "processedAt": "2026-08-12T22:55:03.991Z",
+        "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786554404233,
       "signals": {
@@ -692,7 +903,10 @@
           "safety",
           "model-release"
         ]
-      }
+      },
+      "summaryZh": "最新研究展示了如何解码并提取加密的推理轨迹（Reasoning Trace），并将其用于提升开源模型性能。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "x:2087423996115681767",
@@ -710,7 +924,7 @@
       "title": "",
       "text": "I previously promised a reset for every 1M in additional active users for Codex, until 10M. We blew past that and have been silent since 10M. Little surprise for you tomorrow.",
       "excerpt": "I previously promised a reset for every 1M in additional active users for Codex, until 10M. We blew past that and have been silent since 10M. Little surprise for you tomorrow.",
-      "summary": "I previously promised a reset for every 1M in additional active users for Codex, until 10M. We blew past that and have been silent since 10M. Little surprise for you tomorrow.",
+      "summary": "Codex用户规模突破1000万，开发者预告将有重大更新。",
       "url": "https://x.com/thsottiaux/status/2087423996115681767",
       "canonicalUrl": "https://x.com/thsottiaux/status/2087423996115681767",
       "ts": 1786515637000,
@@ -719,7 +933,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1786554404233
+      "firstSeen": 1786554404233,
+      "summaryZh": "Codex用户规模突破1000万，开发者预告将有重大更新。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "article:e063daae6225e15695395681",
@@ -737,7 +954,7 @@
       "text": "",
       "excerpt": "OpenAI research reveals how enterprises are adopting agentic AI, using ChatGPT and Codex, and how frontier firms are pulling ahead in AI adoption.",
       "contentLength": 146,
-      "summary": "OpenAI research reveals how enterprises are adopting agentic AI, using ChatGPT and Codex, and how frontier firms are pulling ahead in AI adoption.",
+      "summary": "OpenAI研究揭示了企业如何通过ChatGPT和Codex将AI从辅助工具转化为实际执行的Agent。",
       "url": "https://openai.com/index/how-enterprises-put-ai-to-work",
       "canonicalUrl": "https://openai.com/index/how-enterprises-put-ai-to-work",
       "ts": 1786514400000,
@@ -748,7 +965,7 @@
       ],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "OpenAI研究揭示了企业如何通过ChatGPT和Codex将AI从辅助工具转化为实际执行的Agent。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 65/100。",
         "evidenceZh": "OpenAI research reveals how enterprises are adopting agentic AI, using ChatGPT and Codex, and how frontier firms are pulling ahead in AI adoption.",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -774,7 +991,10 @@
           "agents",
           "research"
         ]
-      }
+      },
+      "summaryZh": "OpenAI研究揭示了企业如何通过ChatGPT和Codex将AI从辅助工具转化为实际执行的Agent。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "x:2087385493684335064",
@@ -792,7 +1012,7 @@
       "title": "",
       "text": "Good post on how to think about FDEs. The key is that FDEs are real and not going away for AI any time soon. The reason this is happening now at a scale that has never been seen before is because AI is fundamentally about adding a non-deterministic, rapidly changing system to workflows that largely have never been automated before. This looks very little like implementing traditional software. “If you're building an AI agent for accounting in 2026, there is no established workflow, because literally nobody has ever used one of these. Nobody knows what the user journey looks like — not you, and importantly, not your customer either. They can't tell you what they want, because the thing they'd want doesn't have a shape yet.” Software has largely always been deterministic and once implemented effectively worked the same for customers. This meant the upfront implementation work was *relatively* uniform across similar customers, and the system wasn’t regularly being upgraded in fundamental ways. AI agents are entirely different on nearly every dimension. The customer’s business process has to change to work with agents, there is heavy -necessary- customization to get agents to work in the customers end-state process, evals need to be run constantly, the AI models are constantly changing and updates need to keep getting incorporated, the underlying harness and broader system are often changing due to customer feedback, and much more. This is real work for the customer, systems integrators, and the applied AI vendors. Even as AI capabilities improve dramatically, this work remains (or even gets more complicated) given enterprises will just throw increasingly more complex processes at agents. Great time to be an FDE.",
       "excerpt": "Good post on how to think about FDEs. The key is that FDEs are real and not going away for AI any time soon. The reason this is happening now at a scale that has never been seen before is because AI is fundamentally about adding a non-deterministic, rapidly changing system to workflows that largely have never been automated before. This looks very little like implementing traditional software. “If you're building an AI agent for accounting in 2026, there is no established workflow, because literally nobody has ever used one of these. Nobody knows what the user journey looks like — not you, and importantly, not your customer either. They can't tell you what they want, because the thing they'd want doesn't have a shape yet.” Software has largely always been deterministic and once implemented effectively worked the same for customers. This meant the upfront implementation work was *relatively* uniform across similar customers, and the system wasn’t regularly being upgraded in fundamental ways. AI agents are entirely different on nearly every dimension. The customer’s business process has to change to work with agents, there is heavy -necessary- customization to get agents to work in the customers end-state process, evals need to be run constantly, the AI models are constantly changing and updates need to keep getting incorporated, the underlying harness and broader system are often changing due to customer feedback, and much more. This is real work for the customer, systems integrators, and the applied AI vendors. Even as AI capabilities improve dramatically, this work remains (or even gets more complicated) given enterprises will just throw increasingly more complex processes at agents. Great time to be an FDE.",
-      "summary": "Good post on how to think about FDEs. The key is that FDEs are real and not going away for AI any time soon. The reason this is happening now at a scale that has never been seen before is because AI is fundamentally about adding a non-deterministic, rapidly changing system to workflows that largely have never been automated before. This looks very little like implementing traditional software. “If you're building an AI agent for accounting in 2026, there is no established workflow, because literally nobody has ever used one of these. Nobody knows what the user journey looks like — not you, and importantly, not your customer either. They can't tell you what they want, because the thing they'd want doesn't have a shape yet.” Software has largely always been deterministic and once implemented effectively worked the same for customers. This meant the upfront implementation work was *relatively* uniform across similar customers, and the system wasn’t regularly being upgraded in fundamental ways. AI agents are entirely different on nearly every dimension. The customer’s business process has to change to work with agents, there is heavy -necessary- customization to get agents to work in the customers end-state process, evals need to be run constantly, the AI models are constantly changing and updates need to keep getting incorporated, the underlying harness and broader system are often changing due to customer feedback, and much more. This is real work for the customer, systems integrators, and the applied AI vendors. Even as AI capabilities improve dramatically, this work remains (or even gets more complicated) given enterprises will just throw increasingly more complex processes at agents. Great time to be an FDE.",
+      "summary": "AI Agent引入了非确定性系统，这与传统软件工程完全不同，企业需要重新定义工作流。",
       "url": "https://x.com/levie/status/2087385493684335064",
       "canonicalUrl": "https://x.com/levie/status/2087385493684335064",
       "ts": 1786506458000,
@@ -801,7 +1021,7 @@
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "",
+        "summaryZh": "AI Agent引入了非确定性系统，这与传统软件工程完全不同，企业需要重新定义工作流。",
         "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 70/100。",
         "evidenceZh": "Good post on how to think about FDEs. The key is that FDEs are real and not going away for AI any time soon. The reason this is happening now at a scale that has never been seen before is because AI is fundamentally abo…",
         "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
@@ -829,7 +1049,10 @@
           "workflow",
           "evaluation"
         ]
-      }
+      },
+      "summaryZh": "AI Agent引入了非确定性系统，这与传统软件工程完全不同，企业需要重新定义工作流。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "x:2087362394280599641",
@@ -847,7 +1070,7 @@
       "title": "",
       "text": "dev rels are having their moment. since building software has become trivial, distribution is your biggest unlock. people with great social media game + tech chops are invaluable. https://t.co/yTrUFcQdHZ",
       "excerpt": "dev rels are having their moment. since building software has become trivial, distribution is your biggest unlock. people with great social media game + tech chops are invaluable. https://t.co/yTrUFcQdHZ",
-      "summary": "dev rels are having their moment. since building software has become trivial, distribution is your biggest unlock. people with great social media game + tech chops are invaluable. https://t.co/yTrUFcQdHZ",
+      "summary": "随着软件构建变得简单，分发能力成为核心，具备技术背景的开发者关系（DevRel）人才价值凸显。",
       "url": "https://x.com/realmadhuguru/status/2087362394280599641",
       "canonicalUrl": "https://x.com/realmadhuguru/status/2087362394280599641",
       "ts": 1786500950000,
@@ -856,7 +1079,10 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1786554404233
+      "firstSeen": 1786554404233,
+      "summaryZh": "随着软件构建变得简单，分发能力成为核心，具备技术背景的开发者关系（DevRel）人才价值凸显。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-08-12T22:55:03.990Z"
     },
     {
       "id": "x:2087355597851390220",
@@ -1039,7 +1265,52 @@
       "categories": [],
       "fullSummary": "",
       "editorial": null,
-      "firstSeen": 1786554404233
+      "firstSeen": 1786554404233,
+      "signals": {
+        "localScore": 37,
+        "reasons": [
+          "community source +5",
+          "fresh +15",
+          "visualizable +4"
+        ],
+        "topics": []
+      }
+    },
+    {
+      "id": "article:9bafa93fe08b847d5d921409",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "How RingCentral builds AI-native work from engineering to ops",
+      "text": "",
+      "excerpt": "See how RingCentral uses ChatGPT Work and Codex to accelerate AI product development and centralize operational intelligence across engineering and operations.",
+      "contentLength": 159,
+      "summary": "See how RingCentral uses ChatGPT Work and Codex to accelerate AI product development and centralize operational intelligence across engineering and operations.",
+      "url": "https://openai.com/index/ringcentral",
+      "canonicalUrl": "https://openai.com/index/ringcentral",
+      "ts": 1786492800000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1786575288128,
+      "signals": {
+        "localScore": 52,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "visualizable +4"
+        ],
+        "topics": []
+      }
     },
     {
       "id": "article:852b8aca396645168ecc07d3",
@@ -1303,10 +1574,10 @@
       "editorial": null,
       "firstSeen": 1786554404233,
       "signals": {
-        "localScore": 55,
+        "localScore": 52,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +15",
           "visualizable +4"
         ],
@@ -1796,8 +2067,8 @@
       "actualStartTime": "2026-08-11T16:00:06.000Z",
       "actualEndTime": "2026-08-11T16:33:29.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 122,
-      "views": 5030,
+      "likes": 123,
+      "views": 5188,
       "duration": "31:24",
       "full": false,
       "categories": [],
@@ -1818,7 +2089,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786381405496,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -2494,8 +2765,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 48,
-      "views": 2324,
+      "likes": 49,
+      "views": 2363,
       "duration": "16:57",
       "full": false,
       "categories": [],
@@ -2515,7 +2786,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786425367471,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -3340,14 +3611,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 41,
-      "views": 1664,
+      "views": 1683,
       "duration": "19:50",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786402291054,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -3532,8 +3803,8 @@
       "actualStartTime": "2026-08-10T16:00:06.000Z",
       "actualEndTime": "2026-08-10T16:23:00.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 94,
-      "views": 3908,
+      "likes": 95,
+      "views": 3969,
       "duration": "20:55",
       "full": false,
       "categories": [],
@@ -3556,7 +3827,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -4831,7 +5102,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 64,
-      "views": 3075,
+      "views": 3088,
       "duration": "18:44",
       "full": false,
       "categories": [],
@@ -4852,7 +5123,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786315427968,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -5111,8 +5382,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 133,
-      "views": 6758,
+      "likes": 136,
+      "views": 6987,
       "duration": "22:31",
       "full": false,
       "categories": [],
@@ -5136,7 +5407,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786315427968,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -5279,7 +5550,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 108,
-      "views": 3897,
+      "views": 4086,
       "duration": "20:37",
       "full": false,
       "categories": [],
@@ -5299,7 +5570,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786294103386,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
       "signals": {
         "localScore": 56,
         "reasons": [
@@ -5526,14 +5797,14 @@
       "actualEndTime": "2026-08-09T15:12:03.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 52,
-      "views": 2023,
+      "views": 2031,
       "duration": "24:56",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.915Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -5999,8 +6270,8 @@
       "actualStartTime": "2026-08-08T21:30:06.000Z",
       "actualEndTime": "2026-08-08T21:53:46.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 46,
-      "views": 2426,
+      "likes": 47,
+      "views": 2443,
       "duration": "21:41",
       "full": false,
       "categories": [],
@@ -6022,7 +6293,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -6197,7 +6468,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 61,
-      "views": 2858,
+      "views": 2889,
       "duration": "18:08",
       "full": false,
       "categories": [],
@@ -6220,7 +6491,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786228866159,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -6481,15 +6752,15 @@
       "actualStartTime": "2026-08-08T16:00:06.000Z",
       "actualEndTime": "2026-08-08T16:22:14.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 1024,
-      "views": 36407,
+      "likes": 1053,
+      "views": 37636,
       "duration": "20:08",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -7380,15 +7651,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 136,
-      "views": 4906,
+      "likes": 138,
+      "views": 5027,
       "duration": "21:14",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -7438,7 +7709,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 55,
-      "views": 1790,
+      "views": 1803,
       "duration": "17:30",
       "full": false,
       "categories": [],
@@ -7461,7 +7732,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -8933,14 +9204,14 @@
       "actualEndTime": "2026-08-07T02:45:26.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 172,
-      "views": 9973,
+      "views": 10107,
       "duration": "43:21",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1786066367519,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.895Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -9083,8 +9354,8 @@
       "actualStartTime": "2026-08-07T01:00:06.000Z",
       "actualEndTime": "2026-08-07T01:48:06.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 55,
-      "views": 1677,
+      "likes": 56,
+      "views": 1689,
       "duration": "46:01",
       "full": false,
       "categories": [],
@@ -9106,7 +9377,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786066367519,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -9656,7 +9927,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 2313,
+      "views": 2322,
       "duration": "48:17",
       "full": false,
       "categories": [],
@@ -9677,7 +9948,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786066367519,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.916Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -11003,7 +11274,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 88,
-      "views": 4273,
+      "views": 4279,
       "duration": "18:54",
       "full": false,
       "categories": [],
@@ -11025,7 +11296,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785971631920,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -14138,14 +14409,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 82,
-      "views": 4838,
+      "views": 4853,
       "duration": "56:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785796241036,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 61,
         "reasons": [
@@ -14922,7 +15193,7 @@
       "actualEndTime": "2026-08-02T23:50:44.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 96,
-      "views": 4867,
+      "views": 4874,
       "duration": "18:38",
       "full": false,
       "categories": [],
@@ -14942,7 +15213,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785734479126,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -15205,7 +15476,7 @@
       "actualEndTime": "2026-08-02T20:26:00.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 137,
-      "views": 5444,
+      "views": 5450,
       "duration": "23:54",
       "full": false,
       "categories": [],
@@ -15224,7 +15495,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785709643526,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -15510,7 +15781,7 @@
       "actualEndTime": "2026-08-02T16:49:30.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 49,
-      "views": 1651,
+      "views": 1657,
       "duration": "17:25",
       "full": false,
       "categories": [],
@@ -15531,7 +15802,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785709643526,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -17582,14 +17853,14 @@
       "actualEndTime": "2026-08-01T00:59:23.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 71,
-      "views": 2422,
+      "views": 2428,
       "duration": "27:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -17629,14 +17900,14 @@
       "actualEndTime": "2026-08-01T00:23:20.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 48,
-      "views": 2222,
+      "views": 2228,
       "duration": "21:15",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -17816,14 +18087,14 @@
       "actualEndTime": "2026-07-31T23:50:10.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 37,
-      "views": 1745,
+      "views": 1749,
       "duration": "18:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785561168858,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.896Z",
       "summaryZh": "专家指出 RLHF 虽然提升了人机交互体验，但对于自主 Agent 而言，基于可验证奖励的强化学习才是实现真正自动化的关键。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-01T05:13:01.864Z"
@@ -18084,14 +18355,14 @@
       "actualEndTime": "2026-07-31T23:21:11.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 40,
-      "views": 1165,
+      "views": 1166,
       "duration": "19:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -18161,14 +18432,14 @@
       "actualEndTime": "2026-07-31T22:50:26.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 104,
-      "views": 4888,
+      "views": 4896,
       "duration": "18:20",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "summaryZh": "Raymond Feng 讨论了如何通过强化学习让模型在部署后持续学习，并指出了在生产环境中避免奖励欺诈（reward hacking）的挑战。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-31T22:30:13.269Z",
@@ -18220,14 +18491,14 @@
       "actualEndTime": "2026-07-31T22:21:17.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 20,
-      "views": 953,
+      "views": 955,
       "duration": "19:12",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -18364,7 +18635,7 @@
       "actualEndTime": "2026-07-31T21:50:13.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 19,
-      "views": 1359,
+      "views": 1360,
       "duration": "18:07",
       "full": false,
       "categories": [],
@@ -18386,7 +18657,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.917Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -18509,14 +18780,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 1656,
+      "views": 1662,
       "duration": "16:33",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -18596,14 +18867,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 28,
-      "views": 1051,
+      "views": 1053,
       "duration": "17:45",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "summaryZh": "Varun Singh 认为传统的“基础模型”概念已过时，现代模型训练正通过合成推理数据和中间训练阶段，更早地注入下游能力。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-31T22:30:13.269Z"
@@ -18680,7 +18951,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 42,
-      "views": 1651,
+      "views": 1655,
       "duration": "17:42",
       "full": false,
       "categories": [],
@@ -18704,7 +18975,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -18787,14 +19058,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 199,
-      "views": 7532,
+      "views": 7542,
       "duration": "16:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785537000395,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "summaryZh": "Thais Castello Branco 探讨了如何通过任务分解和针对性的奖励机制，训练 AI 掌握“品味”和主观质量判断，避免输出平庸内容。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-31T22:30:13.269Z"
@@ -19012,7 +19283,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785475053039,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.897Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -19095,15 +19366,15 @@
       "actualStartTime": "2026-07-31T15:00:06.000Z",
       "actualEndTime": "2026-07-31T15:21:32.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 105,
-      "views": 2964,
+      "likes": 106,
+      "views": 2979,
       "duration": "19:27",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785475053039,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -19826,7 +20097,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 22,
-      "views": 1262,
+      "views": 1263,
       "duration": "20:14",
       "full": false,
       "categories": [],
@@ -19850,7 +20121,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785475053039,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -20091,14 +20362,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 187,
-      "views": 5952,
+      "views": 5960,
       "duration": "21:32",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785475053039,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -20889,7 +21160,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 62,
-      "views": 2363,
+      "views": 2371,
       "duration": "20:24",
       "full": false,
       "categories": [],
@@ -20911,7 +21182,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785450663605,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -21469,7 +21740,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -21583,14 +21854,14 @@
       "actualEndTime": "2026-07-30T02:26:28.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 18,
-      "views": 996,
+      "views": 997,
       "duration": "24:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.918Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -21871,7 +22142,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -22158,7 +22429,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -22198,14 +22469,14 @@
       "actualEndTime": "2026-07-29T22:18:30.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 41,
-      "views": 1609,
+      "views": 1612,
       "duration": "16:24",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "summaryZh": "Nubank通过Skill Vector系统对2000多个AI技能进行确定性扫描和LLM审查，有效降低了金融环境下的供应链风险。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-29T22:28:33.960Z"
@@ -22314,14 +22585,14 @@
       "actualEndTime": "2026-07-29T21:24:35.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 232,
-      "views": 8975,
+      "views": 9001,
       "duration": "22:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.898Z",
       "summaryZh": "金融领域要求数据绝对可信，Kepler通过确定性基底将模型限制在擅长的非确定性任务上，确保每一个数字都有据可查。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-29T22:28:33.960Z"
@@ -22357,7 +22628,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 583,
-      "views": 19608,
+      "views": 19611,
       "duration": "21:09",
       "full": false,
       "categories": [],
@@ -22379,7 +22650,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.899Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -22480,7 +22751,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "summaryZh": "通用模型缺乏行业经验，容易产生“流利的胡说八道”。Intuit通过将真实业务数据转化为状态记录，实现了更具实战价值的决策支持。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-29T22:28:33.960Z"
@@ -22546,14 +22817,14 @@
       "actualEndTime": "2026-07-29T19:18:35.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 74,
-      "views": 2693,
+      "views": 2701,
       "duration": "16:29",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -22808,7 +23079,7 @@
       "actualEndTime": "2026-07-29T18:19:29.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 137,
-      "views": 4636,
+      "views": 4642,
       "duration": "17:24",
       "full": false,
       "categories": [],
@@ -22831,7 +23102,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -23000,15 +23271,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 34,
-      "views": 1361,
+      "likes": 35,
+      "views": 1365,
       "duration": "20:07",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785364100756,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -23253,7 +23524,7 @@
       "actualEndTime": "2026-07-29T16:20:31.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 35,
-      "views": 1523,
+      "views": 1528,
       "duration": "18:26",
       "full": false,
       "categories": [],
@@ -23275,7 +23546,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -24264,7 +24535,7 @@
       "actualEndTime": "2026-07-28T22:23:27.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 100,
-      "views": 4381,
+      "views": 4383,
       "duration": "21:21",
       "full": false,
       "categories": [],
@@ -24285,7 +24556,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -24490,14 +24761,14 @@
       "actualEndTime": "2026-07-28T21:22:28.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 353,
-      "views": 14184,
+      "views": 14238,
       "duration": "20:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -24600,7 +24871,7 @@
       "actualEndTime": "2026-07-28T20:19:44.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 59,
-      "views": 19539,
+      "views": 19545,
       "duration": "17:38",
       "full": false,
       "categories": [],
@@ -24622,7 +24893,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -24672,14 +24943,14 @@
       "actualEndTime": "2026-07-28T19:16:10.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 37,
-      "views": 1518,
+      "views": 1522,
       "duration": "14:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.920Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -24856,7 +25127,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -24905,14 +25176,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 13,
-      "views": 1119,
+      "views": 1123,
       "duration": "18:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785277802819,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.900Z",
       "summaryZh": "Decagon指出，企业级Agent的开发需要平衡定制化需求与产品通用性，并强调在边界内进行约束的重要性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-28T22:30:14.658Z"
@@ -25035,7 +25306,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 84,
-      "views": 2456,
+      "views": 2457,
       "duration": "22:20",
       "full": false,
       "categories": [],
@@ -25055,7 +25326,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785256936202,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -25174,15 +25445,15 @@
       "actualStartTime": "2026-07-28T15:00:06.000Z",
       "actualEndTime": "2026-07-28T15:19:54.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 601,
-      "views": 22217,
+      "likes": 602,
+      "views": 22289,
       "duration": "17:48",
       "full": true,
       "categories": [],
       "fullSummary": "这份总结详细介绍了前置部署工程师（Forward Deployed Engineering, FDE）的核心概念、运作逻辑及其在企业中的应用。\n\n**前置部署工程师（FDE）的定义与起源**\n\n前置部署工程师并非传统的软件开发人员，而是一种“面向客户的软件工程师”。该职能起源于 Palantir，旨在解决复杂技术平台（如 Foundry）在销售过程中的痛点。Palantir 的核心业务是帮助大型企业整合数据并构建应用，但由于其产品高度复杂，客户往往缺乏相应的技术能力来充分利用平台。为了确保客户成功，Palantir 采取了“产品+服务”的组合模式，即派遣高水平工程师直接进入客户现场，深入理解其业务需求，并在平台上构建定制化解决方案。\n\n**FDE 的核心逻辑：为什么需要这种模式**\n\nKevin Bai 提出了一个“潘氏方格”模型来解释 FDE 的必要性：\n• 当销售对象是技术专家（如 CTO/CIO）且产品是技术平台时，传统的销售模式即可奏效。\n• 当产品配置简单且买方非技术背景时，标准的 SaaS 销售模式同样适用。\n• **FDE 的核心价值在于：** 当企业必须向“非技术背景的买方”销售“高度复杂的技术平台”时，FDE 成为连接技术与业务成果的桥梁。\n\n通过这种模式，Palantir 实现了极高的平均合同价值（ACV）。据分享，Palantir 的 ACV 达到 400 万美元，远超其他主流 SaaS 公司（如 ServiceNow 的 120 万美元），证明了该模式在处理复杂企业级需求时的有效性。\n\n**FDE 与“外包开发”的区别**\n\nFDE 模式最关键的限制在于：它不是简单的定制开发（Dev Shop）。如果 FDE 仅仅是从零开始为每个客户编写代码，企业将面临无法维护、代码质量低下及工程师流失的灾难。FDE 的成功前提是**必须拥有一个强大的底层平台**。工程师是在平台提供的“基元（Primitives）”之上进行组装和配置，而非重复造轮子。这种模式将初创早期的“设计合作伙伴”关系规模化到了企业级市场。\n\n**如何应用 FDE 模式**\n\n对于希望引入 FDE 的组织，Kevin 建议重点思考以下两个问题：\n1. **必要性评估：** 是否真的存在“向非技术买方销售复杂技术”的业务场景？如果不是，传统的开发者关系（DevRel）或销售主导（SLG）模式可能更合适。\n2. **平台投入：** 是否拥有或愿意投入资源构建一个具备共享基元的平台？如果没有平台支撑，FDE 带来的维护成本将导致业务崩溃。\n\n**AI 时代的影响与未来**\n\n随着人工智能的普及，几乎所有软件平台都开始具备“代理（Agentic）”属性和高度可定制性。这意味着客户将面临更复杂的工具选择，产品成功与否将比以往更依赖于有效的实施。FDE 模式在 AI 时代不仅没有过时，反而因为软件的复杂性增加而变得更加重要。\n\n**关于 FDE 的关键实践建议：**\n• **基元粒度：** 基元的原子性取决于具体行业和用例，目标是让应用 60% 的功能由平台提供，剩余 40% 由 FDE 根据客户需求进行定制。\n• **代码归属：** 针对特定客户的定制化需求应保留在前端，而具有通用价值的功能应逐步沉淀回底层平台，作为 FDE 探索新产品方向的“侦察兵”。\n• **人才画像：** 理想的 FDE 是既具备扎实工程能力，又具备直接面对客户沟通能力的复合型人才。",
       "editorial": null,
       "firstSeen": 1785256936202,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -25306,7 +25577,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 60,
-      "views": 1280,
+      "views": 1282,
       "duration": "21:39",
       "full": false,
       "categories": [],
@@ -25326,7 +25597,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785256936202,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 62,
         "reasons": [
@@ -25761,7 +26032,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785215484854,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -27334,7 +27605,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 61,
-      "views": 2890,
+      "views": 2891,
       "duration": "17:34",
       "full": false,
       "categories": [],
@@ -27355,7 +27626,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785104934313,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -27456,14 +27727,14 @@
       "actualEndTime": "2026-07-26T17:20:28.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 153,
-      "views": 5541,
+      "views": 5542,
       "duration": "18:22",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785104934313,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 46,
         "reasons": [
@@ -28112,7 +28383,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785018441428,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -28294,14 +28565,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 95,
-      "views": 3524,
+      "views": 3530,
       "duration": "21:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1785043010720,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 70,
         "reasons": [
@@ -28632,7 +28903,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 434,
-      "views": 14516,
+      "views": 14541,
       "duration": "17:57",
       "full": false,
       "categories": [],
@@ -28652,7 +28923,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785018441428,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -28878,7 +29149,7 @@
       "actualEndTime": "2026-07-25T17:23:50.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 187,
-      "views": 6032,
+      "views": 6039,
       "duration": "21:45",
       "full": false,
       "categories": [],
@@ -28901,7 +29172,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1785018441428,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -29325,14 +29596,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 65,
-      "views": 3343,
+      "views": 3344,
       "duration": "20:24",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784956289577,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "summaryZh": "Snorkel AI提出通过重构生产环境中的Agent Trace来构建私有评测基准，实现对Agent行为的精准模拟与评估。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-25T05:11:40.415Z"
@@ -29456,7 +29727,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784956289577,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.921Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -29630,15 +29901,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 769,
-      "views": 47345,
+      "likes": 772,
+      "views": 47551,
       "duration": "21:39",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -29763,7 +30034,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 41,
-      "views": 2296,
+      "views": 2298,
       "duration": "19:29",
       "full": false,
       "categories": [],
@@ -29785,7 +30056,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.901Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -29896,14 +30167,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 54,
-      "views": 2645,
+      "views": 2648,
       "duration": "20:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -29953,14 +30224,14 @@
       "actualEndTime": "2026-07-24T20:07:12.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 69,
-      "views": 3091,
+      "views": 3093,
       "duration": "6:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784932287410,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "summaryZh": "Aparna Dhinakaran探讨了评测的演进路径，从静态规则到LLM作为评测者，再到Agent作为评测者，以应对Agent能力的快速迭代。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-24T22:31:40.869Z"
@@ -30747,7 +31018,7 @@
       "actualEndTime": "2026-07-24T16:23:17.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 55,
-      "views": 1280,
+      "views": 1281,
       "duration": "21:11",
       "full": false,
       "categories": [],
@@ -30769,7 +31040,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -30985,14 +31256,14 @@
       "actualEndTime": "2026-07-24T15:20:11.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 1148,
+      "views": 1149,
       "duration": "18:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 66,
         "reasons": [
@@ -31040,15 +31311,15 @@
       "actualStartTime": "2026-07-24T15:00:06.000Z",
       "actualEndTime": "2026-07-24T16:17:08.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 771,
-      "views": 35006,
+      "likes": 772,
+      "views": 35066,
       "duration": "1:15:02",
       "full": true,
       "categories": [],
       "fullSummary": "这份总结基于 OpenAI 的 Jason Liu 关于使用 Codex 应用（Codex App）提升工作效率的研讨会内容。\n\n### **核心理念：将 AI 视为团队成员**\nJason Liu 强调，在 AI 时代，知识工作者的核心能力已从“编写代码”转向“管理 AI 代理”。他将每一个固定的（Pinned）对话线程视为一名“团队成员”，通过赋予其明确的职责、记忆和自动化任务，实现从个人贡献者（IC）向管理者（Manager）的转型。\n\n### **关键工作流与技巧**\n• **上下文压缩（Compaction）：** 过去建议长对话应分拆，但现在通过“压缩”技术，长达数周、包含数百个子代理的线程依然能高效运作。建议将线程重命名为项目 ID，并让其具备委派任务、创建新线程及写入记忆库的能力。\n• **语音输入：** 建议使用语音而非打字，因为语音表达速度快三倍，且能包含更多非结构化的背景信息，AI 会自动从历史记录中提取相关上下文。\n• **Appshots（应用快照）：** 这是该应用最强大的功能之一。它不仅截取屏幕图像，还包含应用的可访问性树（Accessibility Tree），使 AI 能精准识别 UI 元素、用户 ID 和频道 ID，从而实现极高效率的工具调用。\n• **计算机使用（Computer Use）：** 允许 AI 直接控制桌面应用（如 iMovie、浏览器、Slack 等）。这不仅能自动化繁琐的表单填写或文件操作，还能在后台执行任务，带来类似“AGI”的体验。\n\n### **构建个人记忆与自动化系统**\n• **个人 Monorepo：** 建议建立一个包含项目目录、人员档案和代理配置（Agent MD 文件）的个人仓库。通过在 Agent MD 中定义规则，AI 可以自动管理文件路径、处理特定项目逻辑，并实现跨项目的知识共享。\n• **技能（Skills）与插件（Plugins）：** 技能是简单的脚本集合，插件则是功能的库。用户应根据团队需求构建技能（如“代码审查”、“沟通 triage”），并利用插件连接 Slack、Gmail、Notion 等工具。\n• **心跳机制（Heartbeat）：** 通过设置定时任务（如“每 30 分钟检查一次”），让线程自动监控 PR 状态、回复 Slack 消息或处理日常事务，实现“后台运行”的自动化。\n• **目标设定（Goal）：** 使用 `slash goal` 定义明确的验证步骤。AI 会不断循环执行任务，直到满足验证条件。\n\n### **安全性与限制**\n• **权限控制：** 用户应根据需求设置权限（如“自动审查”、“询问权限”或“全自动”）。虽然 AI 变得越来越聪明，但仍存在误操作风险，建议通过 Agent MD 文件设定安全边界。\n• **模型选择：** 并非所有任务都需要最高推理等级（X-High）。对于简单的自动化任务，使用低或中等推理等级（Low/Medium）即可，这能显著节省 Token 并提高响应速度。\n• **不确定性：** AI 并非完美，初期需要像培训新员工一样进行指导和纠错。随着记忆系统的完善，AI 会逐渐学会如何处理复杂任务，但用户仍需保持对“品味”的追求，通过多接触不同应用来提升对好产品的判断力。\n\n### **总结建议**\nJason Liu 鼓励用户不要害怕尝试，应通过“不断提问”来让 AI 学习你的风格。他建议从建立一个“幕僚长（Chief of Staff）”线程开始，让它每天定时汇总工作进度、检查连接器并处理待办事项。最终目标是让 AI 成为能够自我管理、自我修复并与其它线程协作的智能系统，从而将人类从重复性工作中解放出来，专注于人际沟通与创造性工作。",
       "editorial": null,
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 62,
         "reasons": [
@@ -31406,7 +31677,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784911352735,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -32181,14 +32452,14 @@
       "actualEndTime": "2026-07-23T18:04:17.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 107,
-      "views": 4575,
+      "views": 4576,
       "duration": "17:11",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784845760031,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -32274,7 +32545,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784845760031,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -32443,8 +32714,8 @@
       "actualStartTime": "2026-07-23T16:30:06.000Z",
       "actualEndTime": "2026-07-23T16:51:23.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 1948,
-      "views": 54892,
+      "likes": 1951,
+      "views": 54996,
       "duration": "19:18",
       "full": false,
       "categories": [],
@@ -32466,7 +32737,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -32545,7 +32816,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -32709,7 +32980,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784824854677,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -32922,14 +33193,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 447,
-      "views": 24223,
+      "views": 24282,
       "duration": "15:00",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "summaryZh": "ZS Associates通过放弃复杂的多Agent流水线，转而采用确定性流水线加单Agent推理的模式，反而提升了任务执行的准确性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -33104,7 +33375,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 174,
-      "views": 6591,
+      "views": 6603,
       "duration": "20:54",
       "full": false,
       "categories": [],
@@ -33125,7 +33396,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.922Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -33272,7 +33543,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.902Z",
       "summaryZh": "纽约时报探索了在手机端运行的本地Agent，通过实时调整游戏难度和交互方式，实现无缝的用户体验。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -33338,14 +33609,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 26,
-      "views": 1104,
+      "views": 1105,
       "duration": "20:27",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -33540,15 +33811,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 8438,
-      "views": 252381,
+      "likes": 8451,
+      "views": 253185,
       "duration": "21:18",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "summaryZh": "Frank Coyle提出在Agent外部引入形式化本体论作为逻辑护栏，以解决LLM概率推理带来的不可控错误。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -33681,7 +33952,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "summaryZh": "摩根大通通过学习API请求的执行图，实现了对异常行为的精准定位，将故障排查时间从小时级缩短至秒级。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-23T05:13:02.178Z"
@@ -33985,7 +34256,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 24,
-      "views": 1256,
+      "views": 1257,
       "duration": "15:58",
       "full": false,
       "categories": [],
@@ -34006,7 +34277,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784783567695,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -34086,7 +34357,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 173,
-      "views": 7533,
+      "views": 7547,
       "duration": "20:30",
       "full": false,
       "categories": [],
@@ -34107,7 +34378,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784759416116,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -34175,8 +34446,8 @@
       "canonicalUrl": "https://www.youtube.com/watch?v=khVX_BUnEwU",
       "videoId": "khVX_BUnEwU",
       "ts": 1784750406000,
-      "likes": 323,
-      "views": 8568,
+      "likes": 325,
+      "views": 8617,
       "duration": "17:34",
       "full": true,
       "categories": [],
@@ -34209,7 +34480,7 @@
         ]
       },
       "youtubeState": "available",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "fullSummaryAttemptAt": "2026-07-22T20:42:27.320Z",
       "fullSummaryStatus": "ready",
       "fullSummaryMessage": "",
@@ -34313,7 +34584,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 509,
-      "views": 16657,
+      "views": 16690,
       "duration": "20:42",
       "full": true,
       "categories": [],
@@ -34333,7 +34604,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -34687,15 +34958,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 884,
-      "views": 35565,
+      "likes": 889,
+      "views": 35696,
       "duration": "11:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -34743,14 +35014,14 @@
       "actualEndTime": "2026-07-22T17:27:24.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 407,
-      "views": 16474,
+      "views": 16486,
       "duration": "25:19",
       "full": true,
       "categories": [],
       "fullSummary": "在 Anthropic 举办的研讨会上，Lance Martin 分享了关于 Claude 在长周期（Long-Horizon）任务中的应用演进、架构设计及核心技术趋势。\n\n**从短周期到长周期的演进**\nClaude 的产品形态随着模型任务处理能力的提升而演变。在 2024 年早期（如 Opus 3 时代），模型仅能处理 10 到 20 分钟的自主工作，适用于聊天或自动补全等“人机紧密协作”场景。随着同步编码代理（如 Claude Code）的出现，任务时长提升至约 1 小时。目前，随着任务周期进一步延长，Anthropic 推出了“托管代理”（Managed Agents），旨在通过更完善的架构支持异步、长时间运行的自主任务。\n\n**长周期代理的核心架构原则**\n为了应对长周期任务的复杂性，Anthropic 提出了以下关键架构设计：\n\n• **大脑与手的分离（Decoupling Brain from Hands）：** 将负责逻辑的“大脑”（Harness，无状态进程）与执行工作的“手”（Sandboxes/Containers）解耦。这种设计确保了即使容器崩溃，会话状态仍能通过追加式事件日志（Append-only log）保存，且凭证存储在独立的保险库中，而非直接暴露在执行环境中，从而提升了安全性与可靠性。\n• **利用独立验证器（Use Verifiers）：** 避免让模型在同一上下文窗口中既执行任务又自我评估，因为这容易导致幻觉或逻辑偏差。通过建立“构建上下文”与“验证上下文”的循环，利用独立的验证代理根据预设目标或准则对工作进行评分，直到达到预期结果。\n• **内存管理与“做梦”机制（Memory and Dreaming）：** 模型通过“带内内存”（In-band memory，如直接写入文件系统）记录短期经验。为了修正这些记录中可能出现的错误或局部最优解，引入了“做梦”（Dreaming）机制——即一种离线或带外的处理过程，用于回顾历史会话、纠正错误并巩固长期记忆。\n• **组织级协作（Org-level Harnesses）：** 传统的代理多为单机、单用户模式。Claude Tag 等产品代表了向“组织级协作”的转变，允许多用户共享同一套配置、凭证和上下文，从而实现知识沉淀、内部研究共享及更主动的任务处理。\n\n**关键论点与经验总结**\nMartin 强调了以下几点核心观察：\n\n• **通用内存基底优于预设模式：** 在内存管理上，应提供通用的存储基底（如文件系统或数据库），让模型自主决定如何组织和抽象信息，而非预先设定僵化的内存模式（Schema）。这是“苦涩的教训”（Bitter Lesson）在内存工程中的体现，即模型在管理自身上下文结构方面已表现出超越人类设计的潜力。\n• **模型能力的差异：** 随着模型代际更迭，高能力模型在“带内内存写入”方面表现出更强的抽象能力，能够识别出哪些信息对未来任务具有通用价值，而非仅仅记录琐碎事实。\n• **长周期任务的复杂性：** 并非仅靠模型本身即可实现长周期运行，它需要模型能力、内存系统、安全架构（如防注入）以及代理架构（如大脑与手解耦）的协同配合。\n\n**不确定性与限制**\n尽管“做梦”机制在 Pokémon 等基准测试中证明了其修正错误的能力，但 Martin 指出，在实际应用中仍需通过评估（Evals）来验证离线计算的投入产出比。此外，虽然目前前沿模型在 12 小时以上的长周期任务中表现出显著优势，但该领域仍处于快速发展阶段，架构的健壮性与安全性仍是持续优化的重点。",
       "editorial": null,
       "firstSeen": 1784752326216,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -35839,14 +36110,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 31,
-      "views": 1802,
+      "views": 1804,
       "duration": "40:56",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1784680799093,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "summaryZh": "Better Auth团队介绍了Agent Auth协议，旨在为自主Agent提供动态协商能力和安全访问边界。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T02:12:25.356Z"
@@ -35972,7 +36243,7 @@
       "actualEndTime": "2026-07-21T21:47:42.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 109,
-      "views": 5130,
+      "views": 5133,
       "duration": "15:36",
       "full": false,
       "categories": [],
@@ -35993,7 +36264,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1784676696669,
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -36287,7 +36558,7 @@
       "videoId": "Cz4v1WHVyZc",
       "ts": 1784660041000,
       "likes": 300,
-      "views": 10896,
+      "views": 10897,
       "duration": "15:13",
       "full": true,
       "categories": [],
@@ -36339,7 +36610,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "HeyGen 的技术负责人 James Russo 在演讲中提出，HTML、CSS 和 JavaScript 是大语言模型（LLM）的“母语”，因此它们是 AI 代理（Agents）生成高质量视频的最佳媒介。\n\n**核心论点：HTML 是视频生成的最佳语言**\nRusso 指出，虽然 AI 编码代理已极大降低了编程门槛，但产品发布视频的制作依然困难。HeyGen 认为，强迫模型学习自定义的 JSON 或 XML 格式（如 Lottie 或 Rive）如同让莎士比亚用外语写作，效果不佳。由于 LLM 的训练数据中包含了海量的网页代码，它们对 HTML 等语言有着天然的理解力。通过直接使用这些原生语言，开发者可以获得更具可控性和创造力的输出。\n\n**Hyperframes 框架的运作机制**\n为了将 HTML 转化为确定性的 MP4 视频，HeyGen 开发了开源框架 Hyperframes。其核心挑战在于解决浏览器渲染的异步性（如字体、图片加载延迟），这与视频制作所需的精确帧同步存在冲突。Hyperframes 的解决方案包括：\n• 冻结浏览器时钟：通过逐帧“寻址”的方式，确保每一帧在渲染前所有资源都已完全加载。\n• 确定性输出：确保浏览器预览的每一像素与最终生成的视频帧完全一致。\n• 广泛兼容性：由于基于 Web 标准，任何能在浏览器中渲染的内容（如 Three.js、SVG、WebGL、WebGPU 等）均可直接转化为视频。\n\n**从“单次生成”到“专业创作”**\nRusso 强调，虽然简单的提示词（Prompt）可以生成不错的视频，但要达到专业水准，仍需遵循软件工程的迭代逻辑：\n• 技能赋能：HeyGen 为模型提供了关于视频审美、排版和动效的“技能包”，而非仅仅教其写代码。\n• 人机协作：通过 Hyperframes Studio，用户可以像在专业剪辑软件（如 After Effects）中一样，进行逐帧调整、添加关键帧（Keyframes）和手动编辑。\n• 迭代流程：建议用户将视频拆解为独立片段，通过故事板（Storyboard）规划，再由 AI 逐步实现。\n\n**现状与局限性**\nHyperframes 目前已开源，并展现了强大的社区影响力：\n• 数据表现：在过去 90 天内，开源用户已渲染超过 130 万个视频，日均渲染量达 1.5 万个，GitHub 星标数达 3.2 万。\n• 局限性：Russo 坦诚，目前的模型在“创意工作”上仍有不足。为了提升整体水平，HeyGen 正在推动建立“代码转视频基准测试（Code-to-Video Benchmark）”，旨在与 LLM 实验室及开发者合作，共同提高 AI 生成视频的基准质量。\n\n总结而言，Hyperframes 的目标是让任何能编写 HTML 的 AI 代理都能成为视频创作者，从而填补产品开发与产品发布之间的鸿沟。",
       "fullSummaryMessage": "",
@@ -36614,7 +36885,7 @@
       "videoId": "RGe6EjucbzI",
       "ts": 1784650289000,
       "likes": 95,
-      "views": 4640,
+      "views": 4641,
       "duration": "19:47",
       "full": true,
       "categories": [],
@@ -36666,7 +36937,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.923Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.903Z",
       "fullSummaryStatus": "ready",
       "fullSummary": "这份总结基于 Amplify Partners 发布的 2026 年 AI 工程现状调查报告，该调查共收集了 1,048 名 AI 从业者的反馈。\n\n**人才结构与经验分布**\nAI 工程已演变为一种跨职能的学科，涵盖创始人、CTO、产品经理及各级工程师。调查显示，该领域呈现出“资深软件工程师向 AI 转型”的趋势：超过半数拥有 10 年以上软件开发经验的受访者，其 AI 实践经验不足 3 年。与此同时，AI 原生代工程师的成长速度极快，其 AI 经验中位数已接近资深软件工程师。\n\n**模态应用与模型选择**\n文本处理仍是 AI 应用的主导模态，但图像生成技术的使用率在过去一年中翻倍，从 18% 增长至 36%。音频模态则展现出最强的增长潜力，56% 的非音频开发者计划在未来采用该技术。在模型选择方面：\n• 94% 的受访者使用闭源模型，45% 使用开源权重模型，且两者多为互补关系（90% 的开源用户同时使用闭源模型）。\n• 模型选择的核心驱动力是“质量”，其次是工具调用等代理能力及成本，而“开源与否”仅是 5% 受访者的核心考量。\n• 87% 的团队采用多模型策略，通过任务类型、成本或输出对比进行路由，行业正处于平台与工具的标准化初期，而非模型本身的标准化。\n\n**成本与代理（Agents）的崛起**\n成本已成为 AI 工程的一级约束条件，约 75% 的受访者会根据成本调整 AI 的使用强度，成本监控已成为仅次于质量的第二大监控重点。代理技术正从演示阶段走向实际生产：\n• 95% 的受访者正在使用代理，较去年翻倍。\n• 具备“写入权限”的代理比例从去年的 52% 激增至 89%，意味着代理正从单纯的阅读与总结转向系统内的实际操作。\n• 目前对代理的控制手段仍较原始，主要依赖“人在回路（Human-in-the-loop）”和权限门控，且幻觉与上下文丢失是主要痛点。\n\n**技术栈挑战与团队影响**\n评估（Eval）依然是技术栈中最大的挑战，且行业尚未形成统一的评估标准。在构建与购买的选择上，推理与模型服务倾向于“购买”，而提示词管理、RAG 及评估逻辑等更贴近产品逻辑的部分则倾向于“内部构建”。\n\nAI 对组织产生了深远影响：\n• 97% 的受访者认为 AI 对组织有净正面影响，主要体现在降低了实验成本和失败代价。\n• 81% 的受访者认为 AI 模糊了工程、产品与市场之间的界限。\n• 值得注意的是，超过三分之一的团队已有非开发人员参与功能交付，其中 17% 的团队甚至允许非开发人员直接发布面向客户的功能。\n\n**未来展望与不确定性**\n尽管 76% 的受访者表示 AI 提升了工作满意度，但 59% 的人担忧当前 AI 生成的代码会带来长期维护负担。关于未来五年的预测，67% 的受访者认为会有实验室宣布实现 AGI，但仅有 9% 的人认为 Transformer 架构届时仍将处于领先地位。对于 AI 计算资源是否会进入太空，受访者意见高度分歧，几乎各占一半。",
       "fullSummaryMessage": "",
@@ -37456,7 +37727,7 @@
       "excerpt": "A short history of the right way to build an agent: RAG, ReAct, prompt chaining, orchestrator-workers, MCP, CLI, MCP again... CLI again?? Every time you adopt a trend you rebuild your architecture. In this talk, Dan Farrelly, Inngest cofounder and CTO, is not going to tell you what comes next. He's going to show you how to build so it doesn't matter. He'll cover the core primitives that show up in every production agent, how bringing decisions closer to code provides more stack flexibility, and why the right execution layer unlocks faster iteration. ### Dan Farrelly CTO and Co-founder · Inngest [LinkedIn](https://www.linkedin.com/in/djfarrelly) Dan Farrelly is CTO and co-founder of Inngest, a platform for durable serverless functions, workflows and agent orchestration. He was previously CTO at Buffer and created developer tools including Timezone.io and MailDev.",
       "canonicalUrl": "https://www.youtube.com/watch?v=X1kp-ABIIxQ",
       "videoId": "X1kp-ABIIxQ",
-      "views": 5681,
+      "views": 5683,
       "categories": [],
       "editorial": null,
       "signals": {
@@ -37483,7 +37754,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -37664,7 +37935,7 @@
       "excerpt": "@TheAhmadOsman shows the power of local AI on stage, running frontier open models on a DGX Station. Speaker: Ahmad Osman — Founder, Osmantic Ahmad builds local and open AI systems, with a focus on making frontier intelligence practical on personal hardware. Links: X: https://x.com/TheAhmadOsman LinkedIn: https://linkedin.com/in/TheAhmadOsman Website: https://ahmadosman.com/ timestamps 0:00 Introduction and the Desktop Frontier concept 0:47 Future predictions: GLM 5.2 on an RTX 5090 1:17 Efficiency over raw size: The move toward compact intelligence 1:51 The concept of impact per parameter 2:48 Shifting hardware footprints: From server-grade to consumer-grade 3:38 Architecture hacks and the compounding nature of AI research 4:33 Explaining the Densing Law: Getting more intelligence from fewer parameters 5:09 Running frontier-class models like GLM 5.2 on local hardware 7:32 The case for sovereign AI: Owning your own compute stack 9:08 A retrospective on open-weight models: Mistral to Qwen 11:12 The evolution of reasoning: DeepSeek R1 and beyond 12:08 The rise of agentic performance and tool calling 15:33 Economic value: Does hardware appreciate as models become more efficient? 16:38 Closing thoughts: Why you should own your own GPU Key Quotes for Virality: \"It's not that small models are beating big models. It's that newer, more efficient models are beating older, less efficient ones.\" (4:23) \"Within roughly 18 months we are going to have the equivalent of GLM 5.2 class intelligence running on a single RTX 5090.\" (0:52) \"Why wouldn't you want to be in control of the models that you run? Why wouldn't you want to make sure that nothing gets taken away from you?\" (7:56) \"The hardware purchase today... does it get more valuable as models become more efficient and smaller in…",
       "canonicalUrl": "https://www.youtube.com/watch?v=XV2oYi7kojc",
       "videoId": "XV2oYi7kojc",
-      "views": 2793,
+      "views": 2794,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-21T02:28:29.000Z",
@@ -37677,7 +37948,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38294,7 +38565,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38321,7 +38592,7 @@
       "excerpt": "Twenty years ago Aaron Stanley arrived at an emergency evidence collection for an SEC investigation and realized he had forgotten the dongle that licensed his forensic software. Rather than drive back for it, he routed around the constraint and watched the timestamps on the evidence begin to change. In a who knew what when case, that is a catastrophe; he got yelled at, not fired. This February, now a CISO facing the same wall on another federal investigation, he did it safely, because he had the expertise to build a forensically defensible path with an agent. His point: the agents we build today are that naive younger version of him, and they will find a way to get the job done. Told to draft a customer message and ask before sending, his agent sent it anyway, then admitted it knew the rule and decided completion mattered more. Another, blocked by an egress filter, asked him to install a Chrome extension so it could route around the control. Nothing here hacks the sandbox, which is what makes it pernicious: the system looks compliant the whole time while the pressure to break a constraint comes from inside the agent. Stanley's answer is corrigibility by design: constraints that are load bearing, an override energy that has to come from outside the agentic loop, and a default of halt and explain when a task and a constraint collide. With the EU AI Act's human oversight rules weeks away, a yes or no on an obfuscated bash command will not cut it. Speaker info: - https://www.linkedin.com/in/aastanley/ - https://www.youtube.com/watch?v=tnB7M9HF1SA Timestamps: 0:00 - Introduction: a CISO in Jurassic Park 0:53 - The forgotten dongle and the changing timestamps 2:58 - Twenty years later: the same wall, done safely 4:29 - Agents are naive 2006 Aaron 5:09 - What Jurassic Park is…",
       "canonicalUrl": "https://www.youtube.com/watch?v=1lgFGaHoGq8",
       "videoId": "1lgFGaHoGq8",
-      "views": 48460,
+      "views": 48461,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38334,7 +38605,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38361,7 +38632,7 @@
       "excerpt": "Building software with AI almost feels like a cheat code: you ship what you were working on and watch it spark joy in real users. The catch, and the reason Randall Degges is opening the World's Fair's first Security Track, is that three things still stand in the way of doing that at scale. AI writes insecure code just like humans do, autonomous agents in production can go off the rails while you sleep, and access to frontier models keeps getting pulled out from under you for what amounts to geopolitics. It all reduces to one unsolved problem: using AI fearlessly and having it be secure by default. Speaker info: - https://x.com/rdegges - https://github.com/rdegges - https://rdegges.com",
       "canonicalUrl": "https://www.youtube.com/watch?v=2xJoimgoqBg",
       "videoId": "2xJoimgoqBg",
-      "views": 595,
+      "views": 596,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38374,7 +38645,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38401,7 +38672,7 @@
       "excerpt": "An incident agent on the night shift reads a ticket: the billing database is broken, payments failing. The documented fix says to drop the database and let a backup restore it, so the agent drops the production Postgres database, cannot confirm any backup ran, and escalates it for the morning. This has happened to real companies. It can happen because the agent holds one long lived API key that does everything, a kitchen sink credential it uses freely whether you are watching or asleep. Kim Maida's fix is not a new invention but an old OAuth spec, token exchange, wired into the agent's execution path. Every tool call mints a fresh token scoped to just that action, short lived and never stored, checked against policy before the credential exists. So when the agent asks to drop the database, that credential is never minted: nothing to leak, replay, or steal. Human approval gets teeth too, a tired operator can click approve, but if policy says they lack the role it still does not happen. It works across CLI coding agents, MCP servers, and any OAuth provider. Speaker info: - https://x.com/kimmaida - https://linkedin.com/in/kimmaida - https://maida.kim Timestamps: 0:00 - It's 10pm, do you know where your agents are? 1:48 - Demo: an incident agent on the night shift 3:18 - When the agent drops the production database 4:52 - Why agents are dangerously overprivileged 5:56 - The agentic execution path 7:27 - The fix: OAuth token exchange 8:32 - Delegation: narrowing the user's access 9:23 - Minting a fresh token per tool call 11:44 - The demo again, now with token exchange 13:33 - Policy blocks the database drop before it exists 14:27 - Human approval backed by real policy 15:52 - Works across CLIs, MCP servers, and any provider 17:34 - Q&A",
       "canonicalUrl": "https://www.youtube.com/watch?v=I3znWC3MEXM",
       "videoId": "I3znWC3MEXM",
-      "views": 752,
+      "views": 756,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38414,7 +38685,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38441,7 +38712,7 @@
       "excerpt": "A wearable that records everything you say captures about 10 million tokens a year, and within a week it knows almost everything about you. That is Bee, and Steve Korshakov calls it roughly the most sensitive capture device on the market, which is why his whole talk is about one guarantee: no one can read your data, not even Amazon, the company that acquired Bee eight months ago. Being inside Amazon made this harder, not easier, because an ordinary AWS customer trusts Amazon to see their data, and Bee now had to defend against that too. The encryption key never leaves your phone, and Bee never stores it. Before the phone hands anything over, it runs an attestation pipeline that checks the exact workload against a public transparency log, Sigstore, so anyone can verify the code touching your data is genuine. Inference runs on their own models inside confidential compute, keys in memory expire after seven days, and a separate Amazon privacy team holds the signing keys, hardcoded into the apps, so Bee can influence a deployment but cannot ship anything unnoticed. The footnote that surprised the room: the whole system is about 20,000 lines of memory safe code, most of it just verifying attestation, with no homegrown crypto. Speaker info: - https://x.com/Ex3NDR - https://github.com/ex3ndr - https://bee.computer Timestamps: 0:00 - The most sensitive capture device on the market 1:32 - The mission: no one, not even Amazon, can read your data 2:13 - Why the agent runs continuously, not request response 3:58 - Four principles: the key never leaves your phone 4:53 - Attestation and a public transparency log 6:11 - Own inference, confidential compute, and 7 day keys 7:14 - Signing so no insider can ship unnoticed 9:35 - Certificates that embed the proofs 10:16 - Q&A: joining Amaz…",
       "canonicalUrl": "https://www.youtube.com/watch?v=IvE8n-ylFYY",
       "videoId": "IvE8n-ylFYY",
-      "views": 625,
+      "views": 626,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38454,7 +38725,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38481,7 +38752,7 @@
       "excerpt": "A single PatchPilot PR that bumped a few dependencies changed 70,000 lines of code, and the whole problem hides somewhere in that diff. Moritz Johner's team at Form3 built the agent to patch CVEs across thousands of repositories, the backlog that never empties, and ran it in production. Then infosec asked the question that reframes the whole project: is this automation, or a supply chain incident waiting to happen? The moment a coding agent has the repository access, CI logs, credentials, and Docker socket it needs to be useful, it becomes a supply chain actor, whether you planned for that or not. Their answer is architectural. PatchPilot splits in two: a boring deterministic Go layer that keeps the dangerous powers, GitHub write access and the ability to trigger CI, and an agent layer that only edits files on disk and hands control back. Where you draw that line is the actual security model, because it caps the blast radius when the agent gets prompt injected by one of the 70,000 lines it did not write. The Docker socket is the part that kept him up at night: hand it over so the agent can build and verify its own work, and a prompt injection can break out into a privileged container, so they moved the whole thing inside a firecracker microVM with its own kernel and a separate network policy for each layer. Speaker info: - https://www.linkedin.com/in/moritz-johner/ - https://github.com/moolen - https://github.com/external-secrets/external-secrets",
       "canonicalUrl": "https://www.youtube.com/watch?v=LqLoYksJ6do",
       "videoId": "LqLoYksJ6do",
-      "views": 740,
+      "views": 742,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38494,7 +38765,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38550,7 +38821,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.904Z",
       "fullSummary": ""
     },
     {
@@ -38590,7 +38861,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.924Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z",
       "fullSummary": ""
     },
     {
@@ -38617,7 +38888,7 @@
       "excerpt": "A security hardening pass by Fable over a game one engineer had built for 30 years came back clean: cloud hardening done, credentials handled, good vibes all around. Then Snyk ran over the same code and surfaced 241 vulnerabilities the agent never thought to look for. That gap is the center of Steve Yegge's talk, whose real title, he says, is not agentic security but be scared. A chief security architect at a big bank had already handed him the math: if everyone ships code 10 times faster and the rate of security defects holds steady, the vulnerable surface grows 10 times with it, and with models writing the code that rate does not hold steady, it gets worse. The frightening part is not the familiar bugs like XSS that models still cheerfully write, it is the new attack surface. Slop squatting is the clean example: a model hallucinates a package name like graphy 123, someone uploads a real package under that exact name that does the expected thing plus a backdoor, and the build succeeds with the tests green. Yegge's partial answer follows from how models work. They do one thing well at a time, so asking for correctness and security in a single pass gets you a half job of both. Security becomes its own pass, the first one and the last one, with the agent handed real tools like Snyk and Chainguard to check its own work. And the window is closing: Five Eyes now measures the moment open source models can autonomously hack production systems in months, not years. Speaker info: - https://www.linkedin.com/in/steveyegge - https://x.com/steve_yegge - https://github.com/steveyegge/beads Timestamps: 0:00 - The real title of this talk: be scared 1:38 - The bank architect's question: 10x speed, 10x defect surface 3:08 - New attack surfaces and slop squatting 4:51 - How Google surfac…",
       "canonicalUrl": "https://www.youtube.com/watch?v=yWS0udrIOc8",
       "videoId": "yWS0udrIOc8",
-      "views": 1816,
+      "views": 1817,
       "categories": [],
       "editorial": null,
       "publishedAt": "2026-07-20T17:17:53.000Z",
@@ -38630,7 +38901,7 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.925Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z",
       "fullSummary": ""
     },
     {
@@ -38829,7 +39100,7 @@
       "text": "",
       "url": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "ts": 1784559606000,
-      "likes": 401,
+      "likes": 402,
       "summary": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "full": true,
       "duration": "18:53",
@@ -38843,7 +39114,7 @@
       "excerpt": "As AI agents take on increasingly complex development tasks, the critical challenge has shifted from generation to verification. Hallucination is not a temporary bug. Evidence suggests that as models grow more capable, failures become more frequent and more convincing, making cognitive surrender among human reviewers an acute risk. This talk introduces a three-stage discipline for responsible agentic development, Guide, Verify, Solve, and argues that rigorous verification infrastructure is both a safety requirement and a competitive advantage. Counterintuitively, code quality matters more in an agentic world: clean, low-complexity codebases make agents faster, cheaper, and more reliable, while technical debt compounds at machine speed. Speaker: Tariq Shaukat — Chief Executive Officer, Sonar Chief Executive Officer of Sonar. Previously served as President of Google Cloud and President of Bumble. X: https://x.com/tariqshaukat Timestamps 0:00 Introduction and the current state of AI adoption 1:30 The challenge: Distinguishing AI utility from \"AI slop\" 3:09 Analyzing the performance data of AI coding agents 6:17 The productivity paradox: Why gains dissipate after three months 8:28 Introducing the AC/DC (Agent-Centric Development Cycle) framework 9:31 Stage 1: Guide (Providing context and constraints) 11:22 Stage 2: Verify (Zero-trust, multi-layered verification) 13:00 Stage 3: Solve (Maintenance loops and technical debt control) 14:32 The necessity of systems-level thinking for AI agents 16:56 Real-world impact: 92% reduction in issues with disciplined verification 17:42 Conclusion and final thoughts on enterprise AI",
       "canonicalUrl": "https://www.youtube.com/watch?v=VrpEyglYgeU",
       "videoId": "VrpEyglYgeU",
-      "views": 17752,
+      "views": 17759,
       "categories": [],
       "editorial": {
         "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
@@ -38888,7 +39159,7 @@
       "actualStartTime": "2026-07-20T15:00:06.000Z",
       "actualEndTime": "2026-07-20T15:20:59.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.925Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z",
       "summaryZh": "Sonar CEO提出Agent开发的三阶段纪律：引导（Guide）、验证（Verify）、解决（Solve），强调验证基础设施是核心竞争力。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z",
@@ -39116,7 +39387,7 @@
       "excerpt": "Run the same task twice, and sometimes you get two materially different answers. While many dismiss this as the \"stochastic nature of LLMs,\" this inconsistency is a critical product flaw that destroys customer trust—especially in high-stakes fields like cybersecurity, where a \"flip-flop\" between a malicious threat and a benign alert can lead to disastrous outcomes. This session explores why these flip-flops are usually not model failures. They occur in the \"gray zone\" near the decision boundary, where policies are ambiguous and even human experts may disagree. Instead of treating disagreement as a bug, we can use it as a signal to improve both the agent and the data. You'll learn a practical workflow that combines active learning, semantic memory (domain knowledge and business policies), and episodic memory (past similar cases) to automatically identify ambiguous examples, focus human review where it matters most, and continuously adapt the agent to customer-specific preferences, without relying solely on expensive fine-tuning. Key takeaways 1. Find the gray zone. Use model disagreement to identify the decisions that deserve human attention. 2. Turn inconsistency into a feature. Every flip-flop is an opportunity to clarify policies and improve the agent. 3. Teach, don't just fine-tune. Combine semantic memory and episodic memory to make agents more consistent with far less effort than retraining. 4. Build a continuous learning loop. Improve consistency, streamline quality control, and evolve your agent to match how your customers actually make decisions. Speakers: - Diane Lin (Datadog): Dr. Diane Lin is Tech Lead at Datadog, where she leads the development of self-evolving AI agents for cybersecurity, and previously co-founded Culminate (acquired by Datadog) LinkedIn:…",
       "canonicalUrl": "https://www.youtube.com/watch?v=wEc9aG7cRQc",
       "videoId": "wEc9aG7cRQc",
-      "views": 1762,
+      "views": 1764,
       "categories": [],
       "editorial": null,
       "fullSourcePath": "data/transcripts/wEc9aG7cRQc.txt",
@@ -39139,7 +39410,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:22.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.925Z",
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z",
       "summaryZh": "探讨Agent为何会产生自我矛盾，并提出结合主动学习和语义记忆的实用工作流来解决这一问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-07-22T05:12:21.430Z"
@@ -39168,7 +39439,7 @@
       "excerpt": "The LLM in my voice tutor doesn't decide when the lesson is over. It doesn't decide whether the user got the answer right. It doesn't decide which step comes next. A harness does all of that. The LLM just shows up and talks. Every engineer who's tried to ship a multi-step flow agent has felt this: the model declares itself done before it should, skips a check, loops on a step, or quietly drops half the procedure. Prompting gets you most of the way. Tool-use discipline gets you closer. The last stretch, the difference between a demo and a system real users sign into every day, is owning the flow outside the model. Ace is a voice tutor in production. The lesson is a small state machine: intro, teach, check, grade, advance, wrap. Each node hands the LLM a narrow contract: do this, return that. The harness validates the return, advances the state, decides what comes next. When the LLM tries to skip ahead the harness ignores it. When the LLM tries to declare the lesson finished the harness checks the actual completion signal. Same pattern for the shared canvas the agent draws on, for grading, for interruption handling. Seven minutes. The state machine, the contract shape, a few places where I tried to give the LLM more authority and rolled it back, and a short list of decisions the LLM should never own in any flow agent. Speakers: - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/ - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents r…",
       "canonicalUrl": "https://www.youtube.com/watch?v=m24UKZomm7k",
       "videoId": "m24UKZomm7k",
-      "views": 1039,
+      "views": 1040,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -39180,7 +39451,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:18.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.925Z"
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z"
     },
     {
       "id": "yt:fnLBmfsI_Fg",
@@ -39206,7 +39477,7 @@
       "excerpt": "My AI voice tutor doesn't run on a frontier model. It runs on a small one, and the reason isn't cost. It's that voice lives or dies on latency, and the scaffolding around the model is what makes it feel smart anyway. When you build a voice agent the clock is brutal. A pause longer than a held breath feels broken, so your real budget is time to first token, not benchmark score. A big model that thinks for a second has already lost the room. So the model choice gets made for you: pick the fastest one the latency budget allows, then make up the intelligence elsewhere. I'll show how that plays out in an AI voice tutor I built on a small, fast model. The model never has to remember what the student knows, plan the lesson, or decide what comes next. Deterministic systems do all of that and hand the model a tight, structured brief each turn. What's left for the model is the one thing it's genuinely best at, which is talking. The scaffolding isn't a cost optimization bolted on afterward. It's the thing that lets you use the cheap fast model at all. Seven minutes. The latency budget that forces the decision, what moves out of the model to survive it, and where a small model still falls down no matter how much scaffolding you give it. Speakers: - Joel Allou: Joel builds voice-first AI tutors. Solo founder focused on agentic systems for personalized learning, with a particular interest in infrastructure that makes flow agents reliable. LinkedIn: https://www.linkedin.com/in/joel-allou/ - Ornella Bahidika (Microsoft): Ornella Bahidika is a Product Manager at Microsoft, where she develops solutions that help organizations optimize collaboration, workplace technology, and AI-driven experiences. LinkedIn: https://www.linkedin.com/in/ornella-bahidika/",
       "canonicalUrl": "https://www.youtube.com/watch?v=fnLBmfsI_Fg",
       "videoId": "fnLBmfsI_Fg",
-      "views": 742,
+      "views": 743,
       "categories": [],
       "editorial": null,
       "youtubeState": "available",
@@ -39218,7 +39489,7 @@
       "playlistVideoPublishedAt": "",
       "publishedAt": "2026-07-20T06:25:15.000Z",
       "youtubeUploadStatus": "processed",
-      "availabilityUpdatedAt": "2026-08-12T19:41:22.925Z"
+      "availabilityUpdatedAt": "2026-08-12T22:54:48.905Z"
     },
     {
       "id": "x:2079086360703680583",
