@@ -459,7 +459,21 @@
     return renderGroupedList(list);
   }
 
-  function render(){$("content").innerHTML=state.filter==="top"?renderTop():state.filter==="links"?renderMyLinks():renderList();bindActions()}
+  function detailsKey(el){const s=el.querySelector("summary .archive-date");return (s?s.textContent:el.className||"").trim()}
+  function render(){
+    const root=$("content");
+    const prevFilter=render._filter, sameView=prevFilter===state.filter&&render._topView===state.topView;
+    const openKeys=sameView?new Set([...root.querySelectorAll("details.archive-day[open]")].map(detailsKey)):null;
+    const closedKeys=sameView?new Set([...root.querySelectorAll("details.archive-day:not([open])")].map(detailsKey)):null;
+    const scrollY=sameView?window.scrollY:0;
+    root.innerHTML=state.filter==="top"?renderTop():state.filter==="links"?renderMyLinks():renderList();
+    if(sameView&&openKeys){
+      root.querySelectorAll("details.archive-day").forEach(el=>{const k=detailsKey(el);if(openKeys.has(k))el.open=true;else if(closedKeys.has(k))el.open=false});
+      window.scrollTo(0,scrollY);
+    }
+    render._filter=state.filter;render._topView=state.topView;
+    bindActions();
+  }
 
   function renderMyLinks(){
     const box=OWNER?`<div class="addlink"><div class="addlink-row"><input id="addLinkUrl" type="url" placeholder="Paste a YouTube, article, or X / Twitter URL"><button id="addLinkBtn">Add link</button></div><div class="addlink-note">Owner only. The link is fetched and saved to the repo, and stays only in My Links.</div></div>`:"";
@@ -492,7 +506,11 @@
   async function downloadTranscript(id){const item=itemById(id);if(!item)return;try{const text=await fetchTranscript(item);const blob=new Blob([text],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=transcriptFilename(item);document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(a.href)}catch(err){toast("Transcript file isn't available yet.")}}
   async function copyTranscript(id,btn){const item=itemById(id);if(!item)return;try{const text=await fetchTranscript(item);await navigator.clipboard.writeText(text);const old=btn&&btn.textContent;if(btn){btn.textContent="Copied ✓";setTimeout(()=>{if(btn.isConnected)btn.textContent=old},1500)}toast("Transcript copied")}catch(err){toast("Could not copy the transcript.")}}
   function bindActions(){
-    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();render()});
+    document.querySelectorAll("[data-star]").forEach(btn=>btn.onclick=()=>{const id=btn.dataset.star;const item=itemById(id);if(!item)return;if(state.saved[id])delete state.saved[id];else state.saved[id]=snapshot(item);storeSaved();buildRail();
+      const on=Boolean(state.saved[id]);
+      document.querySelectorAll(`[data-star="${CSS.escape(id)}"]`).forEach(b=>{b.classList.toggle("on",on);const long=/Save[d]?\b/i.test(b.textContent||"");b.textContent=on?(long?"★ Saved":"★"):(long?"☆ Save":"☆")});
+      if(state.filter==="shortlist")render();
+    });
     document.querySelectorAll("[data-summary-item]").forEach(btn=>btn.onclick=()=>requestFullSummary(btn.dataset.summaryItem,btn));
     document.querySelectorAll("[data-summary-block]").forEach(btn=>btn.onclick=()=>toast(btn.dataset.summaryBlock||"This item is not available for a full summary yet."));
     document.querySelectorAll("[data-reader-id]").forEach(card=>{
