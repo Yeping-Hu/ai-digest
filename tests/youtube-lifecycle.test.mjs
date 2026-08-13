@@ -31,11 +31,16 @@ assert.equal(upcoming.state, "upcoming");
 assert.equal(upcoming.ts, null, "an upcoming video must not use its playlist-add date as publication time");
 assert.equal(upcoming.scheduledStartTime, "2026-07-22T18:00:00.000Z");
 
-const blocked = youtubeNotReady({ kind: "youtube", youtubeState: "upcoming", scheduledStartTime: upcoming.scheduledStartTime });
+// youtubeNotReady() compares against the real current time, so these two cases must use
+// dates relative to now. Hardcoded dates make the test rot once they fall into the past.
+const futureStart = new Date(Date.now() + 36 * 3600 * 1000).toISOString();
+const pastStart = new Date(Date.now() - 36 * 3600 * 1000).toISOString();
+
+const blocked = youtubeNotReady({ kind: "youtube", youtubeState: "upcoming", scheduledStartTime: futureStart });
 assert.equal(blocked.code, "youtube_upcoming");
 assert.match(blocked.message, /scheduled|not started/i);
 assert.equal(
-  youtubeNotReady({ kind: "youtube", youtubeState: "upcoming", scheduledStartTime: "2026-07-20T18:00:00Z" }),
+  youtubeNotReady({ kind: "youtube", youtubeState: "upcoming", scheduledStartTime: pastStart }),
   null,
   "after the scheduled time the summary action should be allowed to check transcript availability",
 );
@@ -119,7 +124,7 @@ const previous = {
   url: "https://www.youtube.com/watch?v=khVX_BUnEwU",
   canonicalUrl: "https://www.youtube.com/watch?v=khVX_BUnEwU",
   youtubeState: "upcoming",
-  scheduledStartTime: "2026-07-22T18:00:00.000Z",
+  scheduledStartTime: futureStart,
   ts: null,
   firstSeen,
   full: false,
@@ -168,7 +173,7 @@ const stored = JSON.parse(fs.readFileSync(path.join(tmp, "data", "archive.json")
 assert.equal(stored.full, false);
 assert.equal(stored.fullSummaryStatus, "not_ready");
 assert.equal(stored.fullSummaryErrorCode, "youtube_upcoming");
-assert.equal(stored.fullSummaryRetryAt, "2026-07-22T18:00:00.000Z");
+assert.equal(stored.fullSummaryRetryAt, futureStart);
 assert.match(stored.fullSummaryMessage, /scheduled|not started/i);
 fs.rmSync(tmp, { recursive: true, force: true });
 
