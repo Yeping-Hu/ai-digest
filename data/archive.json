@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T04:46:47.153Z",
+  "generatedAt": "2026-08-13T04:49:08.906Z",
   "count": 1074,
   "items": [
     {
@@ -3815,12 +3815,12 @@
       "actualStartTime": "2026-08-10T16:00:06.000Z",
       "actualEndTime": "2026-08-10T16:23:00.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 95,
-      "views": 3969,
+      "likes": 101,
+      "views": 4044,
       "duration": "20:55",
-      "full": false,
+      "full": true,
       "categories": [],
-      "fullSummary": "",
+      "fullSummary": "这份总结概述了 OpenAI 工程师 Dominik Kundel 关于 Codex 智能体（Agent）底层架构及开发实践的分享。Codex 的核心架构旨在构建一个开放的生态系统，其所有组件（包括 App Server 和 Harness）均已开源（MIT/Apache 2 协议），开发者可直接使用或基于此进行二次开发。\n\n**核心通信协议**\nCodex 的运行依赖两套关键协议：\n• **App Server 协议**：负责 UI 与 Harness 之间的通信，支持第三方集成（如 Cloud Code 或自定义界面）。\n• **Responses API**：负责 Harness 与大模型推理端之间的通信。该 API 经过重新设计，专门适配智能体需求，支持网页搜索、图像生成等复杂功能，并已与 Ollama、Nvidia 等合作伙伴共同推动其标准化。\n\n**上下文构建与优化**\n为了在有限的 Token 预算内保持性能并降低成本，Codex 采取了以下策略：\n• **延迟加载工具（Deferred Tools）**：将部分工具标记为延迟加载，仅在通过工具搜索（Tool Search）调用时才加入上下文，避免占用窗口。\n• **技能上限控制**：当可用技能列表超过上下文总窗口的 2% 时，系统会自动缩减描述长度。\n• **可缓存性**：通过结构化指令和工具注册表管理，确保上下文在多次交互中保持高效的缓存利用率。\n\n**智能体动作执行机制**\nCodex 通过多种方式实现复杂任务处理：\n• **异步动作**：利用“生成智能体（Spawn Agent）”工具实现子任务委派，或通过后台终端进行持续交互。\n• **计算机使用（Computer Use）**：从早期的受限动作演进为代码执行模式（支持 JavaScript/Python），允许智能体通过编写脚本（如 Playwright）与浏览器交互，显著提升了自动化效率。\n• **文件系统交互**：模型被训练使用 `apply patch` 工具进行差异化文件编辑，并支持通过 `Ripgrep` 或 PowerShell 进行文件搜索与导航。所有操作均在沙箱环境（macOS 使用 Seatbelt，Linux 使用 Bubblewrap，Windows 使用自定义开源沙箱）中运行。\n\n**安全与性能优化**\n• **自动审核（Auto Review）**：为解决“批准疲劳”问题，Codex 引入了自动审核模式。当智能体尝试执行高风险操作（如删除文件）时，会启动一个只读权限的子智能体，根据用户授权和风险分类自动判断是否放行。\n• **WebSocket 模式**：为解决推理速度提升后网络延迟成为瓶颈的问题，引入了 WebSocket 连接。该模式支持状态化上下文，仅传输变更数据，大幅降低了网络开销。\n• **目标达成与压缩**：通过注入持续性提示词（Continuation Prompt）引导模型直至达成目标。针对长时间运行的任务，系统支持“自动压缩（Auto Compaction）”，将历史上下文转化为精简的压缩项，确保模型在长周期运行下性能不衰减。\n\n**总结建议**\n开发者应关注 Responses API 的演进，利用其中提供的工具搜索、补丁应用、WebSocket 通信及服务端压缩等功能，构建更高效的智能体。Codex 的开源代码库不仅是实现参考，也是理解当前智能体工程挑战（如沙箱安全、长上下文管理）的最佳实践蓝本。",
       "editorial": {
         "summaryZh": "OpenAI工程师揭秘Codex架构，通过websocket模式实现持久连接，并引入延迟工具加载机制以优化上下文窗口利用率。",
         "whyItMattersZh": "这是目前AI Agent工程化最前沿的实践，解决了高并发下的上下文瓶颈问题，对构建复杂Agent系统有极高参考价值。",
@@ -3839,8 +3839,8 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1786165549741,
-      "availabilityUpdatedAt": "2026-08-12T22:54:48.894Z",
-      "fullSummaryStatus": "",
+      "availabilityUpdatedAt": "2026-08-13T04:49:03.552Z",
+      "fullSummaryStatus": "ready",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
       "fullSummaryMessage": "",
@@ -3861,7 +3861,19 @@
       },
       "summaryZh": "OpenAI工程师揭秘Codex架构，通过websocket模式实现持久连接，并引入延迟工具加载机制以优化上下文窗口利用率。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-10T22:51:46.966Z"
+      "summaryTranslatedAt": "2026-08-10T22:51:46.966Z",
+      "fullSummaryAt": "2026-08-13T04:49:08.906Z",
+      "fullSummarySource": "transcript",
+      "fullSummaryChars": 1460,
+      "fullSourcePath": "data/transcripts/shRR1e2HXMk.txt",
+      "sourceTextPath": "data/transcripts/shRR1e2HXMk.txt",
+      "transcriptPath": "data/transcripts/shRR1e2HXMk.txt",
+      "fullSourceChars": 19967,
+      "fullSourceCachedAt": "2026-08-13T04:49:08.906Z",
+      "fullSummaryAttemptAt": "2026-08-13T04:49:08.906Z",
+      "fullSummaryLastErrorAt": "",
+      "fullSummaryBillableRequests": 1,
+      "fullSummaryTranscriptStatus": 200
     },
     {
       "id": "x:2086838277701882031",
