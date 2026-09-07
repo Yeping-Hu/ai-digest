@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T09:14:44.805Z",
+  "generatedAt": "2026-09-07T19:53:25.443Z",
   "date": "2026-09-07",
   "timeZone": "America/Los_Angeles",
   "newCount": 9,
@@ -17,21 +17,25 @@
   "topIds": [
     "article:904ea86174aa4acc4bec58d1",
     "article:073b13b14ae0138b1424f5cc",
-    "x:2096735726750908464"
+    "x:2096735726750908464",
+    "x:2096824861108928701",
+    "x:2096815819997204639",
+    "x:2096798671547646134",
+    "x:2096796392102752507"
   ],
   "scanIds": [],
   "ranking": [
     {
       "id": "article:904ea86174aa4acc4bec58d1",
       "score": 82,
-      "reason": "深度揭示了AI科研范式的转变，具有极高的行业参考价值。",
+      "reason": "independent source +12 · fresh +15 · topic fit +25",
       "tier": "top",
       "rank": 1,
       "peakScore": 82,
       "lastScore": 82,
       "firstSelectedAt": "2026-09-07T09:14:44.805Z",
-      "lastSelectedAt": "2026-09-07T09:14:44.805Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 2
     },
     {
       "id": "article:073b13b14ae0138b1424f5cc",
@@ -42,23 +46,81 @@
       "peakScore": 53,
       "lastScore": 53,
       "firstSelectedAt": "2026-09-07T09:14:44.805Z",
-      "lastSelectedAt": "2026-09-07T09:14:44.805Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 2
     },
     {
       "id": "x:2096735726750908464",
       "score": 43,
-      "reason": "引发对AI时代基础设施变革的深度思考，具有长期的讨论价值。",
+      "reason": "community source +5 · fresh +15 · topic fit +8",
       "tier": "top",
       "rank": 3,
       "peakScore": 43,
       "lastScore": 43,
       "firstSelectedAt": "2026-09-07T09:14:44.805Z",
-      "lastSelectedAt": "2026-09-07T09:14:44.805Z",
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 2
+    },
+    {
+      "id": "x:2096824861108928701",
+      "score": 41,
+      "reason": "community source +5 · fresh +15 · topic fit +8",
+      "tier": "top",
+      "rank": 4,
+      "peakScore": 41,
+      "lastScore": 41,
+      "firstSelectedAt": "2026-09-07T19:53:25.443Z",
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 1
+    },
+    {
+      "id": "x:2096815819997204639",
+      "score": 37,
+      "reason": "community source +5 · fresh +15 · visualizable +4",
+      "tier": "top",
+      "rank": 5,
+      "peakScore": 37,
+      "lastScore": 37,
+      "firstSelectedAt": "2026-09-07T19:53:25.443Z",
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 1
+    },
+    {
+      "id": "x:2096798671547646134",
+      "score": 32,
+      "reason": "community source +5 · fresh +15",
+      "tier": "top",
+      "rank": 6,
+      "peakScore": 32,
+      "lastScore": 32,
+      "firstSelectedAt": "2026-09-07T19:53:25.443Z",
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
+      "selectionCount": 1
+    },
+    {
+      "id": "x:2096796392102752507",
+      "score": 32,
+      "reason": "community source +5 · fresh +15",
+      "tier": "top",
+      "rank": 7,
+      "peakScore": 32,
+      "lastScore": 32,
+      "firstSelectedAt": "2026-09-07T19:53:25.443Z",
+      "lastSelectedAt": "2026-09-07T19:53:25.443Z",
       "selectionCount": 1
     }
   ],
   "ideas": [
+    {
+      "workingTitle": "AI Agent 越能自己做事，人应该在哪些节点介入？",
+      "angle": "用几个真实案例拆解 agent 工作流里的关键决策点",
+      "whyNow": "当天多个来源出现同一主题信号。",
+      "sourceIds": [
+        "article:904ea86174aa4acc4bec58d1",
+        "x:2096735726750908464",
+        "x:2096824861108928701"
+      ]
+    },
     {
       "workingTitle": "OpenAI内部科研揭秘：Agent如何实现递归自我改进？",
       "angle": "通过解析OpenAI的科研工作流，展示Agent如何从辅助工具进化为科研加速器，帮助科研人员实现效率跃迁。",
@@ -78,7 +140,7 @@
   ],
   "run": {
     "status": "ok",
-    "startedAt": "2026-09-07T09:14:33.034Z",
+    "startedAt": "2026-09-07T19:52:18.191Z",
     "sourcesAttempted": 8,
     "sourcesSucceeded": 7,
     "sourcesFailed": 1,
@@ -88,16 +150,17 @@
     "candidates": 7,
     "geminiCalls": 1,
     "geminiModel": "gemini-3.1-flash-lite",
-    "usedGemini": true,
+    "usedGemini": false,
     "errors": [
-      "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml"
+      "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml",
+      "Gemini: Gemini 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"U"
     ],
-    "newItemsThisRun": 9,
+    "newItemsThisRun": 2,
     "releasedItemsThisRun": 0,
-    "translationTargets": 7,
-    "finishedAt": "2026-09-07T09:14:44.805Z",
-    "rankedThisRun": 3,
-    "accumulatedTop": 3,
+    "translationTargets": 0,
+    "finishedAt": "2026-09-07T19:53:25.443Z",
+    "rankedThisRun": 7,
+    "accumulatedTop": 7,
     "youtubeLifecycleUpdates": 0
   }
 }
