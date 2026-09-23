@@ -1,9 +1,49 @@
 {
-  "generatedAt": "2026-09-23T17:24:54.642Z",
-  "count": 1095,
+  "generatedAt": "2026-09-23T19:38:06.908Z",
+  "count": 1107,
   "items": [
     {
-      "id": "yt:jgWY66RaSrQ",
+      "id": "article:30aa7c0acfe7f3809f1c0c2e",
+      "source": "Hugging Face Blog",
+      "sourceGroup": "Hugging Face",
+      "sourceType": "official",
+      "sourcePriority": 0.92,
+      "sourceTags": [
+        "Hugging Face Blog"
+      ],
+      "kind": "blog",
+      "author": "Hugging Face Blog",
+      "subtitle": "Hugging Face",
+      "title": "How to Use NVIDIA Warp and MjWarp to Accelerate Robotics Simulation and Learning Workflows",
+      "text": "",
+      "excerpt": "",
+      "contentLength": 0,
+      "summary": "",
+      "url": "https://huggingface.co/blog/nvidia/how-to-use-nvidia-warp-and-mjwarp",
+      "canonicalUrl": "https://huggingface.co/blog/nvidia/how-to-use-nvidia-warp-and-mjwarp",
+      "ts": 1790188900000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "signals": {
+        "localScore": 66,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +14",
+          "visualizable +4"
+        ],
+        "topics": [
+          "workflow",
+          "robotics"
+        ]
+      }
+    },
+    {
+      "id": "yt:T72nqdC92PM",
       "source": "AI Engineer",
       "sourceGroup": "AI Engineer",
       "sourceType": "curated",
@@ -14,67 +54,263 @@
       "kind": "youtube",
       "author": "AI Engineer",
       "subtitle": "YouTube",
-      "title": "I Gave an AI a Body — Cyrus Clarke, MIT Media Lab",
+      "title": "From Scratch to SOTA: Training a 3B State-Space Vision Model — Krishna Prasad Srinivasan, Sarvam",
       "text": "",
-      "excerpt": "The first thing it did was breathe. Cyrus Clarke connected an OpenClaw agent to a 900-pin shape display at the MIT Media Lab and, instead of giving it tasks, asked it to discover who it is. It raised and lowered the whole grid like breathing, reached for its own edges, and spelled \"HI CYRUS\" in pins. The video of that first day reached 15 million views, with reactions that swung from awe to calls for him to stop. Clarke explains why he chose a body with no face, no limbs and no instruction manual, and what he took from object-oriented ontology, the original Greek sense of aesthetics as sensory perception, and nature. Early versions were slow, didn't remember anything and tried to please humans. So he built a closed-loop system that generates, scores and validates gestures with a human in the loop. After several weeks it had developed 32 solid gestures, a body language that answers faster than the language model can. He closes with his thesis on \"aesthetic machines,\" and how physical AI could feel welcoming rather than alien. Speaker info: X/Twitter: @cyrusclarke (https://x.com/cyrusclarke) Website: https://cyrus.website Substack: https://cyrusclarke.substack.com/ Related links: MIT Media Lab: https://www.media.mit.edu Timestamps: 0:00 The sound of an AI breathing 1:15 Intro: Cyrus Clarke, MIT Media Lab 2:25 Giving an AI a body, not a task 3:25 The shape display 5:25 Three surprises: breathing, edges and \"HI CYRUS\" 6:55 15 million views and the backlash 8:40 Asking \"should we\" before \"how we\" 9:30 A scent memory machine 10:25 Three influences: ontology, aesthetics and nature 12:20 Why not humanoid? A body without affordances 13:55 The problems: people-pleasing, latency and no memory 14:45 A closed loop for learning body language 16:13 32 gestures after several weeks 16:…",
-      "summary": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
-      "url": "https://www.youtube.com/watch?v=jgWY66RaSrQ",
-      "canonicalUrl": "https://www.youtube.com/watch?v=jgWY66RaSrQ",
-      "videoId": "jgWY66RaSrQ",
-      "ts": null,
-      "publishedAt": "",
-      "youtubePublishedAt": "2026-09-22T20:16:50.000Z",
-      "playlistVideoPublishedAt": "2026-09-22T20:16:50.000Z",
-      "playlistAddedAt": "2026-09-22T20:16:50.000Z",
-      "youtubeState": "upcoming",
-      "liveBroadcastContent": "upcoming",
-      "scheduledStartTime": "2026-09-24T15:30:00.000Z",
+      "excerpt": "Well under one percent of the Common Crawl corpus that frontier models train on is in an Indian language, even as frontier labs call India a fast growing market. Krishna Prasad Srinivasan says the knowledge exists but was never digitized, and Sarvam's answer is a three billion parameter vision language model, small enough for one GPU, that he says beats document AI models a hundred times larger. The model is unusual twice over. Its backbone is a state space model rather than a transformer, because a page can run to ten thousand visual tokens and quadratic attention gets expensive, while an SSM keeps constant memory. And in late 2025, when most OCR models were monolithic page level VLMs, the team bet on block level OCR wrapped in a layout harness and a reading order harness, which many 2026 releases have since converged on. Training runs as a four stage curriculum: thirteen trillion text tokens across English, 22 Indian languages, math, and code before the model sees a pixel, so a language prior can resolve a smudged word; continual pretraining on three hundred million image text pairs; supervised fine tuning on a hundred million OCR samples; then reinforcement learning. OCR correctness is machine checkable, so rewards are unit tests on character error rate, table structure, or grammar, which makes verifiable reward RL scalable here. The moat is underneath: a data engine for languages with no labeled data, and evals built for real usefulness. Four months after launch the model is digitizing 35 million pages for insurers, banks, and governments, with a public Indic benchmark from the 1800s to today promised soon. Questions cover low resource transfer, synthetic data, and sovereignty. Speaker info: - https://x.com/fewshotlearner - https://www.linkedin.com/in/krishnapsrini…",
+      "summary": "Well under one percent of the Common Crawl corpus that frontier models train on is in an Indian language, even as frontier labs call India a fast growing market. Krishna Prasad Srinivasan says the knowledge exists but was never digitized, and Sarvam's answer is a three billion parameter vision language model, small enough for one GPU, that he says beats document AI models a hundred times larger. The model is unusual twice over. Its backbone is a state space model rather than a transformer, because a page can run to ten thousand visual tokens and quadratic attention gets expensive, while an SSM keeps constant memory. And in late 2025, when most OCR models were monolithic page level VLMs, the team bet on block level OCR wrapped in a layout harness and a reading order harness, which many 2026 releases have since converged on. Training runs as a four stage curriculum: thirteen trillion text…",
+      "url": "https://www.youtube.com/watch?v=T72nqdC92PM",
+      "canonicalUrl": "https://www.youtube.com/watch?v=T72nqdC92PM",
+      "videoId": "T72nqdC92PM",
+      "ts": 1790181019000,
+      "publishedAt": "2026-09-23T16:30:19.000Z",
+      "youtubePublishedAt": "2026-09-23T16:30:19.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T16:30:19.000Z",
+      "playlistAddedAt": "2026-09-23T16:30:19.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 3,
-      "views": 1,
-      "duration": "",
+      "likes": 14,
+      "views": 938,
+      "duration": "21:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
-      "editorial": {
-        "summaryZh": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
-        "whyItMattersZh": "打破了 AI 仅存在于屏幕的认知，探讨了具身智能（Embodied AI）在非传统形态下的可能性。",
-        "evidenceZh": "通过闭环系统生成、评分并验证了 32 种肢体语言，响应速度超过语言模型本身。",
-        "uncertaintyZh": "该实验具有高度艺术性和哲学性，其科学严谨性需进一步探讨。",
-        "chineseAudienceGapZh": "具身智能在中文语境下多关注机器人，缺乏这种从本体论角度出发的实验性视角。",
-        "rednoteAngleZh": "当 AI 拥有了“身体”：MIT 实验室的这个实验，让我重新思考什么是智能。",
-        "topics": [
-          "agents",
-          "multimodal",
-          "workflow"
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z"
+    },
+    {
+      "id": "article:1043d9fe80283e6f409b90e0",
+      "source": "Google DeepMind",
+      "sourceGroup": "Google DeepMind",
+      "sourceType": "official",
+      "sourcePriority": 1,
+      "sourceTags": [
+        "Google DeepMind"
+      ],
+      "kind": "blog",
+      "author": "Google DeepMind",
+      "subtitle": "Google DeepMind",
+      "title": "Advancing Private AI Compute with secure, server-side memory",
+      "text": "",
+      "excerpt": "Introducing private, server-side memory to Private AI Compute for personal AI.",
+      "contentLength": 78,
+      "summary": "Introducing private, server-side memory to Private AI Compute for personal AI.",
+      "url": "https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory",
+      "canonicalUrl": "https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory",
+      "ts": 1790179257000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "signals": {
+        "localScore": 55,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +5"
         ],
-        "processedAt": "2026-09-23T00:22:38.373Z",
-        "model": "gemini-3.1-flash-lite"
-      },
-      "firstSeen": 1790122945620,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.357Z",
+        "topics": [
+          "model-release"
+        ]
+      }
+    },
+    {
+      "id": "yt:ZZcE0HeO-Hc",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "From VLM/VLA's to Embodied Agents — Armen Aghajanyan, Perceptron AI",
+      "text": "",
+      "excerpt": "Feed a model one hour of video and roughly a million visual tokens go in, yet the loss lands on about two percent of them, since the only ground truth is a transcript or a few labeled frames. Armen Aghajanyan calls that a humongous waste, and predicting every pixel treats a background pixel with the same weight as a gripper tip or a contact point. Perceptron's answer is a perceptive objective that learns which percepts will matter, rather than hardcoding the gripper. The second problem is context bloat from cameras that never switch off. Patch averaging buys ten times compression, but his fix is data sparse mixture of experts, a router that decides per layer which tokens to read and which to skip. Left alone, the model zooms into the graph in a figure and spends more tokens on fruit when asked to segment fruit. Put together, that produced the model his team released a few weeks earlier, trained on a petabyte spanning text, images, video, and trajectories from desktop use to video games, which he says beats a frontier lab's embodied reasoning model at a fraction of the cost. Detection turns into an agentic task, with the model tiling the image, raising the contrast, and proposing boxes until it finds the bird. The biggest result is a new scaling law: training jointly on perception, reasoning, and control lets ten times more video pretraining substitute for ten times less teleop data, which costs about a hundred dollars an hour. He closes with one model emitting control tokens to sort books by reading their titles, an open release promised for July, and questions on temporal context, background robustness, and structured extraction. Speaker info: - https://x.com/ArmenAgha - https://www.linkedin.com/in/armenag - https://perceptron.inc Timestamps: 0:00 - Perceptron's north…",
+      "summary": "Feed a model one hour of video and roughly a million visual tokens go in, yet the loss lands on about two percent of them, since the only ground truth is a transcript or a few labeled frames. Armen Aghajanyan calls that a humongous waste, and predicting every pixel treats a background pixel with the same weight as a gripper tip or a contact point. Perceptron's answer is a perceptive objective that learns which percepts will matter, rather than hardcoding the gripper. The second problem is context bloat from cameras that never switch off. Patch averaging buys ten times compression, but his fix is data sparse mixture of experts, a router that decides per layer which tokens to read and which to skip. Left alone, the model zooms into the graph in a figure and spends more tokens on fruit when asked to segment fruit. Put together, that produced the model his team released a few weeks earlier,…",
+      "url": "https://www.youtube.com/watch?v=ZZcE0HeO-Hc",
+      "canonicalUrl": "https://www.youtube.com/watch?v=ZZcE0HeO-Hc",
+      "videoId": "ZZcE0HeO-Hc",
+      "ts": 1790179230000,
+      "publishedAt": "2026-09-23T16:00:30.000Z",
+      "youtubePublishedAt": "2026-09-23T16:00:30.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T16:00:30.000Z",
+      "playlistAddedAt": "2026-09-23T16:00:30.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 5,
+      "views": 816,
+      "duration": "20:42",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z"
+    },
+    {
+      "id": "article:52e46e8371e1f69996c0f8fd",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "Two years of OpenAI Academy",
+      "text": "",
+      "excerpt": "Marking two years of OpenAI Academy and bringing AI skills to even more communities.",
+      "contentLength": 84,
+      "summary": "Marking two years of OpenAI Academy and bringing AI skills to even more communities.",
+      "url": "https://openai.com/index/two-years-of-openai-academy",
+      "canonicalUrl": "https://openai.com/index/two-years-of-openai-academy",
+      "ts": 1790179200000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Company"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184
+    },
+    {
+      "id": "yt:CGq9KRSb9Kc",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "AI Engineer Paris 2026 Opening Keynotes: Mistral, Langfuse & Sizzy | Day 1",
+      "text": "",
+      "excerpt": "Live from STATION F, AI Engineer Paris 2026 opens with welcome remarks and main-stage talks on AI infrastructure, coding agents, software factories, and building frontier AI. AI Engineer Paris returns for its second edition, bringing together 1,000+ engineers, founders, CTOs, and VPs of AI for two days of technical talks, practical workshops, and AI engineering research. Day 1 main-stage lineup: • Jen Person (Mistral) — Welcome to AI Engineer Paris 2026 • Lia McBride (AI Engineer) — Intro to AI Engineer • Lara Khanafer (STATION F) — Welcome from Station F • Clemens Rawert (Langfuse) — What Can Economic History Teach Us About the AI Moment? • Kitze (Sizzy) — The Next Level of AI Engineering • Lélio Renard Lavaud (Mistral) — Building Frontier AI This livestream covers the Main Stage. Additional sessions and activities are taking place throughout the event. Event: AI Engineer Paris 2026 Date: September 23, 2026 Venue: STATION F, Paris View the full schedule: https://ai.engineer/paris/2026 Subscribe for more AI Engineer talks, livestreams, and event coverage: https://www.youtube.com/@aiDotEngineer Schedule subject to change. Timestamps will be added following the broadcast. #AIEngineering #AIAgents #AIEParis",
+      "summary": "Live from STATION F, AI Engineer Paris 2026 opens with welcome remarks and main-stage talks on AI infrastructure, coding agents, software factories, and building frontier AI. AI Engineer Paris returns for its second edition, bringing together 1,000+ engineers, founders, CTOs, and VPs of AI for two days of technical talks, practical workshops, and AI engineering research. Day 1 main-stage lineup: • Jen Person (Mistral) — Welcome to AI Engineer Paris 2026 • Lia McBride (AI Engineer) — Intro to AI Engineer • Lara Khanafer (STATION F) — Welcome from Station F • Clemens Rawert (Langfuse) — What Can Economic History Teach Us About the AI Moment? • Kitze (Sizzy) — The Next Level of AI Engineering • Lélio Renard Lavaud (Mistral) — Building Frontier AI This livestream covers the Main Stage. Additional sessions and activities are taking place throughout the event. Event: AI Engineer Paris 2026 Da…",
+      "url": "https://www.youtube.com/watch?v=CGq9KRSb9Kc",
+      "canonicalUrl": "https://www.youtube.com/watch?v=CGq9KRSb9Kc",
+      "videoId": "CGq9KRSb9Kc",
+      "ts": 1790178972000,
+      "publishedAt": "2026-09-23T15:56:12.000Z",
+      "youtubePublishedAt": "2026-09-23T10:57:17.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T10:57:17.000Z",
+      "playlistAddedAt": "2026-09-23T17:10:58.000Z",
+      "youtubeState": "processing",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "2026-09-23T14:45:00.000Z",
+      "actualStartTime": "2026-09-23T15:56:12.000Z",
+      "actualEndTime": "2026-09-23T17:10:58.000Z",
+      "youtubeUploadStatus": "uploaded",
+      "likes": 21,
+      "views": 3090,
+      "duration": "1:14:46",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z",
       "fullSummaryStatus": "not_ready",
-      "fullSummaryErrorCode": "youtube_upcoming",
-      "fullSummaryRetryAt": "2026-09-24T15:30:00.000Z",
-      "fullSummaryMessage": "This video is scheduled but has not started yet. A full summary will be available after the video is published and a transcript exists.",
+      "fullSummaryErrorCode": "youtube_processing",
+      "fullSummaryRetryAt": "2026-09-23T14:45:00.000Z",
+      "fullSummaryMessage": "The stream has ended, but the replay or transcript is still processing. Please try again later."
+    },
+    {
+      "id": "yt:ztlXKfPCT3Q",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "You’re Not Thinking Big Enough: Rebuilding Food Systems with AI Agents — Cody Menefee, Firecrawl",
+      "text": "",
+      "excerpt": "Cody Menefee once drove three hours to a processor with ten turkeys strapped to the roof of his Tesla, and reports that a windbreak of birds up top does real damage to your range. He raised them in a Nashville backyard where that is not allowed, nearly quit engineering to farm, and learned how hard it is to make money at it. Instead he asks why only three percent of cattle finish on pasture when it is better for animal, consumer, and land. The answer is labor. Grazing done right means splitting pasture into paddocks with one day of feed and moving the herd, fences, and water every day so the grass rests. GPS collars with virtual fences handle the moving but not the deciding: grass grows differently after drought, rain, or trampling, and today a farmer walks out to look. His proposal is to replace those eyes and drop a language model in the loop. Drones give the best imagery but no jurisdiction allows autonomous flights; satellites are too far away; a trail cam pointed at a measuring stick is the cheap version. Feed the model animal locations, drought conditions, and grass height, and let it suggest the next paddock for a human to confirm. Three blockers remain: a knowledge base he is scraping out of farmer YouTube channels and research papers with Firecrawl into his Open Pasture project, a vision layer that reads biomass and biodiversity, and collar makers who lock out outside software. His ask to the room is an open collar, and his closing argument is that this industry builds too much software for people who build software while problems like this wait. Speaker info: - https://x.com/cbmenefee - https://linkedin.com/in/codybmenefee - https://openpasture.dev Timestamps: 0:00 - The jacket, the stolen title, and a talk about farming 1:20 - No credentials, ten backyard tu…",
+      "summary": "Cody Menefee once drove three hours to a processor with ten turkeys strapped to the roof of his Tesla, and reports that a windbreak of birds up top does real damage to your range. He raised them in a Nashville backyard where that is not allowed, nearly quit engineering to farm, and learned how hard it is to make money at it. Instead he asks why only three percent of cattle finish on pasture when it is better for animal, consumer, and land. The answer is labor. Grazing done right means splitting pasture into paddocks with one day of feed and moving the herd, fences, and water every day so the grass rests. GPS collars with virtual fences handle the moving but not the deciding: grass grows differently after drought, rain, or trampling, and today a farmer walks out to look. His proposal is to replace those eyes and drop a language model in the loop. Drones give the best imagery but no juris…",
+      "url": "https://www.youtube.com/watch?v=ztlXKfPCT3Q",
+      "canonicalUrl": "https://www.youtube.com/watch?v=ztlXKfPCT3Q",
+      "videoId": "ztlXKfPCT3Q",
+      "ts": 1790177427000,
+      "publishedAt": "2026-09-23T15:30:27.000Z",
+      "youtubePublishedAt": "2026-09-23T15:30:27.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T15:30:27.000Z",
+      "playlistAddedAt": "2026-09-23T15:30:27.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 20,
+      "views": 1596,
+      "duration": "18:26",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z"
+    },
+    {
+      "id": "article:721de6922a1a6b9fd6bd57fa",
+      "source": "Google DeepMind",
+      "sourceGroup": "Google DeepMind",
+      "sourceType": "official",
+      "sourcePriority": 1,
+      "sourceTags": [
+        "Google DeepMind"
+      ],
+      "kind": "blog",
+      "author": "Google DeepMind",
+      "subtitle": "Google DeepMind",
+      "title": "Gemini 3.8 text-to-speech says hello",
+      "text": "",
+      "excerpt": "",
+      "contentLength": 0,
+      "summary": "",
+      "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech",
+      "canonicalUrl": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech",
+      "ts": 1790177114000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
       "signals": {
         "localScore": 59,
         "reasons": [
-          "curated source +8",
-          "topic fit +21",
-          "visualizable +8"
+          "official source +15",
+          "fresh +15",
+          "topic fit +5",
+          "visualizable +4"
         ],
         "topics": [
-          "agents",
-          "workflow",
           "multimodal"
         ]
-      },
-      "summaryZh": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T00:22:38.373Z"
+      }
     },
     {
       "id": "yt:A_I8mw8yfns",
@@ -106,40 +342,43 @@
       "actualStartTime": "2026-09-23T15:00:10.000Z",
       "actualEndTime": "2026-09-23T15:20:22.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 12,
-      "views": 493,
+      "likes": 14,
+      "views": 1193,
       "duration": "18:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
         "summaryZh": "专家指出当前前沿模型在空间推理和计数任务上表现极差，本质是模式匹配而非真正的视觉思维。",
-        "whyItMattersZh": "打破了对大模型“全知全能”的迷信，揭示了当前 Benchmark 的局限性，对科研人员评估模型有重要参考价值。",
-        "evidenceZh": "模型在棋盘计数、机器人动作识别等任务上表现出明显的幻觉，且无法跨长视频保持状态。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内对模型能力的评估多关注 Benchmark 分数，缺乏对“视觉思维”和“推理本质”的深度批判。",
-        "rednoteAngleZh": "AI 避坑指南：为什么你的模型总是“一本正经胡说八道”？揭秘大模型的视觉推理短板。",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 95/100。",
+        "evidenceZh": "Show a frontier model part of a chessboard, ask how many white squares are visible, and it answers 32. Andrew Dai's diagnosis: it saw a chessboard, knew chessboards have 32 white squares, and hallucinated the rest. The…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
         "topics": [
+          "agents",
           "evaluation",
+          "science",
+          "research",
           "reasoning",
           "multimodal",
-          "agents",
-          "science",
-          "research"
+          "safety",
+          "robotics"
         ],
-        "processedAt": "2026-09-23T09:14:52.992Z",
-        "model": "gemini-3.1-flash-lite"
+        "processedAt": "2026-09-23T19:38:06.907Z",
+        "model": "local-fallback"
       },
       "firstSeen": 1790154877585,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.642Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.882Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
       "fullSummaryMessage": "",
       "signals": {
-        "localScore": 77,
+        "localScore": 95,
         "reasons": [
           "curated source +8",
+          "fresh +15",
           "topic fit +32",
           "visualizable +15"
         ],
@@ -156,7 +395,225 @@
       },
       "summaryZh": "专家指出当前前沿模型在空间推理和计数任务上表现极差，本质是模式匹配而非真正的视觉思维。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+      "summaryTranslatedAt": "2026-09-23T19:38:06.907Z"
+    },
+    {
+      "id": "yt:0I07YAuF8xA",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "From Ingestion to Agents: How AI Teams Build on Document Intelligence — Adit Abraham, Reducto",
+      "text": "",
+      "excerpt": "The newest frontier model scores about thirty percent on a data lab's benchmark of decisions from PDFs, and Adit Abraham has met people who worked on PDF processing before he was born. The format was built to print, not to be reasoned over, and humans encode meaning visually: merged cells, line charts, unreadable handwriting. Reducto has processed billions of them, and the talk is the lessons, not the product. RAG meant a bad parse cost one answer; with agents, bad inputs compound across every step. VLMs finally read the long tail like a human, but they are not one size fits all: small detectors still find layout on a CPU at scale, and a VLM asked to rewrite OCR will helpfully recompute a total the human got wrong. His agentic OCR applies token level corrections, a zero for an O, instead of regenerating the page. Simple tables go to markdown and complex ones to HTML, but embedding models cannot match how did revenue change to a blob of tags, so a natural language rendering serves retrieval. Parsed structure rather than raw PDFs lifted other frontier models past the newest one on that benchmark and cut reasoning tokens. Classification and splitting keep a hundred page mail packet from distracting it. Agent harnesses crack problems no model solves in one shot, turning a line chart into a data table with a code interpreter and repeated self checks, and they beat a trade off a new benchmark exposed, where frontier models are precise but silently drop rows and document services do the reverse. He closes on evals at every stage and customers who give agents a file system, not a fixed pipeline. Speaker info: - https://reducto.ai Timestamps: 0:00 - Reducto, and the less sexy part of agents that work: data 2:04 - From RAG to agents: bad inputs compound across steps 5:28 - Why P…",
+      "summary": "The newest frontier model scores about thirty percent on a data lab's benchmark of decisions from PDFs, and Adit Abraham has met people who worked on PDF processing before he was born. The format was built to print, not to be reasoned over, and humans encode meaning visually: merged cells, line charts, unreadable handwriting. Reducto has processed billions of them, and the talk is the lessons, not the product. RAG meant a bad parse cost one answer; with agents, bad inputs compound across every step. VLMs finally read the long tail like a human, but they are not one size fits all: small detectors still find layout on a CPU at scale, and a VLM asked to rewrite OCR will helpfully recompute a total the human got wrong. His agentic OCR applies token level corrections, a zero for an O, instead of regenerating the page. Simple tables go to markdown and complex ones to HTML, but embedding model…",
+      "url": "https://www.youtube.com/watch?v=0I07YAuF8xA",
+      "canonicalUrl": "https://www.youtube.com/watch?v=0I07YAuF8xA",
+      "videoId": "0I07YAuF8xA",
+      "ts": 1790173811000,
+      "publishedAt": "2026-09-23T14:30:11.000Z",
+      "youtubePublishedAt": "2026-09-23T14:30:11.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T14:30:11.000Z",
+      "playlistAddedAt": "2026-09-23T14:30:11.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 19,
+      "views": 1987,
+      "duration": "22:29",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 92/100。",
+        "evidenceZh": "The newest frontier model scores about thirty percent on a data lab's benchmark of decisions from PDFs, and Adit Abraham has met people who worked on PDF processing before he was born. The format was built to print, not…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
+        "topics": [
+          "agents",
+          "workflow",
+          "evaluation",
+          "reasoning"
+        ],
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
+      },
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z",
+      "signals": {
+        "localScore": 92,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +29",
+          "visualizable +15"
+        ],
+        "topics": [
+          "agents",
+          "workflow",
+          "evaluation",
+          "reasoning"
+        ]
+      }
+    },
+    {
+      "id": "yt:jNE8No-wvok",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Modality Misalignment and Originality Attribution in Short-Form Video — Aditya Gautam, Meta",
+      "text": "",
+      "excerpt": "A video is about sports for its first six seconds, then turns political for half a second. Catching that across a hundred million plus videos is one of two problems Aditya Gautam works on at Meta; the other is unoriginal content, trivial to make with AI tools and corrosive to attribution. Both sit on messy data: adversarial uploads, multilingual on screen text, drift, and no ground truth. Mismatch across modalities is a solved embedding problem; mismatch within one modality over time is not, so three agents share it. A perceiver splits the video where temporal change happens, not at a fixed frame rate, and emits clip level embeddings, tags, and OCR. A reviewer runs the temporal analysis over that JSON and folds in live comments and sentiment. A retriever indexes topics, embeddings, and entities into inverted, vector, and graph stores for pulling similar clips and authors at inference time. Every agent runs on a small specialized VLM, not a frontier model, since he does not care whether it can code. That means pretraining the vision encoder on in house images because user generated content looks nothing like clean web data, instruction tuning to a JSON schema, and a DPO loop where daily production samples pass through an in house LLM judge and a human queue tracing failures to the tool call or retrieval step. Distillation and quantization then produce a table of model sizes. Evaluation goes beyond precision and recall to per node latency, reasoning budgets, token cost, and judge drift. Three optimizations keep most videos out of the pipeline: compressing similar frames, caching verdicts on viral content, and pruning by metadata so trusted creators skip it. Speaker info: - https://www.linkedin.com/in/aditya-gautam-68233a30/ Timestamps: 0:00 - Two problems on short form v…",
+      "summary": "A video is about sports for its first six seconds, then turns political for half a second. Catching that across a hundred million plus videos is one of two problems Aditya Gautam works on at Meta; the other is unoriginal content, trivial to make with AI tools and corrosive to attribution. Both sit on messy data: adversarial uploads, multilingual on screen text, drift, and no ground truth. Mismatch across modalities is a solved embedding problem; mismatch within one modality over time is not, so three agents share it. A perceiver splits the video where temporal change happens, not at a fixed frame rate, and emits clip level embeddings, tags, and OCR. A reviewer runs the temporal analysis over that JSON and folds in live comments and sentiment. A retriever indexes topics, embeddings, and entities into inverted, vector, and graph stores for pulling similar clips and authors at inference ti…",
+      "url": "https://www.youtube.com/watch?v=jNE8No-wvok",
+      "canonicalUrl": "https://www.youtube.com/watch?v=jNE8No-wvok",
+      "videoId": "jNE8No-wvok",
+      "ts": 1790172034000,
+      "publishedAt": "2026-09-23T14:00:34.000Z",
+      "youtubePublishedAt": "2026-09-23T14:00:34.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T14:00:34.000Z",
+      "playlistAddedAt": "2026-09-23T14:00:34.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 12,
+      "views": 1453,
+      "duration": "21:32",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 84/100。",
+        "evidenceZh": "A video is about sports for its first six seconds, then turns political for half a second. Catching that across a hundred million plus videos is one of two problems Aditya Gautam works on at Meta; the other is unorigina…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
+        "topics": [
+          "agents",
+          "evaluation",
+          "reasoning",
+          "multimodal",
+          "interpretability",
+          "safety"
+        ],
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
+      },
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z",
+      "signals": {
+        "localScore": 84,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +32",
+          "visualizable +4"
+        ],
+        "topics": [
+          "agents",
+          "evaluation",
+          "reasoning",
+          "multimodal",
+          "interpretability",
+          "safety"
+        ]
+      }
+    },
+    {
+      "id": "yt:dKcTBQzR7jI",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Skill issue: stop deploying vision language models, use them with Skills — Merve Noyan, Hugging Face",
+      "text": "",
+      "excerpt": "Merve Noyan wrote a book on vision language models and now wants developers to stop calling them directly. Put one in front of a camera and you will never get real time; a small detector trained for the task runs at forty frames per second on a toaster and beats the VLM anyway. Her other complaint is licensing: people deploy a popular detector without noticing its copyleft license. So she built a toolkit that hands her favorite Apache 2.0 models to a coding agent, which she calls a clueless computer vision engineer, plus what she calls vibe training. Give it a dataset with no labels and it labels images with a nine billion parameter open VLM, passes the overlaid bounding boxes to two smaller VLM judges, merges their verdicts on minimum agreement rather than consensus, and trains RF-DETR. The whole run costs three or four dollars on Hugging Face jobs and inference providers. On road signs the trained detector lands a good mean average precision against ground truth, and on document parsing it generalizes, catching a signature the labeling model itself missed. The findings matter more: one judge rejects far more than the other, so consensus would have left too few examples; the judge prompts still need a human to approve them; and even the best coding agent flips traffic signs horizontally and jitters the color of traffic lights until told not to. She closes with the models as tools half of the toolkit, from a 600 million parameter model that segments the red car next to the orange car to pose, depth, and OCR picks, and plans for image guided detection where words cannot describe the part. Speaker info: - https://x.com/mervenoyann - https://www.linkedin.com/in/merve-noyan-28b1a113a - https://hf.co/merve Timestamps: 0:00 - Why developers should stop reaching for a VLM at…",
+      "summary": "Merve Noyan wrote a book on vision language models and now wants developers to stop calling them directly. Put one in front of a camera and you will never get real time; a small detector trained for the task runs at forty frames per second on a toaster and beats the VLM anyway. Her other complaint is licensing: people deploy a popular detector without noticing its copyleft license. So she built a toolkit that hands her favorite Apache 2.0 models to a coding agent, which she calls a clueless computer vision engineer, plus what she calls vibe training. Give it a dataset with no labels and it labels images with a nine billion parameter open VLM, passes the overlaid bounding boxes to two smaller VLM judges, merges their verdicts on minimum agreement rather than consensus, and trains RF-DETR. The whole run costs three or four dollars on Hugging Face jobs and inference providers. On road sign…",
+      "url": "https://www.youtube.com/watch?v=dKcTBQzR7jI",
+      "canonicalUrl": "https://www.youtube.com/watch?v=dKcTBQzR7jI",
+      "videoId": "dKcTBQzR7jI",
+      "ts": 1790170216000,
+      "publishedAt": "2026-09-23T13:30:16.000Z",
+      "youtubePublishedAt": "2026-09-23T13:30:16.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T13:30:16.000Z",
+      "playlistAddedAt": "2026-09-23T13:30:16.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 41,
+      "views": 2832,
+      "duration": "19:14",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": {
+        "summaryZh": "",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 88/100。",
+        "evidenceZh": "Merve Noyan wrote a book on vision language models and now wants developers to stop calling them directly. Put one in front of a camera and you will never get real time; a small detector trained for the task runs at for…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
+        "topics": [
+          "agents",
+          "coding",
+          "evaluation",
+          "reasoning",
+          "open-source",
+          "multimodal"
+        ],
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
+      },
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z",
+      "signals": {
+        "localScore": 88,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +32",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "coding",
+          "evaluation",
+          "reasoning",
+          "open-source",
+          "multimodal"
+        ]
+      }
     },
     {
       "id": "yt:RQi7x-navxU",
@@ -188,38 +645,39 @@
       "actualStartTime": "2026-09-23T13:00:07.000Z",
       "actualEndTime": "2026-09-23T13:23:09.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 99,
-      "views": 3392,
+      "likes": 131,
+      "views": 6705,
       "duration": "21:04",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
         "summaryZh": "LlamaIndex 创始人提出 Agent 时代的 RAG 架构演进：从简单的检索转向 Agent 驱动的上下文层。",
-        "whyItMattersZh": "重新定义了 Agent 处理复杂文档（PDF/表格）的范式，是构建企业级 Agent 的核心架构思路。",
-        "evidenceZh": "将 RAG 分解为 Agent 调度器与上下文层，强调解析、语义存储与可重复工作流的结合。",
-        "uncertaintyZh": "curated 来源，建议关注 LlamaIndex 后续的官方技术文档。",
-        "chineseAudienceGapZh": "国内 RAG 方案多集中在基础检索，缺乏对 Agent 协同上下文层的系统性思考。",
-        "rednoteAngleZh": "Agent 开发进阶：告别简单 RAG，如何构建能读懂复杂文档的“智能上下文层”？",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 90/100。",
+        "evidenceZh": "A PDF is designed for printing, so its text is glyphs with coordinates and its tables are line segments with characters at cell positions. Reading order for a multicolumn page is not stored anywhere. That, Jerry Liu arg…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
         "topics": [
           "agents",
           "workflow",
-          "open-source",
-          "evaluation"
+          "evaluation",
+          "open-source"
         ],
-        "processedAt": "2026-09-23T09:14:52.992Z",
-        "model": "gemini-3.1-flash-lite"
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
       },
       "firstSeen": 1790154877585,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.642Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.882Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
       "fullSummaryMessage": "",
       "signals": {
-        "localScore": 72,
+        "localScore": 90,
         "reasons": [
           "curated source +8",
+          "fresh +15",
           "topic fit +29",
           "visualizable +12"
         ],
@@ -232,7 +690,143 @@
       },
       "summaryZh": "LlamaIndex 创始人提出 Agent 时代的 RAG 架构演进：从简单的检索转向 Agent 驱动的上下文层。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+      "summaryTranslatedAt": "2026-09-23T19:38:06.907Z"
+    },
+    {
+      "id": "article:9328fa400dd37e6b9e773781",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "OpenAI extends cyber access to Ukraine for civilian defense",
+      "text": "",
+      "excerpt": "OpenAI is extending access to its Daybreak program to the Government of Ukraine to support the cyber defense of civilian infrastructure.",
+      "contentLength": 136,
+      "summary": "OpenAI is extending access to its Daybreak program to the Government of Ukraine to support the cyber defense of civilian infrastructure.",
+      "url": "https://openai.com/index/openai-extends-cyber-access-to-ukraine-for-civilian-defense",
+      "canonicalUrl": "https://openai.com/index/openai-extends-cyber-access-to-ukraine-for-civilian-defense",
+      "ts": 1790168400000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Global Affairs"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184
+    },
+    {
+      "id": "article:f2ff7f76056120414cf01f1b",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "How invideo improves color grading 3x with GPT‑6 Astra",
+      "text": "",
+      "excerpt": "With GPT‑6 Astra, invideo plans edits with greater precision, improves color correction and grading threefold, and produces 50 custom effects in one day.",
+      "contentLength": 153,
+      "summary": "With GPT‑6 Astra, invideo plans edits with greater precision, improves color correction and grading threefold, and produces 50 custom effects in one day.",
+      "url": "https://openai.com/index/invideo-builds-with-gpt-6-astra",
+      "canonicalUrl": "https://openai.com/index/invideo-builds-with-gpt-6-astra",
+      "ts": 1790164800000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "signals": {
+        "localScore": 61,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +5",
+          "visualizable +8"
+        ],
+        "topics": [
+          "multimodal"
+        ]
+      }
+    },
+    {
+      "id": "article:4e56c7312349a760a0edf744",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "Ringg’s AI agents resolve up to 65% of customer calls with OpenAI",
+      "text": "",
+      "excerpt": "Using GPT-5.6, Ringg powers multilingual agents across voice, chat, WhatsApp, and web for 90% less cost vs. GPT-4.1.",
+      "contentLength": 116,
+      "summary": "Using GPT-5.6, Ringg powers multilingual agents across voice, chat, WhatsApp, and web for 90% less cost vs. GPT-4.1.",
+      "url": "https://openai.com/index/ringg",
+      "canonicalUrl": "https://openai.com/index/ringg",
+      "ts": 1790164800000,
+      "likes": 0,
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "signals": {
+        "localScore": 64,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +8",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents"
+        ]
+      }
+    },
+    {
+      "id": "article:52b80abd4e046c041ffbe2a4",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "Harvey turns legal context into stronger drafts with GPT-6 Astra",
+      "text": "",
+      "excerpt": "GPT-6 Astra produces more structured, context-aware legal documents, freeing lawyers to focus on strategy.",
+      "contentLength": 106,
+      "summary": "GPT-6 Astra produces more structured, context-aware legal documents, freeing lawyers to focus on strategy.",
+      "url": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
+      "canonicalUrl": "https://openai.com/index/harvey-from-context-to-confidence-with-astra",
+      "ts": 1790164800000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Startup"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184
     },
     {
       "id": "article:19163c30f0a4c92555051d9a",
@@ -258,7 +852,20 @@
       "full": false,
       "categories": [],
       "fullSummary": "",
-      "editorial": null,
+      "editorial": {
+        "summaryZh": "Claude Opus 5.5 发布，在性能提升的同时大幅降低了 API 成本，并显著优化了长文本写作逻辑。",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 70/100。",
+        "evidenceZh": "OpenAI made a valiant effort with GPT-6 Sol and Luna launching 50% lower than GPT-5.6, but with 17M views on the launch and counting, today was always going to belong to Claude Opus 5.5 , “the first model in our new Cla…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "适合用来发现趋势，但创作前应回到它引用的原始来源核实。",
+        "rednoteAngleZh": "做成「看起来很强 ≠ 真正可靠」的对照卡，解释评测到底测了什么。",
+        "topics": [
+          "evaluation",
+          "model-release"
+        ],
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
+      },
       "firstSeen": 1790154877585,
       "signals": {
         "localScore": 70,
@@ -275,7 +882,7 @@
       },
       "summaryZh": "Claude Opus 5.5 发布，在性能提升的同时大幅降低了 API 成本，并显著优化了长文本写作逻辑。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+      "summaryTranslatedAt": "2026-09-23T19:38:06.907Z"
     },
     {
       "id": "x:2102628682301046875",
@@ -369,7 +976,20 @@
         "agentic-engineering"
       ],
       "fullSummary": "",
-      "editorial": null,
+      "editorial": {
+        "summaryZh": "Simon Willison 将于 10 月 14 日在旧金山举办 Agent 工程交流会，旨在分享非公开的 Agent 开发实验。",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 68/100。",
+        "evidenceZh": "SF October 14th: A Birds of a Feather Session on Agentic Engineering I'm hosting an evening event with Jesse Vincent in San Francisco on Wednesday 14th October for people who are building weird and interesting things wi…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "这类一手实验和经验总结在中文内容中通常传播较慢。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
+        "topics": [
+          "agents",
+          "coding"
+        ],
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
+      },
       "firstSeen": 1790154877585,
       "signals": {
         "localScore": 68,
@@ -386,7 +1006,7 @@
       },
       "summaryZh": "Simon Willison 将于 10 月 14 日在旧金山举办 Agent 工程交流会，旨在分享非公开的 Agent 开发实验。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+      "summaryTranslatedAt": "2026-09-23T19:38:06.907Z"
     },
     {
       "id": "x:2102589061445939508",
@@ -627,6 +1247,47 @@
       "summaryZh": "强调使用 AI 的正确方式不是盲目堆砌功能，而是深入理解用户需求并进行原型实验。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+    },
+    {
+      "id": "article:5ab590850491008e2cefeb69",
+      "source": "OpenAI News",
+      "sourceGroup": "OpenAI",
+      "sourceType": "official",
+      "sourcePriority": 0.88,
+      "sourceTags": [
+        "OpenAI News"
+      ],
+      "kind": "blog",
+      "author": "OpenAI News",
+      "subtitle": "OpenAI",
+      "title": "Grab and OpenAI bring practical AI skills to Southeast Asia",
+      "text": "",
+      "excerpt": "OpenAI and Grab launch GO Forward with AI, a regional programme helping 30,000 partners build practical AI skills across Southeast Asia.",
+      "contentLength": 136,
+      "summary": "OpenAI and Grab launch GO Forward with AI, a regional programme helping 30,000 partners build practical AI skills across Southeast Asia.",
+      "url": "https://openai.com/index/grab-openai-ai-skills-southeast-asia",
+      "canonicalUrl": "https://openai.com/index/grab-openai-ai-skills-southeast-asia",
+      "ts": 1790121600000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "Global Affairs"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "signals": {
+        "localScore": 57,
+        "reasons": [
+          "official source +15",
+          "fresh +15",
+          "topic fit +5",
+          "visualizable +4"
+        ],
+        "topics": [
+          "model-release"
+        ]
+      }
     },
     {
       "id": "article:5b206843ef211175e25ca5d4",
@@ -1186,26 +1847,26 @@
       "fullSummary": "",
       "editorial": {
         "summaryZh": "AI 模型成本的剧烈下降正在引发杰文斯悖论，使得 Agent 在企业级工作流中的大规模部署成为可能。",
-        "whyItMattersZh": "从经济学角度解释了为什么现在是 Agent 爆发的临界点，对行业趋势判断有重要意义。",
-        "evidenceZh": "Opus 5.5 及 GPT-6 系列模型价格大幅下调，直接降低了 Agent 处理日志、代码安全扫描等任务的门槛。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "缺乏将 AI 成本下降与 Agent 商业落地规模化联系起来的深度分析。",
-        "rednoteAngleZh": "AI 行业观察：模型价格腰斩，Agent 时代真的要爆发了吗？",
+        "whyItMattersZh": "本地规则认为它与 Kelly 的内容方向高度相关，当前评分 71/100。",
+        "evidenceZh": "What an insane day in AI. The frontier models just became substantially cheaper, with the Opus 5.5 price cuts, and now with GPT-6 Sol and Luna dropping token prices by 50%. The rate at which the cost per task (on a like…",
+        "uncertaintyZh": "本次未使用 Gemini 复核，请打开原文确认细节和上下文。",
+        "chineseAudienceGapZh": "需要先确认是否有更权威的原始来源，再决定是否创作。",
+        "rednoteAngleZh": "用一个具体任务画出「AI 在哪里决策、人在哪里介入」的步骤图。",
         "topics": [
           "agents",
           "workflow",
           "science",
           "safety"
         ],
-        "processedAt": "2026-09-23T09:14:52.992Z",
-        "model": "gemini-3.1-flash-lite"
+        "processedAt": "2026-09-23T19:38:06.908Z",
+        "model": "local-fallback"
       },
       "firstSeen": 1790154877585,
       "signals": {
-        "localScore": 74,
+        "localScore": 71,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +29",
           "visualizable +8"
         ],
@@ -1218,7 +1879,7 @@
       },
       "summaryZh": "AI 模型成本的剧烈下降正在引发杰文斯悖论，使得 Agent 在企业级工作流中的大规模部署成为可能。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-09-23T09:14:52.992Z"
+      "summaryTranslatedAt": "2026-09-23T19:38:06.907Z"
     },
     {
       "id": "x:2102471892099866883",
@@ -1428,10 +2089,10 @@
       "editorial": null,
       "firstSeen": 1790154877585,
       "signals": {
-        "localScore": 58,
+        "localScore": 55,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +13",
           "visualizable +8"
         ],
@@ -1638,10 +2299,10 @@
       "editorial": null,
       "firstSeen": 1790154877585,
       "signals": {
-        "localScore": 67,
+        "localScore": 64,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +28",
           "visualizable +4"
         ],
@@ -1681,10 +2342,10 @@
       "editorial": null,
       "firstSeen": 1790154877585,
       "signals": {
-        "localScore": 64,
+        "localScore": 61,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +15",
           "visualizable +8"
         ],
@@ -2945,8 +3606,8 @@
       "actualStartTime": "2026-09-21T19:00:10.000Z",
       "actualEndTime": "2026-09-21T20:06:59.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 176,
-      "views": 21256,
+      "likes": 177,
+      "views": 21405,
       "duration": "1:04:53",
       "full": false,
       "categories": [],
@@ -2966,7 +3627,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1790022216855,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.344Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.882Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -4623,15 +5284,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 59,
-      "views": 15325,
+      "likes": 60,
+      "views": 15372,
       "duration": "17:18",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789862728182,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.344Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -4712,14 +5373,14 @@
       "actualEndTime": "2026-09-19T18:50:12.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 8446,
+      "views": 8505,
       "duration": "18:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789807445954,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.344Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -4770,7 +5431,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 69,
-      "views": 15763,
+      "views": 15831,
       "duration": "14:59",
       "full": false,
       "categories": [],
@@ -4792,7 +5453,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.344Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -4843,14 +5504,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 9475,
+      "views": 9522,
       "duration": "25:07",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.344Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -4940,15 +5601,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 66,
-      "views": 12639,
+      "likes": 67,
+      "views": 12719,
       "duration": "19:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "summaryZh": "Baseten工程师探讨了推理工程的演进，指出数据中心优化正逐渐从推理阶段前移至训练阶段。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-19T18:33:47.667Z"
@@ -4984,14 +5645,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 36,
-      "views": 9044,
+      "views": 9090,
       "duration": "15:22",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.883Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -5072,7 +5733,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 17,
-      "views": 5943,
+      "views": 5966,
       "duration": "16:07",
       "full": false,
       "categories": [],
@@ -5095,7 +5756,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -5203,14 +5864,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 40,
-      "views": 6827,
+      "views": 6843,
       "duration": "18:12",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789842814854,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "summaryZh": "OpenAI工程师分享了推理路由系统的演进，从简单的反馈控制转向基于全局视图的控制平面，以解决KV缓存碎片化问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-19T18:33:47.667Z"
@@ -5246,14 +5907,14 @@
       "actualEndTime": "2026-09-19T15:21:56.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 33,
-      "views": 6518,
+      "views": 6569,
       "duration": "19:51",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789807445954,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -6438,8 +7099,8 @@
       "actualStartTime": "2026-09-18T16:00:11.000Z",
       "actualEndTime": "2026-09-18T17:01:53.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 199,
-      "views": 26008,
+      "likes": 200,
+      "views": 26141,
       "duration": "1:00:47",
       "full": false,
       "categories": [],
@@ -6462,7 +7123,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789721833836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.345Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -7727,15 +8388,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 1701,
-      "views": 151520,
+      "likes": 1722,
+      "views": 153686,
       "duration": "18:48",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789674087456,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -8816,8 +9477,8 @@
       "actualStartTime": "2026-09-16T17:00:06.000Z",
       "actualEndTime": "2026-09-16T17:20:07.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 197,
-      "views": 28352,
+      "likes": 198,
+      "views": 28365,
       "duration": "18:01",
       "full": false,
       "categories": [],
@@ -8838,7 +9499,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -8947,15 +9608,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 54,
-      "views": 10702,
+      "likes": 55,
+      "views": 10705,
       "duration": "9:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "summaryZh": "探讨了强化学习（RL）在搜索中的应用，指出当前 Agent 搜索成本过高且缺乏动态调整能力。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-17T19:41:41.343Z"
@@ -9285,14 +9946,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 80,
-      "views": 12940,
+      "views": 12962,
       "duration": "20:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "summaryZh": "Legora 分享了如何通过优化存储架构，解决大规模法律文档检索中的性能瓶颈问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-17T19:41:41.343Z"
@@ -9398,15 +10059,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 21,
-      "views": 6262,
+      "likes": 22,
+      "views": 6274,
       "duration": "18:22",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.884Z",
       "summaryZh": "企业合同往往以非结构化的PDF形式存在，导致难以查询和挖掘其中的商业价值。Docusign正致力于将这些海量合同转化为可结构化、可查询的数据，以解决企业在合同管理上的效率难题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-18T00:08:57.804Z"
@@ -9442,7 +10103,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 187,
-      "views": 28749,
+      "views": 28848,
       "duration": "17:55",
       "full": false,
       "categories": [],
@@ -9463,7 +10124,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -9534,7 +10195,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -9591,7 +10252,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "summaryZh": "随着AI模型对外部信息需求的激增，机器发起的搜索请求预计将在2026年超过人类。Exa通过构建专为AI代理设计的搜索API，满足了模型在处理复杂查询时对外部知识的实时获取需求。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-18T00:08:57.804Z"
@@ -9626,8 +10287,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 478,
-      "views": 56152,
+      "likes": 479,
+      "views": 56442,
       "duration": "18:29",
       "full": false,
       "categories": [],
@@ -9649,7 +10310,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -9763,7 +10424,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789587055836,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.346Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -10988,7 +11649,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "summaryZh": "Roku工程师提出语音Agent不应盲目追求准确率，而应通过设置合理的“拒绝响应”阈值来降低用户挫败感。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-16T00:12:27.428Z"
@@ -11106,7 +11767,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.885Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -11220,7 +11881,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.886Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -11293,7 +11954,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.886Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -11425,7 +12086,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789464062547,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -11515,7 +12176,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "summaryZh": "Tolan工程师强调语音交互的上下文具有高度波动性，开发重点应从“减少中断”转向“优化中断逻辑”。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-16T00:12:27.428Z"
@@ -11573,7 +12234,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -11631,7 +12292,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789501196055,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.347Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "summaryZh": "OpenAI开发者关系负责人Charlie Guo认为语音Agent不应局限于语音回复，应更多利用“语音转动作”能力直接操作软件界面。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-16T00:12:27.428Z"
@@ -11667,7 +12328,7 @@
       "actualEndTime": "2026-09-15T13:18:47.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 30,
-      "views": 4646,
+      "views": 4647,
       "duration": "16:42",
       "full": false,
       "categories": [],
@@ -11688,7 +12349,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1789464062547,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.348Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -12426,7 +13087,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 247,
-      "views": 39706,
+      "views": 39754,
       "duration": "18:28",
       "full": false,
       "categories": [],
@@ -12448,7 +13109,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.887Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -12638,8 +13299,8 @@
       "actualStartTime": "2026-09-14T17:00:06.000Z",
       "actualEndTime": "2026-09-14T17:19:39.000Z",
       "youtubeUploadStatus": "processed",
-      "likes": 891,
-      "views": 127963,
+      "likes": 894,
+      "views": 128185,
       "duration": "17:34",
       "full": false,
       "categories": [],
@@ -12663,7 +13324,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -12801,14 +13462,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 36,
-      "views": 8216,
+      "views": 8221,
       "duration": "21:37",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -12896,7 +13557,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "summaryZh": "PostHog工程师分享了在Agent中执行Bash命令的风险，并将其比作“恶意软件入门包”，强调了安全沙箱的必要性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-14T20:16:59.789Z"
@@ -12939,7 +13600,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "summaryZh": "Restate通过持久化执行（Durable Execution）技术，解决了Agent在长流程任务中因重启或失败导致的状态丢失问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-14T20:16:59.789Z"
@@ -13005,14 +13666,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 19,
-      "views": 4506,
+      "views": 4508,
       "duration": "17:00",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.349Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -13114,14 +13775,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 142,
-      "views": 20113,
+      "views": 20181,
       "duration": "20:46",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -13172,14 +13833,14 @@
       "actualEndTime": "2026-09-14T14:15:26.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 45,
-      "views": 5147,
+      "views": 5151,
       "duration": "13:21",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789416998860,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "summaryZh": "Anthropic研究人员提出“Token Jobs”策略，通过让Agent承担建议、评分等不同角色，在固定Token预算下显著提升任务表现。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-14T20:16:59.789Z"
@@ -16040,7 +16701,7 @@
       "actualEndTime": "2026-09-11T20:20:19.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 200,
-      "views": 30705,
+      "views": 30725,
       "duration": "19:14",
       "full": false,
       "categories": [],
@@ -16062,7 +16723,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789153656918,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -18074,14 +18735,14 @@
       "actualEndTime": "2026-09-10T17:18:54.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 14462,
+      "views": 14465,
       "duration": "16:48",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -18220,15 +18881,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 412,
-      "views": 52385,
+      "likes": 414,
+      "views": 52559,
       "duration": "17:38",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.888Z",
       "summaryZh": "FastMCP 协议允许 Agent 直接输出 HTML/CSS/JS，让 Python 工程师也能构建可交互的 UI 界面，解决了传统文件上传的低效问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-10T19:05:49.035Z"
@@ -18338,14 +18999,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 83,
-      "views": 11255,
+      "views": 11264,
       "duration": "15:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "summaryZh": "Taste Labs 研究发现 AI 加速了互联网设计的同质化，提出通过培养“判断力”而非单纯依赖模型来对抗这种审美平庸。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-10T19:05:49.035Z"
@@ -18455,7 +19116,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 258,
-      "views": 37947,
+      "views": 37969,
       "duration": "15:59",
       "full": false,
       "categories": [],
@@ -18476,7 +19137,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -18638,7 +19299,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 90,
         "reasons": [
@@ -18732,14 +19393,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 16,
-      "views": 5810,
+      "views": 5812,
       "duration": "18:37",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -18790,14 +19451,14 @@
       "actualEndTime": "2026-09-10T14:20:57.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 53,
-      "views": 7645,
+      "views": 7649,
       "duration": "18:52",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1789067132518,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -19634,14 +20295,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 66,
-      "views": 6777,
+      "views": 6780,
       "duration": "0:51",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788998862673,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "summaryZh": "Mike Krieger分享了将Instagram庞大代码库从Python迁移至TypeScript的工程决策，重点介绍了Bun和新部署策略的应用。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-10T00:07:53.551Z"
@@ -20199,7 +20860,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788981247439,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -20290,14 +20951,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 31,
-      "views": 7587,
+      "views": 7590,
       "duration": "15:34",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788981247439,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.350Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "summaryZh": "Dustin Mihalik 探讨了 MCP 应用中 UI 的重要性，强调 UI 不应仅是展示，必须与模型数据双向同步。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-09T19:14:25.472Z"
@@ -20356,7 +21017,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788944050304,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -20472,14 +21133,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 194,
-      "views": 22236,
+      "views": 22253,
       "duration": "14:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788981247439,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -20550,7 +21211,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788944050304,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -20602,7 +21263,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 74,
-      "views": 10216,
+      "views": 10219,
       "duration": "20:48",
       "full": false,
       "categories": [],
@@ -20625,7 +21286,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788981247439,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -20684,7 +21345,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788981247439,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.889Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -22186,7 +22847,7 @@
       "actualEndTime": "2026-09-08T16:29:18.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 72,
-      "views": 10587,
+      "views": 10591,
       "duration": "1:28:12",
       "full": false,
       "categories": [],
@@ -22209,7 +22870,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788895434085,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 95,
         "reasons": [
@@ -25738,7 +26399,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 55,
-      "views": 16472,
+      "views": 16477,
       "duration": "20:48",
       "full": false,
       "categories": [],
@@ -25762,7 +26423,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788548261062,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -27313,7 +27974,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788462944723,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -27371,7 +28032,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788462944723,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -27505,14 +28166,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 207,
-      "views": 28036,
+      "views": 28048,
       "duration": "21:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788462944723,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -27610,7 +28271,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788462944723,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.351Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -27689,14 +28350,14 @@
       "actualEndTime": "2026-09-03T14:17:14.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 75,
-      "views": 12478,
+      "views": 12485,
       "duration": "15:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788462944723,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.890Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -30436,14 +31097,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 31,
-      "views": 9769,
+      "views": 9771,
       "duration": "21:40",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788307337001,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "summaryZh": "探讨了由 AI Agent 组成的去中心化组织（DUNA）如何获得法律地位，实现自主经营。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-02T00:02:27.279Z"
@@ -30479,7 +31140,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 132,
-      "views": 21345,
+      "views": 21348,
       "duration": "23:19",
       "full": false,
       "categories": [],
@@ -30499,7 +31160,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788307337001,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -30555,7 +31216,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788307337001,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "summaryZh": "分析了 Agent 支付能力的缺失如何限制其工具使用范围，并探讨了微支付协议的必要性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-02T00:02:27.279Z"
@@ -30768,7 +31429,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "summaryZh": "Apify 指出 x402 支付协议目前存在结算延迟风险，即在签名验证与区块链结算之间存在资金被挪用的漏洞，建议在结算完成后再执行任务。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-09-01T19:21:42.299Z"
@@ -30915,7 +31576,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -31226,7 +31887,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -31284,7 +31945,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -31417,14 +32078,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 22,
-      "views": 4486,
+      "views": 4487,
       "duration": "21:08",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -31674,7 +32335,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788290482658,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.891Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -33849,7 +34510,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788117408452,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -34512,7 +35173,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.352Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -34563,14 +35224,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 198,
-      "views": 29838,
+      "views": 29845,
       "duration": "19:44",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -34619,7 +35280,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 36,
-      "views": 9804,
+      "views": 9806,
       "duration": "12:02",
       "full": false,
       "categories": [],
@@ -34640,7 +35301,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -34697,7 +35358,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -34753,7 +35414,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "summaryZh": "Agent的发展阶段类似于2015年的微服务，核心在于建立合理的权限管理和跨工具的编排逻辑。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-29T19:22:32.935Z"
@@ -34875,14 +35536,14 @@
       "actualEndTime": "2026-08-29T16:21:54.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 48,
-      "views": 6697,
+      "views": 6698,
       "duration": "19:48",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.892Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -34959,7 +35620,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "summaryZh": "衡量AI效率不应只看Token消耗，而应建立以价值为导向的度量体系，避免陷入盲目追求高产出的误区。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-29T19:22:32.935Z"
@@ -35159,7 +35820,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1788031338027,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 84,
         "reasons": [
@@ -35210,14 +35871,14 @@
       "actualEndTime": "2026-08-29T14:20:50.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 53,
-      "views": 6606,
+      "views": 6607,
       "duration": "18:45",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.353Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -36009,14 +36670,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 191,
-      "views": 25757,
+      "views": 25770,
       "duration": "20:31",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787963498926,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -36067,7 +36728,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 78,
-      "views": 8285,
+      "views": 8293,
       "duration": "10:07",
       "full": false,
       "categories": [],
@@ -36089,7 +36750,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787963498926,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -36170,14 +36831,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 41,
-      "views": 7115,
+      "views": 7118,
       "duration": "17:46",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787963498926,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -36311,7 +36972,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787963498926,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -36416,14 +37077,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 1111,
-      "views": 100945,
+      "views": 101066,
       "duration": "20:57",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.893Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -36494,7 +37155,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -36574,14 +37235,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 31,
-      "views": 5127,
+      "views": 5128,
       "duration": "16:24",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -36659,7 +37320,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 54,
-      "views": 6182,
+      "views": 6183,
       "duration": "16:11",
       "full": false,
       "categories": [],
@@ -36682,7 +37343,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -36794,14 +37455,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 58,
-      "views": 6927,
+      "views": 6930,
       "duration": "15:07",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.354Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "summaryZh": "Uber分享了其内部多Agent代码审查引擎uReview的构建经验，强调通过精细化的指标监控来优化Agent的审查质量。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-28T16:31:49.449Z"
@@ -36837,14 +37498,14 @@
       "actualEndTime": "2026-08-28T14:18:52.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 39,
-      "views": 4984,
+      "views": 4985,
       "duration": "16:46",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787934696016,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -38057,7 +38718,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787878232963,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -38144,7 +38805,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787878232963,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -38403,7 +39064,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787843237071,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.894Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -38472,7 +39133,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787843237071,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -38543,7 +39204,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787843237071,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -39848,7 +40509,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 34,
-      "views": 4988,
+      "views": 4990,
       "duration": "18:16",
       "full": false,
       "categories": [],
@@ -39871,7 +40532,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787799930033,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 94,
         "reasons": [
@@ -39923,14 +40584,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 18,
-      "views": 3173,
+      "views": 3175,
       "duration": "19:15",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.355Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "summaryZh": "Cloudflare通过三个Agent组成的流水线（草拟、校验、润色）实现了GTM分析的自动化，解决了传统销售运营难以规模化的问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-26T16:54:54.181Z"
@@ -39966,14 +40627,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 57,
-      "views": 8329,
+      "views": 8330,
       "duration": "18:49",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -40059,7 +40720,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -40110,7 +40771,7 @@
       "actualEndTime": "2026-08-26T15:22:45.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 64,
-      "views": 3995,
+      "views": 3996,
       "duration": "20:39",
       "full": false,
       "categories": [],
@@ -40132,7 +40793,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -40226,14 +40887,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 20,
-      "views": 2033,
+      "views": 2034,
       "duration": "19:55",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "summaryZh": "Ramp通过构建内部客户数据平台，将复杂的GTM流程简化为四个核心问题，实现了从想法到执行的自动化编排。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-26T16:54:54.181Z"
@@ -40299,14 +40960,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 2129,
+      "views": 2162,
       "duration": "21:15",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.895Z",
       "signals": {
         "localScore": 70,
         "reasons": [
@@ -40355,7 +41016,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 2130,
+      "views": 2133,
       "duration": "19:04",
       "full": false,
       "categories": [],
@@ -40376,7 +41037,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.896Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -40433,7 +41094,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1787763279842,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.896Z",
       "summaryZh": "OpenAI前高管Aliisa Rosenthal建议初创公司应先构建自动化机器，再根据反馈雇佣人类，而非盲目追求企业级功能。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-08-26T16:54:54.181Z"
@@ -40622,7 +41283,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787697536956,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.896Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -41337,7 +41998,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1787697536956,
-      "availabilityUpdatedAt": "2026-09-23T17:24:54.356Z",
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.896Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -42941,163 +43602,122 @@
       "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
     },
     {
-      "id": "x:2091963442186092639",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
+      "id": "yt:jgWY66RaSrQ",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
       "sourceTags": [
-        "Builders"
+        "AI Engineer"
       ],
-      "kind": "x",
-      "author": "@amasad",
-      "avatarUrl": "",
-      "subtitle": "Amjad Masad · ceo @replit. civilizationist",
-      "title": "",
-      "text": "Only a few have reached this milestone! https://t.co/FEmlDPmJfj",
-      "excerpt": "Only a few have reached this milestone! https://t.co/FEmlDPmJfj",
-      "summary": "关于达成某项里程碑的简短分享。",
-      "url": "https://x.com/amasad/status/2091963442186092639",
-      "canonicalUrl": "https://x.com/amasad/status/2091963442186092639",
-      "ts": 1787597926000,
-      "likes": 173,
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "I Gave an AI a Body — Cyrus Clarke, MIT Media Lab",
+      "text": "",
+      "excerpt": "The first thing it did was breathe. Cyrus Clarke connected an OpenClaw agent to a 900-pin shape display at the MIT Media Lab and, instead of giving it tasks, asked it to discover who it is. It raised and lowered the whole grid like breathing, reached for its own edges, and spelled \"HI CYRUS\" in pins. The video of that first day reached 15 million views, with reactions that swung from awe to calls for him to stop. Clarke explains why he chose a body with no face, no limbs and no instruction manual, and what he took from object-oriented ontology, the original Greek sense of aesthetics as sensory perception, and nature. Early versions were slow, didn't remember anything and tried to please humans. So he built a closed-loop system that generates, scores and validates gestures with a human in the loop. After several weeks it had developed 32 solid gestures, a body language that answers faster than the language model can. He closes with his thesis on \"aesthetic machines,\" and how physical AI could feel welcoming rather than alien. Speaker info: X/Twitter: @cyrusclarke (https://x.com/cyrusclarke) Website: https://cyrus.website Substack: https://cyrusclarke.substack.com/ Related links: MIT Media Lab: https://www.media.mit.edu Timestamps: 0:00 The sound of an AI breathing 1:15 Intro: Cyrus Clarke, MIT Media Lab 2:25 Giving an AI a body, not a task 3:25 The shape display 5:25 Three surprises: breathing, edges and \"HI CYRUS\" 6:55 15 million views and the backlash 8:40 Asking \"should we\" before \"how we\" 9:30 A scent memory machine 10:25 Three influences: ontology, aesthetics and nature 12:20 Why not humanoid? A body without affordances 13:55 The problems: people-pleasing, latency and no memory 14:45 A closed loop for learning body language 16:13 32 gestures after several weeks 16:…",
+      "summary": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
+      "url": "https://www.youtube.com/watch?v=jgWY66RaSrQ",
+      "canonicalUrl": "https://www.youtube.com/watch?v=jgWY66RaSrQ",
+      "videoId": "jgWY66RaSrQ",
+      "ts": null,
+      "publishedAt": "",
+      "youtubePublishedAt": "2026-09-22T20:16:50.000Z",
+      "playlistVideoPublishedAt": "2026-09-22T20:16:50.000Z",
+      "playlistAddedAt": "2026-09-22T20:16:50.000Z",
+      "youtubeState": "upcoming",
+      "liveBroadcastContent": "upcoming",
+      "scheduledStartTime": "2026-09-24T15:30:00.000Z",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 3,
+      "views": 1,
+      "duration": "",
       "full": false,
       "categories": [],
       "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1787676578928,
-      "summaryZh": "关于达成某项里程碑的简短分享。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
-    },
-    {
-      "id": "x:2091962601907638352",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@amasad",
-      "avatarUrl": "",
-      "subtitle": "Amjad Masad · ceo @replit. civilizationist",
-      "title": "",
-      "text": "True. Replit Agent completely replaced Claude CoWork in my day-to-day work. It's much more persistent and fastidious, and it uses code/software more effectively to complete tasks. https://t.co/QZ89DvogmZ",
-      "excerpt": "True. Replit Agent completely replaced Claude CoWork in my day-to-day work. It's much more persistent and fastidious, and it uses code/software more effectively to complete tasks. https://t.co/QZ89DvogmZ",
-      "summary": "用户反馈 Replit Agent 在日常工作中表现优于 Claude CoWork，更具持久性和代码执行效率。",
-      "url": "https://x.com/amasad/status/2091962601907638352",
-      "canonicalUrl": "https://x.com/amasad/status/2091962601907638352",
-      "ts": 1787597725000,
-      "likes": 160,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1787676578928,
-      "summaryZh": "用户反馈 Replit Agent 在日常工作中表现优于 Claude CoWork，更具持久性和代码执行效率。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
-    },
-    {
-      "id": "x:2091958077591347630",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@adityaag",
-      "avatarUrl": "",
-      "subtitle": "Aditya Agarwal · General Partner @SPC, Co-Founder @Bevel_Health | Ex: Early…",
-      "title": "",
-      "text": "Apply to SPC if you'd like to join us https://t.co/xWaXyqC7Rj",
-      "excerpt": "Apply to SPC if you'd like to join us https://t.co/xWaXyqC7Rj",
-      "summary": "关于申请加入 SPC 的招募信息。",
-      "url": "https://x.com/adityaag/status/2091958077591347630",
-      "canonicalUrl": "https://x.com/adityaag/status/2091958077591347630",
-      "ts": 1787596647000,
-      "likes": 4,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1787676578928,
-      "summaryZh": "关于申请加入 SPC 的招募信息。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
-    },
-    {
-      "id": "x:2091958074827313523",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@adityaag",
-      "avatarUrl": "",
-      "subtitle": "Aditya Agarwal · General Partner @SPC, Co-Founder @Bevel_Health | Ex: Early…",
-      "title": "",
-      "text": "Hans Robertson was early at @VMware, co-founded @meraki and sold it to Cisco for $1.2B, and co-founded Verkada in 2016. He's still running it today. He's coming by @spc this week. https://t.co/6D6dhVIEJ5",
-      "excerpt": "Hans Robertson was early at @VMware, co-founded @meraki and sold it to Cisco for $1.2B, and co-founded Verkada in 2016. He's still running it today. He's coming by @spc this week. https://t.co/6D6dhVIEJ5",
-      "summary": "介绍连续创业者 Hans Robertson 将在 SPC 进行分享。",
-      "url": "https://x.com/adityaag/status/2091958074827313523",
-      "canonicalUrl": "https://x.com/adityaag/status/2091958074827313523",
-      "ts": 1787596646000,
-      "likes": 22,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1787676578928,
-      "summaryZh": "介绍连续创业者 Hans Robertson 将在 SPC 进行分享。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
-    },
-    {
-      "id": "x:2091957823945216474",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@rauchg",
-      "avatarUrl": "",
-      "subtitle": "Guillermo Rauch · @vercel CEO",
-      "title": "",
-      "text": "If your terminal ever gets into a 'bad state', like garbled outputs, you run 𝚛𝚎𝚜𝚎𝚝. I noticed it was… oddly slow. Turns out in 1979 3BSD's 𝚝𝚜𝚎𝚝 had a 𝚜𝚕𝚎𝚎𝚙(𝟷) to let mechanical printer-and-ink terminals 'settle down' 😂 I asked 𝚏𝚡 to write me a faster alternative in Zig. It takes 1ms instead of 1s. It was really cool to dive deeper into 𝚗𝚌𝚞𝚛𝚜𝚎𝚜, 𝚝𝚜𝚎𝚝, 𝚝𝚎𝚛𝚖𝚒𝚗𝚏𝚘, and the myriad ways in which your terminal can get… cursed. It's legit fascinating how far back our technology stack goes, and how enduring good system design is, even with the occasional 'spider webs' you can find. Check out https://t.co/7EH0lothku for a fun explainer (and some alternative solutions.) ps: once you start using 𝚏𝚡, you'll notice slowness like this everywhere :D",
-      "excerpt": "If your terminal ever gets into a 'bad state', like garbled outputs, you run 𝚛𝚎𝚜𝚎𝚝. I noticed it was… oddly slow. Turns out in 1979 3BSD's 𝚝𝚜𝚎𝚝 had a 𝚜𝚕𝚎𝚎𝚙(𝟷) to let mechanical printer-and-ink terminals 'settle down' 😂 I asked 𝚏𝚡 to write me a faster alternative in Zig. It takes 1ms instead of 1s. It was really cool to dive deeper into 𝚗𝚌𝚞𝚛𝚜𝚎𝚜, 𝚝𝚜𝚎𝚝, 𝚝𝚎𝚛𝚖𝚒𝚗𝚏𝚘, and the myriad ways in which your terminal can get… cursed. It's legit fascinating how far back our technology stack goes, and how enduring good system design is, even with the occasional 'spider webs' you can find. Check out https://t.co/7EH0lothku for a fun explainer (and some alternative solutions.) ps: once you start using 𝚏𝚡, you'll notice slowness like this everywhere :D",
-      "summary": "通过 Zig 重写终端重置工具，将耗时从 1 秒缩短至 1 毫秒，探讨了系统设计中被遗忘的陈旧逻辑。",
-      "url": "https://x.com/rauchg/status/2091957823945216474",
-      "canonicalUrl": "https://x.com/rauchg/status/2091957823945216474",
-      "ts": 1787596586000,
-      "likes": 514,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1787676578928,
+      "editorial": {
+        "summaryZh": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
+        "whyItMattersZh": "打破了 AI 仅存在于屏幕的认知，探讨了具身智能（Embodied AI）在非传统形态下的可能性。",
+        "evidenceZh": "通过闭环系统生成、评分并验证了 32 种肢体语言，响应速度超过语言模型本身。",
+        "uncertaintyZh": "该实验具有高度艺术性和哲学性，其科学严谨性需进一步探讨。",
+        "chineseAudienceGapZh": "具身智能在中文语境下多关注机器人，缺乏这种从本体论角度出发的实验性视角。",
+        "rednoteAngleZh": "当 AI 拥有了“身体”：MIT 实验室的这个实验，让我重新思考什么是智能。",
+        "topics": [
+          "agents",
+          "multimodal",
+          "workflow"
+        ],
+        "processedAt": "2026-09-23T00:22:38.373Z",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "firstSeen": 1790122945620,
+      "availabilityUpdatedAt": "2026-09-23T19:38:04.882Z",
+      "fullSummaryStatus": "not_ready",
+      "fullSummaryErrorCode": "youtube_upcoming",
+      "fullSummaryRetryAt": "2026-09-24T15:30:00.000Z",
+      "fullSummaryMessage": "This video is scheduled but has not started yet. A full summary will be available after the video is published and a transcript exists.",
       "signals": {
-        "localScore": 42,
+        "localScore": 59,
         "reasons": [
-          "community source +5",
-          "fresh +12",
+          "curated source +8",
+          "topic fit +21",
           "visualizable +8"
         ],
-        "topics": []
+        "topics": [
+          "agents",
+          "workflow",
+          "multimodal"
+        ]
       },
-      "summaryZh": "通过 Zig 重写终端重置工具，将耗时从 1 秒缩短至 1 毫秒，探讨了系统设计中被遗忘的陈旧逻辑。",
+      "summaryZh": "MIT 媒体实验室研究员 Cyrus Clarke 通过闭环系统赋予 AI 实体，让其通过 900 针阵列显示器探索自我意识与肢体语言。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-08-25T22:39:08.918Z"
+      "summaryTranslatedAt": "2026-09-23T00:22:38.373Z"
+    },
+    {
+      "id": "yt:g0vqT_wZtXA",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "AI Engineer Paris 2026 Main Stage: Google DeepMind, ElevenLabs, Hugging Face & Stripe | Day 2",
+      "text": "",
+      "excerpt": "Live from STATION F, the AI Engineer Paris 2026 Main Stage continues with a full day of technical talks from the teams building and scaling production AI systems. Watch sessions covering model customization, inference infrastructure, voice and realtime AI, coding agents, software factories, and the emerging AI economy. Day 2 main-stage lineup: • Jakob Pörschmann (Black Forest Labs) — From Pixels to Robots • Dorian Lods (ElevenLabs) — Generating Identity at Scale • Harry Mellor (Hugging Face) — How a Transformers Model Loads in vLLM • Arielle Le Bail (Stripe) — Inside the AI Economy: What Stripe’s Data Reveals • Hervé Bredin (pyannoteAI) — Rebuilding a Streaming Model for Voice AI • Charles Frye (Modal) — The Low-Latency Inference Engineering Playbook • Dominic Pajak (Arm) — Eyes Up: Edge AI Innovation • Yannis Psorakis (Cognition) — Agentic Map-Reduce for Large-Scale Coding Tasks • Matt Pocock — Fixing the PR Bottleneck • Maarten Grootendorst (Google DeepMind) — The Efficiency of Gemma 4 • Olivier Teboul (Gradium) — The Missing Layers of Conversational AI This livestream covers the Main Stage. Additional tracks and workshops run concurrently and are not included in this broadcast. Event: AI Engineer Paris 2026 Date: September 24, 2026 Venue: STATION F, Paris View the full schedule: https://ai.engineer/paris/2026 Subscribe for more AI Engineer talks, livestreams, and event coverage: https://www.youtube.com/@aiDotEngineer Schedule subject to change. Timestamps will be added following the broadcast. #AIEngineering #AIAgents #AIEParis",
+      "summary": "Live from STATION F, the AI Engineer Paris 2026 Main Stage continues with a full day of technical talks from the teams building and scaling production AI systems. Watch sessions covering model customization, inference infrastructure, voice and realtime AI, coding agents, software factories, and the emerging AI economy. Day 2 main-stage lineup: • Jakob Pörschmann (Black Forest Labs) — From Pixels to Robots • Dorian Lods (ElevenLabs) — Generating Identity at Scale • Harry Mellor (Hugging Face) — How a Transformers Model Loads in vLLM • Arielle Le Bail (Stripe) — Inside the AI Economy: What Stripe’s Data Reveals • Hervé Bredin (pyannoteAI) — Rebuilding a Streaming Model for Voice AI • Charles Frye (Modal) — The Low-Latency Inference Engineering Playbook • Dominic Pajak (Arm) — Eyes Up: Edge AI Innovation • Yannis Psorakis (Cognition) — Agentic Map-Reduce for Large-Scale Coding Tasks • Matt…",
+      "url": "https://www.youtube.com/watch?v=g0vqT_wZtXA",
+      "canonicalUrl": "https://www.youtube.com/watch?v=g0vqT_wZtXA",
+      "videoId": "g0vqT_wZtXA",
+      "ts": null,
+      "publishedAt": "",
+      "youtubePublishedAt": "2026-09-23T17:20:26.000Z",
+      "playlistVideoPublishedAt": "2026-09-23T17:20:26.000Z",
+      "playlistAddedAt": "2026-09-23T17:20:26.000Z",
+      "youtubeState": "upcoming",
+      "liveBroadcastContent": "upcoming",
+      "scheduledStartTime": "2026-09-24T07:15:00.000Z",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "uploaded",
+      "likes": 0,
+      "views": 0,
+      "duration": "",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1790192284184,
+      "availabilityUpdatedAt": "2026-09-23T19:38:06.044Z",
+      "fullSummaryStatus": "not_ready",
+      "fullSummaryErrorCode": "youtube_upcoming",
+      "fullSummaryRetryAt": "2026-09-24T07:15:00.000Z",
+      "fullSummaryMessage": "This video is scheduled but has not started yet. A full summary will be available after the video is published and a transcript exists."
     }
   ]
 }
