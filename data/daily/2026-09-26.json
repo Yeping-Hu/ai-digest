@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-26T09:17:32.989Z",
+  "generatedAt": "2026-09-26T19:11:16.612Z",
   "date": "2026-09-26",
   "timeZone": "America/Los_Angeles",
-  "newCount": 30,
+  "newCount": 37,
   "newIds": [
     "x:2103696644558704796",
     "x:2103693608729932025",
@@ -33,10 +33,19 @@
     "x:2103515670428238179",
     "x:2103515668171853944",
     "x:2103470568104468517",
-    "article:737331cbffc8a092b5afd218"
+    "article:737331cbffc8a092b5afd218",
+    "yt:oVsEddfhdxc",
+    "yt:OA-Mc60Rboo",
+    "yt:x4e5O9zN0TE",
+    "yt:XyV6bSMyq-I",
+    "yt:vrDvatGtIxs",
+    "yt:hd7TOvmyAxU",
+    "yt:7taOQBfjDyE"
   ],
   "topIds": [
     "x:2103629073595728372",
+    "yt:XyV6bSMyq-I",
+    "yt:hd7TOvmyAxU",
     "x:2103538666597691552"
   ],
   "scanIds": [],
@@ -44,13 +53,37 @@
     {
       "id": "x:2103629073595728372",
       "score": 95,
-      "reason": "深刻揭示了AI Agent从玩具走向生产环境的工程化本质，极具深度。",
+      "reason": "community source +5 · fresh +15 · topic fit +23",
       "tier": "top",
       "rank": 1,
       "peakScore": 95,
-      "lastScore": 95,
+      "lastScore": 63,
       "firstSelectedAt": "2026-09-26T09:17:32.989Z",
-      "lastSelectedAt": "2026-09-26T09:17:32.989Z",
+      "lastSelectedAt": "2026-09-26T19:11:16.612Z",
+      "selectionCount": 2
+    },
+    {
+      "id": "yt:XyV6bSMyq-I",
+      "score": 92,
+      "reason": "展示了 Agent 进化的前沿范式，具有极高的科研与工程参考价值。",
+      "tier": "top",
+      "rank": 2,
+      "peakScore": 92,
+      "lastScore": 92,
+      "firstSelectedAt": "2026-09-26T19:11:16.612Z",
+      "lastSelectedAt": "2026-09-26T19:11:16.612Z",
+      "selectionCount": 1
+    },
+    {
+      "id": "yt:hd7TOvmyAxU",
+      "score": 92,
+      "reason": "提供了极具实操性的科研自动化思路，适合科研群体。",
+      "tier": "top",
+      "rank": 3,
+      "peakScore": 92,
+      "lastScore": 92,
+      "firstSelectedAt": "2026-09-26T19:11:16.612Z",
+      "lastSelectedAt": "2026-09-26T19:11:16.612Z",
       "selectionCount": 1
     },
     {
@@ -58,7 +91,7 @@
       "score": 90,
       "reason": "提供了极具实操价值的Agent工作流案例，非常适合科研/开发类受众。",
       "tier": "top",
-      "rank": 2,
+      "rank": 4,
       "peakScore": 90,
       "lastScore": 90,
       "firstSelectedAt": "2026-09-26T09:17:32.989Z",
@@ -68,52 +101,54 @@
   ],
   "ideas": [
     {
-      "workingTitle": "AI Agent落地难？你需要一套企业级评估体系",
-      "angle": "从工程化视角拆解AI Agent的评估痛点，对比确定性与非确定性流程的度量差异，帮助读者建立AI落地思维。",
-      "whyNow": "企业AI应用正从实验阶段转向生产阶段，评估体系的缺失是当前最大的行业痛点。",
+      "workingTitle": "AI 进化论：如何让 Agent 自己修 Bug、跑实验？",
+      "angle": "以 W&B 的 ARIA 为核心，介绍 Agent 从“执行者”向“自我进化者”转变的工程化闭环，适合追求效率的开发者。",
+      "whyNow": "Agent 自我迭代是当前最前沿的工程趋势，能极大降低人工维护成本。",
       "sourceIds": [
-        "x:2103629073595728372"
+        "yt:XyV6bSMyq-I",
+        "yt:hd7TOvmyAxU"
       ]
     },
     {
-      "workingTitle": "告别手动修Bug：我的AI Agent工作流实操分享",
-      "angle": "通过具体的Prompt案例，展示如何让Agent具备主动性，实现自动复现Bug、提交PR和深度数据分析，提升开发效率。",
-      "whyNow": "开发者对AI辅助编程的需求已从简单的代码补全转向全自动化的工作流协作。",
+      "workingTitle": "科研人员的 AI 辅助：是创新者还是搬运工？",
+      "angle": "对比 AI 在科研竞赛中的表现，探讨 AI 在科研工作流中的真实定位，强调“评估”作为科研 CI 的重要性。",
+      "whyNow": "科研群体对 AI 辅助工具的需求激增，但缺乏科学的评估与使用方法。",
       "sourceIds": [
-        "x:2103538666597691552"
+        "yt:oVsEddfhdxc",
+        "yt:7taOQBfjDyE"
       ]
     },
     {
-      "workingTitle": "AI Agent架构升级：从同步到异步的重构之路",
-      "angle": "以真实项目重构为例，讲解当Agent并发量增加时，如何通过异步工作流解决性能瓶颈，让复杂重构不再可怕。",
-      "whyNow": "随着Agent应用复杂度的提升，底层架构设计已成为决定系统稳定性的关键。",
+      "workingTitle": "告别暴力训练：AI 靠“反思”实现性能飞跃",
+      "angle": "拆解 GEPA 的反思机制，对比传统强化学习，展示如何通过分析 Trace 提升模型表现，适合对算法优化感兴趣的读者。",
+      "whyNow": "算力成本高昂，基于反思的轻量化优化路径是未来的核心竞争力。",
       "sourceIds": [
-        "x:2103648679169257737"
+        "yt:OA-Mc60Rboo"
       ]
     }
   ],
   "run": {
     "status": "ok",
-    "startedAt": "2026-09-26T09:17:13.951Z",
+    "startedAt": "2026-09-26T19:11:01.763Z",
     "sourcesAttempted": 8,
     "sourcesSucceeded": 7,
     "sourcesFailed": 1,
     "itemsFetched": 112,
     "itemsAfterDedup": 112,
-    "newItems": 30,
-    "candidates": 5,
+    "newItems": 37,
+    "candidates": 10,
     "geminiCalls": 2,
     "geminiModel": "gemini-3.1-flash-lite",
     "usedGemini": true,
     "errors": [
       "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml"
     ],
-    "newItemsThisRun": 30,
+    "newItemsThisRun": 8,
     "releasedItemsThisRun": 0,
     "translationTargets": 20,
-    "finishedAt": "2026-09-26T09:17:32.989Z",
-    "rankedThisRun": 2,
-    "accumulatedTop": 2,
+    "finishedAt": "2026-09-26T19:11:16.612Z",
+    "rankedThisRun": 3,
+    "accumulatedTop": 4,
     "youtubeLifecycleUpdates": 0
   }
 }
