@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-12T22:53:34.319Z",
+  "generatedAt": "2026-10-13T02:59:46.852Z",
   "date": "2026-10-12",
   "timeZone": "America/Los_Angeles",
-  "newCount": 46,
+  "newCount": 47,
   "newIds": [
     "x:2109538550421262552",
     "yt:snTZtttfL70",
@@ -49,7 +49,8 @@
     "yt:SacJfmp33vM",
     "yt:ws9XcGGPBDk",
     "yt:gpmze-6ueGU",
-    "article:79fb31c209812beb34edc71f"
+    "article:79fb31c209812beb34edc71f",
+    "article:993bc19082d2d062c86a72ba"
   ],
   "topIds": [
     "yt:qJtcEDc_WJU",
@@ -67,26 +68,26 @@
     {
       "id": "yt:qJtcEDc_WJU",
       "score": 95,
-      "reason": "Anthropic 官方对 Agent 长期记忆和调度架构的深度拆解，极具参考价值。",
+      "reason": "展示了Agent从简单交互到复杂托管式工作流的演进，极具前瞻性。",
       "tier": "top",
       "rank": 1,
       "peakScore": 95,
-      "lastScore": 95,
+      "lastScore": 92,
       "firstSelectedAt": "2026-10-12T11:50:55.912Z",
-      "lastSelectedAt": "2026-10-12T22:53:34.319Z",
-      "selectionCount": 2
+      "lastSelectedAt": "2026-10-13T02:59:46.852Z",
+      "selectionCount": 3
     },
     {
       "id": "yt:rAUyRDOFyHU",
       "score": 92,
-      "reason": "提供了非常具体的企业级 AI 工作流架构，强调确定性与模型判断的结合。",
+      "reason": "提供了极佳的工程化视角，强调确定性工作流对AI Agent的重要性。",
       "tier": "top",
       "rank": 2,
       "peakScore": 92,
-      "lastScore": 92,
+      "lastScore": 91,
       "firstSelectedAt": "2026-10-12T22:53:34.319Z",
-      "lastSelectedAt": "2026-10-12T22:53:34.319Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-10-13T02:59:46.852Z",
+      "selectionCount": 2
     },
     {
       "id": "yt:nSkmXakJ6eo",
@@ -139,14 +140,14 @@
     {
       "id": "x:2109467575025578330",
       "score": 76,
-      "reason": "community source +5 · fresh +15 · topic fit +32",
+      "reason": "community source +5 · fresh +12 · topic fit +32",
       "tier": "top",
       "rank": 7,
       "peakScore": 76,
-      "lastScore": 76,
+      "lastScore": 73,
       "firstSelectedAt": "2026-10-12T11:50:55.912Z",
-      "lastSelectedAt": "2026-10-12T22:53:34.319Z",
-      "selectionCount": 2
+      "lastSelectedAt": "2026-10-13T02:59:46.852Z",
+      "selectionCount": 3
     },
     {
       "id": "x:2109433961223180517",
@@ -175,52 +176,54 @@
   ],
   "ideas": [
     {
-      "workingTitle": "Agent 进化论：从“聊天机器人”到“自主员工”的 3 个关键技术",
-      "angle": "通过对比 Claude 的长期记忆（Dreaming）、Flywire 的确定性工作流和 WorkOS 的身份认证，构建 Agent 进化的技术路线图。",
-      "whyNow": "Agent 正在从实验阶段走向生产环境，读者需要从工程架构层面理解 Agent 的未来。",
+      "workingTitle": "AI Agent进阶：从“聊天机器人”到“托管式工作流”",
+      "angle": "对比普通用户与专业开发者的AI使用鸿沟，通过Anthropic的托管Agent案例，展示如何将AI从简单的对话工具升级为能定时、有记忆、可自主运行的生产力工具。",
+      "whyNow": "目前AI Agent正处于从实验性向生产环境落地的关键期，读者急需从“玩具”转向“工具”的认知升级。",
       "sourceIds": [
         "yt:qJtcEDc_WJU",
+        "x:2109361546505966046"
+      ]
+    },
+    {
+      "workingTitle": "拒绝AI胡乱改代码！大厂都在用的Agent工程化范式",
+      "angle": "以Flywire的Orbit平台和AWS的沙箱测试为例，总结出AI Agent落地的核心逻辑：确定性工作流+人工审核+证据驱动。教读者如何通过YAML定义和沙箱测试，让Agent变得可控、可信。",
+      "whyNow": "开发者对AI Agent的信任度是当前最大的痛点，这套工程化方法论是解决信任问题的最佳实践。",
+      "sourceIds": [
         "yt:rAUyRDOFyHU",
-        "yt:nSkmXakJ6eo"
+        "yt:k72eLcYpVys",
+        "x:2109433961223180517"
       ]
     },
     {
-      "workingTitle": "AI 评测的尽头是“压力测试”：如何让 Agent 帮你找 Bug？",
-      "angle": "以 AWS 的 1000 次沙箱测试为例，教读者如何通过 MCP 和自动化测试框架，让 AI 成为系统的“红队测试员”。",
-      "whyNow": "AI 系统的可靠性是目前企业落地的最大痛点，这种工程化测试方法论极具价值。",
+      "workingTitle": "AI Agent的“身份证”：未来Agent如何自主搞定繁琐注册？",
+      "angle": "从auth.md标准切入，探讨Agent自主化过程中的基础设施建设。通过案例展示Agent如何自动完成身份验证，并结合Railway的开发经验，分享如何构建真正好用的AI应用细节。",
+      "whyNow": "随着Agent自主性增强，身份认证和交互体验将成为决定Agent能否大规模普及的关键基础设施。",
       "sourceIds": [
-        "yt:k72eLcYpVys"
-      ]
-    },
-    {
-      "workingTitle": "别让你的 AI 工具“半途而废”：从脚本到生产级应用的 5 个细节",
-      "angle": "结合 Railway 的经验，总结 AI 工具开发中容易被忽视的交互细节（如撤销、状态同步），帮助开发者提升 AI 工具的可用性。",
-      "whyNow": "很多 AI 开发者做出的工具只能用一次，此选题能帮助他们提升产品思维。",
-      "sourceIds": [
+        "yt:nSkmXakJ6eo",
         "yt:oixzVKMAXG0"
       ]
     }
   ],
   "run": {
     "status": "ok",
-    "startedAt": "2026-10-12T22:53:20.803Z",
+    "startedAt": "2026-10-13T02:59:35.387Z",
     "sourcesAttempted": 8,
     "sourcesSucceeded": 7,
     "sourcesFailed": 1,
     "itemsFetched": 103,
     "itemsAfterDedup": 103,
-    "newItems": 46,
-    "candidates": 12,
-    "geminiCalls": 2,
+    "newItems": 47,
+    "candidates": 13,
+    "geminiCalls": 1,
     "geminiModel": "gemini-3.1-flash-lite",
     "usedGemini": true,
     "errors": [
       "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml"
     ],
-    "newItemsThisRun": 14,
+    "newItemsThisRun": 6,
     "releasedItemsThisRun": 0,
     "translationTargets": 20,
-    "finishedAt": "2026-10-12T22:53:34.319Z",
+    "finishedAt": "2026-10-13T02:59:46.852Z",
     "rankedThisRun": 3,
     "accumulatedTop": 9,
     "youtubeLifecycleUpdates": 0
