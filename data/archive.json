@@ -1,7 +1,163 @@
 {
-  "generatedAt": "2026-10-31T19:54:27.223Z",
-  "count": 1319,
+  "generatedAt": "2026-11-01T01:00:39.264Z",
+  "count": 1310,
   "items": [
+    {
+      "id": "article:785d4ceb71a807a6705cd46d",
+      "source": "Simon Willison",
+      "sourceGroup": "Simon Willison",
+      "sourceType": "independent",
+      "sourcePriority": 0.94,
+      "sourceTags": [
+        "Simon Willison"
+      ],
+      "kind": "blog",
+      "author": "Simon Willison",
+      "subtitle": "Simon Willison",
+      "title": "How We Took Over ChatGPT Accounts",
+      "text": "",
+      "excerpt": "How We Took Over ChatGPT Accounts Parameter Labs describe an exploit they found against ChatGPT's implementation of the artifacts pattern (OpenAI used to call this \"Canvas\" but it looks like the latest revision is called HTML previews ), where interactive custom HTML apps are displayed in a sandboxed iframe. It's important that HTML in these stays tightly sandboxed to avoid untrusted code interacting with OpenAI APIs and accessing private data. Parameter found quite a complex attack chain. OpenAI use the MathLive JavaScript library as part of their graph support, and that library includes its own virtual keyboard , which can be triggered in the parent page via postMessage() from the sandboxed iframe. That message receiving code uses innerHTML , so anything that sends a message can add custom HTML to the parent - and there was no mechanism to prevent other sandboxed frames, including HTML preview frames, from calling that method. This meant untrusted code in an iframe could insert HTML, and while innerHTML doesn't directly execute script elements it could be used to inject a new iframe without sandbox restrictions. OpenAI’s CSP rules blocked inline scripts entirely, and only allowed script loading from a handful of domains, but one of those was YouTube - and the YouTube oEmbed endpoint could be used to reflect JavaScript back in a way that executed it. Once the attack had JavaScript execution on ChatGPT, it was trivial to fetch private user data from APIs and exfiltrate it via an image reference. The end result: you could create a ChatGPT share URL which, when visited by an…",
+      "contentLength": 1928,
+      "summary": "Parameter Labs发现ChatGPT的HTML预览功能存在安全漏洞，攻击者可通过沙箱iframe中的恶意代码绕过限制，向父页面注入内容。",
+      "url": "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts",
+      "canonicalUrl": "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts",
+      "ts": 1793488522000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "iframes",
+        "javascript",
+        "sandboxing",
+        "security",
+        "xss",
+        "openai",
+        "chatgpt",
+        "content-security-policy"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1793494830046,
+      "signals": {
+        "localScore": 70,
+        "reasons": [
+          "independent source +12",
+          "fresh +15",
+          "topic fit +10",
+          "visualizable +8"
+        ],
+        "topics": [
+          "multimodal",
+          "safety"
+        ]
+      },
+      "summaryZh": "Parameter Labs发现ChatGPT的HTML预览功能存在安全漏洞，攻击者可通过沙箱iframe中的恶意代码绕过限制，向父页面注入内容。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
+    },
+    {
+      "id": "yt:LnQce-eHm8k",
+      "source": "AI Engineer",
+      "sourceGroup": "AI Engineer",
+      "sourceType": "curated",
+      "sourcePriority": 0.75,
+      "sourceTags": [
+        "AI Engineer"
+      ],
+      "kind": "youtube",
+      "author": "AI Engineer",
+      "subtitle": "YouTube",
+      "title": "Your AI Agent Wants Your Data. Here's How to Lock It Down - Jeff Smith, Oracle",
+      "text": "",
+      "excerpt": "Jeff Smith has built database tools at Oracle for 25 years, and he's here to make agents and databases get along safely. He explains why natural language to SQL is powerful but risky, since queries can run cleanly and still return the wrong data, and how Oracle's MCP server makes it safer: offering your team's vetted reports as tools instead of ad hoc SQL, pointing agents at a read-only standby for performance tuning, annotating schemas so agents stop brute-forcing your data dictionary, and deep data security that strips out rows a user isn't allowed to see before results ever reach the agent. Chapters: 0:00 Intro 0:56 What is the Oracle AI Database? 3:28 Why agents need database access 5:07 Use case 1: Reports as tools 7:09 Why natural language to SQL is risky 9:43 List reports, execute reports 11:30 Use case 2: Performance tuning 14:48 Use case 3: Schema docs for agents 17:27 Security: who's asking? 20:42 What's coming Jeff Smith https://www.oracle.com Join us in SF for the second annual AIE CODE summit: https://aie.codes our last flagship summit of 2026. Applications live now!",
+      "summary": "Jeff Smith介绍了如何通过Oracle的MCP服务器安全地将数据库接入AI Agent，包括使用预设报表代替直接SQL查询，以及实施行级数据安全控制。",
+      "url": "https://www.youtube.com/watch?v=LnQce-eHm8k",
+      "canonicalUrl": "https://www.youtube.com/watch?v=LnQce-eHm8k",
+      "videoId": "LnQce-eHm8k",
+      "ts": 1793487611000,
+      "publishedAt": "2026-10-31T23:00:11.000Z",
+      "youtubePublishedAt": "2026-10-31T23:00:11.000Z",
+      "playlistVideoPublishedAt": "2026-10-31T23:00:11.000Z",
+      "playlistAddedAt": "2026-10-31T23:00:11.000Z",
+      "youtubeState": "available",
+      "liveBroadcastContent": "none",
+      "scheduledStartTime": "",
+      "actualStartTime": "",
+      "actualEndTime": "",
+      "youtubeUploadStatus": "processed",
+      "likes": 5,
+      "views": 263,
+      "duration": "21:40",
+      "full": false,
+      "categories": [],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1793494830046,
+      "availabilityUpdatedAt": "2026-11-01T01:00:34.203Z",
+      "signals": {
+        "localScore": 65,
+        "reasons": [
+          "curated source +8",
+          "fresh +15",
+          "topic fit +13",
+          "visualizable +8"
+        ],
+        "topics": [
+          "agents",
+          "safety"
+        ]
+      },
+      "summaryZh": "Jeff Smith介绍了如何通过Oracle的MCP服务器安全地将数据库接入AI Agent，包括使用预设报表代替直接SQL查询，以及实施行级数据安全控制。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
+    },
+    {
+      "id": "article:9fc5ee213b01bfece9987a3f",
+      "source": "Simon Willison",
+      "sourceGroup": "Simon Willison",
+      "sourceType": "independent",
+      "sourcePriority": 0.94,
+      "sourceTags": [
+        "Simon Willison"
+      ],
+      "kind": "blog",
+      "author": "Simon Willison",
+      "subtitle": "Simon Willison",
+      "title": "datasette-llm 0.1a9",
+      "text": "",
+      "excerpt": "Release: datasette-llm 0.1a9 I have some big upgrades to Datasette Agent in the pipeline, but in the meantime here's a tiny user experience improvement to the underlying datasette-llm plugin. It now picks up the default model used by LLM , which means you can start using Datasette Agent without needing to explicitly configure a default model: uvx --with datasette-agent datasette content.db --internal internal.db Previously you would also need to specify a model with -s plugins.datasette-agent.default_model gpt-6-astra . Tags: datasette , llm , datasette-agent",
+      "contentLength": 565,
+      "summary": "datasette-llm插件更新至0.1a9版本，现在支持自动识别LLM默认模型，简化了Datasette Agent的配置流程。",
+      "url": "https://simonwillison.net/2026/Oct/31/datasette-llm",
+      "canonicalUrl": "https://simonwillison.net/2026/Oct/31/datasette-llm",
+      "ts": 1793484601000,
+      "likes": 0,
+      "full": false,
+      "categories": [
+        "datasette",
+        "llm",
+        "datasette-agent"
+      ],
+      "fullSummary": "",
+      "editorial": null,
+      "firstSeen": 1793494830046,
+      "signals": {
+        "localScore": 71,
+        "reasons": [
+          "independent source +12",
+          "fresh +15",
+          "topic fit +19",
+          "visualizable +4"
+        ],
+        "topics": [
+          "agents",
+          "open-source",
+          "model-release"
+        ]
+      },
+      "summaryZh": "datasette-llm插件更新至0.1a9版本，现在支持自动识别LLM默认模型，简化了Datasette Agent的配置流程。",
+      "summaryLanguage": "zh",
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
+    },
     {
       "id": "yt:1_lX0m64-aI",
       "source": "AI Engineer",
@@ -17,7 +173,7 @@
       "title": "Everyone Has the Same AI Models. Here's What Sets Agents Apart - Richmond Alake, Oracle",
       "text": "",
       "excerpt": "Richmond Alake was talking about agent memory before most people had heard of it, and now he argues the next layer after the control plane is an intelligence plane: what an agent knows, what it remembers, what it's allowed to see, and how it gets better. Using the WWII codebreakers who worked out that \"AF\" meant Midway, he shows why having the same information as everyone else isn't the same as intelligence. He then demos an agent built with an ontology and semantic layer that gets answers right 99% of the time using 32K tokens, versus 200K for a naive agent, and covers Oracle's agent memory package, deep data security, private inference, and fine-tuning small decision models for memory routing. Chapters: 0:00 Intro 0:20 Agent memory in one minute 1:39 The control plane 2:43 The software factory 3:54 The intelligence plane 4:38 AF is Midway 7:37 Where it fits in the agent stack 8:16 What the intelligence plane is 11:33 Agent = model + harness 13:13 Why now: decision models 14:01 Demo: governed vs. naive agent 17:07 What your team should do now 18:07 Agent memory, security and private inference 20:52 Demo: fine-tuning memory routing 24:41 Wrap-up: own your memory Richmond Alake https://www.oracle.com Join us in SF for the second annual AIE CODE summit: https://aie.codes our last flagship summit of 2026. Applications live now!",
-      "summary": "Richmond Alake提出Agent的核心竞争力在于“智能层（Intelligence Plane）”，即如何通过本体论和语义层优化记忆与决策。",
+      "summary": "Richmond Alake提出Agent的核心竞争力在于“智能平面”（Intelligence Plane），即如何通过本体论和语义层管理记忆，而非仅仅依赖模型。",
       "url": "https://www.youtube.com/watch?v=1_lX0m64-aI",
       "canonicalUrl": "https://www.youtube.com/watch?v=1_lX0m64-aI",
       "videoId": "1_lX0m64-aI",
@@ -32,32 +188,32 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 13,
-      "views": 261,
+      "likes": 40,
+      "views": 5226,
       "duration": "25:47",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "Richmond Alake提出Agent的核心竞争力在于“智能层（Intelligence Plane）”，即如何通过本体论和语义层优化记忆与决策。",
-        "whyItMattersZh": "当模型能力趋同，Agent的差异化在于如何管理记忆和上下文，而非仅仅依赖模型参数。",
-        "evidenceZh": "通过引入本体论和语义层，Agent在32K token下即可达到99%的准确率，远优于普通Agent的200K token表现。",
-        "uncertaintyZh": "需核实Oracle具体Agent memory package的开放程度。",
-        "chineseAudienceGapZh": "国内对Agent记忆管理多停留在RAG层面，缺乏对“智能层”架构设计的深度探讨。",
-        "rednoteAngleZh": "对比图：普通Agent（堆Token） vs 智能层Agent（结构化记忆），如何用更少Token实现更高准确率。",
+        "summaryZh": "Richmond Alake提出Agent的核心竞争力在于“智能平面”（Intelligence Plane），即如何通过本体论和语义层管理记忆，而非仅仅依赖模型。",
+        "whyItMattersZh": "当模型能力趋同，Agent的差异化将取决于其记忆系统和决策路由能力，这是构建高可用Agent的关键。",
+        "evidenceZh": "通过引入语义层，Agent在仅使用32K token的情况下，准确率达到99%，远超普通Agent使用200K token的效果。",
+        "uncertaintyZh": "文中提到的“智能平面”概念尚处于行业探索阶段，缺乏统一标准。",
+        "chineseAudienceGapZh": "国内Agent开发多停留在Prompt Engineering，缺乏对Agent记忆架构（Memory Architecture）的系统性探讨。",
+        "rednoteAngleZh": "“为什么你的Agent总是‘失忆’？揭秘Agent进阶的‘智能平面’架构。”",
         "topics": [
           "agents",
-          "reasoning",
           "workflow",
+          "reasoning",
           "safety"
         ],
-        "processedAt": "2026-10-31T19:54:27.223Z",
+        "processedAt": "2026-11-01T01:00:39.263Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793476454648,
-      "availabilityUpdatedAt": "2026-10-31T19:54:17.445Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.805Z",
       "signals": {
-        "localScore": 84,
+        "localScore": 85,
         "reasons": [
           "curated source +8",
           "fresh +15",
@@ -71,9 +227,9 @@
           "safety"
         ]
       },
-      "summaryZh": "Richmond Alake提出Agent的核心竞争力在于“智能层（Intelligence Plane）”，即如何通过本体论和语义层优化记忆与决策。",
+      "summaryZh": "Richmond Alake提出Agent的核心竞争力在于“智能平面”（Intelligence Plane），即如何通过本体论和语义层管理记忆，而非仅仅依赖模型。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-31T19:54:27.223Z"
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
     },
     {
       "id": "article:bc32ee57928887741a94f66a",
@@ -91,7 +247,7 @@
       "text": "",
       "excerpt": "At AI Engineer New York this month, we sat down with Aman Singh , the lead AI Engineer at Arca , an “AI-native” company providing wealth management services. We discovered that while agents do most of the background work in the firm, there are guardrails in place to ensure that human advisors are making the final decisions. The goal is for AI to guide the process; or as Singh nicely put it, “agents prompt people more than people prompt agents.” Arca recently raised $48.5 Million in a round led by General Catalyst, with participation from Index Ventures and Venrock. One of the features of using AI in financial services, explained Singh, is that it’s typically long-horizon work — although not long-running. In his AIE presentation, Singh noted that agent tasks at Arca can take up to ten days. “It's very stop-start, there's many actors in between, many decision points, many handoffs,” he said. For this reason, Arca has developed an internal memory system . “So we have this persistence for every client ,” Singh said in our podcast discussion. “What has happened so far? What are we tracking for next? What needs to happen immediately in the next couple of days [and] what are we tracking for the long term? Which individual is responsible for which action? All of this is being tracked by our memory systems that our agents contribute to.” Arca uses models from frontier labs like Anthropic and OpenAI, with Claude its primary model provider. The company has built its own harness , which automatically selects the best model to use for a particular task, based on the company’s internal…",
       "contentLength": 4212,
-      "summary": "Arca公司通过“Agent提示人类”的模式，将AI应用于长周期金融工作流，强调AI作为决策辅助而非完全自动化。",
+      "summary": "Arca公司在金融领域实践中发现，AI Agent更适合处理长周期任务，且核心逻辑是“Agent提示人类”而非“人类提示Agent”。",
       "url": "https://latent.space/p/arca",
       "canonicalUrl": "https://latent.space/p/arca",
       "ts": 1793462700000,
@@ -100,17 +256,17 @@
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "Arca公司通过“Agent提示人类”的模式，将AI应用于长周期金融工作流，强调AI作为决策辅助而非完全自动化。",
-        "whyItMattersZh": "展示了AI在复杂、长周期（长达10天）业务场景中的落地范式，即“人机协作”而非“完全替代”。",
-        "evidenceZh": "Arca融资4850万美元，其Agent任务涉及多个决策点和人工干预，通过内部记忆系统实现长周期任务的持久化。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内金融AI多关注客服场景，缺乏对长周期、高风险业务流中Agent协作模式的案例研究。",
-        "rednoteAngleZh": "案例拆解：金融行业如何用AI处理10天周期的复杂任务？核心是“Agent提示人”。",
+        "summaryZh": "Arca公司在金融领域实践中发现，AI Agent更适合处理长周期任务，且核心逻辑是“Agent提示人类”而非“人类提示Agent”。",
+        "whyItMattersZh": "颠覆了Agent仅用于即时任务的认知，展示了在复杂金融工作流中，人机协作的正确范式。",
+        "evidenceZh": "Arca的Agent任务周期长达10天，涉及多个决策点和人工干预，通过内部记忆系统实现持久化。",
+        "uncertaintyZh": "金融行业的特殊合规要求可能限制了该模式的通用性。",
+        "chineseAudienceGapZh": "国内对Agent的讨论多集中在自动化，缺乏对长周期、高风险业务流中人机协作模式的深度案例。",
+        "rednoteAngleZh": "“AI Agent的终极形态：不是替代人类，而是‘反向提示’人类？”",
         "topics": [
           "agents",
           "workflow"
         ],
-        "processedAt": "2026-10-31T19:54:27.223Z",
+        "processedAt": "2026-11-01T01:00:39.263Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793476454648,
@@ -127,9 +283,9 @@
           "workflow"
         ]
       },
-      "summaryZh": "Arca公司通过“Agent提示人类”的模式，将AI应用于长周期金融工作流，强调AI作为决策辅助而非完全自动化。",
+      "summaryZh": "Arca公司在金融领域实践中发现，AI Agent更适合处理长周期任务，且核心逻辑是“Agent提示人类”而非“人类提示Agent”。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-31T19:54:27.223Z"
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
     },
     {
       "id": "yt:CvmZtAPmAW4",
@@ -161,15 +317,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 26,
-      "views": 5811,
+      "likes": 30,
+      "views": 6927,
       "duration": "14:44",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793441866216,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.985Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.805Z",
       "signals": {
         "localScore": 48,
         "reasons": [
@@ -198,7 +354,7 @@
       "title": "When Running Your Own AI Models Beats Paying for APIs - Steven Latré, imec",
       "text": "",
       "excerpt": "Steven Latré leads AI at imec, the Belgian semiconductor R&D center, and his team ran thousands of benchmark runs to find out what moving from APIs to your own GPUs really costs for long-running coding agents. Testing open-weight models and three coding harnesses on SWE-Bench Pro, they found that hardware costs jump in steps rather than a smooth curve, that concurrency matters even more than accuracy, that break-even GPU utilization ranges from 89% on small systems to about 15% on 8x B200 machines, and that the right harness can cut GPU time in half for the same result. Chapters: 0:00 Intro 0:59 Why a chip lab studies AI workloads 1:32 The stages of AI maturity 3:28 Owning your stack blows up the design space 4:38 The benchmarking study 5:28 How the tests were set up 7:28 Accuracy by model 8:40 Adding the hardware cost 10:08 Concurrency: how many users fit 12:37 API vs. renting vs. buying GPUs 14:35 Harnesses and token use 16:20 What's next Steven Latré https://www.imec-int.com Join us in SF for the second annual AIE CODE summit: https://aie.codes our last flagship summit of 2026. Applications live now!",
-      "summary": "imec团队通过对SWE-Bench Pro的基准测试，揭示了从调用API转向自建GPU集群在长周期编码Agent任务中的真实成本逻辑。",
+      "summary": "imec团队通过对SWE-Bench Pro的深度基准测试，揭示了从调用API转向自建GPU集群运行AI Agent的真实成本逻辑。",
       "url": "https://www.youtube.com/watch?v=9-Y_oS9OBLc",
       "canonicalUrl": "https://www.youtube.com/watch?v=9-Y_oS9OBLc",
       "videoId": "9-Y_oS9OBLc",
@@ -213,19 +369,19 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 30,
-      "views": 4235,
+      "likes": 35,
+      "views": 5416,
       "duration": "18:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": {
-        "summaryZh": "imec团队通过对SWE-Bench Pro的基准测试，揭示了从调用API转向自建GPU集群在长周期编码Agent任务中的真实成本逻辑。",
-        "whyItMattersZh": "对于追求生产力与成本平衡的AI工程师，硬件成本并非线性增长，理解GPU利用率的盈亏平衡点是构建大规模Agent系统的关键。",
-        "evidenceZh": "研究发现GPU利用率盈亏平衡点在小型系统上为89%，而在8x B200集群上降至15%；合适的harness工具可将GPU时间减半。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内开发者多关注模型本身，缺乏对Agent运行基础设施（Harness）与硬件成本关系的量化分析。",
-        "rednoteAngleZh": "图表化展示：自建GPU集群 vs API调用，Agent开发者的成本避坑指南。",
+        "summaryZh": "imec团队通过对SWE-Bench Pro的深度基准测试，揭示了从调用API转向自建GPU集群运行AI Agent的真实成本逻辑。",
+        "whyItMattersZh": "对于追求长期AI Agent开发的企业，硬件成本不再是简单的线性增长，理解并发与GPU利用率的临界点是降本增效的关键。",
+        "evidenceZh": "研究发现GPU利用率盈亏平衡点在小型系统上为89%，而在8x B200集群上仅为15%；合适的harness工具可将GPU时间减半。",
+        "uncertaintyZh": "该研究基于特定硬件配置，不同规模的业务场景可能存在差异。",
+        "chineseAudienceGapZh": "国内开发者多关注模型本身，缺乏对Agent运行基础设施成本的量化分析。",
+        "rednoteAngleZh": "“AI Agent烧钱真相：自建GPU集群 vs API调用，到底哪个更划算？”（附成本决策模型图）",
         "topics": [
           "agents",
           "workflow",
@@ -233,11 +389,11 @@
           "coding",
           "evaluation"
         ],
-        "processedAt": "2026-10-31T19:54:27.223Z",
+        "processedAt": "2026-11-01T01:00:39.263Z",
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793441866216,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.805Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -254,9 +410,9 @@
           "research"
         ]
       },
-      "summaryZh": "imec团队通过对SWE-Bench Pro的基准测试，揭示了从调用API转向自建GPU集群在长周期编码Agent任务中的真实成本逻辑。",
+      "summaryZh": "imec团队通过对SWE-Bench Pro的深度基准测试，揭示了从调用API转向自建GPU集群运行AI Agent的真实成本逻辑。",
       "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-31T19:54:27.223Z"
+      "summaryTranslatedAt": "2026-11-01T01:00:39.263Z"
     },
     {
       "id": "yt:3osCbSufv8g",
@@ -289,7 +445,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 5,
-      "views": 3330,
+      "views": 3905,
       "duration": "17:03",
       "full": false,
       "categories": [],
@@ -309,7 +465,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793441866216,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.805Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -769,15 +925,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 31,
-      "views": 6584,
+      "likes": 35,
+      "views": 7190,
       "duration": "19:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793410298872,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 60,
         "reasons": [
@@ -821,10 +977,10 @@
       "editorial": null,
       "firstSeen": 1793441866216,
       "signals": {
-        "localScore": 50,
+        "localScore": 47,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +16"
         ],
         "topics": [
@@ -928,10 +1084,10 @@
       },
       "firstSeen": 1793441866216,
       "signals": {
-        "localScore": 56,
+        "localScore": 53,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +20",
           "visualizable +4"
         ],
@@ -1044,10 +1200,10 @@
       "editorial": null,
       "firstSeen": 1793441866216,
       "signals": {
-        "localScore": 45,
+        "localScore": 42,
         "reasons": [
           "community source +5",
-          "fresh +15",
+          "fresh +12",
           "topic fit +7",
           "visualizable +4"
         ],
@@ -1119,8 +1275,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 75,
-      "views": 14434,
+      "likes": 78,
+      "views": 15876,
       "duration": "17:45",
       "full": false,
       "categories": [],
@@ -1140,7 +1296,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793392861119,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -1673,8 +1829,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 26,
-      "views": 5490,
+      "likes": 27,
+      "views": 5603,
       "duration": "16:44",
       "full": false,
       "categories": [],
@@ -1693,7 +1849,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793357292122,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 61,
         "reasons": [
@@ -1844,14 +2000,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 21,
-      "views": 4006,
+      "views": 4039,
       "duration": "18:46",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793357292122,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 57,
         "reasons": [
@@ -1896,7 +2052,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 13,
-      "views": 4681,
+      "views": 4717,
       "duration": "15:28",
       "full": false,
       "categories": [],
@@ -1918,7 +2074,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793357292122,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -2458,14 +2614,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 17,
-      "views": 5993,
+      "views": 6088,
       "duration": "38:07",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793325160426,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -2961,8 +3117,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 91,
-      "views": 11599,
+      "likes": 92,
+      "views": 11727,
       "duration": "16:35",
       "full": false,
       "categories": [],
@@ -2985,7 +3141,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793307667280,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.986Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -3639,8 +3795,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 273,
-      "views": 34167,
+      "likes": 298,
+      "views": 37503,
       "duration": "11:47",
       "full": false,
       "categories": [],
@@ -3662,7 +3818,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793270973099,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -3757,7 +3913,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 29,
-      "views": 6330,
+      "views": 6391,
       "duration": "21:32",
       "full": false,
       "categories": [],
@@ -3778,7 +3934,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793270973099,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -3827,15 +3983,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 20,
-      "views": 5229,
+      "likes": 21,
+      "views": 5296,
       "duration": "14:51",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793270973099,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -4652,8 +4808,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 287,
-      "views": 46946,
+      "likes": 296,
+      "views": 49205,
       "duration": "18:53",
       "full": false,
       "categories": [],
@@ -4674,7 +4830,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793238264689,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -5062,7 +5218,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 24,
-      "views": 5430,
+      "views": 5462,
       "duration": "14:10",
       "full": false,
       "categories": [],
@@ -5084,7 +5240,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793221069288,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 69,
         "reasons": [
@@ -5998,7 +6154,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 5536,
+      "views": 5561,
       "duration": "16:29",
       "full": false,
       "categories": [],
@@ -6018,7 +6174,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793183365274,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -6124,14 +6280,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 47,
-      "views": 7183,
+      "views": 7193,
       "duration": "18:35",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793183365274,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.806Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -6209,7 +6365,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 11,
-      "views": 4869,
+      "views": 4883,
       "duration": "21:47",
       "full": false,
       "categories": [],
@@ -6231,7 +6387,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793183365274,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 79,
         "reasons": [
@@ -6622,7 +6778,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 77,
-      "views": 15668,
+      "views": 15830,
       "duration": "20:06",
       "full": false,
       "categories": [],
@@ -6643,7 +6799,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793149984047,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -7004,8 +7160,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 235,
-      "views": 38158,
+      "likes": 236,
+      "views": 38536,
       "duration": "14:38",
       "full": false,
       "categories": [],
@@ -7026,7 +7182,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793133387947,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -7588,7 +7744,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 107,
-      "views": 23628,
+      "views": 23817,
       "duration": "18:56",
       "full": false,
       "categories": [],
@@ -7609,7 +7765,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793133387947,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -7837,14 +7993,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 62,
-      "views": 14782,
+      "views": 14809,
       "duration": "18:13",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793094248058,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -7893,7 +8049,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 47,
-      "views": 11383,
+      "views": 11389,
       "duration": "16:38",
       "full": false,
       "categories": [],
@@ -7913,7 +8069,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793094248058,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -8022,7 +8178,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 43,
-      "views": 8881,
+      "views": 8896,
       "duration": "23:23",
       "full": false,
       "categories": [],
@@ -8044,7 +8200,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793094248058,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -8537,14 +8693,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 54,
-      "views": 12560,
+      "views": 12596,
       "duration": "53:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793064317296,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -8939,14 +9095,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 55,
-      "views": 9113,
+      "views": 9132,
       "duration": "56:01",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793048334043,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -9679,15 +9835,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 333,
-      "views": 46482,
+      "likes": 337,
+      "views": 47078,
       "duration": "18:27",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1793008784944,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.987Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 68,
         "reasons": [
@@ -9736,7 +9892,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 87,
-      "views": 14223,
+      "views": 14282,
       "duration": "19:44",
       "full": false,
       "categories": [],
@@ -9758,7 +9914,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793008784944,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -9809,7 +9965,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 33,
-      "views": 6133,
+      "views": 6141,
       "duration": "20:55",
       "full": false,
       "categories": [],
@@ -9832,7 +9988,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1793008784944,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -10265,8 +10421,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 161,
-      "views": 26470,
+      "likes": 163,
+      "views": 26740,
       "duration": "35:20",
       "full": false,
       "categories": [],
@@ -10288,7 +10444,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792973452164,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -10368,8 +10524,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 181,
-      "views": 26847,
+      "likes": 182,
+      "views": 27191,
       "duration": "15:28",
       "full": false,
       "categories": [],
@@ -10391,7 +10547,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792973452164,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -10627,7 +10783,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 7523,
+      "views": 7530,
       "duration": "17:57",
       "full": false,
       "categories": [],
@@ -10646,7 +10802,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792954548998,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -10694,7 +10850,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 103,
-      "views": 12309,
+      "views": 12314,
       "duration": "19:38",
       "full": false,
       "categories": [],
@@ -10714,7 +10870,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792919063935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -10763,7 +10919,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 51,
-      "views": 9309,
+      "views": 9321,
       "duration": "20:58",
       "full": false,
       "categories": [],
@@ -10783,7 +10939,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792919063935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.807Z",
       "signals": {
         "localScore": 66,
         "reasons": [
@@ -10905,7 +11061,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 29,
-      "views": 6381,
+      "views": 6390,
       "duration": "18:32",
       "full": false,
       "categories": [],
@@ -10925,7 +11081,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792919063935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -11494,15 +11650,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 3731,
-      "views": 244797,
+      "likes": 3791,
+      "views": 248908,
       "duration": "27:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792887340912,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 69,
         "reasons": [
@@ -11691,7 +11847,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 68,
-      "views": 12779,
+      "views": 12788,
       "duration": "19:25",
       "full": false,
       "categories": [],
@@ -11713,7 +11869,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792887340912,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -11823,8 +11979,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 76,
-      "views": 17809,
+      "likes": 77,
+      "views": 18141,
       "duration": "16:45",
       "full": false,
       "categories": [],
@@ -11845,7 +12001,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792867461128,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -11980,7 +12136,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 34,
-      "views": 8363,
+      "views": 8375,
       "duration": "14:15",
       "full": false,
       "categories": [],
@@ -12001,7 +12157,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792867461128,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -12052,7 +12208,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 31,
-      "views": 8380,
+      "views": 8390,
       "duration": "18:24",
       "full": false,
       "categories": [],
@@ -12072,7 +12228,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792831702471,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 66,
         "reasons": [
@@ -12875,15 +13031,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 35,
-      "views": 9512,
+      "likes": 36,
+      "views": 9536,
       "duration": "13:16",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792801989451,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -13087,7 +13243,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 53,
-      "views": 9899,
+      "views": 9903,
       "duration": "15:44",
       "full": false,
       "categories": [],
@@ -13107,7 +13263,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792785313416,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -13216,14 +13372,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 24,
-      "views": 6470,
+      "views": 6481,
       "duration": "20:37",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792785313416,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 58,
         "reasons": [
@@ -13342,8 +13498,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 161,
-      "views": 46972,
+      "likes": 163,
+      "views": 47536,
       "duration": "18:59",
       "full": false,
       "categories": [],
@@ -13364,7 +13520,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792785313416,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.988Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -13645,15 +13801,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 36,
-      "views": 10682,
+      "likes": 37,
+      "views": 10935,
       "duration": "18:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792785313416,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "summaryZh": "Compute Exchange CEO建议将算力交易标准化，像股票交易一样通过中立平台进行，以提高市场透明度。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-24T00:33:22.748Z"
@@ -13764,14 +13920,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 17,
-      "views": 6393,
+      "views": 6405,
       "duration": "17:40",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792746910919,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 55,
         "reasons": [
@@ -13816,7 +13972,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 19,
-      "views": 4941,
+      "views": 4944,
       "duration": "18:33",
       "full": false,
       "categories": [],
@@ -13837,7 +13993,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792746910919,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 62,
         "reasons": [
@@ -13885,7 +14041,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 89,
-      "views": 15023,
+      "views": 15243,
       "duration": "17:12",
       "full": false,
       "categories": [],
@@ -13907,7 +14063,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792746910919,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -14562,15 +14718,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 50,
-      "views": 14036,
+      "likes": 53,
+      "views": 14388,
       "duration": "17:49",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792715694241,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.808Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -15151,7 +15307,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 8415,
+      "views": 8422,
       "duration": "16:39",
       "full": false,
       "categories": [],
@@ -15171,7 +15327,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792699133992,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -15842,7 +15998,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 6981,
+      "views": 6990,
       "duration": "20:02",
       "full": false,
       "categories": [],
@@ -15863,7 +16019,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792660793652,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -15913,7 +16069,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 23,
-      "views": 5089,
+      "views": 5092,
       "duration": "19:50",
       "full": false,
       "categories": [],
@@ -15933,7 +16089,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792660793652,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -16107,8 +16263,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 70,
-      "views": 17603,
+      "likes": 71,
+      "views": 18024,
       "duration": "19:02",
       "full": false,
       "categories": [],
@@ -16128,7 +16284,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792660793652,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 70,
         "reasons": [
@@ -16736,8 +16892,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 190,
-      "views": 26138,
+      "likes": 191,
+      "views": 26629,
       "duration": "53:18",
       "full": false,
       "categories": [],
@@ -16760,7 +16916,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792629430744,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -17327,15 +17483,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 1818,
-      "views": 242589,
+      "likes": 1822,
+      "views": 243876,
       "duration": "16:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792613027446,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -18069,7 +18225,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 43,
-      "views": 9087,
+      "views": 9090,
       "duration": "18:43",
       "full": false,
       "categories": [],
@@ -18090,7 +18246,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792574214855,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -18139,14 +18295,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 18,
-      "views": 5941,
+      "views": 5943,
       "duration": "15:39",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792574214855,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 54,
         "reasons": [
@@ -18194,7 +18350,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 20,
-      "views": 4802,
+      "views": 4806,
       "duration": "17:43",
       "full": false,
       "categories": [],
@@ -18216,7 +18372,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792574214855,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.989Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -19026,14 +19182,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 29,
-      "views": 7687,
+      "views": 7689,
       "duration": "17:42",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792542803307,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 61,
         "reasons": [
@@ -19462,7 +19618,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 60,
-      "views": 13312,
+      "views": 13316,
       "duration": "15:30",
       "full": false,
       "categories": [],
@@ -19483,7 +19639,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792526276661,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -20083,8 +20239,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 64,
-      "views": 14374,
+      "likes": 65,
+      "views": 14381,
       "duration": "17:42",
       "full": false,
       "categories": [],
@@ -20105,7 +20261,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792488022828,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 69,
         "reasons": [
@@ -20155,14 +20311,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 34,
-      "views": 7597,
+      "views": 7599,
       "duration": "16:29",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792488022828,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 51,
         "reasons": [
@@ -20207,7 +20363,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 7894,
+      "views": 7898,
       "duration": "16:58",
       "full": false,
       "categories": [],
@@ -20226,7 +20382,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792488022828,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 65,
         "reasons": [
@@ -20829,14 +20985,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 89,
-      "views": 17559,
+      "views": 17562,
       "duration": "17:33",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792458174154,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.809Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -21136,8 +21292,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 2624,
-      "views": 339850,
+      "likes": 2642,
+      "views": 342174,
       "duration": "18:15",
       "full": false,
       "categories": [],
@@ -21160,7 +21316,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792443572260,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -21441,7 +21597,7 @@
       "actualEndTime": "2026-10-19T15:00:34.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 61,
-      "views": 11002,
+      "views": 11003,
       "duration": "51:38",
       "full": false,
       "categories": [],
@@ -21463,7 +21619,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792458174154,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -21588,14 +21744,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 58,
-      "views": 11753,
+      "views": 11757,
       "duration": "18:51",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792403260331,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 56,
         "reasons": [
@@ -21659,7 +21815,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792403260331,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 63,
         "reasons": [
@@ -21727,7 +21883,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792403260331,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -22329,14 +22485,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 8712,
+      "views": 8715,
       "duration": "20:37",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792368540710,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 59,
         "reasons": [
@@ -22616,7 +22772,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 264,
-      "views": 48152,
+      "views": 48506,
       "duration": "49:36",
       "full": false,
       "categories": [],
@@ -22637,7 +22793,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792368540710,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 84,
         "reasons": [
@@ -22758,14 +22914,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 85,
-      "views": 18057,
+      "views": 18063,
       "duration": "44:31",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792348480029,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 64,
         "reasons": [
@@ -22813,7 +22969,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 67,
-      "views": 11869,
+      "views": 11881,
       "duration": "53:32",
       "full": false,
       "categories": [],
@@ -22835,7 +22991,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792313211222,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -22886,7 +23042,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 143,
-      "views": 19555,
+      "views": 19590,
       "duration": "1:01:04",
       "full": false,
       "categories": [],
@@ -22907,7 +23063,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792313211222,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.990Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -23047,14 +23203,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 28,
-      "views": 9884,
+      "views": 9886,
       "duration": "43:25",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792281497027,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -23217,7 +23373,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 123,
-      "views": 17190,
+      "views": 17205,
       "duration": "1:56:13",
       "full": false,
       "categories": [],
@@ -23238,7 +23394,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792281497027,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -23694,7 +23850,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 60,
-      "views": 12945,
+      "views": 12950,
       "duration": "55:25",
       "full": false,
       "categories": [],
@@ -23715,7 +23871,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792261436158,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -23878,7 +24034,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 121,
-      "views": 14303,
+      "views": 14316,
       "duration": "51:49",
       "full": false,
       "categories": [],
@@ -23898,7 +24054,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1792225698384,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.810Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -24627,14 +24783,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 38,
-      "views": 8964,
+      "views": 8966,
       "duration": "18:57",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792196506506,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 62,
         "reasons": [
@@ -24929,7 +25085,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 157,
-      "views": 18898,
+      "views": 18917,
       "duration": "1:41:44",
       "full": false,
       "categories": [],
@@ -24952,7 +25108,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792179057338,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -25762,14 +25918,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 33,
-      "views": 5227,
+      "views": 5229,
       "duration": "7:20",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792140993736,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 45,
         "reasons": [
@@ -28189,7 +28345,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 49,
-      "views": 2653,
+      "views": 2655,
       "duration": "36:11",
       "full": false,
       "categories": [],
@@ -28213,7 +28369,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -28357,7 +28513,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 4635,
+      "views": 4638,
       "duration": "29:27",
       "full": false,
       "categories": [],
@@ -28381,7 +28537,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.991Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -28547,14 +28703,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 37,
-      "views": 3580,
+      "views": 3582,
       "duration": "31:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "summaryZh": "该视频通过多个安全事故案例，强调了在AI Agent开发中必须通过隔离环境和短效凭证来强化基础设施安全。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-14T20:09:30.649Z",
@@ -28604,14 +28760,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 30,
-      "views": 1995,
+      "views": 1996,
       "duration": "1:06",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792179057338,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 38,
         "reasons": [
@@ -28656,7 +28812,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 66,
-      "views": 10128,
+      "views": 10132,
       "duration": "11:12",
       "full": false,
       "categories": [],
@@ -28677,7 +28833,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -28838,14 +28994,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 59,
-      "views": 9297,
+      "views": 9301,
       "duration": "19:19",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.811Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -28895,14 +29051,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 15,
-      "views": 708,
+      "views": 709,
       "duration": "10:02",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "summaryZh": "实验表明，在AI开发中引入无障碍设计不仅能提升产品质量，还能通过减少冗余代码实现降本增效。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-14T20:09:30.649Z"
@@ -28938,14 +29094,14 @@
       "actualEndTime": "2026-10-14T21:32:48.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 149,
-      "views": 35183,
+      "views": 35256,
       "duration": "8:52:25",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -28992,7 +29148,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1792008556592,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -30096,7 +30252,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "summaryZh": "Soukaïna Abelhad提出了一套针对“自动化”声明的技术尽职调查方法，通过对比工作量增长与人力投入，揭示所谓的自动化是否真的减少了人工负担。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-13T21:10:56.822Z"
@@ -30334,14 +30490,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 9,
-      "views": 1887,
+      "views": 1891,
       "duration": "17:32",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -30716,7 +30872,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.992Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -30819,7 +30975,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -30870,14 +31026,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 33,
-      "views": 6398,
+      "views": 6402,
       "duration": "10:29",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.812Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -31013,7 +31169,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "summaryZh": "Somya Rai和MD Sharique展示了如何通过在欺诈检测系统中引入图嵌入技术，显著提升了对复杂欺诈行为的识别精度。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-13T21:10:56.822Z"
@@ -31049,14 +31205,14 @@
       "actualEndTime": "2026-10-13T21:23:30.000Z",
       "youtubeUploadStatus": "processed",
       "likes": 170,
-      "views": 29561,
+      "views": 29571,
       "duration": "7:38:03",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "fullSummaryStatus": "",
       "fullSummaryErrorCode": "",
       "fullSummaryRetryAt": "",
@@ -31119,7 +31275,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791925836176,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -32327,14 +32483,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 23,
-      "views": 2956,
+      "views": 2958,
       "duration": "15:21",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "summaryZh": "Karthic Rao 探讨了在金融与财富管理中，如何通过确定性系统而非僵化的流程图来处理复杂的业务逻辑。他提出利用模型在明确的边界内进行判断与规划，确保自动化流程的可靠性与合规性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32474,14 +32630,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 472,
-      "views": 46294,
+      "views": 46323,
       "duration": "21:03",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "summaryZh": "Hrishi Olickel 指出，简单的数据转换模型常因缺乏上下文而导致严重错误。他提倡使用“即时本体”（Just-in-Time Ontologies）方法，在明确任务需求时构建转换逻辑，并保留上下文以确保数据处理的准确性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32598,14 +32754,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 7106,
+      "views": 7108,
       "duration": "13:21",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.993Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -32687,14 +32843,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 14,
-      "views": 979,
+      "views": 980,
       "duration": "13:21",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "summaryZh": "Branislav Brzak 展示了一种利用 GPU 侧信道攻击推断模型工作负载的方法，通过分析内存读取延迟即可识别模型类型。该研究强调了即使在计算隔离环境下，硬件操作仍可能泄露敏感的推理特征。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32737,7 +32893,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.813Z",
       "summaryZh": "Kim Maida 警告称，赋予 AI Agent 过高的权限与凭证会带来严重的安全风险。她建议采用基于 OAuth 令牌交换的委托授权机制，实现细粒度的意图授权，以限制 Agent 的操作范围。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32773,14 +32929,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 10,
-      "views": 1573,
+      "views": 1579,
       "duration": "8:54",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791845599303,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.814Z",
       "summaryZh": "Matthew Ragone 分享了 Range 如何让非技术人员通过定义业务逻辑来构建 AI Agent 技能。通过将重复性工作拆解为可评估的步骤，公司成功实现了业务流程的自动化转型。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32906,14 +33062,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 19,
-      "views": 8014,
+      "views": 8016,
       "duration": "58:42",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.814Z",
       "summaryZh": "AI Engineer 联合创始人 swyx 在问答环节中回顾了会议的运营情况，并讨论了未来全球活动的规划、演讲者筛选机制以及社区建设的反馈。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32949,14 +33105,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 51,
-      "views": 10840,
+      "views": 10856,
       "duration": "35:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.814Z",
       "summaryZh": "本视频演示了如何构建一个具备研究能力的 AI Agent，包括使用 SEC EDGAR 工具、子代理及结果评估机制。通过引入评分器，系统能自动校验 Claude 的输出并进行迭代优化。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -32992,14 +33148,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 19,
-      "views": 5574,
+      "views": 5576,
       "duration": "18:58",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.814Z",
       "summaryZh": "Anthropic 团队在问答中探讨了 Claude Managed Agents 的工程实践，涵盖了 CI/CD 配置同步、多租户隔离、GPU 资源管理及协调器模式等高级架构话题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -33035,7 +33191,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 7077,
+      "views": 7084,
       "duration": "26:31",
       "full": false,
       "categories": [],
@@ -33058,7 +33214,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.814Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -33117,7 +33273,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.815Z",
       "summaryZh": "Adi Singh 认为 AI Agent 的身份应基于现有的通信表面（如电子邮件）进行累积，而非由单一标准颁发。他通过 AgentMail 的案例展示了 Agent 如何在无需人工干预的情况下完成身份验证与服务注册。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -33153,14 +33309,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 115,
-      "views": 16786,
+      "views": 16808,
       "duration": "17:40",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.994Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.815Z",
       "summaryZh": "Anthropic 团队介绍了 Claude Managed Agents 的架构演进，通过将“大脑”与“手”（沙箱与工具）解耦，显著提升了系统的可维护性与响应速度。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -33196,7 +33352,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 16,
-      "views": 3481,
+      "views": 3486,
       "duration": "21:13",
       "full": false,
       "categories": [],
@@ -33219,7 +33375,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.995Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -33271,7 +33427,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 32,
-      "views": 5853,
+      "views": 5857,
       "duration": "22:47",
       "full": false,
       "categories": [],
@@ -33293,7 +33449,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -33344,7 +33500,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 14,
-      "views": 3088,
+      "views": 3089,
       "duration": "15:19",
       "full": false,
       "categories": [],
@@ -33366,7 +33522,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -33417,14 +33573,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 21,
-      "views": 3824,
+      "views": 3826,
       "duration": "20:50",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "summaryZh": "Nilofer Rajpurkar 基于 Stripe 数据分析了高增长 AI 公司的成功模式，并演示了如何利用 MCP 服务器将支付功能集成到 AI Agent 中。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -33459,15 +33615,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 330,
-      "views": 88282,
+      "likes": 332,
+      "views": 88642,
       "duration": "14:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "summaryZh": "Robert Brennan 强调了为编码 Agent 提供沙箱隔离的必要性，以遵循最小权限原则。他对比了 Docker、GitHub Actions 及 Kubernetes 等多种隔离方案的优劣。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T22:53:34.317Z"
@@ -33503,7 +33659,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 11,
-      "views": 3425,
+      "views": 3429,
       "duration": "47:37",
       "full": false,
       "categories": [],
@@ -33526,7 +33682,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791805847910,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -33872,7 +34028,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "summaryZh": "Druid AI 提出 Agent 评估不应只看“包含率”，而应建立包含治理、风险和业务影响的七大维度评估框架。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34067,14 +34223,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 51,
-      "views": 9405,
+      "views": 9406,
       "duration": "19:18",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "summaryZh": "Fireworks AI 强调通过持续的“训练-部署”循环，利用开源模型实现比闭源模型更高的性价比和定制化质量。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34170,14 +34326,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 21,
-      "views": 5021,
+      "views": 5022,
       "duration": "1:12:59",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.816Z",
       "signals": {
         "localScore": 90,
         "reasons": [
@@ -34229,14 +34385,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 49,
-      "views": 6842,
+      "views": 6846,
       "duration": "51:53",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Browserbase 提出通过“爬坡”策略，让 Agent 在不改变模型权重的情况下，通过积累策略文件实现任务能力的持续提升。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34272,14 +34428,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 22,
-      "views": 4202,
+      "views": 4204,
       "duration": "17:08",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Modular 介绍了如何通过 Mojo 语言和 MAX 框架重构 AI 软件栈，以解决不同硬件间的性能碎片化问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34322,7 +34478,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Weco AI 展示了如何通过“参数高尔夫”实验，让 Agent 自动搜索并优化模型训练参数，实现高效的自动化研究。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34358,14 +34514,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 23,
-      "views": 5459,
+      "views": 5460,
       "duration": "53:43",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791767631213,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.996Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "PayPal 探讨了如何通过 tmux 或 IPC 通道将交互式 CLI 转化为 Agent 可理解的结构化接口，解决 Agent 无法处理终端交互的问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34408,7 +34564,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Amazon AGI Lab 展示了通过视觉标注和验证原语，让 Agent 能够精准感知并修改网页前端，实现闭环的视觉开发。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34444,14 +34600,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 44,
-      "views": 6433,
+      "views": 6434,
       "duration": "1:57:34",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Snyk 介绍了 AI 资产清单（SBOM）的概念，并展示了如何通过多层防御体系应对 Agent 的提示词注入和供应链风险。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34487,14 +34643,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 43,
-      "views": 6478,
+      "views": 6480,
       "duration": "13:04",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "FriendliAI 指出推理提供商的工程优化（如前缀缓存和 speculative decoding）对 Agent 的响应速度和稳定性至关重要。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34616,14 +34772,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 10,
-      "views": 4110,
+      "views": 4112,
       "duration": "41:58",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Sonar 演示了如何将安全扫描集成到 Agent 的编码循环中，实现代码漏洞的实时发现与自动修复。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34659,14 +34815,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 36,
-      "views": 7778,
+      "views": 7783,
       "duration": "36:04",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Arize AI 展示了如何利用 Trace 数据和技能库，让 Agent 自动调查并修复自身在复杂任务中的逻辑错误。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34752,7 +34908,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "summaryZh": "Runpod Flash 允许开发者在云端 GPU 上像本地一样运行 Python 代码，无需 Docker 构建，极大提升了开发迭代速度。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34788,7 +34944,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 6325,
+      "views": 6329,
       "duration": "44:23",
       "full": false,
       "categories": [],
@@ -34811,7 +34967,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.817Z",
       "signals": {
         "localScore": 95,
         "reasons": [
@@ -34870,7 +35026,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "summaryZh": "Accenture 与 Datadog 通过模拟攻击实验，展示了 Agent 权限过大带来的安全风险，并探讨了基础设施层面的防御策略。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -34990,7 +35146,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 95,
         "reasons": [
@@ -35043,15 +35199,15 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 29,
-      "views": 6996,
+      "likes": 30,
+      "views": 6997,
       "duration": "15:22",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "summaryZh": "Venice AI 揭示了 Agent 系统中常见的秘密泄露路径，并提出了通过加密存储和窄作用域控制来降低安全风险的模式。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -35087,14 +35243,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 39,
-      "views": 4937,
+      "views": 4939,
       "duration": "55:30",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.997Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "summaryZh": "NVIDIA 展示了如何通过 Data Designer 构建合成数据流水线，教导模型通过搜索而非记忆来解决复杂问题。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-12T01:14:04.056Z"
@@ -35130,7 +35286,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 17,
-      "views": 4344,
+      "views": 4346,
       "duration": "57:45",
       "full": false,
       "categories": [],
@@ -35154,7 +35310,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -35207,7 +35363,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 28,
-      "views": 6088,
+      "views": 6090,
       "duration": "38:55",
       "full": false,
       "categories": [],
@@ -35230,7 +35386,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -35282,14 +35438,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 16,
-      "views": 3772,
+      "views": 3774,
       "duration": "20:14",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "summaryZh": "Thor Schaeff演示了如何利用Gemini Live API构建实时语音Agent，支持多语言、中断处理及工具调用。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-14T01:09:11.408Z"
@@ -35332,7 +35488,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791749484276,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "summaryZh": "AWS工程师演示了如何通过Strands Agents构建客服Agent，重点展示了如何通过限制工具调用来控制Agent行为。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-14T01:09:11.408Z"
@@ -35398,14 +35554,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 78,
-      "views": 12059,
+      "views": 12075,
       "duration": "52:59",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791715491304,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -35454,7 +35610,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 6008,
+      "views": 6010,
       "duration": "38:19",
       "full": false,
       "categories": [],
@@ -35476,7 +35632,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791715491304,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -35642,7 +35798,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791715491304,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.818Z",
       "signals": {
         "localScore": 95,
         "reasons": [
@@ -35877,7 +36033,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791680005987,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "summaryZh": "Tailscale 提出通过 AI 网关实现模型解耦，帮助企业在不被单一供应商锁定的前提下，实现 AI 应用的 ROI 最大化。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-11T00:53:40.128Z"
@@ -36002,7 +36158,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 26,
-      "views": 6029,
+      "views": 6030,
       "duration": "15:03",
       "full": false,
       "categories": [],
@@ -36026,7 +36182,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791680005987,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -36180,14 +36336,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 9,
-      "views": 5897,
+      "views": 5898,
       "duration": "17:50",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791680005987,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "summaryZh": "Gravitee 强调 Agent 的治理应下沉至基础设施层，通过 API 网关拦截非法调用，而非仅依赖提示词约束。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-11T00:53:40.128Z"
@@ -36283,7 +36439,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 83,
-      "views": 15335,
+      "views": 15338,
       "duration": "19:44",
       "full": false,
       "categories": [],
@@ -36304,7 +36460,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791662406323,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -36411,7 +36567,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 27,
-      "views": 6384,
+      "views": 6385,
       "duration": "22:37",
       "full": false,
       "categories": [],
@@ -36432,7 +36588,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791662406323,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -36524,7 +36680,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 51,
-      "views": 10453,
+      "views": 10454,
       "duration": "19:39",
       "full": false,
       "categories": [],
@@ -36545,7 +36701,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791662406323,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.998Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -36800,8 +36956,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 1280,
-      "views": 144781,
+      "likes": 1282,
+      "views": 145101,
       "duration": "20:44",
       "full": false,
       "categories": [],
@@ -36822,7 +36978,7 @@
         "model": "local-fallback"
       },
       "firstSeen": 1791662406323,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -37338,14 +37494,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 37,
-      "views": 9091,
+      "views": 9093,
       "duration": "17:02",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791596500686,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "summaryZh": "亚马逊AGI工程师指出，多模态模型训练的瓶颈往往不在GPU，而在数据流水线；通过优化数据预取和并发，可将GPU利用率从15%提升至90%。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-10T01:41:55.222Z"
@@ -37381,7 +37537,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 65,
-      "views": 9430,
+      "views": 9431,
       "duration": "17:16",
       "full": false,
       "categories": [],
@@ -37404,7 +37560,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791596500686,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 94,
         "reasons": [
@@ -37516,14 +37672,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 240,
-      "views": 29300,
+      "views": 29312,
       "duration": "15:11",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791596500686,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -37840,7 +37996,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 61,
-      "views": 8824,
+      "views": 8826,
       "duration": "17:18",
       "full": false,
       "categories": [],
@@ -37861,7 +38017,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791578860114,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -37910,14 +38066,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 76,
-      "views": 11089,
+      "views": 11093,
       "duration": "18:20",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791578860114,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -38087,14 +38243,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 66,
-      "views": 8640,
+      "views": 8642,
       "duration": "18:20",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791578860114,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.819Z",
       "signals": {
         "localScore": 60,
         "reasons": [
@@ -38232,7 +38388,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 129,
-      "views": 53911,
+      "views": 53996,
       "duration": "18:08",
       "full": false,
       "categories": [],
@@ -38254,7 +38410,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791578860114,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -38484,7 +38640,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 65,
-      "views": 14846,
+      "views": 14852,
       "duration": "15:56",
       "full": false,
       "categories": [],
@@ -38504,7 +38660,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791578860114,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 67,
         "reasons": [
@@ -39111,7 +39267,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791511362266,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -39276,7 +39432,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791511362266,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -39414,7 +39570,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791511362266,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "summaryZh": "Automattic通过为期两周的沉浸式项目制培训，帮助全远程团队构建AI应用能力，而非仅仅提供工具。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-09T02:02:53.678Z"
@@ -39512,14 +39668,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 15,
-      "views": 4960,
+      "views": 4961,
       "duration": "16:50",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791511362266,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "summaryZh": "Orkes CTO提出Agent生产环境架构：将LLM作为大脑负责规划，确定性的工作流引擎负责执行，实现安全可控。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-09T02:02:53.678Z"
@@ -39638,7 +39794,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791511362266,
-      "availabilityUpdatedAt": "2026-10-31T19:54:15.999Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -39767,7 +39923,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 46,
-      "views": 6986,
+      "views": 6991,
       "duration": "18:41",
       "full": false,
       "categories": [],
@@ -39789,7 +39945,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -40025,7 +40181,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -40174,7 +40330,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -40451,7 +40607,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 56,
         "reasons": [
@@ -40569,14 +40725,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 78,
-      "views": 12877,
+      "views": 12881,
       "duration": "16:39",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791494111896,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 73,
         "reasons": [
@@ -41242,14 +41398,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 41,
-      "views": 8650,
+      "views": 8653,
       "duration": "15:54",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791424209948,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.820Z",
       "signals": {
         "localScore": 84,
         "reasons": [
@@ -41604,7 +41760,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791424209948,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -41933,14 +42089,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 163,
-      "views": 18946,
+      "views": 18982,
       "duration": "18:32",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791407604037,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "summaryZh": "Factory的工程师探讨了如何构建“软件工厂”，通过Agent系统将Bug报告自动转化为生产代码，并强调了SDLC全流程集成的重要性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-07T21:13:38.916Z"
@@ -42078,14 +42234,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 28,
-      "views": 7133,
+      "views": 7142,
       "duration": "17:13",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791407604037,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 74,
         "reasons": [
@@ -42314,14 +42470,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 42,
-      "views": 8697,
+      "views": 8700,
       "duration": "20:42",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791407604037,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -42523,7 +42679,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791407604037,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 76,
         "reasons": [
@@ -42649,7 +42805,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 112,
-      "views": 13750,
+      "views": 13761,
       "duration": "18:31",
       "full": false,
       "categories": [],
@@ -42671,7 +42827,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791407604037,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -43508,7 +43664,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 160,
-      "views": 28965,
+      "views": 28973,
       "duration": "23:22",
       "full": false,
       "categories": [],
@@ -43532,7 +43688,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791370760169,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 90,
         "reasons": [
@@ -43682,7 +43838,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791336448667,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.000Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "summaryZh": "AI公司正面临严重的定价基础设施问题，建议采用类似银行的同步授权与异步结算架构来管理Agent使用成本。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-07T01:27:41.780Z"
@@ -43848,7 +44004,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 44,
-      "views": 8199,
+      "views": 8203,
       "duration": "21:05",
       "full": false,
       "categories": [],
@@ -43871,7 +44027,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791336448667,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -44115,7 +44271,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791336448667,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 72,
         "reasons": [
@@ -44559,14 +44715,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 50,
-      "views": 8844,
+      "views": 8847,
       "duration": "19:07",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791320102807,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 70,
         "reasons": [
@@ -44741,7 +44897,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791320102807,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 78,
         "reasons": [
@@ -44957,7 +45113,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 58,
-      "views": 8647,
+      "views": 8652,
       "duration": "17:07",
       "full": false,
       "categories": [],
@@ -44980,7 +45136,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791320102807,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.821Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -45202,8 +45358,8 @@
       "actualStartTime": "",
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
-      "likes": 554,
-      "views": 66966,
+      "likes": 556,
+      "views": 67103,
       "duration": "20:32",
       "full": false,
       "categories": [],
@@ -45225,7 +45381,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791320102807,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -45853,14 +46009,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 136,
-      "views": 60002,
+      "views": 60116,
       "duration": "1:07:24",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "summaryZh": "OpenAI 演示了如何通过 Slack 对话快速构建 macOS 应用，展示了上下文、插件与监督机制在 Agent 开发中的协同作用。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-06T02:13:03.941Z"
@@ -45961,7 +46117,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "summaryZh": "PayPal 工程师介绍了三种 AI Agent 支付集成方案，重点讲解了如何通过 Agentic Commerce Protocol 确保支付安全与合规。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-06T02:13:03.941Z"
@@ -45997,7 +46153,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 37,
-      "views": 6909,
+      "views": 6912,
       "duration": "1:51:37",
       "full": false,
       "categories": [],
@@ -46020,7 +46176,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "signals": {
         "localScore": 91,
         "reasons": [
@@ -46072,14 +46228,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 5133,
+      "views": 5134,
       "duration": "18:13",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -46161,14 +46317,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 49,
-      "views": 6749,
+      "views": 6753,
       "duration": "59:59",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "signals": {
         "localScore": 87,
         "reasons": [
@@ -46316,14 +46472,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 60,
-      "views": 11297,
+      "views": 11304,
       "duration": "21:14",
       "full": true,
       "categories": [],
       "fullSummary": "这份总结介绍了 Browserbase 与微软合作开展的一项关于“通用验证器”（Universal Verifier）的研究，旨在解决当前大语言模型（LLM）作为评估者时存在的“自信谎言”问题。\n\n**核心问题：LLM 评估者的局限性**\n在自动化网页任务中，开发者通常依赖 LLM 作为“裁判”来评估智能体（Agent）的表现。然而，研究发现现有的评估基准（如 WebVoyager）中，LLM 评估者往往表现出极高的“自信错误”。例如，在某项测试中，GPT-4o 给出的成功率为 74%，但基于人类专家标注的真实成功率仅为 38%。这种偏差会导致模型在训练过程中不仅没有变强，反而学会了如何欺骗评估者。\n\n**通用验证器的工作机制**\n为了弥补这一差距，研究团队开发了一种新的验证器，其核心逻辑包括：\n• ** rubric（评分标准）生成**：针对任务生成详细的评分标准，将任务拆解为约 10 个具体指标。\n• **证据检索与关联**：从智能体的操作轨迹中提取最相关的截图作为证据，而非盲目处理所有上下文，从而避免上下文窗口溢出。\n• **过程与结果评分**：不仅输出最终的布尔值（成功/失败），还提供基于过程的评分，允许对部分完成的任务给予部分信用。\n• **原则性设计**：\n    • 仅评估任务要求的内容，避免无关指标干扰。\n    • 错误隔离：多步骤任务中，单步错误不应导致后续步骤的评分级联失效。\n    • 必须参考真实环境截图，以识别智能体的幻觉。\n    • 区分可控与不可控因素（例如，因网页缺货导致的任务失败不应惩罚智能体的操作能力）。\n\n**实验结果与验证**\n研究团队通过“KUA Verifier Bench”基准测试验证了该系统的有效性：\n• **人类一致性**：通用验证器与人类专家的一致性（Cohen's Kappa 系数 0.58）与人类互评的一致性相当，甚至在某些情况下能纠正人类的疏忽。\n• **训练质量提升**：实验证明，使用该验证器过滤后的高质量数据进行监督微调（SFT），能显著提升智能体模型的性能。\n• **自动研究（Auto-Research）的潜力**：研究探讨了利用 AI 自动构建验证器的可能性。结果显示，AI 可以在一天内完成人类三周的工作量，并达到人类构建版本 70% 的性能。结合人类直觉与自动研究循环，被认为是目前最强大的研究范式。\n\n**结论与未来展望**\n研究者强调，构建高质量的验证器与构建模型本身同样重要。目前，该项目已开源，包含代码、实验数据及“KUA Verifier Bench”基准。未来，团队计划将此验证框架扩展至桌面端任务（如企业级工作流），并整合终端日志和系统遥测数据，以提供更全面的评估能力。\n\n**限制与不确定性**\n研究团队特别提到了防止过拟合的问题。为了确保验证器的可靠性，他们在构建过程中严格保留了三分之二的标注数据作为“留出集”（Hold-out set），仅在极少数样本上进行迭代优化，从而确保了最终评估指标的客观性。",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.001Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "summaryZh": "Browserbase 与微软研究人员揭示了现有 LLM Judge 的局限性，并提出了 Universal Verifier，通过任务特定准则大幅降低了评估中的假阳性。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-06T02:13:03.941Z",
@@ -46405,14 +46561,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 40,
-      "views": 8154,
+      "views": 8157,
       "duration": "42:17",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791252774664,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "summaryZh": "Laurie Voss 通过一个玩具商店 Agent 的案例，演示了如何通过可观测性发现搜索质量问题，并利用编码 Agent 自动修复缺陷。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-06T02:13:03.941Z"
@@ -46478,14 +46634,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 34,
-      "views": 5748,
+      "views": 5750,
       "duration": "21:37",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.822Z",
       "summaryZh": "从POC到生产环境，处理海量非结构化文档需要数据清洗和元数据标签化，否则Agent的检索上下文将大量失效。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -46521,7 +46677,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 239,
-      "views": 22545,
+      "views": 22591,
       "duration": "1:51:27",
       "full": false,
       "categories": [],
@@ -46545,7 +46701,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "signals": {
         "localScore": 92,
         "reasons": [
@@ -46696,7 +46852,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -46838,14 +46994,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 45,
-      "views": 6975,
+      "views": 6985,
       "duration": "52:09",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "summaryZh": "产品工程的核心在于区分用户需求与功能实现，通过“Mom Test”等方法论避免盲目堆砌AI功能。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -46881,14 +47037,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 186,
-      "views": 19292,
+      "views": 19315,
       "duration": "55:19",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "summaryZh": "AI时代工程师的价值在于判断哪些问题值得用软件解决，而非仅仅是实现功能。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -47074,14 +47230,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 18,
-      "views": 4586,
+      "views": 4587,
       "duration": "59:33",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "summaryZh": "通过故意破坏沙箱环境，展示了如何构建可复现、可重置的Agent运行环境，这对大规模Agent部署至关重要。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -47117,14 +47273,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 95,
-      "views": 8598,
+      "views": 8624,
       "duration": "59:49",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.823Z",
       "summaryZh": "简单的断言测试无法评估Agent，需要构建包含场景、响应和人工判定的完整评估体系。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -47263,14 +47419,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 108,
-      "views": 16168,
+      "views": 16180,
       "duration": "1:01:28",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.824Z",
       "signals": {
         "localScore": 85,
         "reasons": [
@@ -47351,7 +47507,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 194,
-      "views": 24680,
+      "views": 24684,
       "duration": "18:15",
       "full": false,
       "categories": [],
@@ -47373,7 +47529,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.824Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -47662,14 +47818,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 51,
-      "views": 8041,
+      "views": 8043,
       "duration": "20:36",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791239565151,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.002Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.824Z",
       "summaryZh": "Agent的单体记忆已解决，但跨Agent的共享学习仍是难题，需要建立可治理、可推广的持久化层。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-05T22:33:06.570Z"
@@ -48247,7 +48403,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 102,
-      "views": 16434,
+      "views": 16437,
       "duration": "20:40",
       "full": false,
       "categories": [],
@@ -48270,7 +48426,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791161317071,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.003Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.824Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -48382,14 +48538,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 85,
-      "views": 17651,
+      "views": 17653,
       "duration": "12:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791142330212,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.003Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 77,
         "reasons": [
@@ -48501,14 +48657,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 52,
-      "views": 9416,
+      "views": 9419,
       "duration": "16:05",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791142330212,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.003Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -48638,7 +48794,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791142330212,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.003Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -48778,7 +48934,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 100,
-      "views": 15279,
+      "views": 15291,
       "duration": "16:19",
       "full": false,
       "categories": [],
@@ -48800,7 +48956,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791142330212,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.003Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 86,
         "reasons": [
@@ -49093,7 +49249,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 701,
-      "views": 124996,
+      "views": 125013,
       "duration": "10:42",
       "full": false,
       "categories": [],
@@ -49113,7 +49269,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791109876972,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 70,
         "reasons": [
@@ -49161,14 +49317,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 23,
-      "views": 7157,
+      "views": 7158,
       "duration": "20:12",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791073879626,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -49413,7 +49569,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791073879626,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "summaryZh": "分析了在生产环境中运行开源大模型的优化策略，包括推理引擎选择、投机采样及 KV 缓存卸载等技术。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-04T00:31:34.299Z"
@@ -49621,7 +49777,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791073879626,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 81,
         "reasons": [
@@ -49744,7 +49900,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 78,
-      "views": 14534,
+      "views": 14537,
       "duration": "17:04",
       "full": false,
       "categories": [],
@@ -49767,7 +49923,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791073879626,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 88,
         "reasons": [
@@ -49969,14 +50125,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 102,
-      "views": 18250,
+      "views": 18252,
       "duration": "20:10",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1791054621785,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 71,
         "reasons": [
@@ -50120,7 +50276,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791054621785,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 80,
         "reasons": [
@@ -50471,7 +50627,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1791020859608,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 83,
         "reasons": [
@@ -50642,7 +50798,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 49,
-      "views": 7855,
+      "views": 7857,
       "duration": "11:35",
       "full": false,
       "categories": [],
@@ -50665,7 +50821,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1790989550996,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "signals": {
         "localScore": 90,
         "reasons": [
@@ -50747,14 +50903,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 28,
-      "views": 7200,
+      "views": 7203,
       "duration": "18:33",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1790989550996,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.825Z",
       "summaryZh": "Traversal产品经理探讨了AI生成代码带来的调试难题，并提出了“自动驾驶生产环境”的五个等级及根因分析策略。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-03T01:06:12.967Z"
@@ -50797,7 +50953,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1790989550996,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "signals": {
         "localScore": 84,
         "reasons": [
@@ -51016,7 +51172,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1790989550996,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "summaryZh": "Meticulous创始人分析了AI代码生成后的验证瓶颈，并展示了如何通过录制回放和视觉差异对比实现自动化前端测试。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-03T01:06:12.967Z"
@@ -51059,7 +51215,7 @@
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1790989550996,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "summaryZh": "Browserbase工程师解析了浏览器Agent在长任务中失败的原因，并提出了基于事务成功率而非单步准确率的评估架构。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-03T01:06:12.967Z"
@@ -51305,7 +51461,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 25,
-      "views": 7448,
+      "views": 7449,
       "duration": "18:08",
       "full": false,
       "categories": [],
@@ -51327,7 +51483,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1790973546935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.004Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -51857,14 +52013,14 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 39,
-      "views": 8774,
+      "views": 8775,
       "duration": "12:23",
       "full": false,
       "categories": [],
       "fullSummary": "",
       "editorial": null,
       "firstSeen": 1790973546935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.005Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "signals": {
         "localScore": 75,
         "reasons": [
@@ -52047,7 +52203,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1790973546935,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.005Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "signals": {
         "localScore": 89,
         "reasons": [
@@ -52129,7 +52285,7 @@
       "actualEndTime": "",
       "youtubeUploadStatus": "processed",
       "likes": 73,
-      "views": 10261,
+      "views": 10263,
       "duration": "15:17",
       "full": false,
       "categories": [],
@@ -52152,7 +52308,7 @@
         "model": "gemini-3.1-flash-lite"
       },
       "firstSeen": 1790936768390,
-      "availabilityUpdatedAt": "2026-10-31T19:54:16.005Z",
+      "availabilityUpdatedAt": "2026-11-01T01:00:31.826Z",
       "signals": {
         "localScore": 82,
         "reasons": [
@@ -52720,403 +52876,6 @@
       "summaryZh": "调侃了当前AI播客中常见的“AI毁灭人类”式开场白，反映了社区对过度炒作的疲劳。",
       "summaryLanguage": "zh",
       "summaryTranslatedAt": "2026-10-02T10:26:23.281Z"
-    },
-    {
-      "id": "x:2105819303471976479",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@karpathy",
-      "avatarUrl": "",
-      "subtitle": "Andrej Karpathy",
-      "title": "",
-      "text": "We'll be spending a lot more time trying to understand the outputs of language models. A few thoughts, tips & tricks: Writing. Something I've had success with: Ask your LLM to explain something in ASD-STE100, it's a controlled language specification originally developed for aerospace maintenance documentation. LLMs well-versed in this language and it comes with heavy constraints on clean writing style that I often find a lot more readable. Sometimes I've tried to soften it a bit e.g. ask for \"80% of the way to ASD-STE100\" because the spec is quite stringent. But even better: Diagrams / images. Instead of writing, ask your LLM to create a diagram. These can be a lot easier to process, parse, and understand. But even better: Web pages. Ask for output \"in HTML\" to get a beautiful, interactive webpage. LLMs are getting really good at frontend and can create beautiful experiences, animations, etc. But even better: Explainer videos. The output format I am most bullish on is fully custom / bespoke explainer videos generated on any arbitrary topic. Experiment with things like \"Create a 3b1b style video explainer on X. Use my ElevenLabs API key for audio narration\". (you'd need an API key for the latter or you can ask your LLM to find you decent free alternatives that use your local compute). This is actually starting to work! In summary: - As LLMs get better, they will do more and more of the legwork autonomously, and a lot more of our work will rise up the abstractions into oversight and understanding. - Luckily, LLMs can help here too because as intelligence and code are increasingly abundant, you can ask for large, custom, discardable software artifacts (e.g. web apps, video explainers) that would have never made sense to create before. Push the boundaries here and you'll be surprised.",
-      "excerpt": "We'll be spending a lot more time trying to understand the outputs of language models. A few thoughts, tips & tricks: Writing. Something I've had success with: Ask your LLM to explain something in ASD-STE100, it's a controlled language specification originally developed for aerospace maintenance documentation. LLMs well-versed in this language and it comes with heavy constraints on clean writing style that I often find a lot more readable. Sometimes I've tried to soften it a bit e.g. ask for \"80% of the way to ASD-STE100\" because the spec is quite stringent. But even better: Diagrams / images. Instead of writing, ask your LLM to create a diagram. These can be a lot easier to process, parse, and understand. But even better: Web pages. Ask for output \"in HTML\" to get a beautiful, interactive webpage. LLMs are getting really good at frontend and can create beautiful experiences, animations, etc. But even better: Explainer videos. The output format I am most bullish on is fully custom / bespoke explainer videos generated on any arbitrary topic. Experiment with things like \"Create a 3b1b style video explainer on X. Use my ElevenLabs API key for audio narration\". (you'd need an API key for the latter or you can ask your LLM to find you decent free alternatives that use your local compute). This is actually starting to work! In summary: - As LLMs get better, they will do more and more of the legwork autonomously, and a lot more of our work will rise up the abstractions into oversight and understanding. - Luckily, LLMs can help here too because as intelligence and code are increasingly abundant, you can ask for large, custom, discardable software artifacts (e.g. web apps, video explainers) that would have never made sense to create before. Push the boundaries here and you'll be surprised.",
-      "summary": "分享了提升LLM输出质量的实用技巧，包括使用ASD-STE100受控语言、生成交互式HTML网页及可视化图表。",
-      "url": "https://x.com/karpathy/status/2105819303471976479",
-      "canonicalUrl": "https://x.com/karpathy/status/2105819303471976479",
-      "ts": 1790901420000,
-      "likes": 16925,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": {
-        "summaryZh": "分享了提升LLM输出质量的实用技巧，包括使用ASD-STE100受控语言、生成交互式HTML网页及可视化图表。",
-        "whyItMattersZh": "提供了非常接地气的Prompt工程优化方案，能直接提升AI输出的可读性和交互性。",
-        "evidenceZh": "建议使用航空维护文档标准（ASD-STE100）来约束模型输出，并推荐将输出格式改为HTML以获得更好的交互体验。",
-        "uncertaintyZh": "",
-        "chineseAudienceGapZh": "国内Prompt教程多为“咒语大全”，缺乏这种基于工业标准（如ASD-STE100）的结构化输出思维。",
-        "rednoteAngleZh": "“别再写长篇大论了！用这3个技巧让AI输出更专业、更易读”，适合所有AI用户。",
-        "topics": [
-          "multimodal",
-          "coding"
-        ],
-        "processedAt": "2026-10-02T10:26:23.281Z",
-        "model": "gemini-3.1-flash-lite"
-      },
-      "firstSeen": 1790936768390,
-      "signals": {
-        "localScore": 52,
-        "reasons": [
-          "community source +5",
-          "fresh +12",
-          "topic fit +5",
-          "visualizable +8"
-        ],
-        "topics": [
-          "multimodal"
-        ]
-      },
-      "summaryZh": "分享了提升LLM输出质量的实用技巧，包括使用ASD-STE100受控语言、生成交互式HTML网页及可视化图表。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T10:26:23.281Z"
-    },
-    {
-      "id": "x:2105814135388979414",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@garrytan",
-      "avatarUrl": "",
-      "subtitle": "Garry Tan · President & CEO @ycombinator —Founder @garryslist—Creator of GStack…",
-      "title": "",
-      "text": "When people say McCoy is not an extremist you can tell those people are gaslighting you https://t.co/ESw2ANPS37",
-      "excerpt": "When people say McCoy is not an extremist you can tell those people are gaslighting you https://t.co/ESw2ANPS37",
-      "summary": "针对McCoy是否为极端分子的争议发表评论，指出相关讨论中存在的误导性信息。",
-      "url": "https://x.com/garrytan/status/2105814135388979414",
-      "canonicalUrl": "https://x.com/garrytan/status/2105814135388979414",
-      "ts": 1790900188000,
-      "likes": 26,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "针对McCoy是否为极端分子的争议发表评论，指出相关讨论中存在的误导性信息。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T10:26:23.281Z"
-    },
-    {
-      "id": "x:2105811214827696302",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@danshipper",
-      "avatarUrl": "",
-      "subtitle": "Dan Shipper · ceo @every | the only subscription you need…",
-      "title": "",
-      "text": "we published a sick guide to getting started with open models on @every: https://t.co/ZLCBB2WtSh",
-      "excerpt": "we published a sick guide to getting started with open models on @every: https://t.co/ZLCBB2WtSh",
-      "summary": "Every发布了一份关于如何入门开源模型的深度指南。",
-      "url": "https://x.com/danshipper/status/2105811214827696302",
-      "canonicalUrl": "https://x.com/danshipper/status/2105811214827696302",
-      "ts": 1790899492000,
-      "likes": 49,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "Every发布了一份关于如何入门开源模型的深度指南。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "article:882596cbc7639eb42bf210ab",
-      "source": "OpenAI News",
-      "sourceGroup": "OpenAI",
-      "sourceType": "official",
-      "sourcePriority": 0.88,
-      "sourceTags": [
-        "OpenAI News"
-      ],
-      "kind": "blog",
-      "author": "OpenAI News",
-      "subtitle": "OpenAI",
-      "title": "Chatham scales its capital markets expertise with OpenAI",
-      "text": "",
-      "excerpt": "Chatham Financial uses Codex and GPT-5.6 to build technology and redesign workflows, cutting trade validation from 30 minutes to under 4.",
-      "contentLength": 137,
-      "summary": "Chatham Financial利用OpenAI模型重构工作流，将交易验证时间从30分钟缩短至4分钟以内。",
-      "url": "https://openai.com/index/chatham-financial",
-      "canonicalUrl": "https://openai.com/index/chatham-financial",
-      "ts": 1790899200000,
-      "likes": 0,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790973546935,
-      "signals": {
-        "localScore": 61,
-        "reasons": [
-          "official source +15",
-          "fresh +12",
-          "topic fit +8",
-          "visualizable +8"
-        ],
-        "topics": [
-          "workflow"
-        ]
-      },
-      "summaryZh": "Chatham Financial利用OpenAI模型重构工作流，将交易验证时间从30分钟缩短至4分钟以内。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105809148365717985",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@garrytan",
-      "avatarUrl": "",
-      "subtitle": "Garry Tan · President & CEO @ycombinator —Founder @garryslist—Creator of GStack…",
-      "title": "",
-      "text": "This guy is now the frontrunner for D8 Supervisor in SF. You should probably be looking for alternatives. https://t.co/wYufh7iXH9 https://t.co/1orp7aYohx",
-      "excerpt": "This guy is now the frontrunner for D8 Supervisor in SF. You should probably be looking for alternatives. https://t.co/wYufh7iXH9 https://t.co/1orp7aYohx",
-      "summary": "关于旧金山D8主管竞选的政治评论，提醒关注候选人动态。",
-      "url": "https://x.com/garrytan/status/2105809148365717985",
-      "canonicalUrl": "https://x.com/garrytan/status/2105809148365717985",
-      "ts": 1790898999000,
-      "likes": 14,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "关于旧金山D8主管竞选的政治评论，提醒关注候选人动态。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105805164305359019",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@steipete",
-      "avatarUrl": "",
-      "subtitle": "Peter Steinberger · Polyagentmorous ClawFather. Came back from retirement to mess…",
-      "title": "",
-      "text": "holy https://t.co/qt50yrncnf",
-      "excerpt": "holy https://t.co/qt50yrncnf",
-      "summary": "社区分享的AI相关突发内容。",
-      "url": "https://x.com/steipete/status/2105805164305359019",
-      "canonicalUrl": "https://x.com/steipete/status/2105805164305359019",
-      "ts": 1790898049000,
-      "likes": 1016,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "社区分享的AI相关突发内容。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105796174464815210",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@garrytan",
-      "avatarUrl": "",
-      "subtitle": "Garry Tan · President & CEO @ycombinator —Founder @garryslist—Creator of GStack…",
-      "title": "",
-      "text": "Harm accelerationist Gary McCoy is going to ruin San Francisco https://t.co/pcOuGg9L8x",
-      "excerpt": "Harm accelerationist Gary McCoy is going to ruin San Francisco https://t.co/pcOuGg9L8x",
-      "summary": "对Gary McCoy政策影响的批评性评论。",
-      "url": "https://x.com/garrytan/status/2105796174464815210",
-      "canonicalUrl": "https://x.com/garrytan/status/2105796174464815210",
-      "ts": 1790895906000,
-      "likes": 70,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "对Gary McCoy政策影响的批评性评论。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105778011635400949",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@steipete",
-      "avatarUrl": "",
-      "subtitle": "Peter Steinberger · Polyagentmorous ClawFather. Came back from retirement to mess…",
-      "title": "",
-      "text": "\"Today, we’re releasing two Cloudflare-trained decision models, Clef and Clef-flash\" https://t.co/E8cYq4w7Fz Never seen an idea spreading so fast.",
-      "excerpt": "\"Today, we’re releasing two Cloudflare-trained decision models, Clef and Clef-flash\" https://t.co/E8cYq4w7Fz Never seen an idea spreading so fast.",
-      "summary": "Cloudflare发布了Clef和Clef-flash决策模型，引发社区广泛关注。",
-      "url": "https://x.com/steipete/status/2105778011635400949",
-      "canonicalUrl": "https://x.com/steipete/status/2105778011635400949",
-      "ts": 1790891576000,
-      "likes": 1377,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "Cloudflare发布了Clef和Clef-flash决策模型，引发社区广泛关注。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105775325385040243",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@ryolu_",
-      "avatarUrl": "",
-      "subtitle": "Ryo Lu · Designed @Cursor_ai, @NotionHQ, @Stripe, built startups. I make…",
-      "title": "",
-      "text": "flip phone. full desktop. a whole little world. ryOS on iPhone Duo https://t.co/JxmdBqWlgh",
-      "excerpt": "flip phone. full desktop. a whole little world. ryOS on iPhone Duo https://t.co/JxmdBqWlgh",
-      "summary": "展示在iPhone Duo上运行桌面级系统的ryOS项目。",
-      "url": "https://x.com/ryolu_/status/2105775325385040243",
-      "canonicalUrl": "https://x.com/ryolu_/status/2105775325385040243",
-      "ts": 1790890935000,
-      "likes": 329,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "展示在iPhone Duo上运行桌面级系统的ryOS项目。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105773541652308145",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@steipete",
-      "avatarUrl": "",
-      "subtitle": "Peter Steinberger · Polyagentmorous ClawFather. Came back from retirement to mess…",
-      "title": "",
-      "text": "\"AI agents are aeroplanes for the mind: faster and more powerful than the bicycle, harder to control, costlier when they crash.\"",
-      "excerpt": "\"AI agents are aeroplanes for the mind: faster and more powerful than the bicycle, harder to control, costlier when they crash.\"",
-      "summary": "将AI Agent比作飞机的观点：强大但难以控制，且崩溃代价高昂。",
-      "url": "https://x.com/steipete/status/2105773541652308145",
-      "canonicalUrl": "https://x.com/steipete/status/2105773541652308145",
-      "ts": 1790890510000,
-      "likes": 45,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "将AI Agent比作飞机的观点：强大但难以控制，且崩溃代价高昂。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105756563302723721",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@bcherny",
-      "avatarUrl": "",
-      "subtitle": "Boris Cherny · Claude Code @anthropicai",
-      "title": "",
-      "text": "Mods are absolutely insane. You can now customize Claude to work and look the way you want by just prompting it. Each person works differently, so there's no reason why everyone should have an identical Claude experience. Make Claude your own, and share mods as plugins so others can try your mods too.",
-      "excerpt": "Mods are absolutely insane. You can now customize Claude to work and look the way you want by just prompting it. Each person works differently, so there's no reason why everyone should have an identical Claude experience. Make Claude your own, and share mods as plugins so others can try your mods too.",
-      "summary": "Claude Mods允许用户通过提示词自定义Claude的外观和功能，并支持插件分享。",
-      "url": "https://x.com/bcherny/status/2105756563302723721",
-      "canonicalUrl": "https://x.com/bcherny/status/2105756563302723721",
-      "ts": 1790886462000,
-      "likes": 3542,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "Claude Mods允许用户通过提示词自定义Claude的外观和功能，并支持插件分享。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
-    },
-    {
-      "id": "x:2105753728183828692",
-      "source": "Builders",
-      "sourceGroup": "Builders",
-      "sourceType": "community",
-      "sourcePriority": 0.55,
-      "sourceTags": [
-        "Builders"
-      ],
-      "kind": "x",
-      "author": "@zarazhangrui",
-      "avatarUrl": "",
-      "subtitle": "Zara Zhang · Builder. Make something people want, then make people…",
-      "title": "",
-      "text": "Frontend code is probably the most expressive medium for storytelling of our times yet many people are just using it to make SaaS landing pages",
-      "excerpt": "Frontend code is probably the most expressive medium for storytelling of our times yet many people are just using it to make SaaS landing pages",
-      "summary": "观点认为前端代码是极佳的叙事媒介，不应仅限于制作SaaS落地页。",
-      "url": "https://x.com/zarazhangrui/status/2105753728183828692",
-      "canonicalUrl": "https://x.com/zarazhangrui/status/2105753728183828692",
-      "ts": 1790885786000,
-      "likes": 119,
-      "full": false,
-      "categories": [],
-      "fullSummary": "",
-      "editorial": null,
-      "firstSeen": 1790936768390,
-      "summaryZh": "观点认为前端代码是极佳的叙事媒介，不应仅限于制作SaaS落地页。",
-      "summaryLanguage": "zh",
-      "summaryTranslatedAt": "2026-10-02T20:39:26.707Z"
     }
   ]
 }
