@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-10T22:18:13.737Z",
+  "generatedAt": "2026-11-11T02:43:37.227Z",
   "date": "2026-11-10",
   "timeZone": "America/Los_Angeles",
-  "newCount": 54,
+  "newCount": 57,
   "newIds": [
     "article:0e9fb0eb84f13acffdc59012",
     "article:0f0020abcf733229d29f4d40",
@@ -57,7 +57,10 @@
     "article:f3fc54cd1d78c100d666a9c2",
     "article:cb93d68b445c05b0e3dc3bb4",
     "article:5f3963726dbe36e6ccf9753b",
-    "article:6b6709b612e5913e3ffca54a"
+    "article:6b6709b612e5913e3ffca54a",
+    "article:65b96c238445cdedc96b3e82",
+    "yt:iK9gmxXyBR0",
+    "yt:hFNbPmzzcEs"
   ],
   "topIds": [
     "article:cba41f0395d50b9e1105caa6",
@@ -77,38 +80,38 @@
     {
       "id": "article:cba41f0395d50b9e1105caa6",
       "score": 95,
-      "reason": "independent source +12 · fresh +15 · topic fit +26",
+      "reason": "主流大厂模型发布，直接影响Agent开发成本。",
       "tier": "top",
       "rank": 1,
       "peakScore": 95,
       "lastScore": 86,
       "firstSelectedAt": "2026-11-10T13:24:12.281Z",
-      "lastSelectedAt": "2026-11-10T22:18:13.737Z",
-      "selectionCount": 2
+      "lastSelectedAt": "2026-11-11T02:43:37.227Z",
+      "selectionCount": 3
     },
     {
       "id": "article:55a30966cc422eea3be8f9a1",
       "score": 93,
-      "reason": "curated source +8 · fresh +15 · topic fit +32",
+      "reason": "国产高性能模型，且有明确的工程应用场景。",
       "tier": "top",
       "rank": 2,
       "peakScore": 93,
       "lastScore": 93,
       "firstSelectedAt": "2026-11-10T22:18:13.737Z",
-      "lastSelectedAt": "2026-11-10T22:18:13.737Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-11-11T02:43:37.227Z",
+      "selectionCount": 2
     },
     {
       "id": "yt:rS36lYuvXQ8",
       "score": 92,
-      "reason": "curated source +8 · fresh +15 · topic fit +32",
+      "reason": "极具实战价值的Agent调试与优化经验。",
       "tier": "top",
       "rank": 3,
       "peakScore": 92,
       "lastScore": 92,
       "firstSelectedAt": "2026-11-10T22:18:13.737Z",
-      "lastSelectedAt": "2026-11-10T22:18:13.737Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-11-11T02:43:37.227Z",
+      "selectionCount": 2
     },
     {
       "id": "x:2119869228207546638",
@@ -124,15 +127,15 @@
     },
     {
       "id": "yt:vg3JdjGuJwM",
-      "score": 86,
-      "reason": "curated source +8 · fresh +15 · topic fit +32",
+      "score": 87,
+      "reason": "将Agent纠错转化为数据资产的思路非常前沿。",
       "tier": "top",
       "rank": 5,
-      "peakScore": 86,
-      "lastScore": 86,
+      "peakScore": 87,
+      "lastScore": 87,
       "firstSelectedAt": "2026-11-10T22:18:13.737Z",
-      "lastSelectedAt": "2026-11-10T22:18:13.737Z",
-      "selectionCount": 1
+      "lastSelectedAt": "2026-11-11T02:43:37.227Z",
+      "selectionCount": 2
     },
     {
       "id": "yt:TlOAhw9t5DA",
@@ -209,58 +212,53 @@
   ],
   "ideas": [
     {
-      "workingTitle": "AI Agent 越能自己做事，人应该在哪些节点介入？",
-      "angle": "用几个真实案例拆解 agent 工作流里的关键决策点",
-      "whyNow": "当天多个来源出现同一主题信号。",
+      "workingTitle": "AI Agent 总是“假装”任务完成？你需要这套工程优化方案",
+      "angle": "从Agent的CLI交互痛点出发，结合Meta的On-call AI队友案例，探讨如何通过规范化交互和证据链来提升Agent的真实可靠性。",
+      "whyNow": "Agent从实验走向生产，可靠性已成为开发者最关注的瓶颈。",
       "sourceIds": [
         "yt:rS36lYuvXQ8",
-        "yt:vg3JdjGuJwM",
-        "article:cba41f0395d50b9e1105caa6",
-        "yt:TlOAhw9t5DA"
+        "yt:_NBx2NNOuA4"
       ]
     },
     {
-      "workingTitle": "模型看起来更强，为什么仍然可能不可靠？",
-      "angle": "解释新评测究竟测到了什么、又漏掉了什么",
-      "whyNow": "当天多个来源出现同一主题信号。",
+      "workingTitle": "别让你的Agent成为“数据黑洞”：如何把纠错变成训练资产？",
+      "angle": "探讨如何通过Twin Review等机制，将人类对Agent的每一次修改转化为高质量的微调数据，实现Agent的自我进化。",
+      "whyNow": "单纯依赖Prompt已到瓶颈，数据闭环是Agent进阶的关键。",
+      "sourceIds": [
+        "yt:vg3JdjGuJwM"
+      ]
+    },
+    {
+      "workingTitle": "国产模型新势力：Naive-N0.5-Flash 真的能让编程提速10倍吗？",
+      "angle": "对比Muse Ember与Naive-N0.5-Flash，分析不同模型在工程流中的定位，探讨高性能模型对开发效率的实际影响。",
+      "whyNow": "模型发布密集，开发者急需从性价比和工程适配度角度进行选型。",
       "sourceIds": [
         "article:55a30966cc422eea3be8f9a1",
-        "yt:rS36lYuvXQ8",
-        "yt:vg3JdjGuJwM",
-        "yt:gbeuC0ud1p4"
-      ]
-    },
-    {
-      "workingTitle": "AI Agent开发新范式：从Prompt工程到工程化编排",
-      "angle": "对比传统Prompt优化与现代Agent工程化（如云端沙盒调用、混合评审机制），帮助读者从“调参侠”进阶为“Agent架构师”。",
-      "whyNow": "随着Claude Fable 5.2和Meta Muse Ember的发布，Agent开发已进入深水区，工程化能力成为核心竞争力。",
-      "sourceIds": [
-        "x:2119878364794372162"
+        "article:cba41f0395d50b9e1105caa6"
       ]
     }
   ],
   "run": {
     "status": "ok",
-    "startedAt": "2026-11-10T22:18:11.011Z",
+    "startedAt": "2026-11-11T02:43:25.300Z",
     "sourcesAttempted": 8,
     "sourcesSucceeded": 7,
     "sourcesFailed": 1,
     "itemsFetched": 112,
     "itemsAfterDedup": 112,
-    "newItems": 54,
+    "newItems": 57,
     "candidates": 18,
     "geminiCalls": 1,
     "geminiModel": "gemini-3.1-flash-lite",
-    "usedGemini": false,
+    "usedGemini": true,
     "errors": [
-      "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml",
-      "Gemini: Gemini 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"U"
+      "OpenAI Engineering: 403 https://openai.com/news/engineering/rss.xml"
     ],
-    "newItemsThisRun": 18,
+    "newItemsThisRun": 3,
     "releasedItemsThisRun": 0,
     "translationTargets": 20,
-    "finishedAt": "2026-11-10T22:18:13.737Z",
-    "rankedThisRun": 8,
+    "finishedAt": "2026-11-11T02:43:37.227Z",
+    "rankedThisRun": 4,
     "accumulatedTop": 11,
     "youtubeLifecycleUpdates": 0
   }
